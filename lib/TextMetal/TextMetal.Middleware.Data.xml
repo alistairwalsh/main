@@ -1,0 +1,916 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TextMetal.Middleware.Data</name>
+    </assembly>
+    <members>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.CreateParameter(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.ParameterDirection,System.Data.DbType,System.Int32,System.Byte,System.Byte,System.Boolean,System.String,System.Object)">
+            <summary>
+            Create a new data parameter from the data source.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="parameterDirection"> Specifies the parameter direction. </param>
+            <param name="parameterDbType"> Specifies the parameter provider-(in)dependent type. </param>
+            <param name="parameterSize"> Specifies the parameter size. </param>
+            <param name="parameterPrecision"> Specifies the parameter precision. </param>
+            <param name="parameterScale"> Specifies the parameter scale. </param>
+            <param name="parameterNullable"> Specifies the parameter nullable-ness. </param>
+            <param name="parameterName"> Specifies the parameter name. </param>
+            <param name="parameterValue"> Specifies the parameter value. </param>
+            <returns> The data parameter with the specified properties set. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.ExecuteReader(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Data.CommandBehavior,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Executes a command, returning a data reader, against a data source.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            This method DOES NOT DISPOSE OF DATA READER - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <param name="commandBehavior"> The reader behavior. </param>
+            <param name="commandTimeout"> The command timeout (use null for default). </param>
+            <param name="commandPrepare"> Whether to prepare the command at the data source. </param>
+            <returns> The data reader result. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.ExecuteRecords(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.ExecuteResultsets(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of resultsets, each with an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.ExecuteSchemaRecords(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.ExecuteSchemaResultsets(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an resultsets, each with an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.GetRecordsFromReader(System.Data.IDataReader,System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            Note that THE DATA READER WILL NOT BE DISPOSED UPON ENUMERATION OR FOREACH BRANCH OUT.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of record dictionary instances, containing key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.GetResultsetsFromReader(System.Data.IDataReader)">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of resultsets, each with an enumerable of records dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.GetSchemaRecordsFromReader(System.Data.IDataReader,System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            Note that THE DATA READER WILL NOT BE DISPOSED UPON ENUMERATION OR FOREACH BRANCH OUT.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of record dictionary instances, containing key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.GetSchemaResultsetsFromReader(System.Data.IDataReader)">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of resultsets, each with an enumerable of records dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.IAdoNetFascade.InferDbTypeForClrType(System.Type)">
+            <summary>
+            Returns a DbType mapping for a Type.
+            An InvalidOperationException is thrown for unmappable types.
+            </summary>
+            <param name="clrType"> The CLR type to map to a DbType. </param>
+            <returns> The mapped DbType. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.#ctor(TextMetal.Middleware.Common.Utilities.IReflectionFascade)">
+            <summary>
+            Initializes a new instance of the AdoNetFascade class.
+            </summary>
+            <param name="reflectionFascade"> The reflection instance to use. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.#ctor">
+            <summary>
+            Initializes a new instance of the AdoNetFascade class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.CreateParameter(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.ParameterDirection,System.Data.DbType,System.Int32,System.Byte,System.Byte,System.Boolean,System.String,System.Object)">
+            <summary>
+            Create a new data parameter from the data source.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="parameterDirection"> Specifies the parameter direction. </param>
+            <param name="parameterDbType"> Specifies the parameter provider-(in)dependent type. </param>
+            <param name="parameterSize"> Specifies the parameter size. </param>
+            <param name="parameterPrecision"> Specifies the parameter precision. </param>
+            <param name="parameterScale"> Specifies the parameter scale. </param>
+            <param name="parameterNullable"> Specifies the parameter nullable-ness. </param>
+            <param name="parameterName"> Specifies the parameter name. </param>
+            <param name="parameterValue"> Specifies the parameter value. </param>
+            <returns> The data parameter with the specified properties set. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.ExecuteReader(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Data.CommandBehavior,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Executes a command, returning a data reader, against a data source.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            This method DOES NOT DISPOSE OF DATA READER - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <param name="commandBehavior"> The reader behavior. </param>
+            <param name="commandTimeout"> The command timeout (use null for default). </param>
+            <param name="commandPrepare"> Whether to prepare the command at the data source. </param>
+            <returns> The data reader result. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.ExecuteRecords(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            /// <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.ExecuteResultsets(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of resultsets, each with an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.ExecuteSchemaRecords(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter},System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.ExecuteSchemaResultsets(System.Data.IDbConnection,System.Data.IDbTransaction,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an resultsets, each with an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            This method DOES NOT DISPOSE OF CONNECTION/TRANSACTION - UP TO THE CALLER.
+            </summary>
+            <param name="dbConnection"> The database connection. </param>
+            <param name="dbTransaction"> An optional local database transaction. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.GetRecordsFromReader(System.Data.IDataReader,System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            Note that THE DATA READER WILL NOT BE DISPOSED UPON ENUMERATION OR FOREACH BRANCH OUT.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of record dictionary instances, containing key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.GetResultsetsFromReader(System.Data.IDataReader)">
+            <summary>
+            Execute a command against a data source, mapping the data reader to an enumerable of resultsets, each with an enumerable of records dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.GetSchemaRecordsFromReader(System.Data.IDataReader,System.Action{System.Int32})">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of record dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            Note that THE DATA READER WILL NOT BE DISPOSED UPON ENUMERATION OR FOREACH BRANCH OUT.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <param name="recordsAffectedCallback"> Executed when the output count of records affected is available to return (post enumeration). </param>
+            <returns> An enumerable of record dictionary instances, containing key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.GetSchemaResultsetsFromReader(System.Data.IDataReader)">
+            <summary>
+            Execute a command against a data source, mapping the data reader GetSchemaTable() result to an enumerable of resultsets, each with an enumerable of records dictionaries.
+            This method perfoms LAZY LOADING/DEFERRED EXECUTION.
+            </summary>
+            <param name="dataReader"> The target data reader. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.AdoNetFascade.InferDbTypeForClrType(System.Type)">
+            <summary>
+            Returns a DbType mapping for a Type.
+            An InvalidOperationException is thrown for unmappable types.
+            </summary>
+            <param name="clrType"> The CLR type to map to a DbType. </param>
+            <returns> The mapped DbType. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1">
+            <summary>
+            Used to 'wrap' a disposable (e.g. DataContext, DbContext, SessionImpl, etc.) in a manner such that consuming code can leverage a 'using' block which respects an ambient unit of work, if one is present.
+            Essentially, the disposal of this object forwards disposal to the wrapped disposable if an ambient unit of work is NOT present; otherwise, no action is performed leaving disposal of the disposable up to the adjudication of the ambient unit of work.
+            </summary>
+            <typeparam name="TDisposableContext"> The type of the underlying or 'wrapped' disposable. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1.#ctor(TextMetal.Middleware.Data.UoW.IUnitOfWork,`0)">
+            <summary>
+            Initializes a new instance of the AmbientUnitOfWorkAwareContextWrapper`1 class.
+            </summary>
+            <param name="sourceUnitOfWork">
+            The unit of work triggering the creation of this 'wrapped' disposable.
+            NOTE: Any ambient unit of work may not reference the same object instance as the incoming unit of work.
+            In this case, the ambient unit of work is ignored as the unit of work instances differ.
+            </param>
+            <param name="disposableContext"> The underlying or 'wrapped' disposable. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1.Dispose">
+            <summary>
+            Disposes of the inner context. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1.DisposableContext">
+            <summary>
+            Gets the underlying or 'wrapped' disposable.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1.ShouldDisposeResources">
+            <summary>
+            Gets a value indicating whether resources need to be disposed of.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.AmbientUnitOfWorkAwareContextWrapper`1.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.ContextModelRepository`1.#ctor">
+            <summary>
+            Initializes a new instance of the ContextModelRepository`1 class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.ContextModelRepository`1.GetContext(TextMetal.Middleware.Data.UoW.IUnitOfWork)">
+            <summary>
+            For a given unit of work, this method returns a AmbientUnitOfWorkAwareContextWrapper`1 for a target data context type.
+            </summary>
+            <param name="unitOfWork"> The target unitOfWork. </param>
+            <returns> An instance of a AmbientUnitOfWorkAwareContextWrapper`1 for the requested data context type, associated withthe unitOfWork. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.ContextModelRepository`1.GetContext(TextMetal.Middleware.Data.UoW.IUnitOfWork,System.Type)">
+            <summary>
+            For a given unit of work, this method returns a Context of the target data context type.
+            </summary>
+            <param name="unitOfWork"> The target unitOfWork. </param>
+            <param name="contextType"> The desired data context type. </param>
+            <returns> An instance of the requested data context type, associated withthe unitOfWork. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.MicrosoftLinq.DataContextModelRepository`1">
+            <summary>
+            LINQ to SQL
+            NOTE: TDataContext must support GetConstructor(new Type[] { typeof(IDbConnection) }).
+            </summary>
+            <typeparam name="TDataContext"> </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MicrosoftLinq.DataContextModelRepository`1.#ctor">
+            <summary>
+            Initializes a new instance of the DataContextModelRepository`1 class.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope">
+            <summary>
+            Represents an atomic scoped set of data operations on a single connection/transaction.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope.#ctor(TextMetal.Middleware.Data.UoW.IUnitOfWorkFactory,System.Boolean,System.Data.IsolationLevel)">
+            <summary>
+            Initializes a new instance of the AmbientUnitOfWorkScope class.
+            </summary>
+            <param name="unitOfWorkFactory"> The unit of work factory instance. </param>
+            <param name="transactional"> Gets a value indicating whether the created unit of work should create a data source transaction. </param>
+            <param name="isolationLevel"> An optional isolation level for the unit of work transaction. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope.Dispose">
+            <summary>
+            Ends the data source transaction scope and performs a commit or rollback.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope.ScopeComplete">
+            <summary>
+            Indicates that all operations within the unit of work scope have completed successfully. This method should only be called once.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope.ScopeDivergent">
+            <summary>
+            Indicates that at least one operation within the unit of work scope cause a failure in data concurrency or nullipotency. This forces the entire unit of work to yield an incomplete status. This method can be called any number of times.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.AmbientUnitOfWorkScope.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.UoW.ExtensionMethods">
+            <summary>
+            Provides extension methods for unit of work instances.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.ExtensionMethods.CreateParameter(TextMetal.Middleware.Data.UoW.IUnitOfWork,System.Data.ParameterDirection,System.Data.DbType,System.Int32,System.Byte,System.Byte,System.Boolean,System.String,System.Object)">
+            <summary>
+            An extension method to create a new data parameter from the data source.
+            </summary>
+            <param name="unitOfWork"> The target unit of work. </param>
+            <param name="parameterDirection"> Specifies the parameter direction. </param>
+            <param name="dbType"> Specifies the parameter provider-(in)dependent type. </param>
+            <param name="parameterSize"> Specifies the parameter size. </param>
+            <param name="parameterPrecision"> Specifies the parameter precision. </param>
+            <param name="parameterScale"> Specifies the parameter scale. </param>
+            <param name="parameterNullable"> Specifies the parameter nullable-ness. </param>
+            <param name="parameterName"> Specifies the parameter name. </param>
+            <param name="parameterValue"> Specifies the parameter value. </param>
+            <returns> The data parameter with the specified properties set. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.ExtensionMethods.ExecuteResultsets(TextMetal.Middleware.Data.UoW.IUnitOfWork,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            An extension method to execute a resultset/records query operation against a target unit of work.
+            DO NOT DISPOSE OF UNIT OF WORK CONTEXT - UP TO THE CALLER.
+            </summary>
+            <param name="unitOfWork"> The target unit of work. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.ExtensionMethods.ExecuteSchemaResultsets(TextMetal.Middleware.Data.UoW.IUnitOfWork,System.Data.CommandType,System.String,System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            An extension method to execute a resultset/records query operation against a target unit of work.
+            DO NOT DISPOSE OF UNIT OF WORK CONTEXT - UP TO THE CALLER.
+            </summary>
+            <param name="unitOfWork"> The target unit of work. </param>
+            <param name="commandType"> The type of the command. </param>
+            <param name="commandText"> The SQL text or stored procedure name. </param>
+            <param name="commandParameters"> The parameters to use during the operation. </param>
+            <returns> An enumerable of resultset instances, each containing an enumerable of dictionaries with record key/value pairs of schema metadata. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.ExtensionMethods.GetOutputAsRecord(System.Collections.Generic.IEnumerable{System.Data.IDbDataParameter})">
+            <summary>
+            An extension method to extract outputs from a record dictionary.
+            </summary>
+            <param name="dbDataParameters"> The target enumerable of data paramters. </param>
+            <returns> A dictionary with record key/value pairs of OUTPUT data. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.IUnitOfWork.Complete">
+            <summary>
+            Indicates that all operations within the unit of work have completed successfully. This method should only be called once.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.IUnitOfWork.Divergent">
+            <summary>
+            Indicates that at least one operation within the unit of work cause a failure in data concurrency or nullipotency. This forces the entire unit of work to yield an incomplete status. This method can be called any number of times.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Completed">
+            <summary>
+            Gets a value indicating whether the current instance has been completed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Connection">
+            <summary>
+            Gets the underlying ADO.NET connection.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Diverged">
+            <summary>
+            Gets a value indicating whether the current instance has been diverged.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Transaction">
+            <summary>
+            Gets the underlying ADO.NET transaction.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.IUnitOfWork.Context">
+            <summary>
+            Gets the context object.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.UoW.UnitOfWork">
+            <summary>
+            Represents an atomic set of data operations on a single connection/transaction.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.#ctor(System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            Initializes a new instance of the unitOfWork class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.Create(System.Type,System.String,System.Boolean,System.Data.IsolationLevel)">
+            <summary>
+            Creates a new unit of work (and opens the underlying connection) for the given connection type and connection string with an optional transaction started.
+            </summary>
+            <param name="connectionType"> The run-time type of the connection to use. </param>
+            <param name="connectionString"> The ADO.NET provider connection string to use. </param>
+            <param name="transactional"> A value indicating whether a new local data source transaction isstarted on the connection. </param>
+            <param name="isolationLevel"> A value indicating the transaction isolation level. </param>
+            <returns> An instance of teh unitOfWork ready for execution of operations. This should be wrapped in a using(...){} block for an optimal usage scenario. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.Adjudicate">
+            <summary>
+            Contains the logic to 'adjudicate' or realize a transaction based on state of the current unit of work instance.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.Complete">
+            <summary>
+            Indicates that all operations within the unit of work have completed successfully. This method should only be called once.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.Dispose">
+            <summary>
+            Dispose of the unit of work.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.UoW.UnitOfWork.Divergent">
+            <summary>
+            Indicates that at least one operation within the unit of work cause a failure in data concurrency or nullipotency. This forces the entire unit of work to yield an incomplete status. This method can be called any number of times.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Current">
+            <summary>
+            Gets the current ambient unit of work active on the current thread and application domain.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Connection">
+            <summary>
+            Gets the underlying ADO.NET connection.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Transaction">
+            <summary>
+            Gets the underlying ADO.NET transaction.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Completed">
+            <summary>
+            Gets a value indicating whether the current instance has been completed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Context">
+            <summary>
+            Gets the context object.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.UoW.UnitOfWork.Diverged">
+            <summary>
+            Gets a value indicating whether the current instance has been diverged.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.BinaryExpression">
+            <summary>
+            Represents an expression with two operands.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.IExpression">
+            <summary>
+            Represents an expression.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.ExpressionVisitor.#ctor">
+            <summary>
+            Initializes a new instance of the ExpressionVisitor class.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.LiteralValue">
+            <summary>
+            Represents a literal value.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.NullaryExpression">
+            <summary>
+            Represents an expression with zero operands.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.SortOrder">
+            <summary>
+            Represents a sequence.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.SymbolName">
+            <summary>
+            Represents a symbol name.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Expressions.UnaryExpression">
+            <summary>
+            Represents an expression with one operand.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.FreakazoidModelRepository.GetProcedureRecordsLazy``4(TextMetal.Middleware.Data.UoW.IUnitOfWork,TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.IProcedureTacticCommand{``0,``2,``3},``1,TextMetal.Middleware.Data.IResultset)">
+            <summary>
+            NOTE: This code is re-entrant if the results enumeration is re-started, for example:
+            resultset.Records.First(); // causes an 'abandoned' enumerator
+            resultset.Records.Last(); // causes a full enumeration
+            To prevent this:
+            var records = resultset.Records.ToArray(); // causes a full enumeration
+            records.First(); // in-memory
+            records.Last(); // in-memory
+            </summary>
+            <typeparam name="TCallProcedureModelObject"> </typeparam>
+            <typeparam name="TResultsetModelObject"> </typeparam>
+            <typeparam name="TResultProcedureModelObject"> </typeparam>
+            <typeparam name="TReturnProcedureModelObject"> </typeparam>
+            <param name="unitOfWork"> </param>
+            <param name="procedureTacticCommand"> </param>
+            <param name="resultsetModelObject"> </param>
+            <param name="resultset"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.FreakazoidModelRepository.GetProcedureResultsetsLazy``4(TextMetal.Middleware.Data.UoW.IUnitOfWork,TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.IProcedureTacticCommand{``0,``2,``3},``0,``3)">
+            <summary>
+            NOTE: This code is re-entrant if the results enumeration is re-started, for example:
+            returnProcedureModelObject.Resultsets.First(); // causes an 'abandoned' enumerator
+            returnProcedureModelObject.Resultsets.Last(); // causes a full enumeration
+            To prevent this:
+            var resultsets = returnProcedureModelObject.Resultsets.ToArray(); // causes a full enumeration
+            resultsets.First(); // in-memory
+            resultsets.Last(); // in-memory
+            </summary>
+            <typeparam name="TCallProcedureModelObject"> </typeparam>
+            <typeparam name="TResultsetModelObject"> </typeparam>
+            <typeparam name="TResultProcedureModelObject"> </typeparam>
+            <typeparam name="TReturnProcedureModelObject"> </typeparam>
+            <param name="unitOfWork"> </param>
+            <param name="procedureTacticCommand"> </param>
+            <param name="callProcedureModelObject"> </param>
+            <param name="returnProcedureModelObject"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.FreakazoidModelRepository.GetTableResultsLazy``1(TextMetal.Middleware.Data.UoW.IUnitOfWork,TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITableTacticCommand{``0})">
+            <summary>
+            NOTE: This code is re-entrant if the results enumeration is re-started, for example:
+            records.First(); // causes an 'abandoned' enumerator
+            records.Last(); // causes a full enumeration
+            To prevent this:
+            var records2 = records.ToArray(); // causes a full enumeration
+            records2.First(); // in-memory
+            records2.Last(); // in-memory
+            </summary>
+            <typeparam name="TTableModelObject"> </typeparam>
+            <param name="unitOfWork"> </param>
+            <param name="tableTacticCommand"> </param>
+            <returns> </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:TextMetal.Middleware.Data.Models.Tabular.ITableModelQuery" -->
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the ParameterMappingAttribute class.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterDbType">
+            <summary>
+            Gets or sets the type of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterDirection">
+            <summary>
+            Gets or sets the direction of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterName">
+            <summary>
+            Gets or sets the name of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterNullable">
+            <summary>
+            Gets or sets the nullable-ness of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterPrecision">
+            <summary>
+            Gets or sets the precision of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterScale">
+            <summary>
+            Gets or sets the scale of the parameter.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Mappings.ParameterMappingAttribute.ParameterSize">
+            <summary>
+            Gets or sets the size of the parameter.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory">
+            <summary>
+            Represents an ordered set of historical revsions to a database (file).
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.#ctor">
+            <summary>
+            Initializes a new instance of the DatabaseHistory class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.PerformSchemaUpgrade(TextMetal.Middleware.Data.UoW.IUnitOfWork)">
+            <summary>
+            For a given unitOfWork, perform a schema upgrade if necessary. The ordered set of revisions are executed from version+1 to version[n].
+            </summary>
+            <param name="unitOfWork"> The target unitOfWork. </param>
+            <returns> A value indicating whether any changes were needed against the target database (file). </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.Revisions">
+            <summary>
+            Gets a list of ordered revisions.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.DoesSchemaTrackingExistCommandText">
+            <summary>
+            Gets or sets the SQL required to determine if schema tracking is enabled in the database (file).
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.GetSchemaVersionCommandText">
+            <summary>
+            Gets or sets the SQL required to determine the schema version of the database (file).
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseHistory.IncrementSchemaVersionCommandText">
+            <summary>
+            Gets or sets the SQL required to increment the schema version in the database (file).
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseRevision">
+            <summary>
+            Represents a single historical revsion to a database (file).
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseRevision.#ctor">
+            <summary>
+            Initializes a new instance of the DatabaseRevision class.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseRevision.Statements">
+            <summary>
+            Gets an ordered list of statements to execute for this revision.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Migrations.DatabaseRevision.Number">
+            <summary>
+            Gets or sets the revision number.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1">
+            <summary>
+            Used as a context object for a unit of work. Allows multiple contexts to be associated to a single transaction for differing actual types. An exception is throw if duplicate context actual types are registered. When disposed, all underlying contexts will also be disposed.
+            </summary>
+            <typeparam name="TDisposableContext"> The base type (not actual type) of the underlying context. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.#ctor">
+            <summary>
+            Initializes a new instance of the MulticastDisposableContext`1 class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.ClearContext(System.Type)">
+            <summary>
+            Unsets (or unregisters) the specified actual context type.
+            </summary>
+            <param name="contextActualType"> The actual context type requested. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.Dispose">
+            <summary>
+            Disposes of the inner contexts. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.GetContext(System.Type)">
+            <summary>
+            Gets the single context of the specified actual context type. An exception is thrown if the requested actual type has not previously been registered.
+            </summary>
+            <param name="contextActualType"> The actual context type requested. </param>
+            <returns> An instance of an actual context type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.HasContext(System.Type)">
+            <summary>
+            Gets a value indicating whether a context of the specified actual context type has been previously registered.
+            </summary>
+            <param name="contextActualType"> The actual context type requested. </param>
+            <returns> A value indicating whether a context of the specified actual context type has been previously registered. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.SetContext(System.Type,`0)">
+            <summary>
+            Sets (or registers) a single context instance of the specified actual context type. An exception is thrown if the requested actual type has already previously been registered.
+            </summary>
+            <param name="contextActualType"> The actual context type requested. </param>
+            <param name="contextActualInstance"> The actual context instance to register. </param>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.MulticastDisposableContext`1.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITacticCommand.CommandBehavior">
+            <summary>
+            Gets or sets the command behavior.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITacticCommand.CommandPrepare">
+            <summary>
+            Gets or sets a value indicating whether to prepare the command.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITacticCommand.CommandText">
+            <summary>
+            Gets or sets the command text.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITacticCommand.CommandTimeout">
+            <summary>
+            Gets or sets the command timeout.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.ITacticCommand.CommandType">
+            <summary>
+            Gets or sets the command type.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.TacticCommand.CommandBehavior">
+            <summary>
+            Gets or sets the command behavior.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.TacticCommand.CommandPrepare">
+            <summary>
+            Gets or sets a value indicating whether to prepare the command.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.TacticCommand.CommandText">
+            <summary>
+            Gets or sets the command text.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.TacticCommand.CommandTimeout">
+            <summary>
+            Gets or sets the command timeout.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Impl.FreakazoidMapper.Tactics.TacticCommand.CommandType">
+            <summary>
+            Gets or sets the command type.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:TextMetal.Middleware.Data.Models.IModelObject" -->
+        <!-- Badly formed XML comment ignored for member "T:TextMetal.Middleware.Data.Models.Functional.IResultProcedureModelObject" -->
+        <!-- Badly formed XML comment ignored for member "T:TextMetal.Middleware.Data.Models.IRecordModelObject" -->
+        <!-- Badly formed XML comment ignored for member "T:TextMetal.Middleware.Data.Models.Tabular.ITableModelObject" -->
+        <member name="M:TextMetal.Middleware.Data.Models.Tabular.ITableModelObject.Mark">
+            <summary>
+            Called prior to any non-nullipotent (e.g. insert, update, delete) operation.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.ITableModelObject.IdValues">
+            <summary>
+            Gets the ordinal sorted array values identifying the current table model object instance.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.ITableModelObject.IsNew">
+            <summary>
+            Gets or sets a value indicating whether the current table model object instance
+            is new (never been persisted) or old (has been persisted).
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Models.Functional.IReturnProcedureModelObject">
+            <summary>
+            Provides a contract for return procedure model objects (procedure, function, packages, etc.).
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Models.Functional.IReturnProcedureModelObject`2">
+            <summary>
+            Provides a contract for return procedure model objects (procedure, function, packages, etc.).
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Data.Models.Functional.ICallProcedureModelObject">
+            <summary>
+            Provides a contract for call procedure model objects (procedure, function, packages, etc.).
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Models.Tabular.DynamicTableModelObject.Mark">
+            <summary>
+            Called prior to any non-nullipotent (e.g. insert, update, delete) operation.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Models.Tabular.DynamicTableModelObject.Validate">
+            <summary>
+            Validates this model instance.
+            </summary>
+            <returns> A enumerable of zero or more messages. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.DynamicTableModelObject.IdValues">
+            <summary>
+            Gets the ordinal sorted array values identifying the current table model object instance.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.DynamicTableModelObject.IsNew">
+            <summary>
+            Gets or sets a value indicating whether the current table model object instance
+            is new (never been persisted) or old (has been persisted).
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Models.Tabular.TableModelObject.Mark">
+            <summary>
+            Called prior to any non-nullipotent (e.g. insert, update, delete) operation.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Data.Models.Tabular.TableModelObject.Validate">
+            <summary>
+            Validates this model instance.
+            </summary>
+            <returns> A enumerable of zero or more messages. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.TableModelObject.IdValues">
+            <summary>
+            Gets the ordinal sorted array values identifying the current table model object instance.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Data.Models.Tabular.TableModelObject.IsNew">
+            <summary>
+            Gets or sets a value indicating whether the current table model object instance
+            is new (never been persisted) or old (has been persisted).
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5701A75D-CDFC-4828-B3A0-8331EEAC9123}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_2ndAsset.Utilities.DataObfu.WindowsTool</RootNamespace>
+    <AssemblyName>DataObfuscationStudio</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DataObfuscationStudio.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\DataObfuscationStudio.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\2ndAssetSuite.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.ConnectionUI">
+      <HintPath>..\..\lib\DataConnectionDialog\Microsoft.Data.ConnectionUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.ConnectionUI.Dialog">
+      <HintPath>..\..\lib\DataConnectionDialog\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TextMetal.Middleware.Common">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMetal.Middleware.Data">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMetal.Middleware.Solder">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Solder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>SolutionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controllers\AdapterSettingsController.cs" />
+    <Compile Include="Controllers\ObfuscationController.cs" />
+    <Compile Include="Controllers\SplashController.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controls\AvalancheSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AvalancheSettingsUserControl.Designer.cs">
+      <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExecutionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExecutionUserControl.Designer.cs">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DictionarySettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DictionarySettingsUserControl.Designer.cs">
+      <DependentUpon>DictionarySettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MetadataSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MetadataSettingsUserControl.Designer.cs">
+      <DependentUpon>MetadataSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DelTxtAdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DelTxtAdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>DelTxtAdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdapterSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdapterSettingsForm.Designer.cs">
+      <DependentUpon>AdapterSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataConnectionConfiguration.cs" />
+    <Compile Include="Forms\IDataConnectionConfiguration.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ObfuscationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ObfuscationForm.Designer.cs">
+      <DependentUpon>ObfuscationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Views\IAdapterSettingsView2.cs" />
+    <Compile Include="Views\IAvalancheSettingsView.cs" />
+    <Compile Include="Views\IExecutionView.cs" />
+    <Compile Include="Views\IDictionarySettingsView.cs" />
+    <Compile Include="Views\IDictionarySpecView.cs" />
+    <Compile Include="Views\IMetaColumnSpecView.cs" />
+    <Compile Include="Views\IMetadataSettingsView.cs" />
+    <Compile Include="Views\IAdapterSettingsView.cs" />
+    <Compile Include="Views\IAdoNetAdapterSettingsView.cs" />
+    <Compile Include="Views\IDelTextAdapterSettingsView.cs" />
+    <Compile Include="Views\IHeaderSpecView.cs" />
+    <Compile Include="Views\IObfuscationView.cs" />
+    <Compile Include="Views\ISpecificAdapterSettingsView.cs" />
+    <Compile Include="Views\ISplashView.cs" />
+    <Compile Include="Views\IAboutView.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <EmbeddedResource Include="Controls\AvalancheSettingsUserControl.resx">
+      <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ExecutionUserControl.resx">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DictionarySettingsUserControl.resx">
+      <DependentUpon>DictionarySettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MetadataSettingsUserControl.resx">
+      <DependentUpon>MetadataSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AdapterSettingsUserControl.resx">
+      <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AdoNetAdapterSettingsUserControl.resx">
+      <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DelTxtAdapterSettingsUserControl.resx">
+      <DependentUpon>DelTxtAdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdapterSettingsForm.resx">
+      <DependentUpon>AdapterSettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ObfuscationForm.resx">
+      <DependentUpon>ObfuscationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\2ndAssetSuite.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2ndAsset.Common.WinForms\2ndAsset.Common.WinForms.csproj">
+      <Project>{6BD158BA-429B-422B-AAEB-24A36511C19A}</Project>
+      <Name>2ndAsset.Common.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2ndAsset.ObfuscationEngine.Core\2ndAsset.ObfuscationEngine.Core.csproj">
+      <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
+      <Name>2ndAsset.ObfuscationEngine.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

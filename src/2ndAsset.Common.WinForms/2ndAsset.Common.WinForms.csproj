@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6BD158BA-429B-422B-AAEB-24A36511C19A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_2ndAsset.Common.WinForms</RootNamespace>
+    <AssemblyName>2ndAsset.Common.WinForms</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\2ndAssetSuite.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\2ndAsset.Common.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\2ndAsset.Common.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TextMetal.Middleware.Common">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMetal.Middleware.Data">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMetal.Middleware.Solder">
+      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Solder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>SolutionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\_2ndAssetUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetMultiDocumentForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetDocumentForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\IBaseController~1.cs" />
+    <Compile Include="Presentation\BaseController~1.cs" />
+    <Compile Include="Controls\ControlExtensionMethods.cs" />
+    <Compile Include="Controls\_2ndAssetUserControl~1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\BackgroundTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BackgroundTaskForm.Designer.cs">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.designer.cs">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetForm.Designer.cs">
+      <DependentUpon>_2ndAssetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IListItem.cs" />
+    <Compile Include="IListItem~1.cs" />
+    <Compile Include="ListItem.cs" />
+    <Compile Include="ListItem~1.cs" />
+    <Compile Include="Presentation\DispatchActionUriAttribute.cs" />
+    <Compile Include="Presentation\IDocumentView~1.cs" />
+    <Compile Include="Presentation\IDocumentView.cs" />
+    <Compile Include="Presentation\IFullView.cs" />
+    <Compile Include="Presentation\IMultiDocumentView.cs" />
+    <Compile Include="Presentation\IPartialView.cs" />
+    <Compile Include="Presentation\IListView.cs" />
+    <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Presentation\IBaseView.cs" />
+    <Compile Include="WindowsApplicationFascade~1.cs" />
+    <Compile Include="WindowsApplicationFascade~2.cs" />
+    <Compile Include="SplashApplicationContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\2ndAssetSuite.snk">
+      <Link>2ndAssetSuite.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\BackgroundTaskForm.resx">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PropertyForm.resx">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\_2ndAssetForm.resx">
+      <DependentUpon>_2ndAssetForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,237 @@
+{
+	ConfigurationNamespace: "http://www.2ndAsset.com/cfg/v0.1.0",
+
+	SourceAdapterConfiguration:
+	{
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.DelimitedTextSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+		DelimitedTextAdapterConfiguration:
+		{
+			DelimitedTextFilePath: "d:\\Confidential_Banking_Data.txt",
+			DelimitedTextSpec:
+			{
+				FirstRecordIsHeader: true,
+				RecordDelimiter: "\r\n",
+				FieldDelimiter: "\t",
+				QuoteValue: "",
+
+				HeaderSpecs:
+				[
+					{
+						HeaderName: "Institution",
+						FieldType: "String"
+					},
+
+					{
+						HeaderName: "txid",
+						FieldType: "Number"
+					},
+
+					{
+						HeaderName: "number",
+						FieldType: "String"
+					},
+
+					{
+						HeaderName: "date",
+						FieldType: "DateTime"
+					},
+
+					{
+						HeaderName: "payee",
+						FieldType: "String"
+					},
+
+					{
+						HeaderName: "amount",
+						FieldType: "Number"
+					},
+
+					{
+						HeaderName: "cleared",
+						FieldType: "Number"
+					},
+
+					{
+						HeaderName: "category",
+						FieldType: "String"
+					},
+
+					{
+						HeaderName: "due",
+						FieldType: "DateTime"
+					},
+
+					{
+						HeaderName: "comments",
+						FieldType: "String"
+					}
+				]
+			}
+		}
+	},
+
+	DestinationAdapterConfiguration:
+	{
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.DelimitedTextDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+		DelimitedTextAdapterConfiguration:
+		{
+			DelimitedTextFilePath: "d:\\Public_Banking_Data.csv",
+			DelimitedTextSpec:
+			{
+				FirstRecordIsHeader: true,
+				RecordDelimiter: "\n",
+				FieldDelimiter: ",",
+				QuoteValue: "\""
+			}
+		}
+	},
+
+	HashConfiguration:
+	{
+		Multiplier: 33,
+		Seed: 5381
+	},
+
+	DictionaryConfigurations:
+	[
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_CrayonColor",
+			RecordCount: 121,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.SqlServerBulkAdoNetDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				AdoNetAdapterConfiguration:
+				{
+					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+					PreExecuteCommandType: "",
+					PreExecuteCommandText: "",
+
+					ExecuteCommandText: "SELECT t.[Key], t.[CrayonColor] FROM [2ndasset_obfuscation_test_suite].[rev001].[CrayonColorDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandType: "Text",
+
+					PostExecuteCommandType: "",
+					PostExecuteCommandText: ""
+				}
+			}
+		},
+
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_LastName",
+			RecordCount: 88800,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				AdoNetAdapterConfiguration:
+				{
+					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+					PreExecuteCommandType: "",
+					PreExecuteCommandText: "",
+					
+					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_obfuscation_test_suite].[rev001].[LastNameDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandType: "Text",
+					
+					PostExecuteCommandType: "",
+					PostExecuteCommandText: ""
+				}
+			}
+		}
+	],
+
+	TableConfiguration:
+	{
+		ColumnConfigurations:
+		[
+			{
+				ColumnName: "txid",
+				IsColumnNullable: true,
+				DictionaryReference: "",
+				ExtentValue: null,
+				ObfuscationStrategy: "None"
+			},
+
+			{
+				ColumnName: "Institution",
+				IsColumnNullable: false,
+				DictionaryReference: "d_CrayonColor",
+				ExtentValue: null,
+				ObfuscationStrategy: "Substitution"
+			},
+
+			{
+				ColumnName: "number",
+				IsColumnNullable: false,
+				DictionaryReference: "",
+				ExtentValue: null,
+				ObfuscationStrategy: "Shuffling"
+			},
+
+			{
+				ColumnName: "date",
+				IsColumnNullable: true,
+				DictionaryReference: "",
+				ExtentValue: 25,
+				ObfuscationStrategy: "Variance"
+			},
+
+			{
+				ColumnName: "payee",
+				IsColumnNullable: true,
+				DictionaryReference: "d_LastName",
+				ExtentValue: -50,
+				ObfuscationStrategy: "Substitution"
+			},
+
+			{
+				ColumnName: "amount",
+				IsColumnNullable: true,
+				DictionaryReference: "",
+				ExtentValue: 100,
+				ObfuscationStrategy: "Variance"
+			},
+
+			{
+				ColumnName: "cleared",
+				IsColumnNullable: true,
+				DictionaryReference: "",
+				ExtentValue: null,
+				ObfuscationStrategy: "None"
+			},
+
+			{
+				ColumnName: "category",
+				IsColumnNullable: true,
+				DictionaryReference: "d_CrayonColor",
+				ExtentValue: null,
+				ObfuscationStrategy: "Substitution"
+			},
+
+			{
+				ColumnName: "due",
+				IsColumnNullable: true,
+				DictionaryReference: "",
+				ExtentValue: 10,
+				ObfuscationStrategy: "Variance"
+			},
+
+			{
+				ColumnName: "comments",
+				IsColumnNullable: true,
+				DictionaryReference: "d_LastName",
+				ExtentValue: null,
+				ObfuscationStrategy: "Substitution"
+			}
+		]
+	}
+}

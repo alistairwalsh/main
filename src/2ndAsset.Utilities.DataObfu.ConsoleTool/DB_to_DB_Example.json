@@ -1,0 +1,190 @@
+{
+	ConfigurationNamespace: "http://www.2ndAsset.com/cfg/v0.1.0",
+
+	SourceAdapterConfiguration:
+	{
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+		AdoNetAdapterConfiguration:
+		{
+			ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+			ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+			PreExecuteCommandType: "",
+			PreExecuteCommandText: "",
+
+			ExecuteCommandText: "SELECT * FROM [2ndasset_bank_account_demo].[dbo].[CheckingAccount]",
+			ExecuteCommandType: "Text",
+
+			PostExecuteCommandType: "",
+			PostExecuteCommandText: ""
+		}
+	},
+
+	DestinationAdapterConfiguration:
+	{
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.SqlServerBulkAdoNetDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+		AdoNetAdapterConfiguration:
+		{
+			ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+			ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+			PreExecuteCommandType: "Text",
+			PreExecuteCommandText: "TRUNCATE TABLE [2ndasset_bank_account_demo].[dbo].[Ox_CheckingAccount]",
+			
+			ExecuteCommandText: "[2ndasset_bank_account_demo].[dbo].[Ox_CheckingAccount]",
+			ExecuteCommandType: "TableDirect",
+			
+			PostExecuteCommandType: "",
+			PostExecuteCommandText: ""
+		}
+	},
+
+	HashConfiguration:
+	{
+		Multiplier: 33,
+		Seed: 5381
+	},
+
+	DictionaryConfigurations:
+	[
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_CrayonColor",
+			RecordCount: 121,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.SqlServerBulkAdoNetDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				AdoNetAdapterConfiguration:
+				{
+					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+					PreExecuteCommandType: "",
+					PreExecuteCommandText: "",
+
+					ExecuteCommandText: "SELECT t.[Key], t.[CrayonColor] FROM [2ndasset_bank_account_demo].[OxConfig].[CrayonColorDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandType: "Text",
+
+					PostExecuteCommandType: "",
+					PostExecuteCommandText: ""
+				}
+			}
+		},
+
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_LastName",
+			RecordCount: 88800,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				AdoNetAdapterConfiguration:
+				{
+					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+					PreExecuteCommandType: "",
+					PreExecuteCommandText: "",
+					
+					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_bank_account_demo].[OxConfig].[LastNameDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandType: "Text",
+					
+					PostExecuteCommandType: "",
+					PostExecuteCommandText: ""
+				}
+			}
+		}
+	],
+
+	TableConfiguration:
+	{
+		ColumnConfigurations:
+		[
+			{
+				"ColumnName": "TransactionId",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "None"
+			},
+
+			{
+				"ColumnName": "InstitutionId",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "None"
+			},
+
+			{
+				"ColumnName": "RefNumber",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Shuffling"
+			},
+
+			{
+				"ColumnName": "TheDate",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": 25,
+				"ObfuscationStrategy": "Variance"
+			},
+
+			{
+				"ColumnName": "PayeeId",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": -50,
+				"ObfuscationStrategy": "None"
+			},
+
+			{
+				"ColumnName": "TheAmount",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": 100,
+				"ObfuscationStrategy": "Variance"
+			},
+
+			{
+				"ColumnName": "IsCleared",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "None"
+			},
+
+			{
+				"ColumnName": "CategoryId",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "None"
+			},
+
+			{
+				"ColumnName": "DueDate",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": 10,
+				"ObfuscationStrategy": "Variance"
+			},
+
+			{
+				"ColumnName": "Comments",
+				"IsColumnNullable": true,
+				"DictionaryReference": "d_LastName",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
+			}
+		]
+	}
+}

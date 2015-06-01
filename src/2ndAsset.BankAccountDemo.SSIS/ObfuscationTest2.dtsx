@@ -1,0 +1,1633 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/17/2014 5:33:25 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="FRAMEWORK"
+  DTS:CreatorName="framework\daniel.bullington"
+  DTS:DTSID="{06B9242E-AD2C-4D48-82AE-3346DCBEFB73}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{5EF3E597-D656-435B-B3BE-78F4773309CD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{868adf8d-a01b-47b9-8f71-60d2ce89b0bd}"
+      DTS:ObjectName="DestinationDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=state_contractor_data;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DictionaryDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{57A574F9-9235-4528-98AC-FF6BEF3C7AF0}"
+      DTS:ObjectName="DictionaryDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=obfu_conf;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{140F620B-516D-4357-AD46-9CC7F78ED590}"
+      DTS:ObjectName="SourceDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=state_contractor_data;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0701A544-AA8D-43E3-B8A4-A031F3FD1662}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ImportId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ImportId]"
+                      name="ImportId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[SourceSystem]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[SourceSystem]"
+                      name="SourceSystem"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"test"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"test"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Obfuscation Strategy Transform"
+              componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+              contactInfo="info@badmsftbistack.com"
+              description="Obfuscation Strategy Transform"
+              name="Obfuscation Strategy Transform"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int64"
+                  description="Sign hash multiplier."
+                  Encrypted="1"
+                  name="SignHashMultiplier"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAelQ3UYdSnkGMpBM0dolm2gAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACUiFBCDVyy8stPMvOnSstk0Fhv9krAAVO4qGvIX52k1wAAAAAOgAAAAAIAACAAAADUWPdlfxBYW+7E/xRXC8tqhfDI8yBDJAn2xipjhXoLUhAAAADwtKLSZeE6g+eq/CrMTyBPQAAAAESGNQhaeJdg3ZdcXukW78l1U+vq0GEjfvVJsqgVF9RDdIMDhYProfsrGDaqOtjuhQdC5ATJAm0a+75NW7J4eBE</property>
+                <property
+                  dataType="System.Int64"
+                  description="Sign hash seed."
+                  Encrypted="1"
+                  name="SignHashSeed"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAelQ3UYdSnkGMpBM0dolm2gAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACPJ+9Nqk1P5U49F9Wey7R1zMdsXuWZcaY+n10Xp+ooQwAAAAAOgAAAAAIAACAAAACyptCxry2B8MY1yto5CSl7Xc4fU7K1rUh7KdZ4PeOkqxAAAACRQgAfmNwiqnofOQ6JuV4GQAAAAAn/1upnLCDW1n8KnlsYkB8Uew+LXybrljvFrduznkCWj+1nZfrR67lkaHC7gEg1IedTeUVPhiI0VuyooAkh2Wk</property>
+                <property
+                  dataType="System.Int64"
+                  description="Value hash multiplier."
+                  Encrypted="1"
+                  name="ValueHashMultiplier"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAelQ3UYdSnkGMpBM0dolm2gAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABVh6FjDOJaswKRuCIJEkPXk+Nnuk0KaalrtH8L4vsnbAAAAAAOgAAAAAIAACAAAAAFP7RyUBIgnivkdRV5repRw/R3CfZjBX+TAHP01QFvUBAAAADoFfj1qq8S2E0bpZbCfb2JQAAAAG0kmsm/SGA3Dzmq2wOWXcwjM+Y1rC9jJ2WW8OEsZXBVyx+eIbIHJbj9TcintCAkpkkcv1U/Zn8Q/4MzLu0qPaQ</property>
+                <property
+                  dataType="System.Int64"
+                  description="Value hash seed."
+                  Encrypted="1"
+                  name="ValueHashSeed"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAelQ3UYdSnkGMpBM0dolm2gAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACxGfS9nrle8MLSvll6kIFVvtokMDUTaeIfkCl+1j2ybwAAAAAOgAAAAAIAACAAAADBKANk2ZcfQe2UvPi9QjVzh3ru28cnYdgL8N/Bu0lvLRAAAAA9ieag/sUtDgZnz2CzD13tQAAAANvTWbXz0Xv73LU1Y6Eswwx7yjGvc8UzE6v8uDUvi/i364wNxjm8GrSRgZ2R90bmXjTeaFOj9H9Q8cEhwMrj3ok</property>
+                <property
+                  dataType="System.Boolean"
+                  description="A value indicating whether to launch the debugger at component initialization time."
+                  name="DebuggerLaunch"
+                  typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                <property
+                  dataType="System.String"
+                  description="JSON serialized dictionary configuration data."
+                  name="DictionaryConfiguration"
+                  typeConverter="BadMsftBIStack.Ssis.Components.UI.ReadonlyTypeConverter, BadMsftBIStack.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1, processorArchitecture=MSIL"
+                  UITypeEditor="BadMsftBIStack.Ssis.Components.UI.DictConfFormEditor, BadMsftBIStack.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1, processorArchitecture=MSIL">[]</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">BadMsftBIStack.Ssis.Components.ObfuscationStrategyTransform, BadMsftBIStack.Ssis.Components, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Obfuscation Strategy Transform.Connections[DictionaryConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DictionaryDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DictionaryDB]"
+                  description="Dictionary connection."
+                  name="DictionaryConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]"
+                  name="Obfuscation Strategy Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[SourceKey]"
+                      cachedDataType="wstr"
+                      cachedLength="1031"
+                      cachedName="SourceKey"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[MinorCityCountyLocality]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MinorCityCountyLocality"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MinorCityCountyLocality]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[MajorCityCountyLocality]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MajorCityCountyLocality"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MajorCityCountyLocality]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[StateProvince]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="StateProvince"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvince]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[StateProvinceAbbreviation]"
+                      cachedDataType="wstr"
+                      cachedLength="127"
+                      cachedName="StateProvinceAbbreviation"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvinceAbbreviation]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[ZipPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ZipPostalCode"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipPostalCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[CountryTerritory]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CountryTerritory"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritory]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[CountryTerritoryAbbreviation]"
+                      cachedDataType="wstr"
+                      cachedLength="127"
+                      cachedName="CountryTerritoryAbbreviation"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritoryAbbreviation]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TelephoneCountryTerritoryCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TelephoneCountryTerritoryCode"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneCountryTerritoryCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TelephoneAreaCode]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="TelephoneAreaCode"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneAreaCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[EffectiveFromTimestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveFromTimestamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveFromTimestamp]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[EffectiveToTimestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveToTimestamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveToTimestamp]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[IsCurrentRecord]"
+                      cachedDataType="i4"
+                      cachedName="IsCurrentRecord"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentRecord]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[ImportId]"
+                      cachedDataType="i4"
+                      cachedName="ImportId"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ImportId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[SourceSystem]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="SourceSystem"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[SourceSystem]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="BadMsftBIStack.Core.Obfuscation.ObfuscationStrategy, BadMsftBIStack.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=71af88ed0efe1db1">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Defaulting nullable."
+                          name="DefaultingNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Masking extent."
+                          name="MaskingExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Variance extent."
+                          name="VarianceExtent"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Output]"
+                  name="Obfuscation Strategy Output"
+                  synchronousInputId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output]"
+                  isErrorOut="true"
+                  name="Obfuscation Strategy Error Output"
+                  synchronousInputId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[model].[LocationDimension]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SourceKey]"
+                      cachedDataType="wstr"
+                      cachedLength="1031"
+                      cachedName="SourceKey"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceKey]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MinorCityCountyLocality]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MinorCityCountyLocality"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MinorCityCountyLocality]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MinorCityCountyLocality]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MajorCityCountyLocality]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MajorCityCountyLocality"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MajorCityCountyLocality]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MajorCityCountyLocality]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StateProvince]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="StateProvince"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvince]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvince]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StateProvinceAbbreviation]"
+                      cachedDataType="wstr"
+                      cachedLength="127"
+                      cachedName="StateProvinceAbbreviation"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceAbbreviation]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvinceAbbreviation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ZipPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ZipPostalCode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZipPostalCode]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipPostalCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CountryTerritory]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CountryTerritory"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryTerritory]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CountryTerritoryAbbreviation]"
+                      cachedDataType="wstr"
+                      cachedLength="127"
+                      cachedName="CountryTerritoryAbbreviation"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryTerritoryAbbreviation]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritoryAbbreviation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TelephoneCountryTerritoryCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TelephoneCountryTerritoryCode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TelephoneCountryTerritoryCode]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneCountryTerritoryCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TelephoneAreaCode]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="TelephoneAreaCode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TelephoneAreaCode]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneAreaCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EffectiveFromTimestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveFromTimestamp"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveFromTimestamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveFromTimestamp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EffectiveToTimestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveToTimestamp"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveToTimestamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveToTimestamp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrentRecord]"
+                      cachedDataType="i4"
+                      cachedName="IsCurrentRecord"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrentRecord]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentRecord]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ImportId]"
+                      cachedDataType="i4"
+                      cachedName="ImportId"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportId]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ImportId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SourceSystem]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="SourceSystem"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceSystem]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[SourceSystem]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationDimensionId]"
+                      dataType="i8"
+                      name="LocationDimensionId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportId]"
+                      dataType="i8"
+                      name="ImportId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceSystem]"
+                      dataType="wstr"
+                      length="127"
+                      name="SourceSystem" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="SourceKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MinorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      name="MinorCityCountyLocality" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MajorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      name="MajorCityCountyLocality" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvince]"
+                      dataType="wstr"
+                      length="255"
+                      name="StateProvince" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      name="StateProvinceAbbreviation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZipPostalCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ZipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryTerritory]"
+                      dataType="wstr"
+                      length="255"
+                      name="CountryTerritory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryTerritoryAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      name="CountryTerritoryAbbreviation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TelephoneCountryTerritoryCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="TelephoneCountryTerritoryCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TelephoneAreaCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="TelephoneAreaCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveFromTimestamp]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveFromTimestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveToTimestamp]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveToTimestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrentRecord]"
+                      dataType="bool"
+                      name="IsCurrentRecord" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[StageDimLocation]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP 100 * FROM [staging].[stagedimlocation]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceKey]"
+                      length="1031"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceKey]"
+                      name="SourceKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MinorCityCountyLocality]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MinorCityCountyLocality]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MinorCityCountyLocality]"
+                      name="MinorCityCountyLocality"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MajorCityCountyLocality]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MajorCityCountyLocality]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MajorCityCountyLocality]"
+                      name="MajorCityCountyLocality"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvince]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StateProvince]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvince]"
+                      name="StateProvince"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvinceAbbreviation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceAbbreviation]"
+                      length="127"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[StateProvinceAbbreviation]"
+                      name="StateProvinceAbbreviation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipPostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ZipPostalCode]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipPostalCode]"
+                      name="ZipPostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryTerritory]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritory]"
+                      name="CountryTerritory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritoryAbbreviation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryTerritoryAbbreviation]"
+                      length="127"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryTerritoryAbbreviation]"
+                      name="CountryTerritoryAbbreviation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneCountryTerritoryCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TelephoneCountryTerritoryCode]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneCountryTerritoryCode]"
+                      name="TelephoneCountryTerritoryCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneAreaCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TelephoneAreaCode]"
+                      length="7"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TelephoneAreaCode]"
+                      name="TelephoneAreaCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveFromTimestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveFromTimestamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveFromTimestamp]"
+                      name="EffectiveFromTimestamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveToTimestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveToTimestamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EffectiveToTimestamp]"
+                      name="EffectiveToTimestamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentRecord]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCurrentRecord]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentRecord]"
+                      name="IsCurrentRecord"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceKey]"
+                      dataType="wstr"
+                      length="1031"
+                      name="SourceKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MinorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      name="MinorCityCountyLocality" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MajorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      name="MajorCityCountyLocality" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StateProvince]"
+                      dataType="wstr"
+                      length="255"
+                      name="StateProvince" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      name="StateProvinceAbbreviation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ZipPostalCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ZipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryTerritory]"
+                      dataType="wstr"
+                      length="255"
+                      name="CountryTerritory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryTerritoryAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      name="CountryTerritoryAbbreviation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TelephoneCountryTerritoryCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="TelephoneCountryTerritoryCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TelephoneAreaCode]"
+                      dataType="wstr"
+                      length="7"
+                      name="TelephoneAreaCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveFromTimestamp]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveFromTimestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveToTimestamp]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveToTimestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCurrentRecord]"
+                      dataType="i4"
+                      name="IsCurrentRecord" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceKey]"
+                      dataType="wstr"
+                      length="1031"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceKey]"
+                      name="SourceKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MinorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MinorCityCountyLocality]"
+                      name="MinorCityCountyLocality" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MajorCityCountyLocality]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MajorCityCountyLocality]"
+                      name="MajorCityCountyLocality" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StateProvince]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StateProvince]"
+                      name="StateProvince" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StateProvinceAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StateProvinceAbbreviation]"
+                      name="StateProvinceAbbreviation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ZipPostalCode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ZipPostalCode]"
+                      name="ZipPostalCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryTerritory]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryTerritory]"
+                      name="CountryTerritory" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryTerritoryAbbreviation]"
+                      dataType="wstr"
+                      length="127"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryTerritoryAbbreviation]"
+                      name="CountryTerritoryAbbreviation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TelephoneCountryTerritoryCode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TelephoneCountryTerritoryCode]"
+                      name="TelephoneCountryTerritoryCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TelephoneAreaCode]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TelephoneAreaCode]"
+                      name="TelephoneAreaCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EffectiveFromTimestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EffectiveFromTimestamp]"
+                      name="EffectiveFromTimestamp" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EffectiveToTimestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EffectiveToTimestamp]"
+                      name="EffectiveToTimestamp" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCurrentRecord]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCurrentRecord]"
+                      name="IsCurrentRecord" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Obfuscation Strategy Output]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Obfuscation Strategy Output"
+              startId="Package\Data Flow Task\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B575A24C-2406-411A-932F-694D0DF42A22}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{868adf8d-a01b-47b9-8f71-60d2ce89b0bd}"
+          SQLTask:SqlStatementSource="delete from [model].[LocationDimension];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8995C9C6-6CAE-4E62-A14F-89A3F2ED14DC}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="70,89" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="61,16" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="144,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="127,291" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="137,34" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="137,122" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Data Flow Task\Obfuscation Strategy Transform"
+          TopLeft="351,208" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="213,76">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Obfuscation Strategy Output]"
+          TopLeft="465.5,250">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-253,41"
+              Start="0,0"
+              End="-253,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="-4,20.5" />
+                  <mssgle:LineSegment
+                    End="-249,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-249,20.5"
+                    Point2="-253,20.5"
+                    Point3="-253,24.5" />
+                  <mssgle:LineSegment
+                    End="-253,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="214,164">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="251.5,44"
+              Start="0,0"
+              End="251.5,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="4,22" />
+                  <mssgle:LineSegment
+                    End="247.5,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="247.5,22"
+                    Point2="251.5,22"
+                    Point3="251.5,26" />
+                  <mssgle:LineSegment
+                    End="251.5,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

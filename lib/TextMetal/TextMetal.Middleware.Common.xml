@@ -1,0 +1,806 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TextMetal.Middleware.Common</name>
+    </assembly>
+    <members>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ExecutableApplicationFascade.EntryPoint(System.String[])">
+            <summary>
+            The indirect entry point method for this application. Code is wrapped in this method to leverage the 'TryStartup'/'Startup' pattern. This method, if used, wraps the Startup() method in an exception handler. The handler will catch all exceptions and report a full detailed stack trace to the Console.Error stream; -1 is then returned as the exit code. Otherwise, if no exception is thrown, the exit code returned is that which is returned by Startup().
+            </summary>
+            <param name="args"> The command line arguments passed from the executing environment. </param>
+            <returns> The resulting exit code. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.ExecutableApplicationFascade.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.AppConfigFascade">
+            <summary>
+            Provides static helper and/or extension methods for strongly typed read access to an app.config or web.config file.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.GetAppSetting``1(System.String)">
+            <summary>
+            Gets the value of an app settings for the current application's default configuration. A ConfigurationErrorsException is thrown if the key does not exist.
+            </summary>
+            <typeparam name="TValue"> The type to convert the app settings value. </typeparam>
+            <param name="key"> The key to get a value. </param>
+            <returns> The app settings as type TValue. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.GetAppSetting(System.Type,System.String)">
+            <summary>
+            Gets the value of an app settings for the current application's default configuration. A ConfigurationErrorsException is thrown if the key does not exist.
+            </summary>
+            <param name="valueType"> The type to convert the app settings value. </param>
+            <param name="key"> The key to get a value. </param>
+            <returns> The app settings as a string. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.GetConnectionProvider(System.String)">
+            <summary>
+            Gets the value of a connection provider for the current application's default configuration. A ConfigurationErrorsException is thrown if the name does not exist.
+            </summary>
+            <param name="name"> The name to get a value. </param>
+            <returns> The connection provider. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.GetConnectionString(System.String)">
+            <summary>
+            Gets the value of a connection string for the current application's default configuration. A ConfigurationErrorsException is thrown if the name does not exist.
+            </summary>
+            <param name="name"> The name to get a value. </param>
+            <returns> The connection string. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.HasAppSetting(System.String)">
+            <summary>
+            Checks to see if an app settings key exists for the current application's default configuration.
+            </summary>
+            <param name="key"> The key to check. </param>
+            <returns> A boolean value indicating the app setting key presence. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.HasConnectionString(System.String)">
+            <summary>
+            Checks to see if a connection string name exists for the current application's default configuration.
+            </summary>
+            <param name="name"> The name to check. </param>
+            <returns> A boolean value indicating the connection string name presence. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.ParseCommandLineArguments(System.String[])">
+            <summary>
+            Given a string array of command line arguments, this method will parse the arguments using a well know pattern match to obtain a loosely typed dictionary of key/multi-value pairs for use by applications.
+            </summary>
+            <param name="args"> The command line argument array to parse. </param>
+            <returns> A loosely typed dictionary of key/multi-value pairs. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IAppConfigFascade.TryParseCommandLineArgumentProperty(System.String,System.String@,System.String@)">
+            <summary>
+            Given a string property, this method will parse the property using a well know pattern match to obtain an output key/value pair for use by applications.
+            </summary>
+            <param name="arg"> The property to parse. </param>
+            <param name="key"> The output property key. </param>
+            <param name="value"> The output property value. </param>
+            <returns> A value indicating if the parse was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.#ctor(TextMetal.Middleware.Common.Utilities.IDataTypeFascade)">
+            <summary>
+            Initializes a new instance of the AppConfigFascade class.
+            </summary>
+            <param name="dataTypeFascade"> The data type instance to use. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.#ctor">
+            <summary>
+            Initializes a new instance of the AppConfigFascade class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.GetAppSetting``1(System.String)">
+            <summary>
+            Gets the value of an app settings for the current application's default configuration. A ConfigurationErrorsException is thrown if the key does not exist.
+            </summary>
+            <typeparam name="TValue"> The type to convert the app settings value. </typeparam>
+            <param name="key"> The key to get a value. </param>
+            <returns> The app settings as type TValue. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.GetAppSetting(System.Type,System.String)">
+            <summary>
+            Gets the value of an app settings for the current application's default configuration. A ConfigurationErrorsException is thrown if the key does not exist.
+            </summary>
+            <param name="valueType"> The type to convert the app settings value. </param>
+            <param name="key"> The key to get a value. </param>
+            <returns> The app settings as a string. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.GetConnectionProvider(System.String)">
+            <summary>
+            Gets the value of a connection provider for the current application's default configuration. A ConfigurationErrorsException is thrown if the name does not exist.
+            </summary>
+            <param name="name"> The name to get a value. </param>
+            <returns> The connection provider. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.GetConnectionString(System.String)">
+            <summary>
+            Gets the value of a connection string for the current application's default configuration. A ConfigurationErrorsException is thrown if the name does not exist.
+            </summary>
+            <param name="name"> The name to get a value. </param>
+            <returns> The connection string. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.HasAppSetting(System.String)">
+            <summary>
+            Checks to see if an app settings key exists for the current application's default configuration.
+            </summary>
+            <param name="key"> The key to check. </param>
+            <returns> A boolean value indicating the app setting key presence. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.HasConnectionString(System.String)">
+            <summary>
+            Checks to see if a connection string name exists for the current application's default configuration.
+            </summary>
+            <param name="name"> The name to check. </param>
+            <returns> A boolean value indicating the connection string name presence. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.ParseCommandLineArguments(System.String[])">
+            <summary>
+            Given a string array of command line arguments, this method will parse the arguments using a well know pattern match to obtain a loosely typed dictionary of key/multi-value pairs for use by applications.
+            </summary>
+            <param name="args"> The command line argument array to parse. </param>
+            <returns> A loosely typed dictionary of key/multi-value pairs. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AppConfigFascade.TryParseCommandLineArgumentProperty(System.String,System.String@,System.String@)">
+            <summary>
+            Given a string property, this method will parse the property using a well know pattern match to obtain an output key/value pair for use by applications.
+            </summary>
+            <param name="arg"> The property to parse. </param>
+            <param name="key"> The output property key. </param>
+            <param name="value"> The output property value. </param>
+            <returns> A value indicating if the parse was successful or not. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AppConfigFascade.ArgsRegEx">
+            <summary>
+            Gets the regular expression pattern for arguments.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AppConfigFascade.PropsRegEx">
+            <summary>
+            Gets the regular expression pattern for properties.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade">
+            <summary>
+            Provides easy access assembly related attribute data.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.AssemblyVersion">
+            <summary>
+            Gets the assembly version.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Company">
+            <summary>
+            Gets the assembly company.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Configuration">
+            <summary>
+            Gets the assembly configuration.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Copyright">
+            <summary>
+            Gets the assembly copyright.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Description">
+            <summary>
+            Gets the assembly description.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.InformationalVersion">
+            <summary>
+            Gets the assembly informational version.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Product">
+            <summary>
+            Gets the assembly product.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Title">
+            <summary>
+            Gets the assembly title.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Trademark">
+            <summary>
+            Gets the assembly trademark.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.IAssemblyInformationFascade.Win32FileVersion">
+            <summary>
+            Gets the assembly Win32 file version.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the AssemblyInformationFascade class.
+            </summary>
+            <param name="assembly"> The target assembly to examine for information. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.#ctor(TextMetal.Middleware.Common.Utilities.IReflectionFascade,System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the AssemblyInformationFascade class.
+            </summary>
+            <param name="reflectionFascade"> The reflectionFascade instance to use. </param>
+            <param name="assembly"> The target assembly to examine for information. </param>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.AssemblyVersion">
+            <summary>
+            Gets the assembly version.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Company">
+            <summary>
+            Gets the assembly company.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Configuration">
+            <summary>
+            Gets the assembly configuration.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Copyright">
+            <summary>
+            Gets the assembly copyright.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Description">
+            <summary>
+            Gets the assembly description.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.InformationalVersion">
+            <summary>
+            Gets the assembly informational version.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Product">
+            <summary>
+            Gets the assembly product.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Title">
+            <summary>
+            Gets the assembly title.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Trademark">
+            <summary>
+            Gets the assembly trademark.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Utilities.AssemblyInformationFascade.Win32FileVersion">
+            <summary>
+            Gets the assembly Win32 file version.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.DataTypeFascade">
+            <summary>
+            Provides static helper and/or extension methods for core data type functionality such as validation and parsing.
+            </summary>
+            <summary>
+            Provides static helper and/or extension methods for core data type functionality such as validation and parsing.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.IDataTypeFascade">
+            <summary>
+            Provides easier easier facilities for core data type functionality such as validation and parsing.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.ChangeType``1(System.Object)">
+            <summary>
+            Performs a run-time type change on a given value.
+            </summary>
+            <typeparam name="T"> The type to change value to. </typeparam>
+            <param name="value"> The value to change type. </param>
+            <returns> A value changed to the given type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.ChangeType(System.Object,System.Type)">
+            <summary>
+            Performs a run-time type change on a given value.
+            </summary>
+            <param name="value"> The value to change type. </param>
+            <param name="conversionType"> The type to change value to. </param>
+            <returns> A value changed to the given type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.DefaultValue(System.Type)">
+            <summary>
+            Obtains the default value for a given type using reflection.
+            </summary>
+            <param name="targetType"> The target type. </param>
+            <returns> The default value for the target type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.IsNullOrEmpty(System.String)">
+            <summary>
+            Determines if a string value is null or zero length.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is null or zero length. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Determines if a string value is null, zero length, or only contains white space.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is null, zero length, or only contains white space. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.IsValidEmailAddress(System.String)">
+            <summary>
+            Determines if a string value is a valid email address.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is a valid email address. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.IsWhiteSpace(System.String)">
+            <summary>
+            Determines if a string value is zero length or only contains white space.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is zero length or only contains white space. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.ObjectsEqualValueSemantics(System.Object,System.Object)">
+            <summary>
+            Checks whether two object instances are equal using the Object.Equals() method. Value coercion is performed.
+            </summary>
+            <param name="objA"> An object instance or null. </param>
+            <param name="objB"> Another object instance or null. </param>
+            <returns> A value indicating whether the two object instances are equal. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.SafeToString``1(``0)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value of a zero length string is returned.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.SafeToString``1(``0,System.String)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value of a zero length string is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.SafeToString``1(``0,System.String,System.String)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <param name="default"> The default value to return if the value is null. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.SafeToString``1(``0,System.String,System.String,System.Boolean)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <param name="default"> The default value to return if the value is null. </param>
+            <param name="dofvisnow"> Use default value if the formatted value is null or whotespace. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.TryParse(System.Type,System.String,System.Object@)">
+            <summary>
+            Converts the specified string representation to its valueType equivalent and returns a value that indicates whether the conversion succeeded.
+            </summary>
+            <param name="valueType"> The type to convert the string value. </param>
+            <param name="value"> A string containing a valueType to convert. </param>
+            <param name="result"> When this method returns, contains the valueType value equivalent contained in value, if the conversion succeeded, or null if the conversion failed. The conversion fails if the value parameter is null, is an empty string, or does not contain a valid string representation of an valueType. This parameter is passed uninitialized. </param>
+            <returns> A boolean value of true if the value was converted successfully; otherwise, false. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IDataTypeFascade.TryParse``1(System.String,``0@)">
+            <summary>
+            Converts the specified string representation to its TValue equivalent and returns a value that indicates whether the conversion succeeded.
+            </summary>
+            <typeparam name="TValue"> The type to parse the string value. </typeparam>
+            <param name="value"> A string containing a TValue to convert. </param>
+            <param name="result"> When this method returns, contains the TValue value equivalent contained in value, if the conversion succeeded, or default(TValue) if the conversion failed. The conversion fails if the value parameter is null, is an empty string, or does not contain a valid string representation of a TValue. This parameter is passed uninitialized. </param>
+            <returns> A boolean value of true if the value was converted successfully; otherwise, false. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.ChangeType``1(System.Object)">
+            <summary>
+            Performs a run-time type change on a given value.
+            </summary>
+            <typeparam name="T"> The type to change value to. </typeparam>
+            <param name="value"> The value to change type. </param>
+            <returns> A value changed to the given type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.ChangeType(System.Object,System.Type)">
+            <summary>
+            Performs a run-time type change on a given value.
+            </summary>
+            <param name="value"> The value to change type. </param>
+            <param name="conversionType"> The type to change value to. </param>
+            <returns> A value changed to the given type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.DefaultValue(System.Type)">
+            <summary>
+            Obtains the default value for a given type using reflection.
+            </summary>
+            <param name="targetType"> The target type. </param>
+            <returns> The default value for the target type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.IsNullOrEmpty(System.String)">
+            <summary>
+            Determines if a string value is null or zero length.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is null or zero length. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Determines if a string value is null, zero length, or only contains white space.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is null, zero length, or only contains white space. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.IsValidEmailAddress(System.String)">
+            <summary>
+            Determines if a string value is a valid email address.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is a valid email address. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.IsWhiteSpace(System.String)">
+            <summary>
+            Determines if a string value is zero length or only contains white space.
+            </summary>
+            <param name="value"> The string value to check. </param>
+            <returns> A boolean value indicating whether the value is zero length or only contains white space. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.ObjectsEqualValueSemantics(System.Object,System.Object)">
+            <summary>
+            Checks whether two object instances are equal using the Object.Equals() method. Value coercion is performed.
+            </summary>
+            <param name="objA"> An object instance or null. </param>
+            <param name="objB"> Another object instance or null. </param>
+            <returns> A value indicating whether the two object instances are equal. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.SafeToString``1(``0)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value of a zero length string is returned.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.SafeToString``1(``0,System.String)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value of a zero length string is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.SafeToString``1(``0,System.String,System.String)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <param name="default"> The default value to return if the value is null. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.SafeToString``1(``0,System.String,System.String,System.Boolean)">
+            <summary>
+            Returns a string that represents the specified type with the format specification. If the value is null, then the default value is returned. No trimming is performed.
+            </summary>
+            <typeparam name="TValue"> The type of the value to obtain a string representation. </typeparam>
+            <param name="value"> The target value. </param>
+            <param name="format"> The string specifying the format to use or null to use the default format defined for the type of the IFormattable implementation. </param>
+            <param name="default"> The default value to return if the value is null. </param>
+            <param name="dofvisnow"> Use default value if the formatted value is null or whotespace. </param>
+            <returns> A formatted string value if the value is not null; otherwise the default value specified. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.TryParse(System.Type,System.String,System.Object@)">
+            <summary>
+            Converts the specified string representation to its valueType equivalent and returns a value that indicates whether the conversion succeeded.
+            </summary>
+            <param name="valueType"> The type to convert the string value. </param>
+            <param name="value"> A string containing a valueType to convert. </param>
+            <param name="result"> When this method returns, contains the valueType value equivalent contained in value, if the conversion succeeded, or null if the conversion failed. The conversion fails if the value parameter is null, is an empty string, or does not contain a valid string representation of an valueType. This parameter is passed uninitialized. </param>
+            <returns> A boolean value of true if the value was converted successfully; otherwise, false. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.DataTypeFascade.TryParse``1(System.String,``0@)">
+            <summary>
+            Converts the specified string representation to its TValue equivalent and returns a value that indicates whether the conversion succeeded.
+            </summary>
+            <typeparam name="TValue"> The type to parse the string value. </typeparam>
+            <param name="value"> A string containing a TValue to convert. </param>
+            <param name="result"> When this method returns, contains the TValue value equivalent contained in value, if the conversion succeeded, or default(TValue) if the conversion failed. The conversion fails if the value parameter is null, is an empty string, or does not contain a valid string representation of a TValue. This parameter is passed uninitialized. </param>
+            <returns> A boolean value of true if the value was converted successfully; otherwise, false. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.IReflectionFascade">
+            <summary>
+            Provides easier reflection facilities.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetAllAttributes``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Gets all custom attributes of the specified type. If no custom attributes of the specified type are defined, then null is returned.
+            </summary>
+            <typeparam name="TAttribute"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </typeparam>
+            <param name="target"> The target object. </param>
+            <returns> The custom attributes array or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetErrors(System.Exception,System.Int32)">
+            <summary>
+            Returns the concatenation of error messages from an exception object. All inner exceptions and collected exceptions (public properties implementing IEnumerable&lt;Exception&gt;) are returned.
+            </summary>
+            <param name="exception"> The root exception to get errors. </param>
+            <param name="indent"> The indent level count. </param>
+            <returns> A string concatenation of error messages delimited by newlines. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetLogicalPropertyType(System.Object,System.String,System.Type@)">
+            <summary>
+            Attempts to get the property type for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to get the type for. </param>
+            <param name="propertyType"> An output run-time type of the logical property or null if the logical property lookup failed. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetLogicalPropertyValue(System.Object,System.String,System.Object@)">
+            <summary>
+            Attempts to get the property value for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to get the value for. </param>
+            <param name="propertyValue"> An output run-time value of the logical property or null if the logical property lookup failed. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetLowestProperty(System.Type,System.String)">
+            <summary>
+            Used to obtain the least-derived public, instance property of a given name.
+            </summary>
+            <param name="propertyType"> The property type to interogate. </param>
+            <param name="propertyName"> The property name to lookup. </param>
+            <returns> A PropertyInfo for the least-derived public, instance property by the given name or null if none were found. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetOneAttribute``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Get the single custom attribute of the attribute specified type. If more than one custom attribute exists for the requested type, an InvalidOperationException is thrown. If no custom attributes of the specified type are defined, then null is returned.
+            </summary>
+            <typeparam name="TAttribute"> The custom attribute type. </typeparam>
+            <param name="target"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </param>
+            <returns> The single custom attribute or null if none are defined. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.GetZeroAttributes``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Asserts that the custom attribute is not defined on the target. If more than zero custom attributes exist for the requested type, an InvalidOperationException is thrown.
+            </summary>
+            <typeparam name="TAttribute"> The custom attribute type. </typeparam>
+            <param name="target"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.MakeNonNullableType(System.Type)">
+            <summary>
+            Transforms a nullable type to its underlying non-nullable equivalent.
+            Simply returns an existing reference type
+            </summary>
+            <param name="conversionType"> The nullable run-time type to transform. </param>
+            <returns> The non-nullbale run-time type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.MakeNullableType(System.Type)">
+            <summary>
+            Transforms a nullable type to its underlying non-nullable equivalent.
+            </summary>
+            <param name="conversionType"> The nullable run-time type to transform. </param>
+            <returns> The non-nullbale run-time type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.SetLogicalPropertyValue(System.Object,System.String,System.Object)">
+            <summary>
+            Attempts to set the property value for a logical property (CLR, associative, etc.). This overload assume stayHard=false and makeSoft=true semantics.
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to set the value for. </param>
+            <param name="propertyValue"> The value of the logical property to set or null. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.IReflectionFascade.SetLogicalPropertyValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            Attempts to set the property value for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to set the value for. </param>
+            <param name="propertyValue"> The value of the logical property to set or null. </param>
+            <param name="stayHard"> Force only 'hard' object semantics and not use associative lookup (i.e. the target instance must be a real CLR object). </param>
+            <param name="makeSoft"> Allow making 'soft' object semantics (i.e. the target instance could be an associative object). </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not; lookup respects the 'stayHard' and 'makeSoft' flags. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Utilities.ReflectionFascade">
+            <summary>
+            Provides easier reflection facilities.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.#ctor(TextMetal.Middleware.Common.Utilities.IDataTypeFascade)">
+            <summary>
+            Initializes a new instance of the ReflectionFascade class.
+            </summary>
+            <param name="dataTypeFascade"> The data type instance to use. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.#ctor">
+            <summary>
+            Initializes a new instance of the ReflectionFascade class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetAllAttributes``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Gets all custom attributes of the specified type. If no custom attributes of the specified type are defined, then null is returned.
+            </summary>
+            <typeparam name="TAttribute"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </typeparam>
+            <param name="target"> The target object. </param>
+            <returns> The custom attributes array or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetErrors(System.Exception,System.Int32)">
+            <summary>
+            Returns the concatenation of error messages from an exception object. All inner exceptions and collected exceptions (public properties implementing IEnumerable&lt;Exception&gt;) are returned.
+            </summary>
+            <param name="exception"> The root exception to get errors. </param>
+            <param name="indent"> The indent level count. </param>
+            <returns> A string concatenation of error messages delimited by newlines. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetLogicalPropertyType(System.Object,System.String,System.Type@)">
+            <summary>
+            Attempts to get the property type for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to get the type for. </param>
+            <param name="propertyType"> An output run-time type of the logical property or null if the logical property lookup failed. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetLogicalPropertyValue(System.Object,System.String,System.Object@)">
+            <summary>
+            Attempts to get the property value for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to get the value for. </param>
+            <param name="propertyValue"> An output run-time value of the logical property or null if the logical property lookup failed. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetLowestProperty(System.Type,System.String)">
+            <summary>
+            Used to obtain the least-derived public, instance property of a given name.
+            </summary>
+            <param name="propertyType"> The property type to interogate. </param>
+            <param name="propertyName"> The property name to lookup. </param>
+            <returns> A PropertyInfo for the least-derived public, instance property by the given name or null if none were found. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetOneAttribute``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Get the single custom attribute of the attribute specified type. If more than one custom attribute exists for the requested type, an InvalidOperationException is thrown. If no custom attributes of the specified type are defined, then null is returned.
+            </summary>
+            <typeparam name="TAttribute"> The custom attribute type. </typeparam>
+            <param name="target"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </param>
+            <returns> The single custom attribute or null if none are defined. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.GetZeroAttributes``1(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Asserts that the custom attribute is not defined on the target. If more than zero custom attributes exist for the requested type, an InvalidOperationException is thrown.
+            </summary>
+            <typeparam name="TAttribute"> The custom attribute type. </typeparam>
+            <param name="target"> The target ICustomAttributeProvider (Assembly, Type, MemberInfo, etc.) </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.MakeNonNullableType(System.Type)">
+            <summary>
+            Transforms a nullable type to its underlying non-nullable equivalent.
+            Simply returns an existing reference type
+            </summary>
+            <param name="conversionType"> The nullable run-time type to transform. </param>
+            <returns> The non-nullbale run-time type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.MakeNullableType(System.Type)">
+            <summary>
+            Transforms a nullable type to its underlying non-nullable equivalent.
+            </summary>
+            <param name="conversionType"> The nullable run-time type to transform. </param>
+            <returns> The non-nullbale run-time type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.SetLogicalPropertyValue(System.Object,System.String,System.Object)">
+            <summary>
+            Attempts to set the property value for a logical property (CLR, associative, etc.). This overload assume stayHard=false and makeSoft=true semantics.
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to set the value for. </param>
+            <param name="propertyValue"> The value of the logical property to set or null. </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Utilities.ReflectionFascade.SetLogicalPropertyValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            Attempts to set the property value for a logical property (CLR, associative, etc.).
+            </summary>
+            <param name="targetInstance"> The target instance to search for a logical property. </param>
+            <param name="propertyName"> The logical property name to set the value for. </param>
+            <param name="propertyValue"> The value of the logical property to set or null. </param>
+            <param name="stayHard"> Force only 'hard' object semantics and not use associative lookup (i.e. the target instance must be a real CLR object). </param>
+            <param name="makeSoft"> Allow making 'soft' object semantics (i.e. the target instance could be an associative object). </param>
+            <returns> A value indicating whether the logical property name lookup was successful or not; lookup respects the 'stayHard' and 'makeSoft' flags. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.IValidate.Validate">
+            <summary>
+            Validates this instance.
+            </summary>
+            <returns> A enumerable of zero or more messages. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Message">
+            <summary>
+            Represents a message with a category, description, and severity.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Message.#ctor(System.String,System.String,TextMetal.Middleware.Common.Severity)">
+            <summary>
+            Initializes a new instance of the Message class.
+            </summary>
+            <param name="category"> The category of the message. </param>
+            <param name="description"> The description of the message. </param>
+            <param name="severity"> The severity of the message. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Common.Message.#ctor">
+            <summary>
+            Initializes a new instance of the Message class.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Message.Category">
+            <summary>
+            Gets the message category.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Message.Description">
+            <summary>
+            Gets the message description.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Common.Message.Severity">
+            <summary>
+            Gets the message severity.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Common.Severity">
+            <summary>
+            Specifies the severity of a message.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.Information">
+            <summary>
+            Information.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.Warning">
+            <summary>
+            Warning.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.Error">
+            <summary>
+            Error.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.Hit">
+            <summary>
+            Hit.
+            </summary>
+        </member>
+        <member name="F:TextMetal.Middleware.Common.Severity.Debug">
+            <summary>
+            Debug.
+            </summary>
+        </member>
+    </members>
+</doc>

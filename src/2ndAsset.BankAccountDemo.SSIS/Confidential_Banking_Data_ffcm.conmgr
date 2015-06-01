@@ -1,0 +1,96 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Confidential_Banking_Data_ffcm"
+  DTS:DTSID="{2787EFAB-8B56-43A1-9AF3-6B25302B0ADB}"
+  DTS:CreationName="FLATFILE">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:Format="Delimited"
+      DTS:LocaleID="1033"
+      DTS:HeaderRowDelimiter="_x000D__x000A_"
+      DTS:ColumnNamesInFirstDataRow="True"
+      DTS:RowDelimiter=""
+      DTS:TextQualifier="_x003C_none_x003E_"
+      DTS:CodePage="1252"
+      DTS:ConnectionString="D:\Confidential_Banking_Data.txt">
+      <DTS:FlatFileColumns>
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="130"
+          DTS:ObjectName="Institution"
+          DTS:DTSID="{DDCE5DFE-ED78-4629-A172-D335080BBA5E}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:DataType="3"
+          DTS:ObjectName="txid"
+          DTS:DTSID="{141C22EA-EBE7-4D32-B26E-31D0A0FB04FE}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:MaximumWidth="50"
+          DTS:DataType="130"
+          DTS:ObjectName="number"
+          DTS:DTSID="{CC2A188A-3593-4372-B775-CDF633A9ADB3}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:DataType="135"
+          DTS:ObjectName="date"
+          DTS:DTSID="{E5417466-4433-4916-B1CC-5299B777237C}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="130"
+          DTS:ObjectName="payee"
+          DTS:DTSID="{A805C995-F122-45EB-B3D0-CBEE73E772B6}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:MaximumWidth="50"
+          DTS:DataType="129"
+          DTS:ObjectName="amount"
+          DTS:DTSID="{26F64248-C523-43CF-9288-CFF38EA83808}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:DataType="11"
+          DTS:ObjectName="cleared"
+          DTS:DTSID="{C28BFF9B-F6F2-49EA-82DA-18D690811A2F}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="130"
+          DTS:ObjectName="category"
+          DTS:DTSID="{3EF7F81D-9875-479E-B161-B721C44311E7}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x0009_"
+          DTS:DataType="135"
+          DTS:ObjectName="due"
+          DTS:DTSID="{DEB864EF-FFC8-4069-B91B-FD958C03D789}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x000D__x000A_"
+          DTS:MaximumWidth="2047"
+          DTS:DataType="130"
+          DTS:ObjectName="comments"
+          DTS:DTSID="{EB1BCBA0-40A1-47AD-93C2-6B3513ADEC6A}"
+          DTS:CreationName="" />
+      </DTS:FlatFileColumns>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

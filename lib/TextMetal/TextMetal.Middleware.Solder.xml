@@ -1,0 +1,1281 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TextMetal.Middleware.Solder</name>
+    </assembly>
+    <members>
+        <member name="T:TextMetal.Middleware.Solder.Context.DefaultContextualStorageFactory">
+            <summary>
+            Manages execution path storage of objects in a manner which is safe in standard executables, libraries, ASP.NET, and WCF code.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Context.HttpContextContextualStorageStrategy.IsInHttpContext">
+            <summary>
+            Gets a value indicating if the current application domain is running under ASP.NET.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Context.WcfContextContextualStorageStrategy.IsInWcfContext">
+            <summary>
+            Gets a value indicating if the current application domain is running under WCF.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.ExternalImport">
+            <summary>
+            This code should remain in sync with:
+            .\src\TextMetal.Middleware.Common\Fascades\Utilities\ReflectionFascade.cs
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.ActivatorDependencyResolution">
+            <summary>
+            Provides the Factory Method pattern used to resolve dependencies.
+            This implementation uses Activator.CreateInstance(...) and is the only implementation
+            that allows for constructor auto-wiring using the DependencyInjectionAttribute.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.IDependencyResolution">
+            <summary>
+            Provides the Factory Method pattern used to resolve dependencies.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyResolution.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ActivatorDependencyResolution.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the ConstructorDependencyResolution class.
+            </summary>
+            <param name="actualType"> The actual type of the resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ActivatorDependencyResolution.#ctor(System.Type,System.Type[])">
+            <summary>
+            Initializes a new instance of the ConstructorDependencyResolution class.
+            </summary>
+            <param name="actualType"> The actual type of the resolution. </param>
+            <param name="parameterTypes"> The parameter types of the constructor overload to use or null for the default constructor. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ActivatorDependencyResolution.#ctor(System.Type,System.Boolean,System.Type[])">
+            <summary>
+            Initializes a new instance of the ConstructorDependencyResolution class.
+            </summary>
+            <param name="actualType"> The actual type of the resolution. </param>
+            <param name="useNonPublicDefault"> A value indicating whether to consider a default, non-public constructor. </param>
+            <param name="parameterTypes"> The parameter types of the constructor overload to use or null for the default constructor. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ActivatorDependencyResolution.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.ConstructorDependencyResolution`1">
+            <summary>
+            Provides the Factory Method pattern used to resolve dependencies.
+            Requires a public, default constructor on the target type.
+            </summary>
+            <typeparam name="TObject"> The actual type of the resolution. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ConstructorDependencyResolution`1.#ctor">
+            <summary>
+            Initializes a new instance of the ConstructorDependencyResolution`1 class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.ConstructorDependencyResolution`1.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DelegateDependencyResolution">
+            <summary>
+            Provides the Factory Method pattern used to resolve dependencies.
+            This implementation executes a callback each time a dependency resolution occurs.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DelegateDependencyResolution.#ctor(System.Delegate)">
+            <summary>
+            Initializes a new instance of the DelegateDependencyResolution class.
+            </summary>
+            <param name="method"> The callback method to execute during resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DelegateDependencyResolution.FromFunc``1(System.Func{``0})">
+            <summary>
+            Gets an instance of DelegateDependencyResolution from the specified Func`1 delegate.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="func"> The callback method to execute during resolution. </param>
+            <returns> A DelegateDependencyResolution instance. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DelegateDependencyResolution.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DependencyException">
+            <summary>
+            The exception thrown when a specific dependency resolution error occurs.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyException.#ctor">
+            <summary>
+            Initializes a new instance of the DependencyException class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the DependencyException class.
+            </summary>
+            <param name="message"> The message that describes the error. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the DependencyException class.
+            </summary>
+            <param name="message"> The message that describes the error. </param>
+            <param name="innerException"> The inner exception. </param>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DependencyInjectionAttribute">
+            <summary>
+            Marks a constructor parameter as a dependency injection point.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyInjectionAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the DependencyInjectionAttribute class.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Injection.DependencyInjectionAttribute.SelectorKey">
+            <summary>
+            Gets or sets the dependency selector key.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DependencyManager">
+            <summary>
+            Provides dependency registration and resolution services. Uses reader-writer lock for asynchronous protection (i.e. thread-safety).
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.IDependencyManager">
+            <summary>
+            Provides dependency registration and resoltuion services.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.AddResolution``1(System.String,TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Adds a new dependency resolution for a given target type and selector key. Throws a DependencyException if the target type and selector key combination has been previously registered in this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <param name="dependencyResolution"> The dependency resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.AddResolution(System.Type,System.String,TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Adds a new dependency resolution for a given target type and selector key. Throws a DependencyException if the target type and selector key combination has been previously registered in this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of resolution. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <param name="dependencyResolution"> The dependency resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.ClearAllResolutions">
+            <summary>
+            Clears all registered dependency resolutions from this instance.
+            </summary>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.ClearTypeResolutions``1">
+            <summary>
+            Clears all registered dependency resolutions of the specified target type from this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of removal. </typeparam>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.ClearTypeResolutions(System.Type)">
+            <summary>
+            Clears all registered dependency resolutions of the specified target type from this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of removal. </param>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.HasTypeResolution``1(System.String)">
+            <summary>
+            Gets a value indicating whether there are any registered dependency resolutions of the specified target type in this instance. If selector key is a null value, then this method will return true if any resolution exists for the specified target type, regardless of selector key; otherwise, this method will return true only if a resolution exists for the specified target type and selector key. This is the generic overload.
+            </summary>
+            <param name="selectorKey"> An null or zero or greater length string selector key. </param>
+            <typeparam name="TObject"> The target type of the check. </typeparam>
+            <returns> A value indicating if at least one dependency resolution is present. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.HasTypeResolution(System.Type,System.String)">
+            <summary>
+            Gets a value indicating whether there are any registered dependency resolutions of the specified target type in this instance. If selector key is a null value, then this method will return true if any resolution exists for the specified target type, regardless of selector key; otherwise, this method will return true only if a resolution exists for the specified target type and selector key. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of the check. </param>
+            <param name="selectorKey"> An null or zero or greater length string selector key. </param>
+            <returns> A value indicating if at least one dependency resolution is present. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.RemoveResolution``1(System.String)">
+            <summary>
+            Removes the registered dependency resolution of the specified target type and selector key from this instance. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of removal. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.RemoveResolution(System.Type,System.String)">
+            <summary>
+            Removes the registered dependency resolution of the specified target type and selector key from this instance. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of removal. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.ResolveDependency``1(System.String)">
+            <summary>
+            Resolves a dependency for the given target type and selector key combination. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. Throws a DependencyException if the resolved value cannot be assigned to the target type. This is the non-generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <returns> An object instance of assisgnable to the target type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.IDependencyManager.ResolveDependency(System.Type,System.String)">
+            <summary>
+            Resolves a dependency for the given target type and selector key combination. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. Throws a DependencyException if the resolved value cannot be assigned to the target type. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of resolution. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <returns> An object instance of assisgnable to the target type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.#ctor">
+            <summary>
+            Initializes a new instance of the DependencyManager class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.CurrentDomain_AssemblyLoad(System.Object,System.AssemblyLoadEventArgs)">
+            <summary>
+            Private method to handle the assembly load events on application domains.
+            </summary>
+            <param name="sender"> The sending object. </param>
+            <param name="args"> The event arguments. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.CurrentDomain_DomainUnload(System.Object,System.EventArgs)">
+            <summary>
+            Private method to handle the assembly unload events on application domains.
+            </summary>
+            <param name="sender"> The sending object. </param>
+            <param name="e"> The event arguments. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ScanAssemblies(System.Reflection.Assembly[])">
+            <summary>
+            Private method that will scan all asemblies specified to perform auto-wiring of dependencies.
+            </summary>
+            <param name="assemblies"> An arry of ssemblies to scan and load dependency resolutions automatically ("auto-wire" feature). </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.SetUpApplicationDomain">
+            <summary>
+            Private thread-safe method which bootstraps an app domain for dependency management.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.TearDownApplicationDomain">
+            <summary>
+            Private thread-safe method which dismantles an app domain for dependency management.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.AddResolution``1(System.String,TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Adds a new dependency resolution for a given target type and selector key. Throws a DependencyException if the target type and selector key combination has been previously registered in this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <param name="dependencyResolution"> The dependency resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.AddResolution(System.Type,System.String,TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Adds a new dependency resolution for a given target type and selector key. Throws a DependencyException if the target type and selector key combination has been previously registered in this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of resolution. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <param name="dependencyResolution"> The dependency resolution. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ClearAllResolutions">
+            <summary>
+            Clears all registered dependency resolutions from this instance.
+            </summary>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ClearTypeResolutions``1">
+            <summary>
+            Clears all registered dependency resolutions of the specified target type from this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of removal. </typeparam>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ClearTypeResolutions(System.Type)">
+            <summary>
+            Clears all registered dependency resolutions of the specified target type from this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of removal. </param>
+            <returns> A value indicating if at least one dependency resolution was removed. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.Dispose">
+            <summary>
+            Clears all dependency resolutions and cleans up any resources. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.HasTypeResolution``1(System.String)">
+            <summary>
+            Gets a value indicating whether there are any registered dependency resolutions of the specified target type in this instance. If selector key is a null value, then this method will return true if any resolution exists for the specified target type, regardless of selector key; otherwise, this method will return true only if a resolution exists for the specified target type and selector key. This is the generic overload.
+            </summary>
+            <param name="selectorKey"> An null or zero or greater length string selector key. </param>
+            <typeparam name="TObject"> The target type of the check. </typeparam>
+            <returns> A value indicating if at least one dependency resolution is present. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.HasTypeResolution(System.Type,System.String)">
+            <summary>
+            Gets a value indicating whether there are any registered dependency resolutions of the specified target type in this instance. If selector key is a null value, then this method will return true if any resolution exists for the specified target type, regardless of selector key; otherwise, this method will return true only if a resolution exists for the specified target type and selector key. This is the non-generic overload.
+            </summary>
+            <param name="selectorKey"> An null or zero or greater length string selector key. </param>
+            <param name="targetType"> The target type of the check. </param>
+            <returns> A value indicating if at least one dependency resolution is present. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.RemoveResolution``1(System.String)">
+            <summary>
+            Removes the registered dependency resolution of the specified target type and selector key from this instance. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of removal. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.RemoveResolution(System.Type,System.String)">
+            <summary>
+            Removes the registered dependency resolution of the specified target type and selector key from this instance. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of removal. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ResolveDependency``1(System.String)">
+            <summary>
+            Resolves a dependency for the given target type and selector key combination. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. Throws a DependencyException if the resolved value cannot be assigned to the target type. This is the non-generic overload.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <returns> An object instance of assisgnable to the target type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyManager.ResolveDependency(System.Type,System.String)">
+            <summary>
+            Resolves a dependency for the given target type and selector key combination. Throws a DependencyException if the target type and selector key combination has not been previously registered in this instance. Throws a DependencyException if the resolved value cannot be assigned to the target type. This is the non-generic overload.
+            </summary>
+            <param name="targetType"> The target type of resolution. </param>
+            <param name="selectorKey"> An non-null, zero or greater length string selector key. </param>
+            <returns> An object instance of assisgnable to the target type. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Injection.DependencyManager.AppDomainInstance">
+            <summary>
+            Gets the singleton instance associated with the current application domain. Most applications will use this instance instead of creating their own instance.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Injection.DependencyManager.DisableResolutionAutoWire">
+            <summary>
+            Gets the current app setting for disabling of resolution auto-wiring.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Injection.DependencyManager.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DependencyManager.LazySingleton">
+            <summary>
+            http://www.yoda.arachsys.com/csharp/singleton.html
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.DependencyRegistrationAttribute">
+            <summary>
+            Marks an assembly as containing one or more types containing dependency registration methods. Marks a class type as containing one or more dependency registration methods. Marks a public, static void(void) method as a dependency registration method. This attribute supports automatic application domain configuration of dependency resolution serivces.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.DependencyRegistrationAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the DependencyRegistrationAttribute class.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution">
+            <summary>
+            Provides the Factory Method pattern used to resolve dependencies.
+            This implementation allows only a single instance to be created, cached, and reused.
+            The singleton instance is the result a value passed as a constructor parameter.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the SingletonDependencyResolution class.
+            </summary>
+            <param name="instance"> The singleton instance. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution.#ctor(TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Initializes a new instance of the SingletonDependencyResolution class.
+            </summary>
+            <param name="chainedDependencyResolution"> The chained dependency resolution which is called only once. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution.LazyConstructorOfType``1">
+            <summary>
+            Gets an instance of an IDependencyResolution using the specified generic type.
+            The default constructor will be used to initialize a lazy singled in the current application domain on first request.
+            This method is never guaranteed to return a SingletonDependencyResolution instance.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <returns> An IDependencyResolution instance. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution.OfType``1(``0)">
+            <summary>
+            Gets an instance of SingletonDependencyResolution from the specified object instance.
+            </summary>
+            <typeparam name="TObject"> The target type of resolution. </typeparam>
+            <param name="instance"> The singleton instance. </param>
+            <returns> A SingletonDependencyResolution instance. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.SingletonDependencyResolution.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker">
+            <summary>
+            Represents a dynamic invocation used for AOP. Provides hooks into pre and post processing of invocations.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Interception.DynamicInvoker">
+            <summary>
+            Represents a dynamic invocation. Provides mechanisms to handle System.Object and System.IDisposable message propagation.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Interception.IDynamicInvocation">
+            <summary>
+            Represents a dynamic invocation using reflection.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.IDynamicInvocation.Invoke(System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            Represnts a dynamic invocation of a proxied type member.
+            </summary>
+            <param name="proxiedType"> The run-time type of the proxied type (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo of the invoked member. </param>
+            <param name="proxyInstance"> The proxy object instance. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <returns> The return value from the invoked member, if appliable. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.DynamicInvoker.#ctor">
+            <summary>
+            Initializes a new instance of the DynamicInvoker class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.DynamicInvoker.InvokeOnObject(System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            Represnts a dynamic invocation of a proxied type member.
+            </summary>
+            <param name="proxiedType"> The run-time type of the proxied type (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo of the invoked member. </param>
+            <param name="proxyInstance"> The proxy object instance. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <returns> The return value from the invoked member, if appliable. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.DynamicInvoker.Dispose">
+            <summary>
+            Disposes of the inner resources, if present. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.DynamicInvoker.Invoke(System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            Represnts a dynamic invocation of a proxied type member.
+            </summary>
+            <param name="proxiedType"> The run-time type of the proxied type (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo of the invoked member. </param>
+            <param name="proxyInstance"> The proxy object instance. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <returns> The return value from the invoked member, if appliable. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Interception.DynamicInvoker.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.#ctor">
+            <summary>
+            Initializes a new instance of the AspectDynamicInvoker class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.Invoke(System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            Represnts a dynamic invocation of a proxied type member.
+            </summary>
+            <param name="proxiedType"> The run-time type of the proxied type (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo of the invoked member. </param>
+            <param name="proxyInstance"> The proxy object instance. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <returns> The return value from the invoked member, if appliable. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.OnInterceptAfterInvoke(System.Boolean,System.Type,System.Reflection.MethodInfo,System.Object,System.Object[],System.Object@,System.Exception@)">
+            <summary>
+            This method is executed after the invoking the intercepted member on the intercepted instance. NOTE: The intercepted member can be accessed via the InterceptedInstance property. Do not confuse the intercepted member for the target instance. The target instance is the underlying proxy object.
+            </summary>
+            <param name="invocationPreceeded"> A value indicating whether the invocation of the member preceeded this interception point. </param>
+            <param name="proxiedType"> The runtime type of the invoking instance (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo that was to be invoked. </param>
+            <param name="proxyInstance"> The target object instance of the invocation. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <param name="returnValue"> The return value from the invoked member, if appliable. </param>
+            <param name="thrownException"> The exception thrown from the invoked member or null if no error (as input); an exception to rethrow or null (as output). The implementation can choose to swallow a thrown exception or project an exception where none was thrown at the taret invocation. </param>
+            <returns> A value indicating whether to proceed with the invoking the member. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.OnInterceptBeforeInvoke(System.Boolean@,System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            This method is executed before the invoking the intercepted member on the intercepted instance. NOTE: The intercepted member can be accessed via the InterceptedInstance property. Do not confuse the intercepted member for the target instance. The target instance is the underlying proxy object.
+            </summary>
+            <param name="proceedWithInvocation"> A value indicating whether to proceed with the invoking the member. </param>
+            <param name="proxiedType"> The runtime type of the invoking instance (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo to invoke. </param>
+            <param name="proxyInstance"> The target object instance of the invocation. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.OnInterceptProceedInvoke(System.Type,System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            This method is executes the the intercepted member on the intercepted instance. NOTE: The intercepted member can be accessed via the InterceptedInstance property. Do not confuse the intercepted member for the target instance. The target instance is the underlying proxy object. Generally, inheritors will use the default implementation of this method but advanced scenarios can override this method ensuring a base call.
+            </summary>
+            <param name="proxiedType"> The run-time type of the proxied type (may differ from MethodInfo.DeclaringType). </param>
+            <param name="invokedMethodInfo"> The MethodInfo of the invoked member. </param>
+            <param name="proxyInstance"> The proxy object instance. </param>
+            <param name="invocationParameters"> The parameters passed to the invoked member, if appliable. </param>
+            <returns> The return value from the invoked member, if appliable. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Interception.AspectDynamicInvoker.InterceptedInstance">
+            <summary>
+            Gets the intercepted instance.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Interception.ProxyFactory`1">
+            <summary>
+            Acts as an abstract factory for proxy objects, with cache support. Uses reader-writer lock for asynchronous protection (i.e. thread-safety). Provides agregated disposal of all cached proxies in the cache by calling Dispose() (if IDisposable).
+            </summary>
+            <typeparam name="TCacheTrait"> The type of the cache trait. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.#ctor">
+            <summary>
+            Initializes a new instance of the ProxyFactory`1 class.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.DisposeOf(System.Object)">
+            <summary>
+            Disposes of the inner proxies, if present. Once disposed, the instance cannot be reused.
+            </summary>
+            <param name="proxy"> The proxy to dispose of. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.CreateOrGetInstance``1(System.Collections.Generic.KeyValuePair{System.Type,`0},System.Func{``0})">
+            <summary>
+            Returns an instance of the specified proxy type for the given key-value pair for a type and cache trait. If the instance is in the cache, it will be returned; otherwise a new instacne is created, added to the cache, and returned. This method is thread-safe: a reader-writer-lock is used to serialize access in the case of a new addition to the cahce.
+            </summary>
+            <typeparam name="TProxy"> The type of proxy object to return. </typeparam>
+            <param name="keyValuePair"> The cahce trait used to check cache existence. </param>
+            <param name="proxyFactoryMethod"> A callback is specified to provide a factory method mechanism. This allows inheritors the abillity to customize the object being created. This method is only called if a new object is required; i.e. the object does not exist in the cache with the specified type and cahce trait. </param>
+            <returns> An instance of the specified proxy type. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.Dispose">
+            <summary>
+            Notifies any registered listeners to the DisposeInstances event to dispose then clears the internal cache. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.IsInstanceInCache(System.Collections.Generic.KeyValuePair{System.Type,`0})">
+            <summary>
+            Gets a value indicating whether an object of a type exists in the cache with the specified cache trait.
+            </summary>
+            <param name="keyValuePair"> A key-value pair object representing the cache trait for a given type. </param>
+            <returns> True if an object exists in the cache with the given cache trait for the typr; otherwise false. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Interception.ProxyFactory`1.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1">
+            <summary>
+            Provides a (remoting) real proxy for objects which leverage the dynamic invoker infrastructure (i.e. IDynamicInvocation).
+            </summary>
+            <typeparam name="TTransparentProxy"> The type of the transparent proxy object served up by this class. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.#ctor(TextMetal.Middleware.Solder.Interception.IDynamicInvocation)">
+            <summary>
+            Initializes a new instance of the DynamicInvokerRealProxy`1 class.
+            </summary>
+            <param name="dynamicInvocation"> The dynamic invoker object to use. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.CanCastTo(System.Type,System.Object)">
+            <summary>
+            Checks whether the proxy that represents the specified object type can be cast to the type represented by the IRemotingTypeInfo interface.
+            </summary>
+            <returns> true if cast will succeed; otherwise, false. </returns>
+            <param name="fromType"> The type to cast to. </param>
+            <param name="o"> The object for which to check casting. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Dispose">
+            <summary>
+            Disposes of the inner dynamic invoker. Once disposed, the instance cannot be reused.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Invoke(System.Runtime.Remoting.Messaging.IMessage)">
+            <summary>
+            Runtime real proxy invocation.
+            </summary>
+            <param name="msg"> Invocation call message </param>
+            <returns> Invocation return message. </returns>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Disposed">
+            <summary>
+            Gets a value indicating whether the current instance has been disposed.
+            </summary>
+        </member>
+        <member name="P:TextMetal.Middleware.Solder.Interception.RemotingImpl.DynamicInvokerRealProxy`1.TypeName">
+            <summary>
+            Gets or sets the fully qualified type name of the server object in a ObjRef. No implementation is provided; any calls will throw a NotSupportedException.
+            </summary>
+            <returns> The fully qualified type name of the server object in a ObjRef. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Injection.LoggingAspectConstructorDependencyResolution`1">
+            <summary>
+            TODO
+            </summary>
+            <typeparam name="TObject"> The actual type of the resolution. </typeparam>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.LoggingAspectConstructorDependencyResolution`1.#ctor(TextMetal.Middleware.Solder.Injection.IDependencyResolution)">
+            <summary>
+            Initializes a new instance of the LoggingAspectConstructorDependencyResolution`1 class.
+            </summary>
+            <param name="chainedDependencyResolution"> The singleton instance. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Injection.LoggingAspectConstructorDependencyResolution`1.Resolve(TextMetal.Middleware.Solder.Injection.IDependencyManager)">
+            <summary>
+            Resolves a dependency.
+            </summary>
+            <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
+            <returns> An instance of an object or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ExtensionMethods.TryGetFromAssemblyResource``1(System.Type,System.String,``0@)">
+            <summary>
+            Deserializes an object from an assembly manifest resource.
+            </summary>
+            <typeparam name="TObject"> The run-time type of the object root to deserialize. </typeparam>
+            <param name="resourceType"> A type within the source assembly where the manifest resource lives. </param>
+            <param name="resourceName"> The fully qualified manifest resource name to load. </param>
+            <param name="result"> A valid object of the specified type or null if the manifest resource name was not found in the assembly of the resource type. </param>
+            <returns> A value indicating whether the manifest resource name was found in the target type's assembly. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ExtensionMethods.TryGetFromAssemblyResource``1(TextMetal.Middleware.Solder.Serialization.ISerializationStrategy,System.Type,System.String,``0@)">
+            <summary>
+            Deserializes an object from an assembly manifest resource.
+            </summary>
+            <typeparam name="TObject"> The run-time type of the object root to deserialize. </typeparam>
+            <param name="resourceType"> A type within the source assembly where the manifest resource lives. </param>
+            <param name="resourceName"> The fully qualified manifest resource name to load. </param>
+            <param name="result"> A valid object of the specified type or null if the manifest resource name was not found in the assembly of the resource type. </param>
+            <returns> A value indicating whether the manifest resource name was found in the target type's assembly. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ExtensionMethods.TryGetStringFromAssemblyResource(System.Type,System.String,System.String@)">
+            <summary>
+            Deserializes a string from an assembly manifest resource.
+            </summary>
+            <param name="resourceType"> A type within the source assembly where the manifest resource lives. </param>
+            <param name="resourceName"> The fully qualified manifest resource name to load. </param>
+            <param name="result"> A valid string or null if the manifest resource name was not found in the assembly of the resource type. </param>
+            <returns> A value indicating whether the manifest resource name was found in the target type's assembly. </returns>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy">
+            <summary>
+            Provides a strategy pattern around serializing and deserializing objects using binary semantics.
+            </summary>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy">
+            <summary>
+            Provides a strategy pattern around serializing and deserializing objects.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.GetObjectFromFile(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified input file.
+            </summary>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.GetObjectFromFile``1(System.String)">
+            <summary>
+            Deserializes an object from the specified input file. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.GetObjectFromStream(System.IO.Stream,System.Type)">
+            <summary>
+            Deserializes an object from the specified readable stream.
+            </summary>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.GetObjectFromStream``1(System.IO.Stream)">
+            <summary>
+            Deserializes an object from the specified readable stream. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.SetObjectToFile``1(System.String,``0)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.SetObjectToFile(System.String,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.SetObjectToStream(System.IO.Stream,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ISerializationStrategy.SetObjectToStream``1(System.IO.Stream,``0)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.GetObjectFromBytes(System.Byte[],System.Type)">
+            <summary>
+            Deserializes an object from the specified byte array value.
+            </summary>
+            <param name="value"> The byte array value to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.GetObjectFromBytes``1(System.Byte[])">
+            <summary>
+            Deserializes an object from the specified byte array value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="value"> The byte array value to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.GetObjectFromReader(System.IO.BinaryReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified binary reader.
+            </summary>
+            <param name="binaryReader"> The binary reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.GetObjectFromReader``1(System.IO.BinaryReader)">
+            <summary>
+            Deserializes an object from the specified binary reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="binaryReader"> The binary reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.SetObjectToBytes(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a byte array value.
+            </summary>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A byte array representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.SetObjectToBytes``1(``0)">
+            <summary>
+            Serializes an object to a byte array value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A byte array representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.SetObjectToWriter(System.IO.BinaryWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified binary writer.
+            </summary>
+            <param name="binaryWriter"> The binary writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IBinarySerializationStrategy.SetObjectToWriter``1(System.IO.BinaryWriter,``0)">
+            <summary>
+            Serializes an object to the specified binary writer. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="binaryWriter"> The binary writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy">
+            <summary>
+            Provides a strategy pattern around serializing and deserializing objects using text semantics.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.GetObjectFromReader(System.IO.TextReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified text reader.
+            </summary>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.GetObjectFromReader``1(System.IO.TextReader)">
+            <summary>
+            Deserializes an object from the specified text reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.GetObjectFromString(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified string value.
+            </summary>
+            <param name="value"> The string value to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.GetObjectFromString``1(System.String)">
+            <summary>
+            Deserializes an object from the specified text value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="value"> The string value to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.SetObjectToString(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a string value.
+            </summary>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.SetObjectToString``1(``0)">
+            <summary>
+            Serializes an object to a string value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.SetObjectToWriter(System.IO.TextWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified text writer.
+            </summary>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.ITextSerializationStrategy.SetObjectToWriter``1(System.IO.TextWriter,``0)">
+            <summary>
+            Serializes an object to the specified text writer. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="T:TextMetal.Middleware.Solder.Serialization.IXmlSerializationStrategy">
+            <summary>
+            Provides a strategy pattern around serializing and deserializing objects using XML semantics.
+            </summary>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IXmlSerializationStrategy.GetObjectFromReader(System.Xml.XmlReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified xml reader.
+            </summary>
+            <param name="xmlReader"> The xml reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IXmlSerializationStrategy.GetObjectFromReader``1(System.Xml.XmlReader)">
+            <summary>
+            Deserializes an object from the specified xml reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="xmlReader"> The xml reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IXmlSerializationStrategy.SetObjectToWriter(System.Xml.XmlWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified xml writer.
+            </summary>
+            <param name="xmlWriter"> The xml writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.IXmlSerializationStrategy.SetObjectToWriter``1(System.Xml.XmlWriter,``0)">
+            <summary>
+            Serializes an object to the specified xml writer. This is the generic overload.
+            </summary>
+            <param name="xmlWriter"> The xml writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromBytes(System.Byte[],System.Type)">
+            <summary>
+            Deserializes an object from the specified byte array value.
+            </summary>
+            <param name="value"> The byte array value to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromBytes``1(System.Byte[])">
+            <summary>
+            Deserializes an object from the specified byte array value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="value"> The byte array value to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromFile(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified input file.
+            </summary>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromFile``1(System.String)">
+            <summary>
+            Deserializes an object from the specified input file. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromReader(System.IO.TextReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified text reader.
+            </summary>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromReader``1(System.IO.TextReader)">
+            <summary>
+            Deserializes an object from the specified text reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromReader(System.IO.BinaryReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified binary reader.
+            </summary>
+            <param name="binaryReader"> The binary reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromReader``1(System.IO.BinaryReader)">
+            <summary>
+            Deserializes an object from the specified binary reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="binaryReader"> The binary reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromStream(System.IO.Stream,System.Type)">
+            <summary>
+            Deserializes an object from the specified readable stream.
+            </summary>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromStream``1(System.IO.Stream)">
+            <summary>
+            Deserializes an object from the specified readable stream. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromString(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified string value.
+            </summary>
+            <param name="value"> The string value to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.GetObjectFromString``1(System.String)">
+            <summary>
+            Deserializes an object from the specified text value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="value"> The string value to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToBytes(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a byte array value.
+            </summary>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A byte array representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToBytes``1(``0)">
+            <summary>
+            Serializes an object to a byte array value. This is the generic overload.
+            </summary>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A byte array representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToFile``1(System.String,``0)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToFile(System.String,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToStream``1(System.IO.Stream,``0)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToStream(System.IO.Stream,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToString(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a string value.
+            </summary>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToString``1(``0)">
+            <summary>
+            Serializes an object to a string value. This is the generic overload.
+            </summary>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToWriter(System.IO.TextWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified text writer.
+            </summary>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToWriter``1(System.IO.TextWriter,``0)">
+            <summary>
+            Serializes an object to the specified text writer. This is the generic overload.
+            </summary>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToWriter``1(System.IO.BinaryWriter,``0)">
+            <summary>
+            Serializes an object to the specified binary writer. This is the generic overload.
+            </summary>
+            <param name="binaryWriter"> The binary writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.JsonSerializationStrategy.SetObjectToWriter(System.IO.BinaryWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified binary writer.
+            </summary>
+            <param name="binaryWriter"> The binary writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromFile(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified input file.
+            </summary>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromFile``1(System.String)">
+            <summary>
+            Deserializes an object from the specified input file. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="inputFilePath"> The input file path to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromReader(System.Xml.XmlReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified xml reader.
+            </summary>
+            <param name="xmlReader"> The xml reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromReader``1(System.Xml.XmlReader)">
+            <summary>
+            Deserializes an object from the specified xml reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="xmlReader"> The xml reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromReader(System.IO.TextReader,System.Type)">
+            <summary>
+            Deserializes an object from the specified text reader.
+            </summary>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromReader``1(System.IO.TextReader)">
+            <summary>
+            Deserializes an object from the specified text reader. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="textReader"> The text reader to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromStream(System.IO.Stream,System.Type)">
+            <summary>
+            Deserializes an object from the specified readable stream.
+            </summary>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromStream``1(System.IO.Stream)">
+            <summary>
+            Deserializes an object from the specified readable stream. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="stream"> The readable stream to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromString(System.String,System.Type)">
+            <summary>
+            Deserializes an object from the specified string value.
+            </summary>
+            <param name="value"> The string value to deserialize. </param>
+            <param name="targetType"> The target run-time type of the root of the deserialized object graph. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.GetObjectFromString``1(System.String)">
+            <summary>
+            Deserializes an object from the specified text value. This is the generic overload.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the deserialized object graph. </typeparam>
+            <param name="value"> The string value to deserialize. </param>
+            <returns> An object of the target type or null. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToFile``1(System.String,``0)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToFile(System.String,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified output file.
+            </summary>
+            <param name="outputFilePath"> The output file path to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToStream``1(System.IO.Stream,``0)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <typeparam name="TObject"> The target run-time type of the root of the object graph to serialize. </typeparam>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToStream(System.IO.Stream,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified writable stream.
+            </summary>
+            <param name="stream"> The writable stream to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToString(System.Type,System.Object)">
+            <summary>
+            Serializes an object to a string value.
+            </summary>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToString``1(``0)">
+            <summary>
+            Serializes an object to a string value. This is the generic overload.
+            </summary>
+            <param name="obj"> The object graph to serialize. </param>
+            <returns> A string representation of the object graph. </returns>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToWriter(System.Xml.XmlWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified xml writer.
+            </summary>
+            <param name="xmlWriter"> The xml writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToWriter``1(System.Xml.XmlWriter,``0)">
+            <summary>
+            Serializes an object to the specified xml writer. This is the generic overload.
+            </summary>
+            <param name="xmlWriter"> The xml writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToWriter(System.IO.TextWriter,System.Type,System.Object)">
+            <summary>
+            Serializes an object to the specified text writer.
+            </summary>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="targetType"> The target run-time type of the root of the object graph to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+        <member name="M:TextMetal.Middleware.Solder.Serialization.XmlSerializationStrategy.SetObjectToWriter``1(System.IO.TextWriter,``0)">
+            <summary>
+            Serializes an object to the specified text writer. This is the generic overload.
+            </summary>
+            <param name="textWriter"> The text writer to serialize. </param>
+            <param name="obj"> The object graph to serialize. </param>
+        </member>
+    </members>
+</doc>

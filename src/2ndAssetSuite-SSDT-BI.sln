@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "2ndAsset.BankAccountDemo.SSIS", "2ndAsset.BankAccountDemo.SSIS\2ndAsset.BankAccountDemo.SSIS.dtproj", "{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{93B9DE97-CB7C-49C8-8F52-2B3033ED2745}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Debug|Any CPU.ActiveCfg = Development
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Debug|Any CPU.Build.0 = Development
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Development|Any CPU.ActiveCfg = Development
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Development|Any CPU.Build.0 = Development
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Release|Any CPU.ActiveCfg = Development
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8}.Release|Any CPU.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02390DA5-C66D-428A-BF5C-E6B8C3BA9EA8} = {93B9DE97-CB7C-49C8-8F52-2B3033ED2745}
+	EndGlobalSection
+EndGlobal

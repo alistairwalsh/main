@@ -1,0 +1,2468 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2014 12:28:49 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FRAMEWORK"
+  DTS:CreatorName="framework\daniel.bullington"
+  DTS:DTSID="{2DE5FC51-5869-4EE8-B764-74F55CD592F2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="BankAccountDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{DF09DCBA-4BCE-4206-BF4E-C3460127FB32}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT-Categories"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{be9e9d63-6772-4a33-a5df-62f29339295d}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Categories"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Categories\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Category]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Categories\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CategoryName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CategoryName"
+                      externalMetadataColumnId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryName]"
+                      lineageId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryId]"
+                      dataType="i4"
+                      name="CategoryId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CategoryName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Categories\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Categories\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Categories\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Categories\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT [CategoryName] FROM [dbo].[CheckingAccountSource] WHERE [CategoryName] IS NOT NULL ORDER BY [CategoryName] ASC;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Categories\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryName]"
+                      length="255"
+                      lineageId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryName]"
+                      name="CategoryName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CategoryName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryName]"
+                      name="CategoryName" />
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Categories.Paths[OLE DB Source Output]"
+              endId="Package\DFT-Categories\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-Categories\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT-CheckingAccount"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{eb6d0dfa-653a-499a-b5b3-683ab0ae90df}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-CheckingAccount"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-CheckingAccount\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CheckingAccount]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-CheckingAccount\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InstitutionId]"
+                      cachedDataType="i4"
+                      cachedName="InstitutionId"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RefNumber"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TheDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TheDate"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PayeeId]"
+                      cachedDataType="i4"
+                      cachedName="PayeeId"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TheAmount]"
+                      cachedDataType="r8"
+                      cachedName="TheAmount"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCleared]"
+                      cachedDataType="bool"
+                      cachedName="IsCleared"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CategoryId]"
+                      cachedDataType="i4"
+                      cachedName="CategoryId"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DueDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DueDate"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]" />
+                    <inputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Comments]"
+                      cachedDataType="wstr"
+                      cachedLength="2047"
+                      cachedName="Comments"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeId]"
+                      dataType="i4"
+                      name="PayeeId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionId]"
+                      dataType="i4"
+                      name="TransactionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionId]"
+                      dataType="i4"
+                      name="InstitutionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="RefNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      dataType="dbTimeStamp"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      dataType="r8"
+                      name="TheAmount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      dataType="bool"
+                      name="IsCleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryId]"
+                      dataType="i4"
+                      name="CategoryId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="Comments" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-CheckingAccount\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+ISNULL((SELECT TOP 1 z.[InstitutionId] FROM [dbo].[Institution] z WHERE z.[InstitutionName] = t.[InstitutionName]), 0) AS [InstitutionId],
+ISNULL(t.[RefNumber], '') AS [RefNumber],
+t.[TheDate],
+ISNULL((SELECT TOP 1 z.[PayeeId] FROM [dbo].[Payee] z WHERE z.[PayeeName] = t.[PayeeName]), 0) AS [PayeeId],
+t.[TheAmount],
+t.[IsCleared],
+ISNULL((SELECT TOP 1 z.[CategoryId] FROM [dbo].[Category] z WHERE z.[CategoryName] = t.[CategoryName]), 0) AS [CategoryId],
+t.[DueDate],
+ISNULL(t.[Comments], '') AS [Comments]
+FROM
+[dbo].[CheckingAccountSource] t
+ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-CheckingAccount\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]"
+                      name="InstitutionId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefNumber]"
+                      length="255"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]"
+                      name="RefNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      name="TheDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]"
+                      name="PayeeId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheAmount]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]"
+                      name="TheAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCleared]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]"
+                      name="IsCleared"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryId]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]"
+                      name="CategoryId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      name="DueDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      length="2047"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      name="Comments"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionId]"
+                      dataType="i4"
+                      name="InstitutionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="RefNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      dataType="dbTimeStamp"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeId]"
+                      dataType="i4"
+                      name="PayeeId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheAmount]"
+                      dataType="r8"
+                      name="TheAmount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCleared]"
+                      dataType="bool"
+                      name="IsCleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryId]"
+                      dataType="i4"
+                      name="CategoryId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="Comments" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionId]"
+                      name="InstitutionId" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefNumber]"
+                      name="RefNumber" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      name="TheDate" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeId]"
+                      name="PayeeId" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheAmount]"
+                      dataType="r8"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheAmount]"
+                      name="TheAmount" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCleared]"
+                      dataType="bool"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCleared]"
+                      name="IsCleared" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryId]"
+                      name="CategoryId" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      name="DueDate" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      name="Comments" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-CheckingAccount.Paths[OLE DB Source Output]"
+              endId="Package\DFT-CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT-Export"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{878979BF-90A0-43DC-BB27-63CAA4B159A1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Export"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Export\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Export\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="{A8104B44-014B-40DB-BEA8-BC8131035535}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Secret_IRS_Bank_Export_ffcm]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].Columns[TheDate]"
+                      cachedDataType="dbDate"
+                      cachedName="TheDate"
+                      externalMetadataColumnId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[THE_DATE]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]" />
+                    <inputColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].Columns[DailyCount]"
+                      cachedDataType="i4"
+                      cachedName="DailyCount"
+                      externalMetadataColumnId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DAILY_COUNT]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyCount]" />
+                    <inputColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].Columns[DailyDelta]"
+                      cachedDataType="cy"
+                      cachedName="DailyDelta"
+                      externalMetadataColumnId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DAILY_DELTA]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyDelta]" />
+                    <inputColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].Columns[RunningBalance]"
+                      cachedDataType="cy"
+                      cachedName="RunningBalance"
+                      externalMetadataColumnId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RUNNING_BALANCE]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[RunningBalance]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[THE_DATE]"
+                      dataType="dbTimeStamp"
+                      name="THE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DAILY_COUNT]"
+                      dataType="i4"
+                      name="DAILY_COUNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DAILY_DELTA]"
+                      dataType="cy"
+                      name="DAILY_DELTA" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RUNNING_BALANCE]"
+                      dataType="cy"
+                      name="RUNNING_BALANCE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\DFT-Export\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CheckingAccountDailyLedger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+	ca.[TransactionId],
+	i.[InstitutionName],
+	ca.[RefNumber],
+	ca.[TheDate],
+	p.[PayeeName],
+	ca.[TheAmount],
+	ca.[IsCleared],
+	c.[CategoryName],
+	ca.[DueDate],
+	ca.[Comments]
+FROM
+	[dbo].[CheckingAccount] ca
+	INNER JOIN [dbo].[Institution] i ON i.[InstitutionId] = ca.[InstitutionId]
+	INNER JOIN [dbo].[Payee] p ON p.[PayeeId] = ca.[PayeeId]
+	INNER JOIN [dbo].[Category] c ON c.[CategoryId] = ca.[CategoryId]
+ORDER BY
+	ca.[TheDate] ASC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Export\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      name="TheDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DailyCount]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyCount]"
+                      name="DailyCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyDelta]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DailyDelta]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[DailyDelta]"
+                      name="DailyDelta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[RunningBalance]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RunningBalance]"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].Columns[RunningBalance]"
+                      name="RunningBalance"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      dataType="dbDate"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DailyCount]"
+                      dataType="i4"
+                      name="DailyCount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DailyDelta]"
+                      dataType="cy"
+                      name="DailyDelta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RunningBalance]"
+                      dataType="cy"
+                      name="RunningBalance" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      name="TheDate" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DailyCount]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DailyCount]"
+                      name="DailyCount" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DailyDelta]"
+                      dataType="cy"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DailyDelta]"
+                      name="DailyDelta" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RunningBalance]"
+                      dataType="cy"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RunningBalance]"
+                      name="RunningBalance" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Export.Paths[OLE DB Source Output]"
+              endId="Package\DFT-Export\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-Export\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT-Institutions"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0adcda12-2da4-4cda-b09f-1c9f8d90dba0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Institutions"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Institutions\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Institution]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Institutions\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InstitutionName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="InstitutionName"
+                      externalMetadataColumnId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionName]"
+                      lineageId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="InstitutionName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionId]"
+                      dataType="i4"
+                      name="InstitutionId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Institutions\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Institutions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Institutions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Institutions\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT [InstitutionName] FROM [dbo].[CheckingAccountSource] WHERE [InstitutionName] IS NOT NULL ORDER BY [InstitutionName] ASC;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Institutions\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionName]"
+                      length="255"
+                      lineageId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionName]"
+                      name="InstitutionName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="InstitutionName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionName]"
+                      name="InstitutionName" />
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Institutions.Paths[OLE DB Source Output]"
+              endId="Package\DFT-Institutions\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-Institutions\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT-Payees"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{e9db3ef4-5ca2-4760-921e-744f7d5248dc}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Payees"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Payees\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Payee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Payees\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PayeeName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PayeeName"
+                      externalMetadataColumnId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeName]"
+                      lineageId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeId]"
+                      dataType="i4"
+                      name="PayeeId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PayeeName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Payees\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Payees\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Payees\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Payees\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT [PayeeName] FROM [dbo].[CheckingAccountSource] WHERE [PayeeName] IS NOT NULL ORDER BY [PayeeName] ASC;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Payees\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeName]"
+                      length="255"
+                      lineageId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeName]"
+                      name="PayeeName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PayeeName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeName]"
+                      name="PayeeName" />
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Payees.Paths[OLE DB Source Output]"
+              endId="Package\DFT-Payees\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-Payees\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT-Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{310AD8C7-E893-4D5C-890C-1ECDBAD34131}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Staging\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Staging\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="{2787EFAB-8B56-43A1-9AF3-6B25302B0ADB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Confidential_Banking_Data_ffcm]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[Institution]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Institution]"
+                      length="255"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[Institution]"
+                      name="Institution"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[txid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[txid]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[txid]"
+                      name="txid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[number]"
+                      length="50"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[number]"
+                      name="number"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[date]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[date]"
+                      name="date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[payee]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[payee]"
+                      length="255"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[payee]"
+                      name="payee"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[amount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[amount]"
+                      length="50"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[amount]"
+                      name="amount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[cleared]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[cleared]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[cleared]"
+                      name="cleared"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[category]"
+                      length="255"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[category]"
+                      name="category"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[due]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[due]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[due]"
+                      name="due"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[comments]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[comments]"
+                      length="2047"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[comments]"
+                      name="comments"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Institution]"
+                      dataType="wstr"
+                      length="255"
+                      name="Institution" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[txid]"
+                      dataType="i4"
+                      name="txid" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[number]"
+                      dataType="wstr"
+                      length="50"
+                      name="number" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[date]"
+                      dataType="dbTimeStamp"
+                      name="date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[payee]"
+                      dataType="wstr"
+                      length="255"
+                      name="payee" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[amount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="amount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[cleared]"
+                      dataType="bool"
+                      name="cleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="255"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[due]"
+                      dataType="dbTimeStamp"
+                      name="due" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="comments" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CheckingAccountSource]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[comments]"
+                      cachedDataType="wstr"
+                      cachedLength="2047"
+                      cachedName="comments"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[comments]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Institution]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Institution"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionName]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[Institution]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[txid]"
+                      cachedDataType="i4"
+                      cachedName="txid"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionId]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[txid]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="date"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[date]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[payee]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="payee"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeName]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[payee]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[amount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="amount"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cleared]"
+                      cachedDataType="bool"
+                      cachedName="cleared"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[cleared]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="category"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryName]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[category]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[due]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="due"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[due]" />
+                    <inputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[number]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="number"
+                      externalMetadataColumnId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      lineageId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output].Columns[number]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="InstitutionName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionId]"
+                      dataType="i4"
+                      name="TransactionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      dataType="dbTimeStamp"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PayeeName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      dataType="r8"
+                      name="TheAmount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      dataType="bool"
+                      name="IsCleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RecordId]"
+                      dataType="i4"
+                      name="RecordId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="RefNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Staging.Paths[Flat File Source Output]"
+              endId="Package\DFT-Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\DFT-Staging\Flat File Source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ExecSQL-Truncate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CCEE633E-A6C6-475B-B494-F9AF57EE4416}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ExecSQL-Truncate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{054C9FA9-E4F8-4B0A-A07C-35966B573066}"
+          SQLTask:SqlStatementSource="DELETE FROM [dbo].[Ox_CheckingAccount];&#xA;DELETE FROM [dbo].[CheckingAccount];&#xA;DELETE FROM [dbo].[CheckingAccountSource];&#xA;DELETE FROM [dbo].[Payee] WHERE [PayeeId] &lt;&gt; 0;&#xA;DELETE FROM [dbo].[Category] WHERE [CategoryId] &lt;&gt; 0;&#xA;DELETE FROM [dbo].[Institution] WHERE [InstitutionId] &lt;&gt; 0;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9427DAE4-62C1-434D-81C4-0A3194428382}"
+      DTS:From="Package\DFT-Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT-Institutions" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1C4BF88-B43F-4588-8C8C-DA2012E1E59F}"
+      DTS:From="Package\DFT-Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DFT-Payees" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2262FAE2-4603-4A04-A8F6-1E66914DA559}"
+      DTS:From="Package\DFT-Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DFT-Categories" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{EDFB7154-927B-464D-921F-BE85DDBB261D}"
+      DTS:From="Package\DFT-Institutions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\DFT-CheckingAccount" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{44F8A88E-2C5D-4422-A646-CE42CFB96861}"
+      DTS:From="Package\DFT-Payees"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT-CheckingAccount" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{155A9F68-22F8-4B88-ABCA-FD506BF2D407}"
+      DTS:From="Package\DFT-Categories"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\DFT-CheckingAccount" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE908027-DA83-494D-835B-DDC82D58EAAA}"
+      DTS:From="Package\DFT-CheckingAccount"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\DFT-Export" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{174EE5DF-B235-40B1-9ADA-99CEE5005246}"
+      DTS:From="Package\ExecSQL-Truncate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\DFT-Staging" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\DFT-Categories"
+          TopLeft="417.5,209.5" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\DFT-CheckingAccount"
+          TopLeft="198,311.5" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\DFT-Export"
+          TopLeft="223,413.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\DFT-Institutions"
+          TopLeft="5.5,209.5" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\DFT-Payees"
+          TopLeft="221.5,209.5" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DFT-Staging"
+          TopLeft="220.5,107.5" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\ExecSQL-Truncate"
+          TopLeft="206.5,5.49999999999989" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="256.75,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-173.75,60"
+              Start="0,0"
+              End="-173.75,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.763723150358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.763723150358"
+                    Point2="0,20.763723150358"
+                    Point3="-4,20.763723150358" />
+                  <mssgle:LineSegment
+                    End="-169.75,20.763723150358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-169.75,20.763723150358"
+                    Point2="-173.75,20.763723150358"
+                    Point3="-173.75,24.763723150358" />
+                  <mssgle:LineSegment
+                    End="-173.75,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="289,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="321.25,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="171.75,60"
+              Start="0,0"
+              End="171.75,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.763723150358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.763723150358"
+                    Point2="0,20.763723150358"
+                    Point3="4,20.763723150358" />
+                  <mssgle:LineSegment
+                    End="167.75,20.763723150358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="167.75,20.763723150358"
+                    Point2="171.75,20.763723150358"
+                    Point3="171.75,24.763723150358" />
+                  <mssgle:LineSegment
+                    End="171.75,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="83,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="162.5,60"
+              Start="0,0"
+              End="162.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.4223826714801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.4223826714801"
+                    Point2="0,39.4223826714801"
+                    Point3="4,39.4223826714801" />
+                  <mssgle:LineSegment
+                    End="158.5,39.4223826714801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="158.5,39.4223826714801"
+                    Point2="162.5,39.4223826714801"
+                    Point3="162.5,43.4223826714801" />
+                  <mssgle:LineSegment
+                    End="162.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="289,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="493,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-160.5,60"
+              Start="0,0"
+              End="-160.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.4223826714801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.4223826714801"
+                    Point2="0,39.4223826714801"
+                    Point3="-4,39.4223826714801" />
+                  <mssgle:LineSegment
+                    End="-156.5,39.4223826714801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-156.5,39.4223826714801"
+                    Point2="-160.5,39.4223826714801"
+                    Point3="-160.5,43.4223826714801" />
+                  <mssgle:LineSegment
+                    End="-160.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="289,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="289,47.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

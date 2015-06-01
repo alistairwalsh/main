@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+	<Product Name="Microsoft BI Build and Deploy Automation - SSIS Components" Id="67EE65DA-5C22-42FE-B6B1-636657BF8EF2" Language="1033" Version="1.0.0.0" Manufacturer="Daniel Bullington" UpgradeCode="649BC3D7-C1F9-42DC-A753-9DA1C83E8838">
+
+		<!-- Boilerplate -->
+		<Package InstallerVersion="200" Compressed="yes" />
+		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+		<WixVariable Id="BaseDirectoryPath" Overridable="yes" Value="D:\development\bad-msft-bi-stack\src" />
+		<WixVariable Id="BuildFlavor" Overridable="yes"  Value="Debug" />
+		
+		<!-- Check for SSIS 2012 x64 -->
+		<Property Id="SSIS64">
+			<RegistrySearch Type="directory" Id="SSIS64" Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\SSIS\Setup\DTSPath" Win64="yes"/>
+		</Property>
+
+		<!-- Check for SSIS 2012 x86 -->
+		<Property Id="SSIS32">
+			<RegistrySearch Type="directory" Id="SSIS32" Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\SSIS\Setup\DTSPath" Win64="no"/>
+		</Property>
+
+		<!-- Validate SSIS 2012 -->
+		<Condition Message="SQL Server Integration Services (SSIS) 2012 is not installed on this computer. Please install SQL Server Integration Services (SSIS) 2012 before running this installer.">
+			<![CDATA[Installed OR SSIS64 OR SSIS32]]>
+		</Condition>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			
+			<!-- Add a new component here for each sample that needs to have one or more DLLs GAC-ed. -->
+			<Component Id="BadMsftBIStackSsisComponentsGAC" Guid="34FE3EB7-79D4-4ADE-B34E-962B77D9BD14">
+				<File Id="BadMsftBIStackCoreAsmGAC" Name="BadMsftBIStack.Core.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Core\bin\!(wix.BuildFlavor)\BadMsftBIStack.Core.dll" Assembly=".net" KeyPath="yes"/>
+				<File Id="BadMsftBIStackCptAsmGAC" Name="BadMsftBIStack.Ssis.Components.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.dll" KeyPath="no"/>
+				<File Id="BadMsftBIStackCptUiAsmGAC" Name="BadMsftBIStack.Ssis.Components.UI.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components.UI\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.UI.dll" KeyPath="no"/>
+			</Component>
+
+			<!-- Add a new component here for each sample that needs one or more files loaded into the SSIS (DTS) install directory, on a 64-bit machine. Use a brand-new GUID for each new Component. -->
+			<Directory Id="SSIS64" Name="SSIS64" >
+				<Directory Id="PipelineComponents64" Name="PipelineComponents">
+					<Component Id="BadMsftBIStackSsisComponents64" Guid="E5F28CB5-3634-4B05-910C-DF7BDC1C6285">
+						<File Id="BadMsftBIStackCoreAsm64" Name="BadMsftBIStack.Core.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Core\bin\!(wix.BuildFlavor)\BadMsftBIStack.Core.dll"/>
+						<File Id="BadMsftBIStackCptAsm64" Name="BadMsftBIStack.Ssis.Components.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.dll"/>
+						<File Id="BadMsftBIStackCptUiAsm64" Name="BadMsftBIStack.Ssis.Components.UI.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components.UI\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.UI.dll"/>
+					</Component>
+				</Directory>
+			</Directory>
+
+			<!-- Add a new component here for each sample that needs one or more files loaded into the SSIS (DTS) install directory, on a 32-bit machine. Use a brand new GUID for each new Component.-->
+			<Directory Id="SSIS32" Name="SSIS32">
+				<Directory Id="PipelineComponents32" Name="PipelineComponents">
+					<Component Id="BadMsftBIStackSsisComponents32" Guid="3CD31A57-21CB-4AB1-ACDB-F4B82900EC6C">
+						<File Id="BadMsftBIStackCoreAsm32" Name="BadMsftBIStack.Core.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Core\bin\!(wix.BuildFlavor)\BadMsftBIStack.Core.dll"/>
+						<File Id="BadMsftBIStackCptAsm32" Name="BadMsftBIStack.Ssis.Components.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.dll"/>
+						<File Id="BadMsftBIStackCptUiAsm32" Name="BadMsftBIStack.Ssis.Components.UI.dll" Source="!(wix.BaseDirectoryPath)\BadMsftBIStack.Ssis.Components.UI\bin\!(wix.BuildFlavor)\BadMsftBIStack.Ssis.Components.UI.dll"/>
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<!-- Create a new ComponentGroup for each sample, referencing the components you've defined above. -->
+		<ComponentGroup Id="BadMsftBIStackSsisComponents">
+			<ComponentRef Id="BadMsftBIStackSsisComponentsGAC"/>
+			<ComponentRef Id="BadMsftBIStackSsisComponents64"/>
+			<ComponentRef Id="BadMsftBIStackSsisComponents32"/>
+		</ComponentGroup>
+
+		<Feature Id="Complete" Title="All SSIS Components" Description ="Installs all components into your SQL Server Integration Services (SSIS) 2012 installation." Display="expand" Level="1">
+			<!-- Add a new Feature for each sample.  Set the Title attribute to the human-readable name. Level=1000 causes the component NOT to be selected by default when the user installs. -->
+			<Feature Id="BadMsftBIStackSsisComponentsFeature" Title="MS BI BaD SSIS Components" Level="1000">
+				<ComponentGroupRef Id="BadMsftBIStackSsisComponents" />
+			</Feature>
+		</Feature>
+		
+		<!-- references the default 'FeatureTree' UI -->
+		<UIRef Id="WixUI_FeatureTree"/>
+	</Product>
+</Wix>
