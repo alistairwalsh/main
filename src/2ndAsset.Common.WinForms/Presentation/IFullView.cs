@@ -37,6 +37,12 @@ namespace _2ndAsset.Common.WinForms.Presentation
 
 		void CloseView(bool? result);
 
+		//IFullView CreateView(Uri viewUri);
+
+		//TFullView CreateView<TFullView>(Uri viewUri) where TFullView : IFullView;
+
+		//void DestroyView(IFullView view);
+
 		object DispatchControllerAction(IPartialView partialView, Uri controllerActionUri, object context);
 
 		void RefreshView();

@@ -129,6 +129,8 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		{
 			List<Message> messages;
 			int index;
+			const string SRC_CONTEXT = "Source";
+			const string DST_CONTEXT = "Destination";
 
 			messages = new List<Message>();
 
@@ -140,12 +142,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			if ((object)this.SourceAdapterConfiguration == null)
 				messages.Add(NewError("Source adapter configuration is required."));
 			else
-				messages.AddRange(this.SourceAdapterConfiguration.Validate());
+				messages.AddRange(this.SourceAdapterConfiguration.Validate(SRC_CONTEXT));
 
 			if ((object)this.DestinationAdapterConfiguration == null)
 				messages.Add(NewError("Destination adapter configuration is required."));
 			else
-				messages.AddRange(this.DestinationAdapterConfiguration.Validate());
+				messages.AddRange(this.DestinationAdapterConfiguration.Validate(DST_CONTEXT));
 
 			if ((object)this.HashConfiguration == null)
 				messages.Add(NewError("Hash configuration is required."));

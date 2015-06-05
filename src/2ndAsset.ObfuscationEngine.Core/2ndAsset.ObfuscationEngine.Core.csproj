@@ -77,7 +77,6 @@
     <Compile Include="ObfuscationComponentAttribute.cs" />
     <Compile Include="Config\AdoNetAdapterConfiguration.cs" />
     <Compile Include="Config\DelimitedTextAdapterConfiguration.cs" />
-    <Compile Include="Config\DictionaryAdoNetAdapterConfiguration.cs" />
     <Compile Include="Support\DelimitedTextCommand.cs" />
     <Compile Include="Support\DelimitedTextConnection.cs" />
     <Compile Include="Support\DelimitedTextReader.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="Adapter\SqlServerBulkAdoNetDestinationAdapter.cs" />
     <Compile Include="Support\FieldType.cs" />
     <Compile Include="Support\HeaderSpec.cs" />
-    <Compile Include="Support\ImpersonationScope.cs" />
     <Compile Include="Support\ObfuscationRecordTextReader.cs" />
     <Compile Include="Config\ColumnConfiguration.cs" />
     <Compile Include="Config\ConfigurationObjectCollection~1.cs" />
@@ -111,9 +109,6 @@
     <Compile Include="ProjectAssemblyInfo.cs" />
     <Compile Include="Support\RecordTextReader.cs" />
     <Compile Include="Support\RecordTextWriter.cs" />
-    <Compile Include="Support\VirtualFileSystemEnumerator.cs" />
-    <Compile Include="Support\VirtualFileSystemItem.cs" />
-    <Compile Include="Support\VirtualFileSystemItemType.cs" />
     <Compile Include="Support\WrappedTextReader.cs" />
     <Compile Include="Support\WrappedTextWriter.cs" />
   </ItemGroup>

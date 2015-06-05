@@ -7,7 +7,7 @@ using System;
 
 namespace _2ndAsset.Common.WinForms.Presentation
 {
-	public interface IListView
+	public interface IListView : IBaseView
 	{
 	}
 }

@@ -103,7 +103,7 @@
 
 			DictionaryAdapterConfiguration:
 			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.SqlServerBulkAdoNetDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
 				AdoNetAdapterConfiguration:
 				{

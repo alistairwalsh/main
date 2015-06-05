@@ -68,11 +68,14 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 		#region Methods/Operators
 
-		IDictionarySpecView IDictionarySettingsView.AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount)
+		IDictionarySpecView IDictionarySettingsView.AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount, IAdapterSettingsView adapterSettingsView)
 		{
 			DictionaryListViewItem lviDictionarySpec;
+			AdapterSettingsForm adapterSettingsForm;
 
-			lviDictionarySpec = new DictionaryListViewItem(new string[] { dictionaryId.SafeToString(), preloadEnabled.SafeToString(), recordCount.SafeToString() });
+			adapterSettingsForm = new AdapterSettingsForm();
+
+			lviDictionarySpec = new DictionaryListViewItem(new string[] { dictionaryId.SafeToString(), preloadEnabled.SafeToString(), recordCount.SafeToString(), string.Empty }, adapterSettingsForm);
 			lviDictionarySpec.Tag = new DictionarySpec()
 									{
 										DictionaryId = dictionaryId.SafeToString(),
@@ -89,7 +92,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 		private void btnAddDictionarySpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.AddDictionarySpecView(string.Format("Dictionary_{0:N}", Guid.NewGuid()), false, null);
+			this.PartialView.AddDictionarySpecView(string.Format("Dictionary_{0:N}", Guid.NewGuid()), false, null, null);
 			this.CoreRefreshControlState();
 		}
 
@@ -109,12 +112,6 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			this.CoreRefreshControlState();
 		}
 
-		private void btnRefreshDictionarySpecs_Click(object sender, EventArgs e)
-		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/metadata-settings/refresh-meta-column-specs"), null);
-			this.CoreRefreshControlState();
-		}
-
 		private void btnRemoveDictionarySpec_Click(object sender, EventArgs e)
 		{
 			this.PartialView.RemoveDictionarySpecView(this.PartialView.SelectedDictionarySpecView);
@@ -122,6 +119,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 		void IDictionarySettingsView.ClearDictionarySpecViews()
 		{
+			this.lvDictionarySpecs.Items.OfType<DictionaryListViewItem>().ToList().ForEach(lvi => lvi.DisposeEditor());
 			this.lvDictionarySpecs.Items.Clear();
 			this.CoreRefreshControlState();
 		}
@@ -165,6 +163,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 				this.lvDictionarySpecs.SelectedItems[0].SubItems[0].Text = dictionarySpec.DictionaryId.SafeToString();
 				this.lvDictionarySpecs.SelectedItems[0].SubItems[1].Text = dictionarySpec.PreloadEnabled.SafeToString();
 				this.lvDictionarySpecs.SelectedItems[0].SubItems[2].Text = dictionarySpec.RecordCount.SafeToString();
+				//this.lvDictionarySpecs.SelectedItems[0].SubItems[3].Text = null;
 			}
 		}
 
@@ -187,6 +186,8 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 			this.lvDictionarySpecs.Items.Remove(lviDictionary);
 
+			lviDictionary.DisposeEditor();
+
 			this.CoreRefreshControlState();
 			return true;
 		}
@@ -206,8 +207,9 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 			dictionarySpec = (DictionarySpec)lviDictionarySpec.Tag;
 
-			using (AdapterSettingsForm frmAdapterSettings = new AdapterSettingsForm())
-				frmAdapterSettings.ShowDialog(this.ParentForm);
+			lviDictionarySpec.ShowEditorModal();
+			// TODO
+			//lviDictionarySpec.SubItems[3].Text = (object)adapterAqtn == null ? "(Right-click to change)" : string.Format("{0}", adapterAqtn);
 		}
 
 		#endregion
@@ -218,10 +220,20 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 		{
 			#region Constructors/Destructors
 
-			public DictionaryListViewItem(IEnumerable<string> values)
+			public DictionaryListViewItem(IEnumerable<string> values, AdapterSettingsForm adapterSettingsForm)
 				: base((object)values != null ? values.ToArray() : null)
 			{
+				if ((object)adapterSettingsForm == null)
+					throw new ArgumentNullException("adapterSettingsForm");
+
+				this.adapterSettingsForm = adapterSettingsForm;
 			}
+
+			#endregion
+
+			#region Fields/Constants
+
+			private readonly AdapterSettingsForm adapterSettingsForm;
 
 			#endregion
 
@@ -231,7 +243,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			{
 				get
 				{
-					return this.SubItems[-1].Text;
+					return this.SubItems[3].Text;
 				}
 			}
 
@@ -239,7 +251,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			{
 				get
 				{
-					return null;
+					return ((IAdapterSettingsView2)this.adapterSettingsForm).DictionaryAdapterSettings;
 				}
 			}
 
@@ -275,6 +287,22 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 					return null;
 				}
+			}
+
+			#endregion
+
+			#region Methods/Operators
+
+			public void DisposeEditor()
+			{
+				this.adapterSettingsForm.Dispose();
+			}
+
+			public void ShowEditorModal()
+			{
+				Form form;
+				form = this.ListView.CoreGetParentForm();
+				this.adapterSettingsForm.ShowDialog(form);
 			}
 
 			#endregion

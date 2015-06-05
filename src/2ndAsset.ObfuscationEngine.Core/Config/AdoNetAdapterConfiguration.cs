@@ -170,6 +170,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		public override IEnumerable<Message> Validate()
 		{
+			return this.Validate(null);
+		}
+
+		public IEnumerable<Message> Validate(string context)
+		{
 			List<Message> messages;
 
 			messages = new List<Message>();

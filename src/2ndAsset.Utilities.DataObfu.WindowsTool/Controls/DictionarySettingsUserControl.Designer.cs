@@ -41,6 +41,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiAdapterSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.grpBxDictionarySpecs.SuspendLayout();
@@ -128,7 +129,8 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			this.lvDictionarySpecs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader8});
+            this.columnHeader8,
+            this.columnHeader3});
 			this.lvDictionarySpecs.ContextMenuStrip = this.cmsMain;
 			this.lvDictionarySpecs.FullRowSelect = true;
 			this.lvDictionarySpecs.HideSelection = false;
@@ -155,7 +157,12 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 			// columnHeader8
 			// 
 			this.columnHeader8.Text = "Record Count";
-			this.columnHeader8.Width = 150;
+			this.columnHeader8.Width = 100;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Adapter Settings";
+			this.columnHeader3.Width = 150;
 			// 
 			// cmsMain
 			// 
@@ -199,6 +206,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 		private Button btnRemoveDictionarySpec;
 		private ContextMenuStrip cmsMain;
 		private ToolStripMenuItem tsmiAdapterSettings;
+		private ColumnHeader columnHeader3;
 
 
 

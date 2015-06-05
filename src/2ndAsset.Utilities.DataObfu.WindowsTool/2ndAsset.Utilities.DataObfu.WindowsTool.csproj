@@ -69,6 +69,8 @@
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\AdapterSettingsController.cs" />
+    <Compile Include="Controllers\ObfuscationController.v2d.p.cs" />
+    <Compile Include="Controllers\ObfuscationController.d2v.p.cs" />
     <Compile Include="Controllers\ObfuscationController.cs" />
     <Compile Include="Controllers\SplashController.cs" />
     <Compile Include="Controllers\AboutController.cs" />

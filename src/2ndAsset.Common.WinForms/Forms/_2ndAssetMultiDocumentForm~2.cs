@@ -25,13 +25,13 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Fields/Constants
 
-		private readonly IList<_2ndAssetForm> documentForms = new List<_2ndAssetForm>();
+		private readonly IList<x_2ndAssetForm> documentForms = new List<x_2ndAssetForm>();
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		protected IList<_2ndAssetForm> DocumentForms
+		protected IList<x_2ndAssetForm> DocumentForms
 		{
 			get
 			{
@@ -85,7 +85,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		IDocumentView IMultiDocumentView.CreateDocumentView(Uri viewUri, string documentFilePath)
 		{
-			_2ndAssetForm form;
+			x_2ndAssetForm form;
 			IDocumentView documentView;
 			Type controlType;
 
@@ -95,7 +95,8 @@ namespace _2ndAsset.Common.WinForms.Forms
 			if (!this.UriToControlTypes.TryGetValue(viewUri, out controlType))
 				throw new InvalidOperationException(string.Format("{0}", viewUri));
 
-			form = (_2ndAssetForm)Activator.CreateInstance(controlType);
+			form = (x_2ndAssetForm)Activator.CreateInstance(controlType);
+			form.HandleCreated += this.documentForm_HandleCreated;
 			form.Load += this.documentForm_Load;
 			form.TextChanged += this.documentForm_TextChanged;
 			form.Closed += this.documentForm_Closed;
@@ -110,12 +111,13 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		private void documentForm_Closed(object sender, EventArgs e)
 		{
-			_2ndAssetForm form;
+			x_2ndAssetForm form;
 
-			form = (_2ndAssetForm)sender;
+			form = (x_2ndAssetForm)sender;
 			form.Closed -= this.documentForm_Closed;
-			form.Load -= this.documentForm_Load;
 			form.TextChanged -= this.documentForm_TextChanged;
+			form.Load -= this.documentForm_Load;
+			form.HandleCreated -= this.documentForm_HandleCreated;
 
 			this.CoreDocumentFormClosed(form);
 
@@ -126,11 +128,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.Activate();
 		}
 
-		private void documentForm_Load(object sender, EventArgs e)
+		private void documentForm_HandleCreated(object sender, EventArgs e)
 		{
-			_2ndAssetForm form;
+			x_2ndAssetForm form;
 
-			form = (_2ndAssetForm)sender;
+			form = (x_2ndAssetForm)sender;
 
 			this.DocumentForms.Add(form);
 
@@ -138,11 +140,15 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.CoreRefreshControlState();
 		}
 
+		private void documentForm_Load(object sender, EventArgs e)
+		{
+		}
+
 		private void documentForm_TextChanged(object sender, EventArgs e)
 		{
-			_2ndAssetForm form;
+			x_2ndAssetForm form;
 
-			form = (_2ndAssetForm)sender;
+			form = (x_2ndAssetForm)sender;
 
 			this.CoreDocumentFormTextChanged(form);
 			this.CoreRefreshControlState();

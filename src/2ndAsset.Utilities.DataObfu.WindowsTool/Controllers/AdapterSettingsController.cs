@@ -98,7 +98,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 				else if (this.View.DictionaryAdapterSettings.SelectedAdapterType == typeof(AdoNetSourceAdapter))
 					this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = true;
 				else
-					throw new InvalidOperationException(string.Format("Unrecognized source adapter UI-view AQTN '{0}'.", partialView.GetType().FullName));
+					throw new InvalidOperationException(string.Format("Unrecognized dictionary adapter UI-view AQTN '{0}'.", partialView.GetType().FullName));
 			}
 			else
 				throw new InvalidOperationException(string.Format(partialView.GetType().FullName));

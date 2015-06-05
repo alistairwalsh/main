@@ -121,6 +121,14 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 				return;
 		}
 
+		protected override void CoreSetup()
+		{
+			base.CoreSetup();
+
+			// UI URIs
+			this.UriToControlTypes.Add(ObfuscationController.AdapterSettingsViewUri, typeof(AdapterSettingsForm));
+		}
+
 		bool IObfuscationView.TryGetDatabaseConnection(ref Type connectionType, ref string connectionString)
 		{
 			DialogResult dialogResult;

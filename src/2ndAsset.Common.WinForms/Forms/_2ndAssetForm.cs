@@ -191,9 +191,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 			e.Cancel = cancel;
 		}
 
-		protected override void OnLoad(EventArgs e)
+		protected override void OnHandleCreated(EventArgs e)
 		{
-			base.OnLoad(e);
+			base.OnHandleCreated(e);
 			this.CoreSetup();
 			this.CoreRefreshControlState();
 		}

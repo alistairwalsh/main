@@ -108,6 +108,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		public IEnumerable<Message> Validate(int? index)
 		{
 			List<Message> messages;
+			const string CONTEXT = "Dictionary";
 
 			messages = new List<Message>();
 
@@ -117,7 +118,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			if ((object)this.DictionaryAdapterConfiguration == null)
 				messages.Add(NewError("Dictionary adapter configuration is required."));
 			else
-				messages.AddRange(this.DictionaryAdapterConfiguration.Validate());
+				messages.AddRange(this.DictionaryAdapterConfiguration.Validate(CONTEXT));
 
 			return messages;
 		}

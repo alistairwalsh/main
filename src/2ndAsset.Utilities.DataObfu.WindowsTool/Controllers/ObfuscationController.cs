@@ -28,7 +28,7 @@ using Message = TextMetal.Middleware.Common.Message;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 {
-	public sealed class ObfuscationController : BaseController<IObfuscationView>
+	public sealed partial class ObfuscationController : BaseController<IObfuscationView>
 	{
 		#region Constructors/Destructors
 
@@ -45,10 +45,57 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 		private const string CURRENT_CONFIGURATION_NAMESPACE = "http://www.2ndAsset.com/cfg/v0.1.0";
 		private const string LF = "{LF}";
 		private const string TAB = "{TAB}";
+		private static readonly Uri adapterSettingsViewUri = new Uri("view://obfuscation/adapter-settings");
+
+		#endregion
+
+		#region Properties/Indexers/Events
+
+		public static Uri AdapterSettingsViewUri
+		{
+			get
+			{
+				return adapterSettingsViewUri;
+			}
+		}
 
 		#endregion
 
 		#region Methods/Operators
+
+		private static void _InitializeDictionaryAdapterView(IDictionarySpecView view)
+		{
+			IList<IListItem<Type>> typeListItems;
+			IList<IListItem<CommandType?>> commandTypeListItems;
+
+			if ((object)view == null)
+				throw new ArgumentNullException("view");
+
+			typeListItems = new List<IListItem<Type>>();
+			typeListItems.Add(new ListItem<Type>(typeof(DelimitedTextDictionaryAdapter), "Delimited Text File (dictionary)"));
+			typeListItems.Add(new ListItem<Type>(typeof(AdoNetDictionaryAdapter), "ADO.NET DB Provider (dictionary)"));
+
+			view.DictionaryAdapterSettings.AdapterTypes = typeListItems;
+			view.DictionaryAdapterSettings.SelectedAdapterType = null;
+			view.DictionaryAdapterSettings.DelTextAdapterSettingsView.IsActiveSettings = false;
+			view.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = false;
+
+			typeListItems = new List<IListItem<Type>>();
+			typeListItems.Add(new ListItem<Type>(typeof(OleDbConnection), "OleDbConnection (dictionary)"));
+			typeListItems.Add(new ListItem<Type>(typeof(OdbcConnection), "OdbcConnection (dictionary)"));
+			typeListItems.Add(new ListItem<Type>(typeof(SqlConnection), "SqlConnection (dictionary)"));
+
+			view.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ConnectionTypes = typeListItems;
+			view.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ConnectionType = null;
+
+			commandTypeListItems = new List<IListItem<CommandType?>>();
+			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.Text, "Text (source)"));
+			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.StoredProcedure, "Stored Procedure (dictionary)"));
+			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.TableDirect, "Table Direct (dictionary)"));
+
+			view.DictionaryAdapterSettings.AdoNetAdapterSettingsView.CommandTypes = commandTypeListItems;
+			view.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType = null;
+		}
 
 		private static string EscapeValue(string value)
 		{
@@ -103,403 +150,6 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 
 			if ((object)recordProcessCallback != null)
 				recordProcessCallback(recordCount, true, (DateTime.UtcNow - startUtc).TotalSeconds);
-		}
-
-		private void ApplyDocumentToView(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			this.View.ConfigurationNamespace = obfuscationConfiguration.ConfigurationNamespace ?? CURRENT_CONFIGURATION_NAMESPACE;
-
-			this.ApplyDocumentToViewSource(obfuscationConfiguration);
-			this.ApplyDocumentToViewDestination(obfuscationConfiguration);
-
-			if ((object)obfuscationConfiguration.HashConfiguration != null)
-			{
-				this.View.AvalancheSettings.HashMultiplier = obfuscationConfiguration.HashConfiguration.Multiplier;
-				this.View.AvalancheSettings.HashSeed = obfuscationConfiguration.HashConfiguration.Seed;
-			}
-
-			if ((object)obfuscationConfiguration.TableConfiguration != null &&
-				(object)obfuscationConfiguration.TableConfiguration.ColumnConfigurations != null)
-			{
-				foreach (ColumnConfiguration columnConfiguration in obfuscationConfiguration.TableConfiguration.ColumnConfigurations)
-					this.View.MetadataSettings.AddMetaColumnSpecView(columnConfiguration.ColumnName, columnConfiguration.IsColumnNullable, columnConfiguration.ObfuscationStrategy, columnConfiguration.DictionaryReference, columnConfiguration.ExtentValue);
-			}
-
-			if ((object)obfuscationConfiguration.DictionaryConfigurations != null)
-			{
-				foreach (DictionaryConfiguration dictionaryConfiguration in obfuscationConfiguration.DictionaryConfigurations)
-					this.View.DictionarySettings.AddDictionarySpecView(dictionaryConfiguration.DictionaryId, dictionaryConfiguration.PreloadEnabled, dictionaryConfiguration.RecordCount);
-			}
-		}
-
-		private void ApplyDocumentToViewAdoNetDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration != null)
-			{
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionString = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionString;
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionType = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.GetConnectionType();
-
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandText = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText;
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandType = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType;
-
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandText = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText;
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType;
-
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandText = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText;
-				this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandType = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType;
-			}
-		}
-
-		private void ApplyDocumentToViewAdoNetSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration != null)
-			{
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ConnectionString = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionString;
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ConnectionType = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.GetConnectionType();
-
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandText = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText;
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandType = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType;
-
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandText = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText;
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType;
-
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandText = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText;
-				this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandType = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType;
-			}
-		}
-
-		private void ApplyDocumentToViewDelimitedTextDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration != null)
-			{
-				this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.TextFilePath = obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath;
-
-				if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec != null)
-				{
-					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.IsFirstRowHeaders = obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader;
-					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.QuoteValue = EscapeValue(obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue);
-					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.RecordDelimiter = EscapeValue(obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter);
-					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.FieldDelimiter = EscapeValue(obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter);
-
-					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.ClearHeaderSpecViews();
-
-					if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs != null)
-					{
-						foreach (HeaderSpec headerSpec in obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs)
-							this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.AddHeaderSpecView(headerSpec.HeaderName, headerSpec.FieldType);
-					}
-				}
-			}
-		}
-
-		private void ApplyDocumentToViewDelimitedTextSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration != null)
-			{
-				this.View.SourceAdapterSettings.DelTextAdapterSettingsView.TextFilePath = obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath;
-
-				if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec != null)
-				{
-					this.View.SourceAdapterSettings.DelTextAdapterSettingsView.IsFirstRowHeaders = obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader;
-					this.View.SourceAdapterSettings.DelTextAdapterSettingsView.QuoteValue = EscapeValue(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue);
-					this.View.SourceAdapterSettings.DelTextAdapterSettingsView.RecordDelimiter = EscapeValue(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter);
-					this.View.SourceAdapterSettings.DelTextAdapterSettingsView.FieldDelimiter = EscapeValue(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter);
-
-					this.View.SourceAdapterSettings.DelTextAdapterSettingsView.ClearHeaderSpecViews();
-
-					if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs != null)
-					{
-						foreach (HeaderSpec headerSpec in obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs)
-							this.View.SourceAdapterSettings.DelTextAdapterSettingsView.AddHeaderSpecView(headerSpec.HeaderName, headerSpec.FieldType);
-					}
-				}
-			}
-		}
-
-		private void ApplyDocumentToViewDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			Type type = null;
-
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration != null)
-			{
-				if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(obfuscationConfiguration.DestinationAdapterConfiguration.AdapterAqtn))
-				{
-					type = obfuscationConfiguration.DestinationAdapterConfiguration.GetAdapterType();
-					this.View.DestinationAdapterSettings.SelectedAdapterType = type;
-				}
-
-				if ((object)type == null)
-				{
-					// do nothing
-				}
-				else if (type == typeof(DelimitedTextDestinationAdapter))
-					this.ApplyDocumentToViewDelimitedTextDestination(obfuscationConfiguration);
-				else if (type == typeof(SqlServerBulkAdoNetDestinationAdapter) ||
-						type == typeof(UpdateAdoNetDestinationAdapter))
-					this.ApplyDocumentToViewAdoNetDestination(obfuscationConfiguration);
-				else
-				{
-					// do nothing
-				}
-			}
-		}
-
-		private void ApplyDocumentToViewSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			Type type = null;
-
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration != null)
-			{
-				if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(obfuscationConfiguration.SourceAdapterConfiguration.AdapterAqtn))
-				{
-					type = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterType();
-					this.View.SourceAdapterSettings.SelectedAdapterType = type;
-				}
-
-				if ((object)type == null)
-				{
-					// do nothing
-				}
-				else if (type == typeof(DelimitedTextSourceAdapter))
-					this.ApplyDocumentToViewDelimitedTextSource(obfuscationConfiguration);
-				else if (type == typeof(AdoNetSourceAdapter))
-					this.ApplyDocumentToViewAdoNetSource(obfuscationConfiguration);
-				else
-				{
-					// do nothing
-				}
-			}
-		}
-
-		private ObfuscationConfiguration ApplyViewToDocument()
-		{
-			ObfuscationConfiguration obfuscationConfiguration;
-
-			obfuscationConfiguration = new ObfuscationConfiguration();
-			obfuscationConfiguration.ConfigurationNamespace = CURRENT_CONFIGURATION_NAMESPACE;
-
-			this.ApplyViewToDocumentSource(obfuscationConfiguration);
-			this.ApplyViewToDocumentDestination(obfuscationConfiguration);
-
-			obfuscationConfiguration.HashConfiguration = new HashConfiguration();
-			obfuscationConfiguration.HashConfiguration.Multiplier = this.View.AvalancheSettings.HashMultiplier;
-			obfuscationConfiguration.HashConfiguration.Seed = this.View.AvalancheSettings.HashSeed;
-
-			obfuscationConfiguration.TableConfiguration = new TableConfiguration();
-
-			foreach (IMetaColumnSpecView metaColumnSpecView in this.View.MetadataSettings.MetaColumnSpecViews)
-			{
-				ColumnConfiguration columnConfiguration;
-
-				columnConfiguration = new ColumnConfiguration()
-									{
-										ColumnName = metaColumnSpecView.ColumnName ?? string.Empty,
-										ObfuscationStrategy = metaColumnSpecView.ObfuscationStrategy ?? ObfuscationStrategy.None,
-										DictionaryReference = metaColumnSpecView.DictionaryRef ?? string.Empty,
-										ExtentValue = metaColumnSpecView.ExtentValue
-									};
-
-				obfuscationConfiguration.TableConfiguration.ColumnConfigurations.Add(columnConfiguration);
-			}
-
-			foreach (IDictionarySpecView dictionarySpecView in this.View.DictionarySettings.DictionarySpecViews)
-			{
-				DictionaryConfiguration dictionaryConfiguration;
-
-				dictionaryConfiguration = new DictionaryConfiguration()
-										{
-											DictionaryId = dictionarySpecView.DictionaryId,
-											PreloadEnabled = dictionarySpecView.PreloadEnabled,
-											RecordCount = dictionarySpecView.RecordCount,
-											DictionaryAdapterConfiguration = new AdapterConfiguration()
-																			{
-																			}
-										};
-
-				obfuscationConfiguration.DictionaryConfigurations.Add(dictionaryConfiguration);
-			}
-
-			return obfuscationConfiguration;
-		}
-
-		private void ApplyViewToDocumentAdoNetDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration = new AdoNetAdapterConfiguration();
-
-			if ((object)this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionType != null)
-				obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionAqtn = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionType.AssemblyQualifiedName;
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionString = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionString;
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandText;
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandType;
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandText;
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType;
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandText;
-			obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType = this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandType;
-		}
-
-		private void ApplyViewToDocumentAdoNetSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration = new AdoNetAdapterConfiguration();
-
-			if ((object)this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ConnectionType != null)
-				obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionAqtn = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ConnectionType.AssemblyQualifiedName;
-
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ConnectionString = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ConnectionString;
-
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandText;
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PreExecuteCommandType;
-
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandText;
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType;
-
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandText;
-			obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType = this.View.SourceAdapterSettings.AdoNetAdapterSettingsView.PostExecuteCommandType;
-		}
-
-		private void ApplyViewToDocumentDelimitedTextDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration = new DelimitedTextAdapterConfiguration();
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath = this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.TextFilePath;
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec = new DelimitedTextSpec();
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader = this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.IsFirstRowHeaders;
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue = UnescapeValue(this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.QuoteValue);
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter = UnescapeValue(this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.RecordDelimiter);
-			obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter = UnescapeValue(this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.FieldDelimiter);
-
-			foreach (IHeaderSpecView headerSpecView in this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.HeaderSpecViews)
-			{
-				HeaderSpec headerSpec;
-
-				headerSpec = new HeaderSpec()
-							{
-								FieldType = headerSpecView.FieldType.GetValueOrDefault(),
-								HeaderName = headerSpecView.HeaderName
-							};
-
-				obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs.Add(headerSpec);
-			}
-		}
-
-		private void ApplyViewToDocumentDelimitedTextSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration = new DelimitedTextAdapterConfiguration();
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath = this.View.SourceAdapterSettings.DelTextAdapterSettingsView.TextFilePath;
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec = new DelimitedTextSpec();
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader = this.View.SourceAdapterSettings.DelTextAdapterSettingsView.IsFirstRowHeaders;
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue = UnescapeValue(this.View.SourceAdapterSettings.DelTextAdapterSettingsView.QuoteValue);
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter = UnescapeValue(this.View.SourceAdapterSettings.DelTextAdapterSettingsView.RecordDelimiter);
-			obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter = UnescapeValue(this.View.SourceAdapterSettings.DelTextAdapterSettingsView.FieldDelimiter);
-
-			foreach (IHeaderSpecView headerSpecView in this.View.SourceAdapterSettings.DelTextAdapterSettingsView.HeaderSpecViews)
-			{
-				HeaderSpec headerSpec;
-
-				headerSpec = new HeaderSpec()
-							{
-								FieldType = headerSpecView.FieldType.GetValueOrDefault(),
-								HeaderName = headerSpecView.HeaderName
-							};
-
-				obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs.Add(headerSpec);
-			}
-		}
-
-		private void ApplyViewToDocumentDestination(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			Type type = null;
-
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.DestinationAdapterConfiguration = new AdapterConfiguration();
-
-			type = this.View.DestinationAdapterSettings.SelectedAdapterType;
-
-			if ((object)type == null)
-			{
-				// do nothing
-			}
-			else
-			{
-				obfuscationConfiguration.DestinationAdapterConfiguration.AdapterAqtn = this.View.DestinationAdapterSettings.SelectedAdapterType.AssemblyQualifiedName;
-
-				if (type == typeof(DelimitedTextDestinationAdapter))
-					this.ApplyViewToDocumentDelimitedTextDestination(obfuscationConfiguration);
-				else if (type == typeof(SqlServerBulkAdoNetDestinationAdapter) ||
-						type == typeof(UpdateAdoNetDestinationAdapter))
-					this.ApplyViewToDocumentAdoNetDestination(obfuscationConfiguration);
-				else
-				{
-					// do nothing
-				}
-			}
-		}
-
-		private void ApplyViewToDocumentSource(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			Type type = null;
-
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.SourceAdapterConfiguration = new AdapterConfiguration();
-
-			type = this.View.SourceAdapterSettings.SelectedAdapterType;
-
-			if ((object)type == null)
-			{
-				// do nothing
-			}
-			else
-			{
-				obfuscationConfiguration.SourceAdapterConfiguration.AdapterAqtn = this.View.SourceAdapterSettings.SelectedAdapterType.AssemblyQualifiedName;
-
-				if (type == typeof(DelimitedTextSourceAdapter))
-					this.ApplyViewToDocumentDelimitedTextSource(obfuscationConfiguration);
-				else if (type == typeof(AdoNetSourceAdapter))
-					this.ApplyViewToDocumentAdoNetSource(obfuscationConfiguration);
-				else
-				{
-					// do nothing
-				}
-			}
 		}
 
 		[DispatchActionUri(Uri = "action://obfuscation/adapter-settings/ado-net/browse-database-connection")]

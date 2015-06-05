@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndAsset.Utilities.DataObfu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{72ED65BC-805C-4CB4-A25D-728465309605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndAsset.Utilities.DataObfu.WpfTool", "2ndAsset.Utilities.DataObfu.WpfTool\2ndAsset.Utilities.DataObfu.WpfTool.csproj", "{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,12 @@ Global
 		{5701A75D-CDFC-4828-B3A0-8331EEAC9123}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{5701A75D-CDFC-4828-B3A0-8331EEAC9123}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5701A75D-CDFC-4828-B3A0-8331EEAC9123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +97,6 @@ Global
 		{E2BDBE66-5440-4B46-B731-1A1B05B2F675} = {8046C5D4-E7F6-44F9-A5DD-46A0C2EE8CD4}
 		{ADF32A63-D140-4D95-988F-3C0DB231C6E3} = {8046C5D4-E7F6-44F9-A5DD-46A0C2EE8CD4}
 		{5701A75D-CDFC-4828-B3A0-8331EEAC9123} = {72ED65BC-805C-4CB4-A25D-728465309605}
+		{F574DEA3-1ECA-46D8-B785-AF7A44BDA295} = {72ED65BC-805C-4CB4-A25D-728465309605}
 	EndGlobalSection
 EndGlobal

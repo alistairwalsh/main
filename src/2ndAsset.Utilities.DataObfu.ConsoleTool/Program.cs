@@ -38,11 +38,6 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 		[STAThread]
 		public static int Main(string[] args)
 		{
-			args = new[]
-					{
-						@"-sourcefile:DB_to_DB_Example.json"
-					};
-
 			using (Program program = new Program())
 				return program.EntryPoint(args);
 		}

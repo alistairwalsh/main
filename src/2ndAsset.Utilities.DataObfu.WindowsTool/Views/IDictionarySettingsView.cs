@@ -29,7 +29,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Views
 
 		#region Methods/Operators
 
-		IDictionarySpecView AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount);
+		IDictionarySpecView AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount, IAdapterSettingsView adapterSettingsView);
 
 		void ClearDictionarySpecViews();
 
