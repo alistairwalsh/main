@@ -14,7 +14,7 @@ using TextMetal.Middleware.Common.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
-	public class ColumnConfiguration : ConfigurationObject, IObfuscationColumn
+	public class ColumnConfiguration : ConfigurationObject
 	{
 		#region Constructors/Destructors
 
@@ -115,9 +115,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		public override bool Equals(object obj)
 		{
-			IObfuscationColumn other;
+			ColumnConfiguration other;
 
-			other = obj as IObfuscationColumn;
+			other = obj as ColumnConfiguration;
 
 			if ((object)other != null)
 				return other.ColumnName.SafeToString().ToLower() == this.ColumnName.SafeToString().ToLower();

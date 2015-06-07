@@ -19,15 +19,40 @@ namespace _2ndAsset.ObfuscationEngine.Core
 
 		#region Fields/Constants
 
+		private int columnIndex;
+		private bool columnIsNullable;
 		private string columnName;
 		private Type columnType;
-		private bool isNullable;
-		private int resultsetIndex;
-		private object tag;
+		private int metaTableIndex;
+		private object tagContext;
 
 		#endregion
 
 		#region Properties/Indexers/Events
+
+		public int ColumnIndex
+		{
+			get
+			{
+				return this.columnIndex;
+			}
+			set
+			{
+				this.columnIndex = value;
+			}
+		}
+
+		public bool ColumnIsNullable
+		{
+			get
+			{
+				return this.columnIsNullable;
+			}
+			set
+			{
+				this.columnIsNullable = value;
+			}
+		}
 
 		public string ColumnName
 		{
@@ -53,39 +78,27 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
-		public bool IsNullable
+		public int MetaTableIndex
 		{
 			get
 			{
-				return this.isNullable;
+				return this.metaTableIndex;
 			}
 			set
 			{
-				this.isNullable = value;
+				this.metaTableIndex = value;
 			}
 		}
 
-		public int ResultsetIndex
+		public object TagContext
 		{
 			get
 			{
-				return this.resultsetIndex;
+				return this.tagContext;
 			}
 			set
 			{
-				this.resultsetIndex = value;
-			}
-		}
-
-		public object Tag
-		{
-			get
-			{
-				return this.tag;
-			}
-			set
-			{
-				this.tag = value;
+				this.tagContext = value;
 			}
 		}
 

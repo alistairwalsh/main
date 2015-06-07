@@ -7,12 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Common.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
+using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
+using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
@@ -38,6 +41,12 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 		[STAThread]
 		public static int Main(string[] args)
 		{
+			args = new[]
+					{
+						@"-sourcefile:DB_to_DB_Example.json",
+						@"-sourcefile2:DTF_to_DTF_Example.json"
+					};
+
 			using (Program program = new Program())
 				return program.EntryPoint(args);
 		}
@@ -49,7 +58,7 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 			IEnumerable<Message> messages;
 
 			sourceFilePath = Path.GetFullPath(sourceFilePath);
-			obfuscationConfiguration = ObfuscationMixIn.FromJsonFile<ObfuscationConfiguration>(sourceFilePath);
+			obfuscationConfiguration = OxymoronEngine.FromJsonFile<ObfuscationConfiguration>(sourceFilePath);
 
 			messages = obfuscationConfiguration.Validate();
 
@@ -66,9 +75,38 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 					destinationAdapter.UpstreamMetadata = sourceAdapter.UpstreamMetadata;
 
 					sourceDataEnumerable = sourceAdapter.PullData(obfuscationConfiguration.TableConfiguration);
+					sourceDataEnumerable = WrapConsoleRecordCounter(sourceDataEnumerable, (x, y, z) => Console.WriteLine("{0} {1} {2}", x, y, z));
 					destinationAdapter.PushData(obfuscationConfiguration.TableConfiguration, sourceDataEnumerable);
 				}
 			}
+		}
+
+		private static IEnumerable<IDictionary<string, object>> WrapConsoleRecordCounter(IEnumerable<IDictionary<string, object>> records, Action<long, bool, double> recordProcessCallback)
+		{
+			long recordCount = 0;
+			DateTime startUtc;
+
+			startUtc = DateTime.UtcNow;
+
+			if ((object)records == null)
+				throw new ArgumentNullException("records");
+
+			foreach (IDictionary<string, object> record in records)
+			{
+				recordCount++;
+
+				if ((recordCount % 1000) == 0)
+				{
+					//Thread.Sleep(250);
+					if ((object)recordProcessCallback != null)
+						recordProcessCallback(recordCount, false, (DateTime.UtcNow - startUtc).TotalSeconds);
+				}
+
+				yield return record;
+			}
+
+			if ((object)recordProcessCallback != null)
+				recordProcessCallback(recordCount, true, (DateTime.UtcNow - startUtc).TotalSeconds);
 		}
 
 		protected override IDictionary<string, ArgumentSpec> GetArgumentMap()

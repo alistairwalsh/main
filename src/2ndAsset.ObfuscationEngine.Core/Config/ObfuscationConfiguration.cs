@@ -19,6 +19,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		public ObfuscationConfiguration()
 		{
+			this.EngineVersion = 1;
+			this.ConfigurationVersion = 1;
+
 			this.dictionaryConfigurations = new ConfigurationObjectCollection<DictionaryConfiguration>(this);
 		}
 
@@ -27,8 +30,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		#region Fields/Constants
 
 		private readonly ConfigurationObjectCollection<DictionaryConfiguration> dictionaryConfigurations;
-		private string configurationNamespace;
+		private int configurationVersion;
 		private AdapterConfiguration destinationAdapterConfiguration;
+		private int engineVersion;
 		private HashConfiguration hashConfiguration;
 		private AdapterConfiguration sourceAdapterConfiguration;
 		private TableConfiguration tableConfiguration;
@@ -45,15 +49,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
-		public string ConfigurationNamespace
+		public int ConfigurationVersion
 		{
 			get
 			{
-				return this.configurationNamespace;
+				return this.configurationVersion;
 			}
 			set
 			{
-				this.configurationNamespace = value;
+				this.configurationVersion = value;
 			}
 		}
 
@@ -67,6 +71,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			{
 				this.EnsureParentOnPropertySet(this.destinationAdapterConfiguration, value);
 				this.destinationAdapterConfiguration = value;
+			}
+		}
+
+		public int EngineVersion
+		{
+			get
+			{
+				return this.engineVersion;
+			}
+			set
+			{
+				this.engineVersion = value;
 			}
 		}
 

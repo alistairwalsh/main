@@ -9,6 +9,7 @@ using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Common.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Support;
+using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

@@ -4,10 +4,15 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 
+using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Common.Utilities;
+
+using Message = TextMetal.Middleware.Common.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
@@ -134,6 +139,27 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Methods/Operators
 
+		private static MessageBoxIcon MapFromSeverity(Severity severity)
+		{
+			switch (severity)
+			{
+				case Severity.None:
+					return MessageBoxIcon.None;
+				case Severity.Information:
+					return MessageBoxIcon.Information;
+				case Severity.Warning:
+					return MessageBoxIcon.Warning;
+				case Severity.Error:
+					return MessageBoxIcon.Error;
+				case Severity.Hit:
+					return MessageBoxIcon.Hand;
+				case Severity.Debug:
+					return MessageBoxIcon.Exclamation;
+				default:
+					return MessageBoxIcon.Stop;
+			}
+		}
+
 		private void AssertExecutionContext()
 		{
 			//if ((object)ExecutableApplicationFascade.Current == null)
@@ -206,6 +232,90 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.CoreShown();
 			this.CoreHasShow = true;
 			this.CoreRefreshControlState();
+		}
+
+		protected bool ShowAlert(string text, Severity severity = Severity.None)
+		{
+			DialogResult dialogResult;
+
+			dialogResult = MessageBox.Show(this, text, ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product, MessageBoxButtons.OK, MapFromSeverity(severity));
+
+			return dialogResult == DialogResult.OK;
+		}
+
+		protected bool? ShowAttempt(string text, bool ignorable, Severity severity = Severity.None)
+		{
+			DialogResult dialogResult;
+
+			dialogResult = MessageBox.Show(this, text, ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product, ignorable ? MessageBoxButtons.AbortRetryIgnore : MessageBoxButtons.RetryCancel, MapFromSeverity(severity));
+
+			if (ignorable)
+				return dialogResult == DialogResult.Abort ? null : (bool?)(dialogResult == DialogResult.Retry);
+			else
+				return dialogResult == DialogResult.Retry;
+		}
+
+		protected bool ShowConfirm(string text, Severity severity = Severity.None)
+		{
+			DialogResult dialogResult;
+
+			dialogResult = MessageBox.Show(this, text, ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product, MessageBoxButtons.OKCancel, MapFromSeverity(severity));
+
+			return dialogResult == DialogResult.OK;
+		}
+
+		protected bool? ShowMessages(IEnumerable<Message> messages, string text, bool cancelable)
+		{
+			DialogResult dialogResult;
+
+			using (MessageForm messageForm = new MessageForm())
+			{
+				messageForm.CoreText = string.Format("Message List - {0} Studio", ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product);
+				messageForm.Message = text;
+				messageForm.Messages = messages;
+				messageForm.IsCancelAllowed = cancelable;
+				dialogResult = messageForm.ShowDialog(this);
+			}
+
+			return dialogResult == DialogResult.OK;
+		}
+
+		protected bool TryGetOpenFilePath(out string filePath)
+		{
+			DialogResult dialogResult;
+
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
+			{
+				openFileDialog.Title = string.Format("Open - {0} Studio", ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product);
+				openFileDialog.FileName = filePath = null;
+				dialogResult = openFileDialog.ShowDialog(this);
+
+				if (dialogResult != DialogResult.OK ||
+					DataTypeFascade.Instance.IsNullOrWhiteSpace(openFileDialog.FileName))
+					return false;
+
+				filePath = Path.GetFullPath(openFileDialog.FileName);
+				return true;
+			}
+		}
+
+		protected bool TryGetSaveFilePath(out string filePath)
+		{
+			DialogResult dialogResult;
+
+			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Title = string.Format("Save As - {0} Studio", ExecutableApplicationFascade.Current.AssemblyInformationFascade.Product);
+				saveFileDialog.FileName = filePath = null;
+				dialogResult = saveFileDialog.ShowDialog(this);
+
+				if (dialogResult != DialogResult.OK ||
+					DataTypeFascade.Instance.IsNullOrWhiteSpace(saveFileDialog.FileName))
+					return false;
+
+				filePath = Path.GetFullPath(saveFileDialog.FileName);
+				return true;
+			}
 		}
 
 		private void UpdateFormText()

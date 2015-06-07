@@ -43,11 +43,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 
 		#region Methods/Operators
 
-		protected virtual void Dispose(bool disposing)
+		protected virtual void CoreDispose(bool disposing)
 		{
 			if (disposing)
 				this.Terminate();
 		}
+
+		protected abstract void CoreInitialize(ObfuscationConfiguration configuration);
+
+		protected abstract void CoreTerminate();
 
 		public void Dispose()
 		{
@@ -56,7 +60,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 
 			try
 			{
-				this.Dispose(true);
+				this.CoreDispose(true);
 			}
 			finally
 			{
@@ -65,14 +69,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 			}
 		}
 
-		public virtual void Initialize(ObfuscationConfiguration configuration)
+		public void Initialize(ObfuscationConfiguration configuration)
 		{
-			// do nothing
+			this.CoreInitialize(configuration);
 		}
 
-		public virtual void Terminate()
+		public void Terminate()
 		{
-			// do nothing
+			this.CoreTerminate();
 		}
 
 		#endregion

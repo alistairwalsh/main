@@ -67,7 +67,7 @@ namespace _2ndAsset.Ssis.Components
 
 		private ComponentMetadataWrapper componentMetadataWrapper;
 		private IDbConnection dictionaryDbConnection;
-		private IObfuscationMixIn obfuscationMixIn;
+		private IOxymoronEngine oxymoronEngine;
 
 		#endregion
 
@@ -105,15 +105,15 @@ namespace _2ndAsset.Ssis.Components
 			}
 		}
 
-		private IObfuscationMixIn ObfuscationMixIn
+		private IOxymoronEngine OxymoronEngine
 		{
 			get
 			{
-				return this.obfuscationMixIn;
+				return this.oxymoronEngine;
 			}
 			set
 			{
-				this.obfuscationMixIn = value;
+				this.oxymoronEngine = value;
 			}
 		}
 
@@ -260,9 +260,9 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void Cleanup()
 		{
-			this.ObfuscationMixIn.Dispose();
+			this.OxymoronEngine.Dispose();
 
-			this.ObfuscationMixIn = null;
+			this.OxymoronEngine = null;
 			this.ComponentMetadataWrapper = null;
 
 			base.Cleanup();
@@ -566,7 +566,7 @@ namespace _2ndAsset.Ssis.Components
 
 			this.TryLaunchDebugger();
 
-			this.ObfuscationMixIn = new ObfuscationMixIn(this.ComponentMetadataWrapper.GetTableConfiguration());
+			this.OxymoronEngine = new OxymoronEngine(this.ComponentMetadataWrapper.GetTableConfiguration());
 
 			// interogate input columns and stash away for later use
 			this.InputColumnInfos.Clear();
@@ -641,7 +641,7 @@ namespace _2ndAsset.Ssis.Components
 						columnType = InferClrTypeForSsisDataType(columnInfo.type);
 						columnValue = buffer[columnInfo.bufferColumnIndex];
 
-						obfuColumnValue = this.ObfuscationMixIn.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
+						obfuColumnValue = this.OxymoronEngine.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
 
 						SetBufferValue(buffer, columnInfo.bufferColumnIndex, obfuColumnValue, columnInfo.type);
 

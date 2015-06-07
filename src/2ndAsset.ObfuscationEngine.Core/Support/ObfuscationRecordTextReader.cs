@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Support
 {
@@ -21,14 +22,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 				throw new ArgumentNullException("tableConfiguration");
 
 			this.tableConfiguration = tableConfiguration;
-			this.obfuscationMixIn = new ObfuscationMixIn(this.TableConfiguration);
+			this.oxymoronEngine = new OxymoronEngine(this.TableConfiguration);
 		}
 
 		#endregion
 
 		#region Fields/Constants
 
-		private readonly IObfuscationMixIn obfuscationMixIn;
+		private readonly IOxymoronEngine oxymoronEngine;
 		private readonly TableConfiguration tableConfiguration;
 
 		#endregion
@@ -43,11 +44,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			}
 		}
 
-		private IObfuscationMixIn ObfuscationMixIn
+		private IOxymoronEngine OxymoronEngine
 		{
 			get
 			{
-				return this.obfuscationMixIn;
+				return this.oxymoronEngine;
 			}
 		}
 
@@ -66,7 +67,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
-				this.ObfuscationMixIn.Dispose();
+				this.OxymoronEngine.Dispose();
 
 			base.Dispose(disposing);
 		}
@@ -102,7 +103,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 						columnValue = record[field.Key];
 						columnType = (columnValue ?? new object()).GetType();
 
-						obfusscatedValue = this.ObfuscationMixIn.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
+						obfusscatedValue = this.OxymoronEngine.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
 						obfuscatedRecord.Add(columnName, obfusscatedValue);
 						columnIndex++;
 					}

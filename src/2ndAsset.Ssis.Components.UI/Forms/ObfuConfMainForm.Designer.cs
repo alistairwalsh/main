@@ -36,12 +36,12 @@ namespace _2ndAsset.Ssis.Components.UI.Forms
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObfuConfMainForm));
-			this.pgRoot = new PropertyGrid();
-			this.btnCancel = new Button();
-			this.btnOK = new Button();
-			this.btnUpdateMetadata = new Button();
-			this.btnImport = new Button();
-			this.btnExport = new Button();
+			this.pgRoot = new System.Windows.Forms.PropertyGrid();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.btnUpdateMetadata = new System.Windows.Forms.Button();
+			this.btnImport = new System.Windows.Forms.Button();
+			this.btnExport = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// pgRoot
@@ -98,7 +98,6 @@ namespace _2ndAsset.Ssis.Components.UI.Forms
 			this.btnImport.TabIndex = 3;
 			this.btnImport.Text = "Import...";
 			this.btnImport.UseVisualStyleBackColor = true;
-			this.btnImport.Visible = false;
 			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
 			// 
 			// btnExport
@@ -110,7 +109,6 @@ namespace _2ndAsset.Ssis.Components.UI.Forms
 			this.btnExport.TabIndex = 3;
 			this.btnExport.Text = "Export...";
 			this.btnExport.UseVisualStyleBackColor = true;
-			this.btnExport.Visible = false;
 			this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
 			// 
 			// ObfuConfMainForm

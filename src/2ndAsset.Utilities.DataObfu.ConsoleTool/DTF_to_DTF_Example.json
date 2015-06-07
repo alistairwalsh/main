@@ -3,7 +3,7 @@
 
 	SourceAdapterConfiguration:
 	{
-		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.DelimitedTextSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Source.DelimitedTextSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
 
 		DelimitedTextAdapterConfiguration:
 		{
@@ -73,7 +73,7 @@
 
 	DestinationAdapterConfiguration:
 	{
-		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.DelimitedTextDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
+		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Destination.DelimitedTextDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
 
 		DelimitedTextAdapterConfiguration:
 		{
@@ -103,7 +103,7 @@
 
 			DictionaryAdapterConfiguration:
 			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
 				AdoNetAdapterConfiguration:
 				{
@@ -113,7 +113,7 @@
 					PreExecuteCommandType: "",
 					PreExecuteCommandText: "",
 
-					ExecuteCommandText: "SELECT t.[Key], t.[CrayonColor] FROM [2ndasset_obfuscation_test_suite].[rev001].[CrayonColorDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandText: "SELECT t.[Key], t.[CrayonColor] FROM [2ndasset_bank_account_demo].[OxConfig].[CrayonColorDictionary] t ORDER BY t.[Key] ASC",
 					ExecuteCommandType: "Text",
 
 					PostExecuteCommandType: "",
@@ -129,7 +129,7 @@
 
 			DictionaryAdapterConfiguration:
 			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
 				AdoNetAdapterConfiguration:
 				{
@@ -139,7 +139,7 @@
 					PreExecuteCommandType: "",
 					PreExecuteCommandText: "",
 					
-					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_obfuscation_test_suite].[rev001].[LastNameDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_bank_account_demo].[OxConfig].[LastNameDictionary] t ORDER BY t.[Key] ASC",
 					ExecuteCommandType: "Text",
 					
 					PostExecuteCommandType: "",

@@ -6,6 +6,8 @@
 using System.Collections.Generic;
 using System.IO;
 
+using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Support
 {
 	public abstract class RecordTextReader : WrappedTextReader

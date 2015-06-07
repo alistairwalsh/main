@@ -23,25 +23,25 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 				throw new ArgumentNullException("tableConfiguration");
 
 			this.tableConfiguration = tableConfiguration;
-			this.obfuscationMixIn = new ObfuscationMixIn(this.TableConfiguration);
+			this.oxymoronEngine = new OxymoronEngine(this.TableConfiguration);
 		}
 
 		#endregion
 
 		#region Fields/Constants
 
-		private readonly IObfuscationMixIn obfuscationMixIn;
+		private readonly IOxymoronEngine oxymoronEngine;
 		private readonly TableConfiguration tableConfiguration;
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		private IObfuscationMixIn ObfuscationMixIn
+		private IOxymoronEngine OxymoronEngine
 		{
 			get
 			{
-				return this.obfuscationMixIn;
+				return this.oxymoronEngine;
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
-				this.ObfuscationMixIn.Dispose();
+				this.OxymoronEngine.Dispose();
 
 			base.Dispose(disposing);
 		}
@@ -79,7 +79,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			columnValue = base.GetValue(i);
 			//columnIsNullable = base.GetSchemaTable().Columns[columnName].AllowDBNull;
 
-			obfusscatedValue = this.ObfuscationMixIn.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
+			obfusscatedValue = this.OxymoronEngine.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
 
 			return obfusscatedValue;
 		}

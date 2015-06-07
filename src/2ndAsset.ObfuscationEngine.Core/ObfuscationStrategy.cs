@@ -56,8 +56,12 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		/// Returns an alternate value that is a +/- (%) mask of the original value.
 		/// DATA TYPE: string
 		/// </summary>
-		Masking
+		Masking,
 
-		// Script /* (oldValue) => newValue */, [Assembly]
+		/// <summary>
+		/// Returns an alternate value that is a script function of the original value.
+		/// DATA TYPE: any
+		/// </summary>
+		Script
 	}
 }
