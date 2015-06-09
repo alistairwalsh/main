@@ -77,6 +77,7 @@
     <Compile Include="Adapter\IAdoNetAdapter.cs" />
     <Compile Include="Adapter\Source\SourceAdapter.cs" />
     <Compile Include="Config\AdapterConfiguration.cs" />
+    <Compile Include="IMetaColumn.cs" />
     <Compile Include="Strategy\CipheringObfuscationStrategy.cs" />
     <Compile Include="Strategy\DefaultHashingStrategy.cs" />
     <Compile Include="Strategy\DefaultingObfuscationStrategy.cs" />

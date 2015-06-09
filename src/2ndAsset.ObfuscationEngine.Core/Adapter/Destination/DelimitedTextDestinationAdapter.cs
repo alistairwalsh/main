@@ -49,49 +49,49 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration configuration)
+		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			DelimitedTextSpec effectiveDelimitedTextSpec;
 
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
 
-			if ((object)configuration.DestinationAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration"));
 
-			if ((object)configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration"));
 
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath"));
 
-			if ((object)configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null &&
-				((object)configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration == null ||
-				(object)configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null))
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null &&
+				((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration == null ||
+				(object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "[Source/Destination]AdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec"));
 
-			if ((object)configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec != null)
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec != null)
 			{
-				effectiveDelimitedTextSpec = configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec;
+				effectiveDelimitedTextSpec = obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec;
 
 				if (effectiveDelimitedTextSpec.HeaderSpecs.Count <= 0 &&
-					(object)configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs != null)
-					effectiveDelimitedTextSpec.HeaderSpecs.AddRange(configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs);
+					(object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs != null)
+					effectiveDelimitedTextSpec.HeaderSpecs.AddRange(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs);
 			}
 			else
-				effectiveDelimitedTextSpec = configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec;
+				effectiveDelimitedTextSpec = obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec;
 
 			if ((object)effectiveDelimitedTextSpec == null ||
 				effectiveDelimitedTextSpec.HeaderSpecs.Count <= 0)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "[Source/Destination]AdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs"));
 
-			this.DelimitedTextWriter = new DelimitedTextWriter(new StreamWriter(File.Open(configuration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Create, FileAccess.Write, FileShare.None)), effectiveDelimitedTextSpec);
+			this.DelimitedTextWriter = new DelimitedTextWriter(new StreamWriter(File.Open(obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Create, FileAccess.Write, FileShare.None)), effectiveDelimitedTextSpec);
 		}
 
-		protected override void CorePushData(TableConfiguration configuration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
+		protected override void CorePushData(TableConfiguration tableConfiguration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
 		{
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)tableConfiguration == null)
+				throw new ArgumentNullException("tableConfiguration");
 
 			if ((object)sourceDataEnumerable == null)
 				throw new ArgumentNullException("sourceDataEnumerable");

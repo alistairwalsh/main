@@ -19,6 +19,7 @@ using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core;
+using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.Ssis.Components
 {
@@ -566,7 +567,7 @@ namespace _2ndAsset.Ssis.Components
 
 			this.TryLaunchDebugger();
 
-			this.OxymoronEngine = new OxymoronEngine(this.ComponentMetadataWrapper.GetTableConfiguration());
+			this.OxymoronEngine = new OxymoronEngine(this.ComponentMetadataWrapper.GetObfuscationConfiguration());
 
 			// interogate input columns and stash away for later use
 			this.InputColumnInfos.Clear();
@@ -626,6 +627,8 @@ namespace _2ndAsset.Ssis.Components
 			object columnValue, obfuColumnValue;
 			int rowIndex = 0;
 
+			IMetaColumn metaColumn;
+
 			if (!buffer.EndOfRowset)
 			{
 				while (buffer.NextRow())
@@ -641,7 +644,17 @@ namespace _2ndAsset.Ssis.Components
 						columnType = InferClrTypeForSsisDataType(columnInfo.type);
 						columnValue = buffer[columnInfo.bufferColumnIndex];
 
-						obfuColumnValue = this.OxymoronEngine.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
+						metaColumn = new MetaColumn()
+						{
+							ColumnIndex = columnIndex,
+							ColumnName = columnName,
+							ColumnType = columnType,
+							ColumnIsNullable = null,
+							TableIndex = 0,
+							TagContext = null
+						};
+
+						obfuColumnValue = this.OxymoronEngine.GetObfuscatedValue(metaColumn, columnValue);
 
 						SetBufferValue(buffer, columnInfo.bufferColumnIndex, obfuColumnValue, columnInfo.type);
 
@@ -928,7 +941,7 @@ namespace _2ndAsset.Ssis.Components
 		/// <returns> </returns>
 		public override DTSValidationStatus Validate()
 		{
-			const string ERROR_INVALID_USAGE_TYPE = "Invalid UsageType for column '{0}'";
+			const string ERROR_INVALID_USAGE_TYPE = "Invalid usage type for column '{0}'";
 			const string ERROR_INVALID_DATA_TYPE = "Invalid data type for column '{0}'";
 			const string ERROR_INVALID_DICTIONARY_CONNECTION_MANAGER = "No dictionary connection manager was specified '{0}'";
 			const string ERROR_INVALID_INPUT = "No input '{0}'";
@@ -942,6 +955,8 @@ namespace _2ndAsset.Ssis.Components
 			IDTSInput100 dtsInput100;
 			IDTSOutput100 dtsOutput100;
 			IDTSRuntimeConnection100 dtsRuntimeConnection100;
+
+			ObfuscationConfiguration obfuscationConfiguration;
 
 			// input
 			if (!this.ComponentMetaData.AreInputColumnsValid)
@@ -1008,8 +1023,17 @@ namespace _2ndAsset.Ssis.Components
 				return DTSValidationStatus.VS_ISBROKEN;
 			}
 
-			// obfusction specific validation
-			messages = this.ComponentMetadataWrapper.GetTableConfiguration().Parent.Validate();
+			// obfuscation specific validation
+			obfuscationConfiguration = this.ComponentMetadataWrapper.GetObfuscationConfiguration();
+
+			if ((object)obfuscationConfiguration == null)
+			{
+				this.ComponentMetaData.FireError(E_FAIL, this.ComponentMetaData.Name, "Obfuscation configuration has not been set.", string.Empty, 0, out cancel);
+
+				return DTSValidationStatus.VS_ISBROKEN;
+			}
+
+			messages = obfuscationConfiguration.Validate();
 
 			if (messages.Any())
 			{

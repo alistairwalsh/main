@@ -7,7 +7,7 @@ using System;
 
 namespace _2ndAsset.ObfuscationEngine.Core
 {
-	public sealed class MetaColumn
+	public sealed class MetaColumn : IMetaColumn
 	{
 		#region Constructors/Destructors
 
@@ -20,10 +20,10 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		#region Fields/Constants
 
 		private int columnIndex;
-		private bool columnIsNullable;
+		private bool? columnIsNullable;
 		private string columnName;
 		private Type columnType;
-		private int metaTableIndex;
+		private int tableIndex;
 		private object tagContext;
 
 		#endregion
@@ -42,7 +42,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
-		public bool ColumnIsNullable
+		public bool? ColumnIsNullable
 		{
 			get
 			{
@@ -78,15 +78,15 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
-		public int MetaTableIndex
+		public int TableIndex
 		{
 			get
 			{
-				return this.metaTableIndex;
+				return this.tableIndex;
 			}
 			set
 			{
-				this.metaTableIndex = value;
+				this.tableIndex = value;
 			}
 		}
 

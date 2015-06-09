@@ -23,7 +23,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Methods/Operators
 
-		void PushData(TableConfiguration configuration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable);
+		void PushData(TableConfiguration tableConfiguration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable);
 
 		#endregion
 	}

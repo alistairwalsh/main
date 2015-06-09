@@ -237,11 +237,11 @@ namespace _2ndAsset.Ssis.Components
 															AdoNetAdapterConfiguration = new DtsConnectionAdapterConfiguration(this.DictionaryUnitOfWorkCallback)
 														}
 					});
-			;
+
 			return temp;
 		}
 
-		public TableConfiguration GetTableConfiguration()
+		public ObfuscationConfiguration GetObfuscationConfiguration()
 		{
 			ObfuscationConfiguration obfuscationConfiguration;
 
@@ -250,13 +250,15 @@ namespace _2ndAsset.Ssis.Components
 			obfuscationConfiguration.HashConfiguration.Multiplier = this.HashMuliplier;
 			obfuscationConfiguration.HashConfiguration.Seed = this.HashSeed;
 
+			obfuscationConfiguration.TableConfiguration = new TableConfiguration();
+			
 			foreach (var column in this.GetColumnConfigurations())
 				obfuscationConfiguration.TableConfiguration.ColumnConfigurations.Add(column);
 
 			foreach (var dictionary in this.GetDictionaryConfigurations())
 				obfuscationConfiguration.DictionaryConfigurations.Add(dictionary);
 
-			return obfuscationConfiguration.TableConfiguration; // will have the package configuration as parent
+			return obfuscationConfiguration;
 		}
 
 		#endregion

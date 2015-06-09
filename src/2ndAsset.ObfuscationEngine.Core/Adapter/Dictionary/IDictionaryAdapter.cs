@@ -13,7 +13,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 	{
 		#region Methods/Operators
 
-		object GetAlternativeValueFromId(DictionaryConfiguration configuration, object id);
+		object GetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id);
 
 		#endregion
 	}

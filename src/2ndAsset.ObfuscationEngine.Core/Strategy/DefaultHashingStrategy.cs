@@ -40,7 +40,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
-		public long? GetHash(long? hashMultiplier, long? hashBucketSize, long? hashSeed, object value)
+		public long? GetHash(long? multiplier, long? size, long? seed, object value)
 		{
 			const long DEFAULT_HASH = -1L;
 			long hashCode;
@@ -48,16 +48,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			Type valueType;
 			string _value;
 
-			if ((object)hashMultiplier == null)
+			if ((object)multiplier == null)
 				return null;
 
-			if ((object)hashBucketSize == null)
+			if ((object)size == null)
 				return null;
 
-			if ((object)hashSeed == null)
+			if ((object)seed == null)
 				return null;
 
-			if (hashBucketSize == 0L)
+			if (size == 0L)
 				return null; // prevent DIV0
 
 			if ((object)value == null)
@@ -77,9 +77,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			buffer = Encoding.UTF8.GetBytes(_value);
 
-			hashCode = (long)hashSeed;
+			hashCode = (long)seed;
 			for (int index = 0; index < buffer.Length; index++)
-				hashCode = ((long)hashMultiplier * hashCode + buffer[index]) % uint.MaxValue;
+				hashCode = ((long)multiplier * hashCode + buffer[index]) % uint.MaxValue;
 
 			if (hashCode > int.MaxValue)
 				hashCode = hashCode - uint.MaxValue;
@@ -87,7 +87,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if (hashCode < 0)
 				hashCode = hashCode + int.MaxValue;
 
-			hashCode = (hashCode % (long)hashBucketSize);
+			hashCode = (hashCode % (long)size);
 
 			return (int)hashCode;
 		}

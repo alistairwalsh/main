@@ -21,11 +21,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		#region Methods/Operators
 
-		protected abstract object CoreGetAlternativeValueFromId(DictionaryConfiguration configuration, object id);
+		protected abstract object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id);
 
-		public object GetAlternativeValueFromId(DictionaryConfiguration configuration, object id)
+		public object GetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id)
 		{
-			return this.CoreGetAlternativeValueFromId(configuration, id);
+			return this.CoreGetAlternativeValueFromId(dictionaryConfiguration, id);
 		}
 
 		#endregion

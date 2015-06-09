@@ -21,12 +21,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		#region Methods/Operators
 
-		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration configuration, object id)
+		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id)
 		{
 			throw new NotImplementedException();
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration configuration)
+		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			throw new NotImplementedException();
 		}

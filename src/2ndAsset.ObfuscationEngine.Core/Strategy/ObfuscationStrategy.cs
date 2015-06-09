@@ -19,9 +19,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
-		protected abstract object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, MetaColumn metaColumn, object columnValue);
+		protected abstract object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue);
 
-		public object GetObfuscatedValue(long signHash, long valueHash, int? extentValue, MetaColumn metaColumn, object columnValue)
+		public object GetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 

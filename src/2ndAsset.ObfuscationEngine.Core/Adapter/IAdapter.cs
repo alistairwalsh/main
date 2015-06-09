@@ -13,7 +13,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 	{
 		#region Methods/Operators
 
-		void Initialize(ObfuscationConfiguration configuration);
+		void Initialize(ObfuscationConfiguration obfuscationConfiguration);
 
 		void Terminate();
 

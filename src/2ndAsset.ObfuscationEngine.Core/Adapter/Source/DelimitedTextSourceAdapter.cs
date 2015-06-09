@@ -69,31 +69,31 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			}
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration configuration)
+		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			IEnumerable<HeaderSpec> headerSpecs;
 
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
 
-			if ((object)configuration.SourceAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
 
-			if ((object)configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration"));
 
-			if ((object)configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null)
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextSpec"));
 
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextFilePath"));
 
-			this.DelimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), configuration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec);
+			this.DelimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec);
 			headerSpecs = this.DelimitedTextReader.ReadHeaderSpecs();
 
 			this.UpstreamMetadata = headerSpecs.Select((hs, i) => new MetaColumn()
 															{
-																MetaTableIndex = 0,
+																TableIndex = 0,
 																ColumnIndex = i,
 																ColumnName = hs.HeaderName,
 																ColumnType = GetColumnTypeFromFieldType(hs.FieldType),
@@ -102,14 +102,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 															});
 		}
 
-		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration configuration)
+		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
 
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)tableConfiguration == null)
+				throw new ArgumentNullException("tableConfiguration");
 
-			sourceDataEnumerable = new ObfuscationRecordTextReader(this.DelimitedTextReader, configuration).ReadRecords();
+			sourceDataEnumerable = new ObfuscationRecordTextReader(this.DelimitedTextReader, tableConfiguration.Parent).ReadRecords();
 
 			return sourceDataEnumerable;
 		}

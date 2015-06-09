@@ -24,14 +24,14 @@ namespace _2ndAsset.ObfuscationEngine.Core
 	{
 		#region Constructors/Destructors
 
-		public OxymoronEngine(TableConfiguration tableConfiguration)
+		public OxymoronEngine(ObfuscationConfiguration obfuscationConfiguration)
 		{
-			if ((object)tableConfiguration == null)
-				throw new ArgumentNullException("tableConfiguration");
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
 
-			this.tableConfiguration = tableConfiguration;
+			this.obfuscationConfiguration = obfuscationConfiguration;
 
-			EnsureValidConfigurationOnce(this.TableConfiguration);
+			EnsureValidConfigurationOnce(this.ObfuscationConfiguration);
 			this.InitializePreloadCache();
 		}
 
@@ -42,7 +42,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		private readonly IDictionary<int, ColumnConfiguration> columnCache = new Dictionary<int, ColumnConfiguration>();
 		private readonly IHashingStrategy hashingStrategy = DefaultHashingStrategy.Instance;
 		private readonly IDictionary<string, IDictionary<long, object>> substitutionCacheRoot = new Dictionary<string, IDictionary<long, object>>();
-		private readonly TableConfiguration tableConfiguration;
+		private readonly ObfuscationConfiguration obfuscationConfiguration;
 
 		#endregion
 
@@ -72,11 +72,11 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
-		private TableConfiguration TableConfiguration
+		private ObfuscationConfiguration ObfuscationConfiguration
 		{
 			get
 			{
-				return this.tableConfiguration;
+				return this.obfuscationConfiguration;
 			}
 		}
 
@@ -143,32 +143,28 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			JsonSerializationStrategy.Instance.SetObjectToFile<TConfiguration>(jsonFilePath, configuration);
 		}
 
-		private object _GetObfuscatedValue(int columnIndex, string columnName, Type columnType, object columnValue)
+		private object _GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
 		{
-			MetaColumn metaColumn;
 			ColumnConfiguration columnConfiguration;
 			DictionaryConfiguration dictionaryConfiguration;
 			long valueHash, signHash, valueHashBucketSize, signHashBucketSize;
 			int? extentValue;
 			const bool COLUMN_CACHE_ENABLED = true;
 
-			if ((object)columnName == null)
-				throw new ArgumentNullException("columnName");
-
-			if ((object)columnType == null)
-				throw new ArgumentNullException("columnType");
+			if ((object)metaColumn == null)
+				throw new ArgumentNullException("metaColumn");
 
 			// KILLS performance - not sure why
 			//EnsureValidConfigurationOnce(this.TableConfiguration);
 			//columnConfiguration = this.TableConfiguration.ColumnConfigurations.SingleOrDefault(c => c.ColumnName.SafeToString().Trim().ToLower() == columnName.SafeToString().Trim().ToLower());
 
-			if (!COLUMN_CACHE_ENABLED || !this.ColumnCache.TryGetValue(columnIndex, out columnConfiguration))
+			if (!COLUMN_CACHE_ENABLED || !this.ColumnCache.TryGetValue(metaColumn.ColumnIndex, out columnConfiguration))
 			{
-				columnConfiguration = this.TableConfiguration.ColumnConfigurations.SingleOrDefault(c => c.ColumnName.SafeToString().Trim().ToLower() == columnName.SafeToString().Trim().ToLower());
+				columnConfiguration = this.ObfuscationConfiguration.TableConfiguration.ColumnConfigurations.SingleOrDefault(c => c.ColumnName.SafeToString().Trim().ToLower() == metaColumn.ColumnName.SafeToString().Trim().ToLower());
 				//columnConfiguration = this.TableConfiguration.ColumnConfigurations.SingleOrDefault(c => c.ColumnName == columnName);
 
 				if (COLUMN_CACHE_ENABLED)
-					this.ColumnCache.Add(columnIndex, columnConfiguration);
+					this.ColumnCache.Add(metaColumn.ColumnIndex, columnConfiguration);
 			}
 
 			if ((object)columnConfiguration == null)
@@ -177,22 +173,33 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			if (columnConfiguration.ObfuscationStrategy == ObfuscationStrategy.None)
 				return columnValue;
 
+			// re-up
+			metaColumn = new MetaColumn()
+			{
+				ColumnIndex = metaColumn.ColumnIndex,
+				ColumnName = metaColumn.ColumnName,
+				ColumnType = metaColumn.ColumnType,
+				ColumnIsNullable = metaColumn.ColumnIsNullable ?? columnConfiguration.IsColumnNullable.GetValueOrDefault(),
+				TableIndex = metaColumn.TableIndex,
+				TagContext = metaColumn.TagContext
+			};
+
 			if (columnConfiguration.DictionaryReference.SafeToString().Trim().ToLower() == string.Empty)
 				dictionaryConfiguration = new DictionaryConfiguration();
 			else
-				dictionaryConfiguration = this.TableConfiguration.Parent.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == columnConfiguration.DictionaryReference.SafeToString().Trim().ToLower());
+				dictionaryConfiguration = this.ObfuscationConfiguration.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == columnConfiguration.DictionaryReference.SafeToString().Trim().ToLower());
 
 			if ((object)dictionaryConfiguration == null)
-				throw new ConfigurationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", columnConfiguration.DictionaryReference, columnName));
+				throw new ConfigurationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", columnConfiguration.DictionaryReference, metaColumn.ColumnName));
 
 			signHashBucketSize = long.MaxValue;
-			signHash = this.HashingStrategy.GetHash(this.TableConfiguration.Parent.HashConfiguration.Multiplier,
+			signHash = this.HashingStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier,
 				signHashBucketSize,
-				this.TableConfiguration.Parent.HashConfiguration.Seed,
+				this.ObfuscationConfiguration.HashConfiguration.Seed,
 				columnValue.SafeToString()) ?? int.MinValue;
 
 			if (signHash == int.MinValue)
-				throw new InvalidOperationException(string.Format("Obfuscation mixin failed to calculate a valid sign hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), columnName));
+				throw new InvalidOperationException(string.Format("Obfuscation mixin failed to calculate a valid sign hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), metaColumn.ColumnName));
 
 			extentValue = columnConfiguration.ExtentValue;
 
@@ -209,23 +216,13 @@ namespace _2ndAsset.ObfuscationEngine.Core
 					break;
 			}
 
-			valueHash = this.HashingStrategy.GetHash(this.TableConfiguration.Parent.HashConfiguration.Multiplier ?? 0L,
+			valueHash = this.HashingStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier ?? 0L,
 				valueHashBucketSize,
-				this.TableConfiguration.Parent.HashConfiguration.Seed ?? 0L,
+				this.ObfuscationConfiguration.HashConfiguration.Seed ?? 0L,
 				columnValue.SafeToString()) ?? int.MinValue;
 
 			if (valueHash == int.MinValue)
-				throw new InvalidOperationException(string.Format("Obfuscation mixin failed to calculate a valid value hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), columnName));
-
-			metaColumn = new MetaColumn()
-						{
-							ColumnIndex = columnIndex,
-							ColumnName = columnName,
-							ColumnIsNullable = columnConfiguration.IsColumnNullable.GetValueOrDefault(),
-							ColumnType = columnType,
-							MetaTableIndex = 0,
-							TagContext = null
-						};
+				throw new InvalidOperationException(string.Format("Obfuscation mixin failed to calculate a valid value hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), metaColumn.ColumnName));
 
 			switch (columnConfiguration.ObfuscationStrategy)
 			{
@@ -246,7 +243,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 				case ObfuscationStrategy.None:
 					return new NoneObfuscationStrategy().GetObfuscatedValue(signHash, valueHash, extentValue, metaColumn, columnValue);
 				default:
-					throw new ConfigurationException(string.Format("Unknown obfuscation strategy '{0}' specified for column '{1}'.", columnConfiguration.ObfuscationStrategy, columnName));
+					throw new ConfigurationException(string.Format("Unknown obfuscation strategy '{0}' specified for column '{1}'.", columnConfiguration.ObfuscationStrategy, metaColumn.ColumnName));
 			}
 		}
 
@@ -256,15 +253,18 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			this.ColumnCache.Clear();
 		}
 
-		public object GetObfuscatedValue(int columnIndex, string columnName, Type columnType, object columnValue)
+		public object GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
+
+			if ((object)metaColumn == null)
+				throw new ArgumentNullException("metaColumn");
 
 			if ((object)columnValue == DBNull.Value)
 				columnValue = null;
 
-			value = this._GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
-			//Console.WriteLine("[{0}]: '{1}' => '{2}'", columnName, columnValue, value);
+			value = this._GetObfuscatedValue(metaColumn, columnValue);
+
 			return value;
 		}
 
@@ -273,7 +273,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			IEnumerable<IRecord> records;
 			IDictionary<long, object> dictionaryCache;
 
-			foreach (DictionaryConfiguration dictionaryConfiguration in this.TableConfiguration.Parent.DictionaryConfigurations)
+			foreach (DictionaryConfiguration dictionaryConfiguration in this.ObfuscationConfiguration.DictionaryConfigurations)
 			{
 				if (dictionaryConfiguration.PreloadEnabled)
 				{

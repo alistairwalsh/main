@@ -23,7 +23,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		#region Methods/Operators
 
-		IEnumerable<IDictionary<string, object>> PullData(TableConfiguration configuration);
+		IEnumerable<IDictionary<string, object>> PullData(TableConfiguration tableConfiguration);
 
 		#endregion
 	}

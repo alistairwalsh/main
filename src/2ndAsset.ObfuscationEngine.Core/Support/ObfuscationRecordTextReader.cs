@@ -15,14 +15,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 	{
 		#region Constructors/Destructors
 
-		public ObfuscationRecordTextReader(RecordTextReader innerTextReader, TableConfiguration tableConfiguration)
+		public ObfuscationRecordTextReader(RecordTextReader innerTextReader, ObfuscationConfiguration obfuscationConfiguration)
 			: base(innerTextReader)
 		{
-			if ((object)tableConfiguration == null)
-				throw new ArgumentNullException("tableConfiguration");
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
 
-			this.tableConfiguration = tableConfiguration;
-			this.oxymoronEngine = new OxymoronEngine(this.TableConfiguration);
+			this.obfuscationConfiguration = obfuscationConfiguration;
+			this.oxymoronEngine = new OxymoronEngine(this.ObfuscationConfiguration);
 		}
 
 		#endregion
@@ -30,7 +30,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 		#region Fields/Constants
 
 		private readonly IOxymoronEngine oxymoronEngine;
-		private readonly TableConfiguration tableConfiguration;
+		private readonly ObfuscationConfiguration obfuscationConfiguration;
 
 		#endregion
 
@@ -52,11 +52,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			}
 		}
 
-		private TableConfiguration TableConfiguration
+		private ObfuscationConfiguration ObfuscationConfiguration
 		{
 			get
 			{
-				return this.tableConfiguration;
+				return this.obfuscationConfiguration;
 			}
 		}
 
@@ -87,6 +87,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 			IEnumerable<IDictionary<string, object>> records;
 			IDictionary<string, object> obfuscatedRecord;
+			IMetaColumn metaColumn;
 
 			using (this)
 			{
@@ -103,7 +104,17 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 						columnValue = record[field.Key];
 						columnType = (columnValue ?? new object()).GetType();
 
-						obfusscatedValue = this.OxymoronEngine.GetObfuscatedValue(columnIndex, columnName, columnType, columnValue);
+						metaColumn = new MetaColumn()
+									{
+										ColumnIndex = columnIndex,
+										ColumnName = columnName,
+										ColumnType = columnType,
+										ColumnIsNullable = null,
+										TableIndex = 0,
+										TagContext = null
+									};
+
+						obfusscatedValue = this.OxymoronEngine.GetObfuscatedValue(metaColumn, columnValue);
 						obfuscatedRecord.Add(columnName, obfusscatedValue);
 						columnIndex++;
 					}

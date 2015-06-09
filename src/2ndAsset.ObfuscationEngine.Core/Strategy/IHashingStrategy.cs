@@ -11,7 +11,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 	{
 		#region Methods/Operators
 
-		long? GetHash(long? hashMultiplier, long? hashBucketSize, long? hashSeed, object value);
+		long? GetHash(long? multiplier, long? size, long? seed, object value);
 
 		#endregion
 	}

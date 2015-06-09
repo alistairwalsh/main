@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="BankAccountDemo"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{DF09DCBA-4BCE-4206-BF4E-C3460127FB32}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{2BCE46C8-C21F-4F98-99BD-DC363B7E0690}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1298,6 +1298,904 @@ ORDER BY
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\DFT-Ox_CheckingAccount"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{29765252-0740-439c-b2d0-3c3761b7f198}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Ox_CheckingAccount"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="info@2ndasset.com"
+              description="2ndAsset Obfuscation Strategy Transform"
+              name="Obfuscation Strategy Transform"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int64"
+                  description="Sign hash multiplier."
+                  Encrypted="1"
+                  name="SignHashMultiplier"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAflFAq0HIdnq2QFDZt6ij5bPx5WyMRuqYNuotG8fphWgAAAAAOgAAAAAIAACAAAAAkZoY821aeREiRJd0m+nwCYqXkyHViERbWcrGvw2uqJRAAAAB1ySSrranx1C4CcJvJPXM3QAAAAI6P8K/TEHV7OUPmJY6+saG2JG4ZstwMTgSEbG+JDHAD/VIk3hPlD3CCJPApODg35YjWJB9j+UkAYy4aSNSw0pk</property>
+                <property
+                  dataType="System.Int64"
+                  description="Sign hash seed."
+                  Encrypted="1"
+                  name="SignHashSeed"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAGUY9dKCeMv/hGz/E3yRoRt5xpF7IdmKsKNbjMHX+wJAAAAAAOgAAAAAIAACAAAAAIiXXpmlplV+VAX3H6uTN4D1la/N/Cy3s2JljMS7JLOhAAAACXxwdXqq5raEgcpLyaXcJEQAAAAEI421X+IBj2eE9pSIVCrwbqs8NXWgGOtuerKRaPVPOU7M/mwD61XG4yapu9XDqZHMoh7VeuUFRikIRiu2plJlM</property>
+                <property
+                  dataType="System.Int64"
+                  description="Value hash multiplier."
+                  Encrypted="1"
+                  name="ValueHashMultiplier"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABtecWcButjt4+u5QrChfDeEJUr+PBhnNbBBIjEnsL1PAAAAAAOgAAAAAIAACAAAAAdXY2LC8ScUja2qrduxhRGHTAyvXYmKAcHc8W7ZdcouRAAAAAY8pUBGSRI0T18vQEHhoZ7QAAAAFqlnbOtoNT5ej4wqNaH8qC/qNNZY7ZFV9FLtnhWHAt2SqG0Gv0HuhC8fB4lixoR6EbjplOJXxi6kueStcN0CoM</property>
+                <property
+                  dataType="System.Int64"
+                  description="Value hash seed."
+                  Encrypted="1"
+                  name="ValueHashSeed"
+                  Sensitive="1"
+                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAGPSaxnr7xwk49c9003Ke+ERCjyg8YjOqRTQKBilDsNAAAAAAOgAAAAAIAACAAAAAq/bqvL5X78zhqIzQVz2xM/tTYk4oInw2C6/yMGkLsexAAAACIpm39S52A87/vYhOeYgrcQAAAAOpQOoUVlQEMTyj63YF2W727xsb2opNSx/pjGwoNbqFe8AY4Sw/s+i+csxtoL7eq7x/7XRDvMfckQwcuzLF08U0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="A value indicating whether to launch the debugger at component initialization time."
+                  name="DebuggerLaunch"
+                  typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                <property
+                  dataType="System.String"
+                  description="JSON serialized dictionary configuration data."
+                  name="DictionaryConfiguration"
+                  typeConverter="_2ndAsset.Ssis.Components.UI.ReadonlyTypeConverter, 2ndAsset.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98, processorArchitecture=MSIL"
+                  UITypeEditor="_2ndAsset.Ssis.Components.UI.DictConfFormEditor, 2ndAsset.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98, processorArchitecture=MSIL">[]</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">_2ndAsset.Ssis.Components.ObfuscationStrategyTransform, 2ndAsset.Ssis.Components, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Connections[DictionaryConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="Dictionary connection."
+                  name="DictionaryConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]"
+                  name="Obfuscation Strategy Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[InstitutionId]"
+                      cachedDataType="i4"
+                      cachedName="InstitutionId"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[RefNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RefNumber"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TheDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TheDate"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[PayeeId]"
+                      cachedDataType="i4"
+                      cachedName="PayeeId"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TheAmount]"
+                      cachedDataType="r8"
+                      cachedName="TheAmount"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[IsCleared]"
+                      cachedDataType="bool"
+                      cachedName="IsCleared"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[CategoryId]"
+                      cachedDataType="i4"
+                      cachedName="CategoryId"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[DueDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DueDate"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[Comments]"
+                      cachedDataType="wstr"
+                      cachedLength="2047"
+                      cachedName="Comments"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TransactionId]"
+                      cachedDataType="i4"
+                      cachedName="TransactionId"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Obfuscation strategy."
+                          name="ObfuscationStrategy"
+                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is column nullable."
+                          name="IsColumnNullable"
+                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="ExtentValue"
+                          name="ExtentValue"
+                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Dictionary reference."
+                          name="DictionaryReference"
+                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Output]"
+                  name="Obfuscation Strategy Output"
+                  synchronousInputId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output]"
+                  isErrorOut="true"
+                  name="Obfuscation Strategy Error Output"
+                  synchronousInputId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Ox_CheckingAccount]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InstitutionId]"
+                      cachedDataType="i4"
+                      cachedName="InstitutionId"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RefNumber"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TheDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TheDate"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PayeeId]"
+                      cachedDataType="i4"
+                      cachedName="PayeeId"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TheAmount]"
+                      cachedDataType="r8"
+                      cachedName="TheAmount"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCleared]"
+                      cachedDataType="bool"
+                      cachedName="IsCleared"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CategoryId]"
+                      cachedDataType="i4"
+                      cachedName="CategoryId"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DueDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DueDate"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]" />
+                    <inputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Comments]"
+                      cachedDataType="wstr"
+                      cachedLength="2047"
+                      cachedName="Comments"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayeeId]"
+                      dataType="i4"
+                      name="PayeeId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionId]"
+                      dataType="i4"
+                      name="TransactionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstitutionId]"
+                      dataType="i4"
+                      name="InstitutionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="RefNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheDate]"
+                      dataType="dbTimeStamp"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TheAmount]"
+                      dataType="r8"
+                      name="TheAmount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCleared]"
+                      dataType="bool"
+                      name="IsCleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CategoryId]"
+                      dataType="i4"
+                      name="CategoryId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="Comments" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT-Ox_CheckingAccount\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CheckingAccount]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+ISNULL((SELECT TOP 1 z.[InstitutionId] FROM [dbo].[Institution] z WHERE z.[InstitutionName] = t.[InstitutionName]), 0) AS [InstitutionId],
+ISNULL(t.[RefNumber], '') AS [RefNumber],
+t.[TheDate],
+ISNULL((SELECT TOP 1 z.[PayeeId] FROM [dbo].[Payee] z WHERE z.[PayeeName] = t.[PayeeName]), 0) AS [PayeeId],
+t.[TheAmount],
+t.[IsCleared],
+ISNULL((SELECT TOP 1 z.[CategoryId] FROM [dbo].[Category] z WHERE z.[CategoryName] = t.[CategoryName]), 0) AS [CategoryId],
+t.[DueDate],
+ISNULL(t.[Comments], '') AS [Comments]
+FROM
+[dbo].[CheckingAccountSource] t
+ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{054C9FA9-E4F8-4B0A-A07C-35966B573066}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[BankAccountDemoDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]"
+                      name="InstitutionId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefNumber]"
+                      length="255"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]"
+                      name="RefNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]"
+                      name="TheDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]"
+                      name="PayeeId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheAmount]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]"
+                      name="TheAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCleared]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]"
+                      name="IsCleared"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]"
+                      name="CategoryId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      name="DueDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      length="2047"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      name="Comments"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionId]"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionId]"
+                      name="TransactionId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstitutionId]"
+                      dataType="i4"
+                      name="InstitutionId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="RefNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheDate]"
+                      dataType="dbTimeStamp"
+                      name="TheDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PayeeId]"
+                      dataType="i4"
+                      name="PayeeId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TheAmount]"
+                      dataType="r8"
+                      name="TheAmount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCleared]"
+                      dataType="bool"
+                      name="IsCleared" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CategoryId]"
+                      dataType="i4"
+                      name="CategoryId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionId]"
+                      dataType="i4"
+                      name="TransactionId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionId]"
+                      name="TransactionId" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstitutionId]"
+                      name="InstitutionId" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefNumber]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefNumber]"
+                      name="RefNumber" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheDate]"
+                      name="TheDate" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PayeeId]"
+                      name="PayeeId" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheAmount]"
+                      dataType="r8"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TheAmount]"
+                      name="TheAmount" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCleared]"
+                      dataType="bool"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCleared]"
+                      name="IsCleared" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryId]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CategoryId]"
+                      name="CategoryId" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      name="DueDate" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      dataType="wstr"
+                      length="2047"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      name="Comments" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT-Ox_CheckingAccount.Paths[Obfuscation Strategy Output]"
+              endId="Package\DFT-Ox_CheckingAccount\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Obfuscation Strategy Output"
+              startId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Outputs[Obfuscation Strategy Output]" />
+            <path
+              refId="Package\DFT-Ox_CheckingAccount.Paths[OLE DB Source Output]"
+              endId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\DFT-Payees"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
@@ -2196,6 +3094,14 @@ ORDER BY
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 7"
       DTS:To="Package\DFT-Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{3BAD1E8A-510E-40A6-BB9F-2B2597EF19CF}"
+      DTS:From="Package\DFT-CheckingAccount"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\DFT-Ox_CheckingAccount" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2208,7 +3114,7 @@ ORDER BY
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="151,42"
           Id="Package\DFT-Categories"
@@ -2461,8 +3367,364 @@ ORDER BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="201,42"
+          Id="Package\DFT-Ox_CheckingAccount"
+          TopLeft="476.5,311.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="380,332.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.5,0"
+              Start="0,0"
+              End="89,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="89,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <TaskHost
+    design-time-name="Package\DFT-Categories">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Categories\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Categories\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-Categories.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-CheckingAccount">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-CheckingAccount\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-CheckingAccount\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-CheckingAccount.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Export">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Export\Flat File Destination"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Export\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-Export.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Institutions">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Institutions\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Institutions\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-Institutions.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Payees">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Payees\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Payees\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-Payees.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Staging\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT-Staging\Flat File Source"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT-Staging.Paths[Flat File Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Ox_CheckingAccount">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\DFT-Ox_CheckingAccount\OLE DB Destination"
+          TopLeft="49,131" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\DFT-Ox_CheckingAccount\OLE DB Source"
+          TopLeft="42,25" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform"
+          TopLeft="328,92" />
+        <EdgeLayout
+          Id="Package\DFT-Ox_CheckingAccount.Paths[OLE DB Source Output]"
+          TopLeft="117,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="325.5,25"
+              Start="0,0"
+              End="325.5,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="4,12.5" />
+                  <mssgle:LineSegment
+                    End="321.5,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="321.5,12.5"
+                    Point2="325.5,12.5"
+                    Point3="325.5,16.5" />
+                  <mssgle:LineSegment
+                    End="325.5,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT-Ox_CheckingAccount.Paths[Obfuscation Strategy Output]"
+          TopLeft="328,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108,39"
+              Start="0,0"
+              End="-100.5,39">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-50,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-50,0"
+                    Point2="-54,0"
+                    Point3="-54,4" />
+                  <mssgle:LineSegment
+                    End="-54,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-54,35"
+                    Point2="-54,39"
+                    Point3="-58,39" />
+                  <mssgle:LineSegment
+                    End="-100.5,39" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT-Ox_CheckingAccount\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT-Ox_CheckingAccount\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

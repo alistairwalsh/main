@@ -35,14 +35,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return DataTypeFascade.Instance.DefaultValue(valueType);
 		}
 
-		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, MetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			value = GetDefault(metaColumn.ColumnIsNullable, metaColumn.ColumnType);
+			value = GetDefault(metaColumn.ColumnIsNullable.GetValueOrDefault(), metaColumn.ColumnType);
 
 			return value;
 		}

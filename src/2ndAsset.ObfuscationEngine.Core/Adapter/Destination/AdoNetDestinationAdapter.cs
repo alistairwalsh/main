@@ -50,46 +50,46 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration configuration)
+		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
-			if ((object)configuration.DestinationAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration"));
 
-			if ((object)configuration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.AdoNetAdapterConfiguration"));
 
-			this.DestinationUnitOfWork = configuration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
+			this.DestinationUnitOfWork = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
 		}
 
 		protected abstract void CorePublishImpl(TableConfiguration configuration, IUnitOfWork destinationUnitOfWork, IDataReader sourceDataReader, out long rowsCopied);
 
-		protected override void CorePushData(TableConfiguration configuration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
+		protected override void CorePushData(TableConfiguration tableConfiguration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
 		{
 			IDataReader sourceDataReader;
 			long rowsCopied;
 			int recordsAffected;
 
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)tableConfiguration == null)
+				throw new ArgumentNullException("tableConfiguration");
 
 			if ((object)sourceDataEnumerable == null)
 				throw new ArgumentNullException("sourceDataEnumerable");
 
-			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText))
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText))
 			{
 				// prepare destination
-				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType ?? CommandType.Text, configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText, new IDbDataParameter[] { });
+				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText, new IDbDataParameter[] { });
 				Console.WriteLine("DESTINATION (pre): recordsAffected={0}", resultsets.First().RecordsAffected);
 			}
 
 			sourceDataReader = new EnumerableDictionaryDataReader(this.UpstreamMetadata, sourceDataEnumerable);
 
-			this.CorePublishImpl(configuration, this.DestinationUnitOfWork, sourceDataReader, out rowsCopied);
+			this.CorePublishImpl(tableConfiguration, this.DestinationUnitOfWork, sourceDataReader, out rowsCopied);
 
-			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText))
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText))
 			{
 				// prepare destination
-				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType ?? CommandType.Text, configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText, new IDbDataParameter[] { });
+				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText, new IDbDataParameter[] { });
 				Console.WriteLine("DESTINATION (post): recordsAffected={0}", resultsets.First().RecordsAffected);
 			}
 		}

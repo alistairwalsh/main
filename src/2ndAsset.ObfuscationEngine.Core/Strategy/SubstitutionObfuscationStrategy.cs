@@ -124,7 +124,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, MetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			long selectId;

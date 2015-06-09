@@ -50,21 +50,21 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration configuration)
+		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			IEnumerable<IResultset> resultsets;
 			IEnumerable<IRecord> records;
 			List<MetaColumn> metaColumns;
 
-			if ((object)configuration.SourceAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
 
-			if ((object)configuration.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration"));
 
-			this.SourceUnitOfWork = configuration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
+			this.SourceUnitOfWork = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
 
-			resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { });
+			resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(obfuscationConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, obfuscationConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { });
 
 			if ((object)resultsets == null)
 				throw new InvalidOperationException(string.Format("Resultsets were invalid."));
@@ -83,7 +83,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 				{
 					metaColumns.Add(new MetaColumn()
 									{
-										MetaTableIndex = resultset.Index,
+										TableIndex = resultset.Index,
 										ColumnIndex = i++,
 										ColumnName = DataTypeFascade.Instance.ChangeType<string>(record["ColumnName"]),
 										ColumnType = DataTypeFascade.Instance.ChangeType<Type>(record["DataType"]),
@@ -96,24 +96,24 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			this.UpstreamMetadata = metaColumns;
 		}
 
-		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration configuration)
+		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
 			IDataReader dataReader;
 
-			if ((object)configuration == null)
-				throw new ArgumentNullException("configuration");
+			if ((object)tableConfiguration == null)
+				throw new ArgumentNullException("tableConfiguration");
 
-			if ((object)configuration.Parent.SourceAdapterConfiguration == null)
+			if ((object)tableConfiguration.Parent.SourceAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
 
-			if ((object)configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
+			if ((object)tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration"));
 
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText))
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText"));
 
-			dataReader = new ObfuscationDataReader(AdoNetFascade.Instance.ExecuteReader(this.SourceUnitOfWork.Connection, this.SourceUnitOfWork.Transaction, configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, configuration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, CommandBehavior.Default, null, false), configuration);
+			dataReader = new ObfuscationDataReader(AdoNetFascade.Instance.ExecuteReader(this.SourceUnitOfWork.Connection, this.SourceUnitOfWork.Transaction, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, CommandBehavior.Default, null, false), tableConfiguration.Parent);
 
 			sourceDataEnumerable = AdoNetFascade.Instance.GetRecordsFromReader(dataReader, null);
 

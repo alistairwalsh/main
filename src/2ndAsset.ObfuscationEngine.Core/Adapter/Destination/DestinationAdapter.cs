@@ -44,11 +44,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Methods/Operators
 
-		protected abstract void CorePushData(TableConfiguration configuration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable);
+		protected abstract void CorePushData(TableConfiguration tableConfiguration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable);
 
-		public void PushData(TableConfiguration configuration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
+		public void PushData(TableConfiguration tableConfiguration, IEnumerable<IDictionary<string, object>> sourceDataEnumerable)
 		{
-			this.CorePushData(configuration, sourceDataEnumerable);
+			this.CorePushData(tableConfiguration, sourceDataEnumerable);
 		}
 
 		#endregion

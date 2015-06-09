@@ -11,7 +11,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 	{
 		#region Methods/Operators
 
-		object GetObfuscatedValue(int columnIndex, string columnName, Type columnType, object columnValue);
+		object GetObfuscatedValue(IMetaColumn metaColumn, object columnValue);
 
 		#endregion
 	}

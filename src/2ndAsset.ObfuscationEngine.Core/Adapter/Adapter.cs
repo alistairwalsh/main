@@ -49,7 +49,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 				this.Terminate();
 		}
 
-		protected abstract void CoreInitialize(ObfuscationConfiguration configuration);
+		protected abstract void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration);
 
 		protected abstract void CoreTerminate();
 
@@ -69,9 +69,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 			}
 		}
 
-		public void Initialize(ObfuscationConfiguration configuration)
+		public void Initialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
-			this.CoreInitialize(configuration);
+			this.CoreInitialize(obfuscationConfiguration);
 		}
 
 		public void Terminate()
