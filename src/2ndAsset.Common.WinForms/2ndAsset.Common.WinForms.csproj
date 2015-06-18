@@ -59,7 +59,27 @@
     <Compile Include="Controls\_2ndAssetUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\x_2ndAssetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetMultiDocumentForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\_2ndAssetDocumentForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\IBaseController~1.cs" />
+    <Compile Include="Presentation\BaseController~1.cs" />
     <Compile Include="Controls\ControlExtensionMethods.cs" />
+    <Compile Include="Controls\_2ndAssetUserControl~1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\BackgroundTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BackgroundTaskForm.Designer.cs">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,14 +98,25 @@
     <Compile Include="Forms\_2ndAssetForm.Designer.cs">
       <DependentUpon>_2ndAssetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\_2ndAssetForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IListItem.cs" />
     <Compile Include="IListItem~1.cs" />
     <Compile Include="ListItem.cs" />
     <Compile Include="ListItem~1.cs" />
+    <Compile Include="Presentation\DispatchActionUriAttribute.cs" />
+    <Compile Include="Presentation\IDocumentView~1.cs" />
+    <Compile Include="Presentation\IDocumentView.cs" />
+    <Compile Include="Presentation\IFullView.cs" />
+    <Compile Include="Presentation\IMultiDocumentView.cs" />
+    <Compile Include="Presentation\IPartialView.cs" />
+    <Compile Include="Presentation\IListView.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
-    <Compile Include="SplashApplicationContext.cs" />
+    <Compile Include="Presentation\IBaseView.cs" />
     <Compile Include="WindowsApplicationFascade~1.cs" />
     <Compile Include="WindowsApplicationFascade~2.cs" />
+    <Compile Include="SplashApplicationContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\2ndAssetSuite.snk">
@@ -93,6 +124,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\BackgroundTaskForm.resx">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageForm.resx">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,7 +137,9 @@
       <DependentUpon>_2ndAssetForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

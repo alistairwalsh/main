@@ -29,8 +29,8 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		#region Fields/Constants
 
-		private readonly IOxymoronEngine oxymoronEngine;
 		private readonly ObfuscationConfiguration obfuscationConfiguration;
+		private readonly IOxymoronEngine oxymoronEngine;
 
 		#endregion
 
@@ -44,19 +44,19 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			}
 		}
 
-		private IOxymoronEngine OxymoronEngine
-		{
-			get
-			{
-				return this.oxymoronEngine;
-			}
-		}
-
 		private ObfuscationConfiguration ObfuscationConfiguration
 		{
 			get
 			{
 				return this.obfuscationConfiguration;
+			}
+		}
+
+		private IOxymoronEngine OxymoronEngine
+		{
+			get
+			{
+				return this.oxymoronEngine;
 			}
 		}
 

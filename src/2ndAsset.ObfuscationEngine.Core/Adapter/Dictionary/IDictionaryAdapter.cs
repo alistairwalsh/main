@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
@@ -13,7 +14,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 	{
 		#region Methods/Operators
 
-		object GetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id);
+		object GetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId);
+
+		void InitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot);
 
 		#endregion
 	}

@@ -5,4 +5,4 @@
 
 using System.Reflection;
 
-[assembly: AssemblyTitle("Microsoft BI Build and Deploy Automation SSIS Components Windows Tool EXE")]
+[assembly: AssemblyTitle("2ndAsset SSIS Components Windows Tool EXE")]

@@ -5,4 +5,4 @@
 
 using System.Reflection;
 
-[assembly: AssemblyTitle("Microsoft BI Build and Deploy Automation SSIS Components UI Library")]
+[assembly: AssemblyTitle("2ndAsset SSIS Components UI Library")]

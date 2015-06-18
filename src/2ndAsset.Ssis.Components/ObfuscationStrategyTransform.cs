@@ -645,14 +645,14 @@ namespace _2ndAsset.Ssis.Components
 						columnValue = buffer[columnInfo.bufferColumnIndex];
 
 						metaColumn = new MetaColumn()
-						{
-							ColumnIndex = columnIndex,
-							ColumnName = columnName,
-							ColumnType = columnType,
-							ColumnIsNullable = null,
-							TableIndex = 0,
-							TagContext = null
-						};
+									{
+										ColumnIndex = columnIndex,
+										ColumnName = columnName,
+										ColumnType = columnType,
+										ColumnIsNullable = null,
+										TableIndex = 0,
+										TagContext = null
+									};
 
 						obfuColumnValue = this.OxymoronEngine.GetObfuscatedValue(metaColumn, columnValue);
 

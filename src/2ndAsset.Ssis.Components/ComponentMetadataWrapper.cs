@@ -251,7 +251,7 @@ namespace _2ndAsset.Ssis.Components
 			obfuscationConfiguration.HashConfiguration.Seed = this.HashSeed;
 
 			obfuscationConfiguration.TableConfiguration = new TableConfiguration();
-			
+
 			foreach (var column in this.GetColumnConfigurations())
 				obfuscationConfiguration.TableConfiguration.ColumnConfigurations.Add(column);
 

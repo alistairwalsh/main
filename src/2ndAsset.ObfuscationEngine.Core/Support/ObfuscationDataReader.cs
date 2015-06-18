@@ -30,26 +30,26 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		#region Fields/Constants
 
-		private readonly IOxymoronEngine oxymoronEngine;
 		private readonly ObfuscationConfiguration obfuscationConfiguration;
+		private readonly IOxymoronEngine oxymoronEngine;
 
 		#endregion
 
 		#region Properties/Indexers/Events
-
-		private IOxymoronEngine OxymoronEngine
-		{
-			get
-			{
-				return this.oxymoronEngine;
-			}
-		}
 
 		private ObfuscationConfiguration ObfuscationConfiguration
 		{
 			get
 			{
 				return this.obfuscationConfiguration;
+			}
+		}
+
+		private IOxymoronEngine OxymoronEngine
+		{
+			get
+			{
+				return this.oxymoronEngine;
 			}
 		}
 
@@ -81,14 +81,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			//columnIsNullable = base.GetSchemaTable().Columns[columnName].AllowDBNull;
 
 			metaColumn = new MetaColumn()
-			{
-				ColumnIndex = columnIndex,
-				ColumnName = columnName,
-				ColumnType = columnType,
-				ColumnIsNullable = null,
-				TableIndex = 0,
-				TagContext = null
-			};
+						{
+							ColumnIndex = columnIndex,
+							ColumnName = columnName,
+							ColumnType = columnType,
+							ColumnIsNullable = null,
+							TableIndex = 0,
+							TagContext = null
+						};
 
 			obfusscatedValue = this.OxymoronEngine.GetObfuscatedValue(metaColumn, columnValue);
 

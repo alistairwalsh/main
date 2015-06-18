@@ -10,9 +10,11 @@ using System.Text;
 
 using TextMetal.Middleware.Common.Utilities;
 
+using _2ndAsset.ObfuscationEngine.Core.Config;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class ShufflingObfuscationStrategy : ObfuscationStrategy
+	public sealed class ShufflingObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -107,15 +109,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return fidelityMap;
 		}
 
-		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			long randomSeed;
 
+			if ((object)configurationContext == null)
+				throw new ArgumentNullException("configurationContext");
+
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			randomSeed = valueHash;
+			randomSeed = hashResult.ValueHash;
 
 			value = GetShuffle(randomSeed, columnValue);
 

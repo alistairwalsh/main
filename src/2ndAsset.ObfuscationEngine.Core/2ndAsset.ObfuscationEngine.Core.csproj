@@ -64,20 +64,28 @@
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Adapter\Adapter.cs" />
+    <Compile Include="Adapter\Destination\NullDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\AdoNetDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\DestinationAdapter.cs" />
+    <Compile Include="Adapter\Dictionary\NullDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\DelimitedTextDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\AdoNetDictionaryAdapter.cs" />
     <Compile Include="Adapter\Destination\DelimitedTextDestinationAdapter.cs" />
-    <Compile Include="Adapter\Dictionary\DestinationAdapter.cs" />
+    <Compile Include="Adapter\Dictionary\DictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\IDictionaryAdapter.cs" />
+    <Compile Include="Adapter\INullAdapter.cs" />
+    <Compile Include="Adapter\Source\NullSourceAdapter.cs" />
     <Compile Include="Adapter\Source\DelimitedTextSourceAdapter.cs" />
     <Compile Include="Adapter\Source\AdoNetSourceAdapter.cs" />
     <Compile Include="Adapter\IDelimitedTextAdapter.cs" />
     <Compile Include="Adapter\IAdoNetAdapter.cs" />
     <Compile Include="Adapter\Source\SourceAdapter.cs" />
     <Compile Include="Config\AdapterConfiguration.cs" />
+    <Compile Include="Hosting\IOxymoronHost.cs" />
+    <Compile Include="Hosting\Tool\ToolHost.cs" />
+    <Compile Include="Hosting\Tool\IToolHost.cs" />
     <Compile Include="IMetaColumn.cs" />
+    <Compile Include="HashResult.cs" />
     <Compile Include="Strategy\CipheringObfuscationStrategy.cs" />
     <Compile Include="Strategy\DefaultHashingStrategy.cs" />
     <Compile Include="Strategy\DefaultingObfuscationStrategy.cs" />
@@ -122,6 +130,7 @@
     <Compile Include="Support\ObfuscationDataReader.cs" />
     <Compile Include="ObfuscationStrategy.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Support\DisposableList~1.cs" />
     <Compile Include="Support\RecordTextReader.cs" />
     <Compile Include="Support\RecordTextWriter.cs" />
     <Compile Include="Support\WrappedTextReader.cs" />

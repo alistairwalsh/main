@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 
@@ -11,59 +12,23 @@ using TextMetal.Middleware.Common.Utilities;
 using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Hosting.Tool;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class SubstitutionObfuscationStrategy : ObfuscationStrategy
+	public sealed class SubstitutionObfuscationStrategy : ObfuscationStrategy<DictionaryConfiguration>
 	{
 		#region Constructors/Destructors
 
-		public SubstitutionObfuscationStrategy(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
+		public SubstitutionObfuscationStrategy()
 		{
-			if ((object)dictionaryConfiguration == null)
-				throw new ArgumentNullException("dictionaryConfiguration");
-
-			if ((object)substitutionCacheRoot == null)
-				throw new ArgumentNullException("substitutionCacheRoot");
-
-			this.dictionaryConfiguration = dictionaryConfiguration;
-			this.substitutionCacheRoot = substitutionCacheRoot;
-		}
-
-		#endregion
-
-		#region Fields/Constants
-
-		private readonly DictionaryConfiguration dictionaryConfiguration;
-		private readonly IDictionary<string, IDictionary<long, object>> substitutionCacheRoot;
-
-		#endregion
-
-		#region Properties/Indexers/Events
-
-		private DictionaryConfiguration DictionaryConfiguration
-		{
-			get
-			{
-				return this.dictionaryConfiguration;
-			}
-		}
-
-		private IDictionary<string, IDictionary<long, object>> SubstitutionCacheRoot
-		{
-			get
-			{
-				return this.substitutionCacheRoot;
-			}
 		}
 
 		#endregion
 
 		#region Methods/Operators
 
-		private static object GetSubstitution(IDictionary<string, IDictionary<long, object>> substitutionCacheRoot,
-			DictionaryConfiguration dictionaryConfiguration,
-			long selectId, object value)
+		private static object GetSubstitution(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, long surrogateId, object value)
 		{
 			Type valueType;
 			string _value;
@@ -71,11 +36,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			IDictionary<long, object> dictionaryCache;
 
-			if ((object)substitutionCacheRoot == null)
-				throw new ArgumentNullException("substitutionCacheRoot");
-
 			if ((object)dictionaryConfiguration == null)
 				throw new ArgumentNullException("dictionaryConfiguration");
+
+			if ((object)metaColumn == null)
+				throw new ArgumentNullException("metaColumn");
 
 			if ((object)value == null)
 				return null;
@@ -95,46 +60,42 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((dictionaryConfiguration.RecordCount ?? 0L) <= 0L)
 				return null;
 
-			if (!SUBSTITUTION_CACHE_ENABLED || !substitutionCacheRoot.TryGetValue(dictionaryConfiguration.DictionaryId, out dictionaryCache))
+			if (!SUBSTITUTION_CACHE_ENABLED || !ToolHost.Current.SubstitutionCacheRoot.TryGetValue(dictionaryConfiguration.DictionaryId, out dictionaryCache))
 			{
 				dictionaryCache = new Dictionary<long, object>();
 
 				if (SUBSTITUTION_CACHE_ENABLED)
-					substitutionCacheRoot.Add(dictionaryConfiguration.DictionaryId, dictionaryCache);
+					ToolHost.Current.SubstitutionCacheRoot.Add(dictionaryConfiguration.DictionaryId, dictionaryCache);
 			}
 
-			if (!SUBSTITUTION_CACHE_ENABLED || !dictionaryCache.TryGetValue(selectId, out value))
+			if (!SUBSTITUTION_CACHE_ENABLED || !dictionaryCache.TryGetValue(surrogateId, out value))
 			{
 				if (dictionaryConfiguration.PreloadEnabled)
 					throw new InvalidOperationException(string.Format("PreloadEnabled state fail."));
 
-				using (IUnitOfWork unitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork())
-				{
-					IDbDataParameter dbDataParameterKey;
-
-					dbDataParameterKey = unitOfWork.CreateParameter(ParameterDirection.Input, DbType.Object, 0, 0, 0, false, "@ID", selectId);
-
-					value = unitOfWork.ExecuteScalar<string>(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { dbDataParameterKey });
-				}
+				value = ToolHost.Current.DictionaryConfigurationToAdapterMappings[dictionaryConfiguration].GetAlternativeValueFromId(dictionaryConfiguration, metaColumn, surrogateId);
 
 				if (SUBSTITUTION_CACHE_ENABLED)
-					dictionaryCache.Add(selectId, value);
+					dictionaryCache.Add(surrogateId, value);
 			}
 
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(DictionaryConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
-			long selectId;
+			long surrogateId;
+
+			if ((object)configurationContext == null)
+				throw new ArgumentNullException("configurationContext");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			selectId = valueHash;
+			surrogateId = hashResult.ValueHash;
 
-			value = GetSubstitution(this.SubstitutionCacheRoot, this.DictionaryConfiguration, selectId, columnValue);
+			value = GetSubstitution(configurationContext, metaColumn, surrogateId, columnValue);
 
 			return value;
 		}

@@ -5,13 +5,16 @@
 
 using System;
 
+using _2ndAsset.ObfuscationEngine.Core.Config;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public interface IObfuscationStrategy
+	public interface IObfuscationStrategy<TConfigurationContext>
+		where TConfigurationContext : class, IConfigurationObject, new()
 	{
 		#region Methods/Operators
 
-		object GetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue);
+		object GetObfuscatedValue(TConfigurationContext configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue);
 
 		#endregion
 	}

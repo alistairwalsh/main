@@ -21,6 +21,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("2015.06.01/preview")]
+[assembly: AssemblyInformationalVersion("2015.06.16/preview")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: ComVisible(false)]

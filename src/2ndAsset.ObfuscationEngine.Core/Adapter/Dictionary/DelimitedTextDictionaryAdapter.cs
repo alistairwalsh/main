@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
@@ -21,19 +22,39 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		#region Methods/Operators
 
-		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, object id)
+		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId)
 		{
+			if ((object)dictionaryConfiguration == null)
+				throw new ArgumentNullException("dictionaryConfiguration");
+
+			if ((object)metaColumn == null)
+				throw new ArgumentNullException("metaColumn");
+
+			if ((object)surrogateId == null)
+				throw new ArgumentNullException("surrogateId");
+
 			throw new NotImplementedException();
 		}
 
 		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
 		{
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
+		}
+
+		protected override void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
+		{
+			if ((object)dictionaryConfiguration == null)
+				throw new ArgumentNullException("dictionaryConfiguration");
+
+			if ((object)substitutionCacheRoot == null)
+				throw new ArgumentNullException("substitutionCacheRoot");
+
 			throw new NotImplementedException();
 		}
 
 		protected override void CoreTerminate()
 		{
-			throw new NotImplementedException();
 		}
 
 		#endregion

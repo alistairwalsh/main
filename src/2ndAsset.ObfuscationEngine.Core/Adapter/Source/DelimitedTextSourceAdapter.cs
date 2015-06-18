@@ -92,14 +92,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			headerSpecs = this.DelimitedTextReader.ReadHeaderSpecs();
 
 			this.UpstreamMetadata = headerSpecs.Select((hs, i) => new MetaColumn()
-															{
-																TableIndex = 0,
-																ColumnIndex = i,
-																ColumnName = hs.HeaderName,
-																ColumnType = GetColumnTypeFromFieldType(hs.FieldType),
-																ColumnIsNullable = true,
-																TagContext = hs
-															});
+																{
+																	TableIndex = 0,
+																	ColumnIndex = i,
+																	ColumnName = hs.HeaderName,
+																	ColumnType = GetColumnTypeFromFieldType(hs.FieldType),
+																	ColumnIsNullable = true,
+																	TagContext = hs
+																});
 		}
 
 		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)

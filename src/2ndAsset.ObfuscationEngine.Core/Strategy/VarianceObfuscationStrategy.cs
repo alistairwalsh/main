@@ -5,9 +5,11 @@
 
 using System;
 
+using _2ndAsset.ObfuscationEngine.Core.Config;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class VarianceObfuscationStrategy : ObfuscationStrategy
+	public sealed class VarianceObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -79,15 +81,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			double varianceFactor;
 
+			if ((object)configurationContext == null)
+				throw new ArgumentNullException("configurationContext");
+
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			varianceFactor = ((((valueHash <= 0 ? 1 : valueHash)) * ((signHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
+			varianceFactor = ((((hashResult.ValueHash <= 0 ? 1 : hashResult.ValueHash)) * ((hashResult.SignHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
 
 			value = GetVariance(varianceFactor, columnValue);
 

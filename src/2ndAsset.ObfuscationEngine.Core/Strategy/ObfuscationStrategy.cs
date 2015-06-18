@@ -5,9 +5,12 @@
 
 using System;
 
+using _2ndAsset.ObfuscationEngine.Core.Config;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public abstract class ObfuscationStrategy : IObfuscationStrategy
+	public abstract class ObfuscationStrategy<TConfigurationContext> : IObfuscationStrategy<TConfigurationContext>
+		where TConfigurationContext : class, IConfigurationObject, new()
 	{
 		#region Constructors/Destructors
 
@@ -19,11 +22,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
-		protected abstract object CoreGetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue);
+		protected abstract object CoreGetObfuscatedValue(TConfigurationContext configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue);
 
-		public object GetObfuscatedValue(long signHash, long valueHash, int? extentValue, IMetaColumn metaColumn, object columnValue)
+		public object GetObfuscatedValue(TConfigurationContext configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
+
+			if ((object)configurationContext == null)
+				throw new ArgumentNullException("configurationContext");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
@@ -31,7 +37,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)columnValue == DBNull.Value)
 				columnValue = null;
 
-			value = this.CoreGetObfuscatedValue(signHash, valueHash, extentValue, metaColumn, columnValue);
+			value = this.CoreGetObfuscatedValue(configurationContext, hashResult, metaColumn, columnValue);
 
 			return value;
 		}

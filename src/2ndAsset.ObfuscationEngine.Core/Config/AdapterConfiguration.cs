@@ -107,6 +107,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 				if ((object)type == null)
 					messages.Add(NewError(string.Format("{0} adapter failed to load type from AQTN.", context)));
+				else if (typeof(INullAdapter).IsAssignableFrom(type))
+				{
+					// do nothing
+				}
 				else if (typeof(IDelimitedTextAdapter).IsAssignableFrom(type))
 				{
 					if ((object)this.DelimitedTextAdapterConfiguration == null)

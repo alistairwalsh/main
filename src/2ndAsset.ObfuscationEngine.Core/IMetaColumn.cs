@@ -9,6 +9,8 @@ namespace _2ndAsset.ObfuscationEngine.Core
 {
 	public interface IMetaColumn
 	{
+		#region Properties/Indexers/Events
+
 		int ColumnIndex
 		{
 			get;
@@ -38,5 +40,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		{
 			get;
 		}
+
+		#endregion
 	}
 }
