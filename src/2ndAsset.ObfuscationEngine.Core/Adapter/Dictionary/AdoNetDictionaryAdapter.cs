@@ -41,6 +41,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)surrogateId == null)
 				throw new ArgumentNullException("surrogateId");
 
+			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration"));
+
+			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.AdoNetAdapterConfiguration"));
+
 			using (IUnitOfWork unitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork())
 			{
 				IDbDataParameter dbDataParameterKey;
@@ -113,8 +119,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 				foreach (IRecord record in records)
 				{
-					long id = record[record.Keys.ToArray()[0]].ChangeType<long>();
-					object value = record[record.Keys.ToArray()[1]].ChangeType<string>();
+					object[] values = record.Values.ToArray();
+					long id = values[0].ChangeType<long>();
+					object value = values[1].ChangeType<string>();
+
 					dictionaryCache.Add(id, value);
 				}
 

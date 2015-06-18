@@ -103,21 +103,18 @@
 
 			DictionaryAdapterConfiguration:
 			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				AdoNetAdapterConfiguration:
+				DelimitedTextAdapterConfiguration:
 				{
-					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-					ConnectionString: "Server=(local);Integrated Security=SSPI;",
-
-					PreExecuteCommandType: "",
-					PreExecuteCommandText: "",
-
-					ExecuteCommandText: "SELECT t.[Key], t.[CrayonColor] FROM [2ndasset_bank_account_demo].[OxConfig].[CrayonColorDictionary] t ORDER BY t.[Key] ASC",
-					ExecuteCommandType: "Text",
-
-					PostExecuteCommandType: "",
-					PostExecuteCommandText: ""
+					DelimitedTextFilePath: "CrayonColorDictionary.txt",
+					DelimitedTextSpec:
+					{
+						FirstRecordIsHeader: true,
+						RecordDelimiter: "\r\n",
+						FieldDelimiter: "\t",
+						QuoteValue: "",
+					}
 				}
 			}
 		},

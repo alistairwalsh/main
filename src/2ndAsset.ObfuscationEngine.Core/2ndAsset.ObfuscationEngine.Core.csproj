@@ -81,6 +81,8 @@
     <Compile Include="Adapter\IAdoNetAdapter.cs" />
     <Compile Include="Adapter\Source\SourceAdapter.cs" />
     <Compile Include="Config\AdapterConfiguration.cs" />
+    <Compile Include="Config\AdoNetParameterConfiguration.cs" />
+    <Compile Include="Config\AdoNetCommandConfiguration.cs" />
     <Compile Include="Hosting\IOxymoronHost.cs" />
     <Compile Include="Hosting\Tool\ToolHost.cs" />
     <Compile Include="Hosting\Tool\IToolHost.cs" />
