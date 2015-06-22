@@ -12,11 +12,10 @@ using TextMetal.Middleware.Data;
 using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.Support;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public sealed class AdoNetSourceAdapter : SourceAdapter, IAdoNetAdapter
+	public class AdoNetSourceAdapter : SourceAdapter, IAdoNetAdapter
 	{
 		#region Constructors/Destructors
 
@@ -113,9 +112,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText"));
 
-			dataReader = new ObfuscationDataReader(AdoNetFascade.Instance.ExecuteReader(this.SourceUnitOfWork.Connection, this.SourceUnitOfWork.Transaction, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, CommandBehavior.Default, null, false), tableConfiguration.Parent);
-
-			sourceDataEnumerable = AdoNetFascade.Instance.GetRecordsFromReader(dataReader, null);
+			sourceDataEnumerable = this.SourceUnitOfWork.ExecuteRecords(tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
 
 			if ((object)sourceDataEnumerable == null)
 				throw new InvalidOperationException(string.Format("Records were invalid."));

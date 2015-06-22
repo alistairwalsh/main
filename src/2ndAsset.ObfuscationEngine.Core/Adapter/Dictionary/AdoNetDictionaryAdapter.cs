@@ -16,7 +16,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public sealed class AdoNetDictionaryAdapter : DictionaryAdapter, IAdoNetAdapter
+	public class AdoNetDictionaryAdapter : DictionaryAdapter, IAdoNetAdapter
 	{
 		#region Constructors/Destructors
 
@@ -27,6 +27,37 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 		#endregion
 
 		#region Methods/Operators
+
+		private static IEnumerable<IRecord> WrapRecordCounter(DictionaryConfiguration dictionaryConfiguration, IEnumerable<IRecord> records, Action<string, long, bool, double> recordProcessCallback)
+		{
+			long recordCount = 0;
+			DateTime startUtc;
+
+			startUtc = DateTime.UtcNow;
+
+			if ((object)dictionaryConfiguration == null)
+				throw new ArgumentNullException("dictionaryConfiguration");
+
+			if ((object)records == null)
+				throw new ArgumentNullException("records");
+
+			foreach (IRecord record in records)
+			{
+				recordCount++;
+
+				if ((recordCount % 1000) == 0)
+				{
+					//Thread.Sleep(250);
+					if ((object)recordProcessCallback != null)
+						recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, false, (DateTime.UtcNow - startUtc).TotalSeconds);
+				}
+
+				yield return record;
+			}
+
+			if ((object)recordProcessCallback != null)
+				recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, true, (DateTime.UtcNow - startUtc).TotalSeconds);
+		}
 
 		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId)
 		{
@@ -63,37 +94,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 		{
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
-		}
-
-		private static IEnumerable<IRecord> WrapRecordCounter(DictionaryConfiguration dictionaryConfiguration, IEnumerable<IRecord> records, Action<string, long, bool, double> recordProcessCallback)
-		{
-			long recordCount = 0;
-			DateTime startUtc;
-
-			startUtc = DateTime.UtcNow;
-
-			if ((object)dictionaryConfiguration == null)
-				throw new ArgumentNullException("dictionaryConfiguration");
-
-			if ((object)records == null)
-				throw new ArgumentNullException("records");
-
-			foreach (IRecord record in records)
-			{
-				recordCount++;
-
-				if ((recordCount % 1000) == 0)
-				{
-					//Thread.Sleep(250);
-					if ((object)recordProcessCallback != null)
-						recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, false, (DateTime.UtcNow - startUtc).TotalSeconds);
-				}
-
-				yield return record;
-			}
-
-			if ((object)recordProcessCallback != null)
-				recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, true, (DateTime.UtcNow - startUtc).TotalSeconds);
 		}
 
 		protected override void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)

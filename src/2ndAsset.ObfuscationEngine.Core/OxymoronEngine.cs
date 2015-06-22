@@ -13,6 +13,7 @@ using TextMetal.Middleware.Common.Utilities;
 using TextMetal.Middleware.Solder.Serialization;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core
@@ -21,11 +22,15 @@ namespace _2ndAsset.ObfuscationEngine.Core
 	{
 		#region Constructors/Destructors
 
-		public OxymoronEngine(ObfuscationConfiguration obfuscationConfiguration)
+		public OxymoronEngine(IOxymoronHost oxymoronHost, ObfuscationConfiguration obfuscationConfiguration)
 		{
+			if ((object)oxymoronHost == null)
+				throw new ArgumentNullException("oxymoronHost");
+
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
 
+			this.oxymoronHost = oxymoronHost;
 			this.obfuscationConfiguration = obfuscationConfiguration;
 
 			EnsureValidConfigurationOnce(this.ObfuscationConfiguration);
@@ -38,6 +43,9 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		private readonly IDictionary<int, ColumnConfiguration> columnCache = new Dictionary<int, ColumnConfiguration>();
 		private readonly IHashingStrategy hashingStrategy = DefaultHashingStrategy.Instance;
 		private readonly ObfuscationConfiguration obfuscationConfiguration;
+		private readonly IOxymoronHost oxymoronHost;
+		private readonly IDictionary<string, IDictionary<long, object>> substitutionCacheRoot = new Dictionary<string, IDictionary<long, object>>();
+		private bool disposed;
 
 		#endregion
 
@@ -64,6 +72,34 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			get
 			{
 				return this.obfuscationConfiguration;
+			}
+		}
+
+		private IOxymoronHost OxymoronHost
+		{
+			get
+			{
+				return this.oxymoronHost;
+			}
+		}
+
+		public IDictionary<string, IDictionary<long, object>> SubstitutionCacheRoot
+		{
+			get
+			{
+				return this.substitutionCacheRoot;
+			}
+		}
+
+		public bool Disposed
+		{
+			get
+			{
+				return this.disposed;
+			}
+			private set
+			{
+				this.disposed = value;
 			}
 		}
 
@@ -214,7 +250,8 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			switch (columnConfiguration.ObfuscationStrategy)
 			{
 				case ObfuscationStrategy.Substitution:
-					return new SubstitutionObfuscationStrategy().GetObfuscatedValue(dictionaryConfiguration, hashResult, metaColumn, columnValue);
+					// TODO: massive technical debt here
+					return new SubstitutionObfuscationStrategy(this.OxymoronHost, this).GetObfuscatedValue(dictionaryConfiguration, hashResult, metaColumn, columnValue);
 				case ObfuscationStrategy.Shuffling:
 					return new ShufflingObfuscationStrategy().GetObfuscatedValue(columnConfiguration, hashResult, metaColumn, columnValue);
 				case ObfuscationStrategy.Variance:
@@ -234,9 +271,29 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
+		private void CoreDispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.SubstitutionCacheRoot.Clear();
+				this.ColumnCache.Clear();
+			}
+		}
+
 		public void Dispose()
 		{
-			this.ColumnCache.Clear();
+			if (this.Disposed)
+				return;
+
+			try
+			{
+				this.CoreDispose(true);
+			}
+			finally
+			{
+				this.Disposed = true;
+				GC.SuppressFinalize(this);
+			}
 		}
 
 		public object GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
@@ -252,6 +309,50 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			value = this._GetObfuscatedValue(metaColumn, columnValue);
 
 			return value;
+		}
+
+		public IEnumerable<IDictionary<string, object>> GetObfuscatedValues(IEnumerable<IDictionary<string, object>> records)
+		{
+			int columnIndex;
+			string columnName;
+			Type columnType;
+			object columnValue, obfusscatedValue;
+			bool columnIsNullable;
+
+			IDictionary<string, object> obfuscatedRecord;
+			IMetaColumn metaColumn;
+
+			if ((object)records == null)
+				throw new ArgumentNullException("records");
+
+			foreach (IDictionary<string, object> record in records)
+			{
+				obfuscatedRecord = new Dictionary<string, object>();
+
+				columnIndex = 0;
+				foreach (KeyValuePair<string, object> field in record)
+				{
+					columnName = field.Key;
+					columnValue = record[field.Key];
+					columnType = (columnValue ?? new object()).GetType();
+
+					metaColumn = new MetaColumn()
+								{
+									ColumnIndex = columnIndex,
+									ColumnName = columnName,
+									ColumnType = columnType,
+									ColumnIsNullable = null,
+									TableIndex = 0,
+									TagContext = null
+								};
+
+					obfusscatedValue = this.GetObfuscatedValue(metaColumn, columnValue);
+					obfuscatedRecord.Add(columnName, obfusscatedValue);
+					columnIndex++;
+				}
+
+				yield return obfuscatedRecord;
+			}
 		}
 
 		#endregion

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="BankAccountDemo"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{2BCE46C8-C21F-4F98-99BD-DC363B7E0690}">
+  DTS:VersionBuild="61"
+  DTS:VersionGUID="{FB559171-3317-4756-91E2-4E71EB24DA0C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1321,44 +1321,17 @@ ORDER BY
               version="1">
               <properties>
                 <property
-                  dataType="System.Int64"
-                  description="Sign hash multiplier."
-                  Encrypted="1"
-                  name="SignHashMultiplier"
-                  Sensitive="1"
-                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAflFAq0HIdnq2QFDZt6ij5bPx5WyMRuqYNuotG8fphWgAAAAAOgAAAAAIAACAAAAAkZoY821aeREiRJd0m+nwCYqXkyHViERbWcrGvw2uqJRAAAAB1ySSrranx1C4CcJvJPXM3QAAAAI6P8K/TEHV7OUPmJY6+saG2JG4ZstwMTgSEbG+JDHAD/VIk3hPlD3CCJPApODg35YjWJB9j+UkAYy4aSNSw0pk</property>
-                <property
-                  dataType="System.Int64"
-                  description="Sign hash seed."
-                  Encrypted="1"
-                  name="SignHashSeed"
-                  Sensitive="1"
-                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAGUY9dKCeMv/hGz/E3yRoRt5xpF7IdmKsKNbjMHX+wJAAAAAAOgAAAAAIAACAAAAAIiXXpmlplV+VAX3H6uTN4D1la/N/Cy3s2JljMS7JLOhAAAACXxwdXqq5raEgcpLyaXcJEQAAAAEI421X+IBj2eE9pSIVCrwbqs8NXWgGOtuerKRaPVPOU7M/mwD61XG4yapu9XDqZHMoh7VeuUFRikIRiu2plJlM</property>
-                <property
-                  dataType="System.Int64"
-                  description="Value hash multiplier."
-                  Encrypted="1"
-                  name="ValueHashMultiplier"
-                  Sensitive="1"
-                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABtecWcButjt4+u5QrChfDeEJUr+PBhnNbBBIjEnsL1PAAAAAAOgAAAAAIAACAAAAAdXY2LC8ScUja2qrduxhRGHTAyvXYmKAcHc8W7ZdcouRAAAAAY8pUBGSRI0T18vQEHhoZ7QAAAAFqlnbOtoNT5ej4wqNaH8qC/qNNZY7ZFV9FLtnhWHAt2SqG0Gv0HuhC8fB4lixoR6EbjplOJXxi6kueStcN0CoM</property>
-                <property
-                  dataType="System.Int64"
-                  description="Value hash seed."
-                  Encrypted="1"
-                  name="ValueHashSeed"
-                  Sensitive="1"
-                  typeConverter="System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAGPSaxnr7xwk49c9003Ke+ERCjyg8YjOqRTQKBilDsNAAAAAAOgAAAAAIAACAAAAAq/bqvL5X78zhqIzQVz2xM/tTYk4oInw2C6/yMGkLsexAAAACIpm39S52A87/vYhOeYgrcQAAAAOpQOoUVlQEMTyj63YF2W727xsb2opNSx/pjGwoNbqFe8AY4Sw/s+i+csxtoL7eq7x/7XRDvMfckQwcuzLF08U0</property>
-                <property
                   dataType="System.Boolean"
                   description="A value indicating whether to launch the debugger at component initialization time."
                   name="DebuggerLaunch"
                   typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
                 <property
                   dataType="System.String"
-                  description="JSON serialized dictionary configuration data."
-                  name="DictionaryConfiguration"
-                  typeConverter="_2ndAsset.Ssis.Components.UI.ReadonlyTypeConverter, 2ndAsset.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98, processorArchitecture=MSIL"
-                  UITypeEditor="_2ndAsset.Ssis.Components.UI.DictConfFormEditor, 2ndAsset.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98, processorArchitecture=MSIL">[]</property>
+                  description="JSON serialized obfuscation configuration data."
+                  Encrypted="1"
+                  name="ObfuscationConfigurationJsonText"
+                  Sensitive="1"
+                  typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAExJf+4l0nka2MyQ4Ny03WwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACr4tXuL0R7wl4uI7heCJzWy7+2/bC5KsTNvmZ3waQO6wAAAAAOgAAAAAIAACAAAACkJ0wjx6Sv3HLgzYTa5cQHTnAfwZvfmfRPMtA7UT/fYbAmAAANmVu8QC9WvrGEFfhM9AHV/BeDK4G1OTGRP+MRvQk4U3RkuzmiZLBUGNEVctrRQ29aBRje4fGxPpxH1p0hsWqBIItaR/YMem+XYbN8t0SnG8gFzfU+znYvcAV81Iy5Ul9ft7WJdvvfu/VLNrRJBxKUgLww6ah6HCQs8EG8EbZ2e4isreLPcKsmdRUNMFHLjis1moiYmd1Gs7TJ75JxhFr/hvoMC/MLo/KXD9q/KlltbjKQwSikQLa2shQytrWPjomjpmwq9eFf0ecPBtLDzZU1PDn/OoqFtvcL/8MEsTlO/O5bp/y3bq2G5kKqtJ7yZ+wTP++2a+xAAuLjXKLkgWbHudNUA0wrSGJXbq1vudVjFrixxvh0v4NS0LceWQ2FqsSQlFFF7Y/1YYzQvNfcJpElNPrrvN/S3Gog9k8kZWXNR4dk4WAEbbMfL5LOJGVXTKfnyIKhz9qfpuz+qiHB4doniyKqzxUIvV/iJvuM4qPL4g/tGKkvvZcCO5044F2mFWawj6/WTFufcndR3hXJKwUDUFDIG9Po8syIW0UGvNTYmAyp2VV1nqKeiQbzeIuXWS/SQ43IM5L2Mxe1150SMkqTWVLe7KqJnPSaFr4GHjOp/WePhzKngwxqV1r8fI6QMj2MYi5blv4mc3CO/glsluKOjYe8r9+0f7nz4GNOpD58qMoSxUuoonVNap2qrQzyTQs0OShQRTPDw1tc7IjEAaWe6WxOFk9v1kTg6SjQj85yRE3zy5L9Fc90frLEsDBk/Dg/ARKg/Jf6YQNX+D3B0rI1q6nmAYUEAijbcyYD1I6HIZXqUffzbHzkS9gsDZw9Ydhbxj90MZ7i6R2i+OHcB1oQwiksFnvERJiPZe/llhDtZS0cOn+Qsy66ego9a3Uo1B8JmVKyQlu/iyv7fEQYZne6KYMAJLw0zLZzxXpN/sPrXxP/Bint4lubNWNEzyLv2u5Yky2on1d5oNdIsATzImsjD3qsNlOcq/I/V6+qHkSb/q+rtSc2RwgQ8RytXaafGq0Xt2RizlsoaJ0XQVp+yBESe0ZKTqUuJ3qLEwQUfSKaJOQZ/dGnKoiEEHmJ/7jWgVt4h8JMqsNRgC7vz4Uz80u2qGpWh6YPBOIxx4WtX1pOnosSDEU9WNEg9aTr8hlonh1IT7iJJIKFOfKWiGBfhTnEeoMKTzwvYFGdmwbqxNbqVdmoWIrHjmsJzkPaxUqOP/92WJ/SKaewvcVip64tP/VvWtbHcME/sND1jXs5KREeMTNjSdle352nF4jYbamFUk3Q2DtX2rvUS/rqLLvYVhnTtpgroKjSqk49QN07b3AO3NJ+4LaVbKVZydxo/128NdTsPIYw5BIvSl+ZOWC5GTImzzP/SQ68z3GlM1HniQHkQJCTJg4ZSHQNw7n3ZMn88QC83mJLjXqftladt4j7GgcNcCCY/e4SkSawNFeodUo5DoGNalQjjfi+BD5JPsIkKaVFpcmUMN1NIoFtyH0ysMVckwu7pXeVW5gmCPWVL0XmQx7fSaYZgQlmKcL4ho3zTgFtK7j7LFR79eVK2E0DhN8jXd3DRd5VMMd6b2X0In2wIs1eVxgNBKC44KEzkbf0GrbYmvhdAf1p9rfroZ3MRPuBPkCN3QoyA+Gzk0tVhGpcUvgBEfcVAgICj/cs/9fpN96I3c0la813cNrolDHETM3R2hdVK42x3N/t/Sgwk3hT9+Ka44kaPCB6MnaruDJ5PLaXxA0KeWUqwmK2UepjImCNSxPNRe3UYFljLo6rSb9SiACngnJEuTgx0cDSmTQdvmzAloaTv4ji3LHzFQqsYGGHpgOzUkEAt9EBcgPbMu01t9dpWyUTDynqb6Gt0aH35n4Cns2sUJJ0uW9AhNS3hloncyV+OJalhZVVCKnbSCFxrYIibNCJpMD778aEEPV1DwAN/YgGKWGfylaMsRtM0mY7n5Dad2RRAkpgU3s367EjOiDOpfIG5S10Ez4PoifcXs8cyV46+fRatS9U3c8U+Q4kjGwQvaWlktZKnyiYblvoA+j+u4N64vJIp6dJNRqFkjYiwQUYPHJJSHdt+YHtnaHjsy/O9HU6fbuxKd2dGOCU34EogIPT7Nh51q4JZ+owAcT0EtJkxGaP6mfW6FL1rtKwZarzEAelvPV9UWe9c9gzB88G6dkKnRFpg/YRbVCJ2UWUAvjer+2KUT2wv2mxu0wSY+NrkbAd4mU50xcrc+kFlKHdE+QtAr7nm8ZjpYwgyj+FWeA/0pbsKMUxXfJSVtH9jB62F6/FaWsn23TeFVtfh4KTloYW5Fpwm0efBnIiZbC4Z20/lBZThPLwit12fSv2JtBltn6bgoaNCdu6PkB4zW3AFfxeQSbiJAHmzcrwWYIvJSp+WbHHIiK3LxCarNIglQa9Ui3UBFOXg72Sqg8gwIOOzo3mXJtMoI7JBNXTA2NnMkkxsxiZwmiIyHC48YclQt5wY1s4YqrD8rJHOfWEEq12xQ4qlJDh0BoqeDqH0GzPW+wBU3SedmyUcOCY241H2K8P1dbPwa3363KMunG6qXfSlgaFyIb12wLrYl/1VQuh1pN676QbgYHe6WN27aD3S18sRN4q3T03V+wyNvCSyrxC7LVs4LVhDk3Vk8Po0YS+5K+yypCOUSRtS1yEXzuwFpjC201HagEzLkj1XuKxP/N1u+qkx+4KOUhw0tEU8bpuj1/i36RiAUmlDRP4fNQoNGpfLl2e8H76jl/suWVI/CsX0jEWm7ZC5Gq/8rXvH85vc7hESCAtbFK6rkjgO/mf7a48VDuiwBjtbusutRWjmLGUNi27f0nuBQCQ5KweJ/c1zYx0eRQIBb2Aaefn0mPp/1t1mi7v70OjEMDJpCVHmLKN9fIhXloXM/az92IXTpO17Z4qzj64u+3lJ7L2QpClMV6EvLDms9700stZDqiM70e8qp3wJPmAyuTPG9y8im2y+DSTeiaE3pmwZV+rLOcNottpd8jTQH/KXTzswqd8J3exv616gPr5oMqVfUE6UauXcDsQtBuLfb+6U25tkJ2t6LaB9i92Y1k5sNCOzmkBSxQvZKYrkzhocvRWCM0QVV+ofVp8gPcweuY3UiI8SHUBFON8n9ksD8Eik/tmcpvrDan9zc4i1C7ILaZSk1nSD6RxU72Xah/MQD5Bn3/VVlKYLvo2OeODJinXwEaw2MTdnhHtyQLsB7+Qm+WRmI6bEQpD5eUia2OZn+WRldZ70llpnBKrEmMH5cFwatvDqorR3SBQL9rIv2eLaJlCEhWe19ulcMWP+GcVHtBBqZAM9XiOqIoaCMaHWhapg1P+3VXGS3EJf5FYbIdDAQ70IV19fLlIjY5FeQX+lycatJ9QLC5Vd2Ukk7kmBYt0Z0aNnNDu3K9zX7SPjjIjvF12SjWLfGQxDeJqR0ObxBEZsDSUjPitJe3RoVMAI6mAxgxjGY8dhbEdUUNwUUKWY33PmGuFx7xZcLKq95389rn3wTpTNn3KofOPpVVQzx+egsbzYehOUZbGUDSuTOP/VYDnJ5Aif1tFBCy/+QV2mC0q9omp/2frF/BFmxeEtkLJi4x0x5gy87zI3Ewa9nHHuXwJC6ckTiPqG9npQpdXwJgwl5WlS7kwGh+cHWUGa+CWqUzvSkgc6IaotpTSlX6oTUKGvMkO/KLupEIb2yjhORpNXMwEqa+eeg/MGCij/l+26XiEaK5oFabXL+Kora2CMSEpr9C3LFPX1Nj8p9OkokpMLL42yCs5vq5gu0yhQePC+qNUUa1gJdwxMXBTiLTp4p1WFJwGVVAaEBL/w9BV6n1w6jBbcklZyE+P8pc+b5eIYJSbS5U9z1j+53ESs1FsFT0p1c/htPWXMg03JCZHeJDe4Zke5UqfK88XFDdDKdP3PVvkYPUM5/qfhMw7hstG93/rJPe49vI5AMXG56pvIhqQfBg5IWeDhwC2fXhR+R8Un8jFpVbIZyApqT0OrEUjO+d2N5AZPCEB4KQahG9yxDmcGIb/3BfoETCrmdfScj2dgmB+dGZipUr9Ksi3/0C7amikTaJ0bh6OL5Ixso3Em1UC5mvotHLOBAflmfryy+FqsUo0v3MkG/3+xFLUH97RbMRypiWJERjcd8hs+DG2k0AcwIpazAFpCcLDrtQvo3AeDHNK6Ix2pWwuUE38wIDn9LgtKDsO9ne28otVlwUbxXWMDI0/r+S6eD1VRP1hXNQLjN9Lc4ALEkBaP7hb5+K7z0+6K8zwTZslNcJcHzthGOWRXo8bIX0K42MNaETKTfnEz3Id2dMgaFS6ZvNtO6FtM/VIpGtZjOadWzpfiJLJUUPa4ntky4VDtZrHaUkjgp4wwFimpB4LmPJnCaqDCc9gFk5W2q+hFjV1t/kb6Xs7v16y8BlmUN3Yq0Qw10UyMUHM3B7YuF1zcuEbN6VpLJxky3qkp4Ar/49Z8WnuBvKExZFspSdbb5BVaPFn095Wfk2LMGjK8XSeY1YtbO21aBW21tW97upUVq9n1oR5oXU+RDNOby3gp//eauUhm6a5z0m94vao02RlJavslTjVtDZk0pGU9PINJAxmQlQe2oU3S5essZr1j1xxkqYMxKzTVosB5YnlrTSMQ7XWfza70nFHLXYdA+IfBS5YlsmPy7TB7rlLIkJaom5aLH4QwDnH8Bs+G8yBttyaCZq3meJHJbdbU6JakMDBIiOuqeQhTGGw9uJuvcF8+aCl+R0WeZ6tLRqU37BlBPFMmR1Wphc4Nl6fq4CivZc2dPzKHIAUGuWfi+m5Otuwwl8sZ4kxJxPFVOT7dQd9+8LlKpM9pcG+sd6QnAWJ+ibNiv9Qif8tp+wKf8jmGX7iVg4Zt/GdPHiu73/NDdt3oRoRkmAllSaOho5of38PDz8XyGkUV9L42Bg1kA/hHS8+vS4yLuW/3dZa7GSUyvU2xuCaAPQM9OAHHznI7egqQ11c9Q+HRvg+fyPgLrCXvmTFp4GdOFbB62oFa2ksY2qQkKTOfJoT5TZRI5Lf4GBXXdmN2JW6FaP0IMML8nGmQAdL0WFyBlQUuXfOEOOKMNx6qHczYDwEK7pB5NBQks7MQbl77x0XNXyR8jGwrLJ7tFmkaudwu4Wrndydg7Re7HJNf7+jEV1OUkbue4DUBvGktKlFvGZRSMaRHQDyppgej7otQLO+QOCHuPFfrosmvmlHMLBtklJGEgtB/znDk3BnE3cLUd7Hj/k+AZSzxOYNDVpqMWoiIkbhqtCi6VfQIXDv4oFELi/9SmUe9ly06TUhSWqZ6b0jcUDS4PpKdgPN+mwssi+HcOZJMblNW7LY/y2g0gzWe30Pc8vxIUajWoaaN0t3/sS74TMiyXGE99LVKIQKz1QPS/3PH7BtgmEndn0sy7JjEVkn+NE/DQ3E0OleWg2VPITb9+ZWBoe0BuUOrHnwH3o2IiNYacrPwhvPA265atWMicBdie7Chdj+KkHbHmhstwb9wKWEDTIguZED+xpZSzcBZnzYnc9zC3vTzfN3wbREzF01aaNgPbqrH6tJw68TgRwF6BZl54ssRpyCNVRMMdl+XOaCwrYXTgpMcneaIT/7uTUKDm5pMlXS+AHPWrGJRXiXxwvXxcZ16eefJcnesfXbmpJofaSyGBVWpjwDK9w+lly2jcElz6nlJzDZf6fDlqhA9mGHk8do/xdqSEV614sdQy7NUF+5jXq3oX6DRylc4m0B+2lUJfkuUb2Fw5cFN5i2E/nKG2xJaeg6WmyKM9GHVHxw4z+HiwFYGDxg3Gh2im7cDb2yCGhvQC4k61vXZYpmnxs29Fl+xCWvw5CvuWFtaTCbkyf1N7YQiDxUIiA4YwK3xYF5DJj0ZzPIu/CdHREEk7hz2ersPx9ePhHjRY2Qj6pfMvForlbPEHn00e9okfxOhJX28oKnensfKLxlOBFFHJhnY9zmPSSxxjTgsAEaNUiwhI0w7WMgQRtxjx6GGMi7A6r+D97fxPs1IBTCfh4VHhrSYVuI9S5C1piV58KWCCi8jX2l9xWFBqxoKsszWPvSZsb0iEOOATYW9zi9AIVk94S+dcQUKGxpawGSTLX++mr9SjReHnQ5JsieOX27Qozbiz2k+R1xB+0+s64FrCdv02pp9kUL0J7WT63IA8kZNBwGc1ZLXeNEjwDEa8LLi80cgbaLoasAXX8M2rYnDf2MS9JNtnce6zdM6CbfHkJJA7xJvbGFv5oeS54iRLJODU/gKjrtE9KqyXMAwsIK1CpEdyrxCW+YpzaRR4LE9EHrk6nznENN5dcm4yZ/mgB8hA5hJ28fKGfVIGpzi0COh4glwTxpt2L66fP90CFJdO7E7GwShq0DCbYBOK0315Zzmm+SlvdmqUU89vjEgJIVyAeSoQLsPwiRTmm2jdkl4asASN1YKiqwqmQ9fPKKbX2zw79z4fO1DtEszACrCue8DKZkwq6IDpFCO7G/N5ae93C6/DExQ3G8rVus5pybwUOdfcrH/XLj5Ri23KHYGVYiK0XlZERGfkGOCY88u9RdXnnmKWsVZPJeT1GPJVMRxwd8dAJomOcXSLkYuTz7v6FgeY0L//vkwXLiep1B1kWbnh4sKjCDySMstbnLyv20DQdcryclp6Ag0Ee5TRQfohNlmblDbzlF+u5MrnwpZ5VZch7cfrDI7HkIzNU4q2VGGoNhZLy7VfOUzy5IH0ALj1Ylids78EGve0J9edPooLhvQGeicMzYnMI5bR+hnGuuPzB9fuYxWpIPNCK3doZzHST1g4ZIuh9BkFojYPIm6fXdoPUXYBpGzz3zZyi2aCI8CujG8FcqdLcTj4S2UNPhbOGtNJpDP3QcqxVE27YdqrytR6uvIiofc8YigibD6OvrcrsqYjxrnpkyaIGYwqaxlj8pt9uDnJ14PAAP7V/WO7ODr0sETXD2urC/BjCHoPV2As5ZfcVgcPieZx6JD897zpHNNJxhW5EqjHZq8xo9IUSvJMoG54mMpoyZJsAbkl5omzhm8A2jq27RCcuYB8dtbaUNUm4EXUJVVeOP15DVMPkk+g1WK2LtGzvt/HpuLWgKhhelFum3IuEqWIUmLfUugKMrRSyOkhetqJBuZX+EbkGML+6L25LAq2ZmkIhDHdNfdUBCxwRoaGFxStNKiALz7Wl+tOqg1qXVukfcFrHjWgLv+ogRslbnNaKfBGxvAB0uouCLJWK2kri0HoMPXyHPy5pJ/rNzlutUgqeSSLtWrkH8pAeudVBzNKfOWFrbslL585VlWOiBeceHpyIsKuFiymxV0TBEpi2xdWZ8xc8ayzW0BTjW8Rsva/0sijDr9kMSaZixtAp5WaQtSDriYQEXlOY0ZSyODCowqX1IXdI7YTqy/dhqnB2TBOFmrK6sxy4/wfYLv6Zi1iZ4OKNim+vTUG7NNyy5nrKNvf4FPsADQGdQhRrPTbCuEtsMH45wt7nMOcN8lwuKoW7t8DUF2z1OrZ+UhZFH/70/LsK+yjKgGpqcXT0vq365pwb6PRCEakqeYHvk1N5i0NvGSQmSULZz4mEatIm48P+PrGQ/FDqgAgTS8bNJRhkYaIYbXnS3FOcJsIBK30MwtX0yw244HfBu4dNFjmQYmedWFUDcRFS7bQ9xU0cbeJvTyeDwIpEt+omlRo13NvSuVgQ8pq7LlK9Y0HNsF+M4J5CzP952Bu/ARwa/lkqiJ8vd9WvN07oUhwvFYEt6vnu7aR+ap6VpouNo5m9qApq90Mqmwvnrhe/PmJUjt/72GECrnDrh4FhxCUy07O+XC3qoSIsXteu6KVQuVm8w1TZ85rAaVazsgolHA4S2ZOQiIVpHMWZ3Zx6MezxpZaMWLob7zpYqOH3AQA6zCWpC+b63GSkXR3D7FQoqNcESQMd+WjLRkgVz4TYjP0+2KLudWJ4Rx7IeC9FQcH9ztQARu5Mj3FAftS678FqiYfHt0VVHB8eUTz7k6HB90aKePEDOrFIJyXOXWWSr2NFTwZ1HqxfjHJecr5G1AHV3JZ1lkwXD9zYHYY5jIbgbYMIp2fHpELKXQk7rdrqEqWJfN0VaOtF7tX8dboZGjM/kC4LP3xh7WiCvFlR0DjY8so0fc9fT1Q/SpMHjDIgke7Gi0014mRdQ9S8LkDihJ2ew5wNPE3ntb8eRSy4GcXCt/Pve9BfavvlkCwVCCofuntvVT/q/R7+m5iEBQcdECdpzLQpOy/mJ/tvk/q9uLZvKGeliCin3pp0nS+6tC+q1KsY6dBeSELyY4b9hok4sZIG5ojQ1jfT16Jx5m4li07KirohD3z8xxzgZPm47p6ZjCnSBEtwAU7EATfcPPp2uy3M03Fv6ve9yAbddeMm09iusbE6okxFzc3HhcmjQHhKMmpJZJ0J8JH38lq78C+46NnA440650nBxurUmMsmLb7VYU65IsfW69qr8FEXGI/wBtSsgkDQ2oyo+rnaVG0TpLGzARQQjY9lgc9ssmQ6VakKRg9tkHCfQk/+UggRdt8Y5xp546GoAXNt/WopkoAPiwD2zeUbwVew1JAor6/qEXNQUF1IWwCZCYpX+d3a4kKtLqUo/KJ4QRfT6SIW+YEX0U34siQ62PGPFAQXxAJvN5pkm9sXm33ADS7WOCraNU/ANRr7UMhqSnf6I9n2JRdPJ7z/dv4ra1roXBBwx0XSTnCWCpaZSvNy4AxB3KPQjVo/iTV96yeg3M5/DnpUY9vlvq537pwu615ADDwYRCHcHx714LI6ACmg9so02YmcCMV7E6Imn2XiriZZKYrQclbOC1W6WoJkgJ2ouYitF6VqPpi/nK9xphpdh6Wrsamani5Y2gteObOUlNFyhQqidqmAjni3AxkgYc9jhuw+JI61fBN1ir8a57r8ppRoOgLdTbtylXLgJGuZ2bILr92MskrYjcNvUqDQbKmgF9jyMMz7z2RvuTxwbHO1EvPjGwgW6BKOKuZLG3bdgqN4r7joACiLteJV9D9JDCknVUTIns3jArfmw4ZVWwlY0Xs1zmpwHSs36KNf8v9EEa5/regdmI/woWPVDmvOfwECFoc8UKLT7p7/m+lVMdgKkZd0XBvB6b8kMbedLKfr4N/+B2P1PhOgjJzHbSJSvwTY7W/9ANNTI3PqoFH8DhZKQcz+FeGYwohPVqMm27ZZr1EtuXavlWa/2Am67r1haaxIld2/EvSmak8NbJ1e21E5b4onMBqNDftD7TUNszqu1cKx43Yrv1PjVNXS7VXPg7PEm1jbfP+bzISilErzaWiGvxnVjUiF8vnq7zqiBLi0Ao3Fu2dEaMILot0BT8Rw4ARg2J18pQ1avF9/9qslNGhX0DN6yKJmQzfo3wh4g9bx/GVopCgGi7LEyt2ufntZc5fGd3j9Q5M/DNdyhFhqn+1KnAXEG3WvCfndHhm8EwpmCykuLIkKuseFzsEE9Eei9wFVdQTcyDxQP+JztZ2r8COBT9KN1b9g6TAhWGqdptfz8utWIpWNFSQroi2Vdwha9J9f8pFmlVwwHclnuWjw6F925JBfAYA6b73jwvVnxIQlLEN7h4ON6vl1MTY8XVUZ+WPJ5lB+EiZqgidMn3qHAXRySNE73qmxQWh7NImWdHPJPMfx/b6v51ZaBN8qmmRthBl0eqV/vupQvrrNYMO8RKb2tdgWTVEHw2entWeEPdpLlJmamFuC5Vd50uTga9Rz/5qtT445E0LfELuPfTF9M3TIYQVFdn0E0pT2hCMxGynnGJ7fKhVb6KlAuzNNS63OLJKpqDcdW/G0M/HZAON/+c6OHuJx7QAj2pH+Itp45IdGRGewIbbpIgsYpHLcIE43BGJvIqc8gUwwo4iIs1Bk32Y/CZU5vakN67cEhZTFc9oraona9vNqI9A++OIaWbDdr6o8RlAohT3GzUQk/7IUbjIKttGbUFWA3pZwHRzXJKr9Fl+oLT2XEMhq8357qXaNqy36vS0tU/yAn53o9ucvIzuUTmEpuv8khATOwwzO8C98LXOJJITsg7JQehmlMAztB5gC/uvp0RQmnnJmtOGOGnTbbEMle19KHWqKjzhKzQNw+o75kTQyQvCvcn/PCK2K29vpSUH/LbA99e/zqaIkcvsObBpQeqIm5gYST0lrXiv2YcQMRV3kr56F7mwpC+o+BS+TvLH4BVBYt+Eh1vPj+hHYM6Jxqb8VM+0ol2z7P0/GI6BtYIvkDjMHwNckvGCvYlOV7WT5wPoaGPMTnPjFGtmV2kpyyPT+2RFHyBia+bakMD/JoyPThfmYHWM0cWAN6dM7TiDkRJyKQq4W2UcnvZCKfo9MVWNHX+lx8spzXvL41D496jAg/tCzZ8enMnmSdWdNTt6yJwitDckI66FjP32u8L7zE4qPHJiZuYX0wAlegnEr5Y6QTgFblTfnsPBk7S4dWUaBak6p2xIBDsyrd31ySclKGNwdnV3/vUHUqaAUxnztjmvfL35+r7WjVL6pqwDlUpZH9H+hw/3oqxKqCIQ2JwGn3ZEZlpzgX5oXUijLu254wbhLAWcrMzNPVh9QfYzEptvF249hBXSpIbAA0NFuRJKmkm7PVsTM6BcCmB3rCcq7zxBVEKXPfqHS08bRE9y9RMD7za7maog9FkrV+sz3C7jqdDuTvpw/wbAyKlANZgwpi3u7yv5p8v4lqBiNCeuH42+0CMD92bfuTuvdUFcENjYhu4NDnXO01JvVVIBYvyt7jKGuvbCfpdTKFHw/JwbmWvNdkFk3eTHlpZCgaXDGOEu+CTqVhd9CTFsHgahv51542vYOvosNrGQTW4KfyAoA4WnUDU34muv7DLQPwaUctKPI+FLkl1yYm1nwAInF8TYvWG15cLU+pitXHd58pH8yv7fyy5alJmXHwPUvxUV+yKDTnI87F/eqrz8aJX3+bEx0wXy8GQ67B7eGGkLNDrayCi3gnSn/jc2b2nmtjpexOevvLguGh/61szY+7sBY7oxDYg6csEx1ETMVCsQsfLgDhYUSETMaoN6U/q9TNkl0su3tJzn/gutopdyeWbSXXjsNVGLJRW7EdxCRPqanMP7rXvG5VZrtDzNn7k18q0Kp6P9dZZgHj+OzN5Z6JdrVy6xZGgJMGubnA2yttgkMBt0kdsloa0jHtOs5k7pzR8B5Xa2KVVKVP9sjPySIijdgXB2yKEfRGUVJkkhKsE401uniBmz47hFQXinfSj9MUPLh9hRoFZpltxoOsMYmE49k4xYTmWURXkldCScbJNq/v+HcI02+HCCyZBDgSuXL4vJP1s9m5JfTg6wmEn7bOXNIMZtkjt6hT7p4qah4znK4/EZU3RuNEzjbKo+MaqfJHYEkt5SlI6HQxhD4hsNW7tLnVsFCik9BGErFsEm2tBcOUa9M/lSNTC2B7zZOilss0WuJVJmq5IzqxvOo9oI3WGEl/EkiaKaMhkeyhIw0v/ax6WniywUBLI/uXPml6tw6HTazX/xjU/Ok1uzutx194WENZBNgfWZb8HJkdpweh83wbw6efiTzIeo8NZ9qM35iKLgIREzfPEEd6fZdH9Upqu7oSKsIEB/CFLbjZYnT29NSbgpcbpOKzSHoJ/t145LJdB9Nnn4Bj3+Unmh6wzmTXz19jHn/TkoCLdYeTMJ0sVraQ6dqh72eVPOaDYUvDfEfIiwcU0I8KE2rlj4Kvg1oa9ykiDG29z6/NafdLJDPC+n1t7F21jKAUZ+C5aDl0Jk97ovoVAYkEpHWXiO3x3KKb5hGiRPP3HCnYRDde5+YfrOr6LIpYL+WYQaPobrrwWx1p1DcICvUHDtqPFVopMRrvmDYMruCkg8BswrXRFBj47gtwUKMrXtZIBLtxjgLt38uXIv0r3bJzuFzJzOHw9FUTIXIY5bX/5JX9MeAPjv5quULU6q3TgsOwSzp2n7QSqMNHErqEz53yNuKjVSwY5R+Ihyv+rSag9h2alws9smla777C4tLP0+WepBBsbR4xgJFlfcvJP+vjsHI20b6+BRq3+Uz9C+DYg4+anU+keOYlkhAEpr86PhajFkV0i98c+IZ9vVx4T2Us+EyiMAeDSisQ0V+FQkYXDaSrrDvY4D5T6lKx7H0X17nvFsWRbAU0xE9DwWeSAMDs/lsQSJnL7qhPtsfK7i71+Zgo6uoOWjKr6ZPcJdSNXNnCs21Nl/VafgVG2IVRneKthtDtKmjZZf54Tazm4WOmNrk494/8mafIEe3CwSccqclYf+S3lo+dloJMLEgoD2qsktItn8fxq5JiCdfcf3vjGy1OHH53mkkxGwrFreVjgrosxsX+PsGhUihfn1hj0Re6kDLD92uUT+C3U7dB5oRzxsglNkaLydx/ie8g0Td8yl78qiVdkGkZ9Xc2mjixdY+1rmRkvvtyFfF5+vsvFqC8mwlgaAT9nqWnomd+ChHWuGZzo9701giYgXV0kjUBszpU5WRipzuyrm7xV37Y7sMNHyYtn27hbO1+oZ35UmDFih5azieIbXtWullcxE3poRPxpeyeeDfWGdg30jhbhC6PQhGtyng3qkN1TG0pJIpmpErRtlVe6x+BnQ5Kjod67fL19xvz4mIcVRMxgZwVwI+1ppzfhVZc+OlWi7JPQPLamNrOgozdajuEYIrQ0lSo5Ifoi9QKQp1JFxP+7pr9sQwPEsXVzyEFGERNNUGlytRHWC9rTKvReGm6QSIO12gZTLZkiVinztJdF+/NiBdvBB4QuVhCDGuFOZ5vdecmyA0gZVqFWrLNGEbPYrjNdRcmKKxYZgx4wgCMjAIIBrfT6KfjlpBJ3o7WbUy8IqbGJgHDhjkUk3aEe9Mp3MTKlnMlZ/9nkOc2Tmt2PtltO7CLtYArUsORaK3aukT1XKGfWPBfQAcKiA2iBU7ffVHVdf7ilARrQLKEALwrawb86KlQaRGp6OceaAq2Fa/BprQqhwWv04kSDYzFIUnRbeOaFepLMtvMRE2lrdTyE/TRoX2o/J16arE5LciFolBYYaFld2/WFPQn4Yyk3/vERbCiuF5qa3A6gfKCtk7c08i/p49AHGibd/c4Rh+WWaWQ+6qKjlL6c/Aw4kUkiCxmGBalbPHcZQFnikvyAWQat+iZT2WDmYITA6dfla7ZUEc1vmr4m9whMtEbaiZfwUNOl+owVW2FJF857zjJz6sQqLzuOgpEF3ubmLUc/zAB4CdjN/WdCn3TYVyw7ERJP1+Prwv59Z5EJXDDqKAe5zvGrFrLVSllcS57mf/nmbCZ/8uimoVH5G5B6RVauEFcppcl7Uffzygll6aYO4/9bpml2egZ9TP6oHuu8H45o+nkSuVmTvTxAxc8QAAAALSNHupnEjkC4gI3yEVBetn+LO0Xoy+QHOvKA5p7LeMDD+XCGYikcPmU8qSZ+rr8FGtSmWEgbumIWzuVUxrZ85I</property>
                 <property
                   dataType="System.String"
                   name="UserComponentTypeName">_2ndAsset.Ssis.Components.ObfuscationStrategyTransform, 2ndAsset.Ssis.Components, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98</property>
@@ -1380,284 +1353,54 @@ ORDER BY
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[InstitutionId]"
                       cachedDataType="i4"
                       cachedName="InstitutionId"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstitutionId]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[RefNumber]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="RefNumber"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefNumber]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TheDate]"
                       cachedDataType="dbTimeStamp"
                       cachedName="TheDate"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheDate]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[PayeeId]"
                       cachedDataType="i4"
                       cachedName="PayeeId"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[PayeeId]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TheAmount]"
                       cachedDataType="r8"
                       cachedName="TheAmount"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TheAmount]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[IsCleared]"
                       cachedDataType="bool"
                       cachedName="IsCleared"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCleared]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[CategoryId]"
                       cachedDataType="i4"
                       cachedName="CategoryId"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[CategoryId]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[DueDate]"
                       cachedDataType="dbTimeStamp"
                       cachedName="DueDate"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDate]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[Comments]"
                       cachedDataType="wstr"
                       cachedLength="2047"
                       cachedName="Comments"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]" />
                     <inputColumn
                       refId="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform.Inputs[Obfuscation Strategy Input].Columns[TransactionId]"
                       cachedDataType="i4"
                       cachedName="TransactionId"
-                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Obfuscation strategy."
-                          name="ObfuscationStrategy"
-                          typeConverter="_2ndAsset.ObfuscationEngine.Core.ObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98">0</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Is column nullable."
-                          name="IsColumnNullable"
-                          typeConverter="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">false</property>
-                        <property
-                          dataType="System.Int32"
-                          description="ExtentValue"
-                          name="ExtentValue"
-                          typeConverter="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">0</property>
-                        <property
-                          dataType="System.String"
-                          description="Dictionary reference."
-                          name="DictionaryReference"
-                          typeConverter="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></property>
-                      </properties>
-                    </inputColumn>
+                      lineageId="Package\DFT-Ox_CheckingAccount\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionId]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -3132,6 +2875,10 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
           Id="Package\DFT-Institutions"
           TopLeft="5.5,209.5" />
         <NodeLayout
+          Size="201,42"
+          Id="Package\DFT-Ox_CheckingAccount"
+          TopLeft="476.5,311.5" />
+        <NodeLayout
           Size="135,42"
           Id="Package\DFT-Payees"
           TopLeft="221.5,209.5" />
@@ -3367,10 +3114,6 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="201,42"
-          Id="Package\DFT-Ox_CheckingAccount"
-          TopLeft="476.5,311.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
           TopLeft="380,332.5">
@@ -3402,24 +3145,40 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="171,42"
           Id="Package\DFT-Categories\OLE DB Destination"
-          TopLeft="NaN,NaN" />
+          TopLeft="65,236" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="150,42"
           Id="Package\DFT-Categories\OLE DB Source"
-          TopLeft="NaN,NaN" />
+          TopLeft="194,112" />
         <EdgeLayout
           Id="Package\DFT-Categories.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="269,154">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="-118.5,82"
               Start="0,0"
-              End="0,0">
+              End="-118.5,74.5">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37"
+                    Point2="0,41"
+                    Point3="-4,41" />
+                  <mssgle:LineSegment
+                    End="-114.5,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-114.5,41"
+                    Point2="-118.5,41"
+                    Point3="-118.5,45" />
+                  <mssgle:LineSegment
+                    End="-118.5,74.5" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -3438,24 +3197,40 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="150,42"
           Id="Package\DFT-CheckingAccount\OLE DB Source"
-          TopLeft="NaN,NaN" />
+          TopLeft="126,255" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="171,42"
           Id="Package\DFT-CheckingAccount\OLE DB Destination"
-          TopLeft="NaN,NaN" />
+          TopLeft="136,120" />
         <EdgeLayout
           Id="Package\DFT-CheckingAccount.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="201,255">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="20.5,-93"
               Start="0,0"
-              End="0,0">
+              End="20.5,-85.5">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-42.5"
+                    Point2="0,-46.5"
+                    Point3="4,-46.5" />
+                  <mssgle:LineSegment
+                    End="16.5,-46.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5,-46.5"
+                    Point2="20.5,-46.5"
+                    Point3="20.5,-50.5" />
+                  <mssgle:LineSegment
+                    End="20.5,-85.5" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -3474,24 +3249,40 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="172,42"
           Id="Package\DFT-Export\Flat File Destination"
-          TopLeft="NaN,NaN" />
+          TopLeft="137,243" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="150,42"
           Id="Package\DFT-Export\OLE DB Source"
-          TopLeft="NaN,NaN" />
+          TopLeft="209,97" />
         <EdgeLayout
           Id="Package\DFT-Export.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="284,139">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="-61,104"
               Start="0,0"
-              End="0,0">
+              End="-61,96.5">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48"
+                    Point2="0,52"
+                    Point3="-4,52" />
+                  <mssgle:LineSegment
+                    End="-57,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-57,52"
+                    Point2="-61,52"
+                    Point3="-61,56" />
+                  <mssgle:LineSegment
+                    End="-61,96.5" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -3510,96 +3301,40 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="171,42"
           Id="Package\DFT-Institutions\OLE DB Destination"
-          TopLeft="NaN,NaN" />
+          TopLeft="152,231" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="150,42"
           Id="Package\DFT-Institutions\OLE DB Source"
-          TopLeft="NaN,NaN" />
+          TopLeft="143,127" />
         <EdgeLayout
           Id="Package\DFT-Institutions.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="218,169">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="19.5,62"
               Start="0,0"
-              End="0,0">
+              End="19.5,54.5">
               <mssgle:Curve.Segments>
-                <assembly:Null />
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\DFT-Payees">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="NaN,NaN"
-          Id="Package\DFT-Payees\OLE DB Destination"
-          TopLeft="NaN,NaN" />
-        <NodeLayout
-          Size="NaN,NaN"
-          Id="Package\DFT-Payees\OLE DB Source"
-          TopLeft="NaN,NaN" />
-        <EdgeLayout
-          Id="Package\DFT-Payees.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
-              Start="0,0"
-              End="0,0">
-              <mssgle:Curve.Segments>
-                <assembly:Null />
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\DFT-Staging">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="NaN,NaN"
-          Id="Package\DFT-Staging\OLE DB Destination"
-          TopLeft="NaN,NaN" />
-        <NodeLayout
-          Size="NaN,NaN"
-          Id="Package\DFT-Staging\Flat File Source"
-          TopLeft="NaN,NaN" />
-        <EdgeLayout
-          Id="Package\DFT-Staging.Paths[Flat File Source Output]"
-          TopLeft="NaN,NaN">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
-              Start="0,0"
-              End="0,0">
-              <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="15.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.5,31"
+                    Point2="19.5,31"
+                    Point3="19.5,35" />
+                  <mssgle:LineSegment
+                    End="19.5,54.5" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -3618,43 +3353,43 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
-          Id="Package\DFT-Ox_CheckingAccount\OLE DB Destination"
-          TopLeft="49,131" />
-        <NodeLayout
           Size="150,42"
           Id="Package\DFT-Ox_CheckingAccount\OLE DB Source"
           TopLeft="42,25" />
         <NodeLayout
           Size="229,42"
           Id="Package\DFT-Ox_CheckingAccount\Obfuscation Strategy Transform"
-          TopLeft="328,92" />
+          TopLeft="347,90" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\DFT-Ox_CheckingAccount\OLE DB Destination"
+          TopLeft="49,131" />
         <EdgeLayout
           Id="Package\DFT-Ox_CheckingAccount.Paths[OLE DB Source Output]"
           TopLeft="117,67">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="325.5,25"
+              EndConnector="344.5,23"
               Start="0,0"
-              End="325.5,17.5">
+              End="344.5,15.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.5" />
+                    End="0,7.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.5"
-                    Point2="0,12.5"
-                    Point3="4,12.5" />
+                    Point1="0,7.5"
+                    Point2="0,11.5"
+                    Point3="4,11.5" />
                   <mssgle:LineSegment
-                    End="321.5,12.5" />
+                    End="340.5,11.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="321.5,12.5"
-                    Point2="325.5,12.5"
-                    Point3="325.5,16.5" />
+                    Point1="340.5,11.5"
+                    Point2="344.5,11.5"
+                    Point3="344.5,15.5" />
                   <mssgle:LineSegment
-                    End="325.5,17.5" />
+                    End="344.5,15.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3665,30 +3400,30 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT-Ox_CheckingAccount.Paths[Obfuscation Strategy Output]"
-          TopLeft="328,113">
+          TopLeft="347,111">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-108,39"
+              EndConnector="-127,41"
               Start="0,0"
-              End="-100.5,39">
+              End="-119.5,41">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-50,0" />
+                    End="-59.5,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="-50,0"
-                    Point2="-54,0"
-                    Point3="-54,4" />
+                    Point1="-59.5,0"
+                    Point2="-63.5,0"
+                    Point3="-63.5,4" />
                   <mssgle:LineSegment
-                    End="-54,35" />
+                    End="-63.5,37" />
                   <mssgle:CubicBezierSegment
-                    Point1="-54,35"
-                    Point2="-54,39"
-                    Point3="-58,39" />
+                    Point1="-63.5,37"
+                    Point2="-63.5,41"
+                    Point3="-67.5,41" />
                   <mssgle:LineSegment
-                    End="-100.5,39" />
+                    End="-119.5,41" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3700,19 +3435,6 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT-Ox_CheckingAccount\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT-Ox_CheckingAccount\OLE DB Source">
     <Properties>
@@ -3726,5 +3448,122 @@ ORDER BY [InstitutionName] DESC, [TransactionId] ASC</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT-Ox_CheckingAccount\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT-Payees">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\DFT-Payees\OLE DB Destination"
+          TopLeft="201,172" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\DFT-Payees\OLE DB Source"
+          TopLeft="174,29" />
+        <EdgeLayout
+          Id="Package\DFT-Payees.Paths[OLE DB Source Output]"
+          TopLeft="249,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.5,101"
+              Start="0,0"
+              End="37.5,93.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.5"
+                    Point2="0,50.5"
+                    Point3="4,50.5" />
+                  <mssgle:LineSegment
+                    End="33.5,50.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.5,50.5"
+                    Point2="37.5,50.5"
+                    Point3="37.5,54.5" />
+                  <mssgle:LineSegment
+                    End="37.5,93.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT-Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\DFT-Staging\OLE DB Destination"
+          TopLeft="105,211" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\DFT-Staging\Flat File Source"
+          TopLeft="59,53" />
+        <EdgeLayout
+          Id="Package\DFT-Staging.Paths[Flat File Source Output]"
+          TopLeft="134.5,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56,116"
+              Start="0,0"
+              End="56,108.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54"
+                    Point2="0,58"
+                    Point3="4,58" />
+                  <mssgle:LineSegment
+                    End="52,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52,58"
+                    Point2="56,58"
+                    Point3="56,62" />
+                  <mssgle:LineSegment
+                    End="56,108.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

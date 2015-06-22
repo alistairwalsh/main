@@ -67,15 +67,8 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 
 			sourceFilePath = (string)arguments[CMDLN_TOKEN_SOURCEFILE].Single();
 
-			try
-			{
-				using (IToolHost toolHost = ToolHost.Current = new ToolHost())
-					toolHost.Host(sourceFilePath);
-			}
-			finally
-			{
-				ToolHost.Current = null;
-			}
+			using (IToolHost toolHost = new ToolHost())
+				toolHost.Host(sourceFilePath);
 
 			return 0;
 		}

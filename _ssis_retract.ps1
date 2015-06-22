@@ -12,13 +12,15 @@ $dts_plc_x64_dir = "C:\Program Files\Microsoft SQL Server\120\DTS\PipelineCompon
 
 echo "The operation is starting..."
 
-$zzz_retract_assembly_names = @("2ndAsset.ObfuscationEngine.Core",
+$zzz_retract_assembly_names = @("2ndAsset.Ssis.Components.UI",
 	"2ndAsset.Ssis.Components",
-	"2ndAsset.Ssis.Components.UI",
+	"2ndAsset.ObfuscationEngine.UI",
+	"2ndAsset.ObfuscationEngine.Core",
+	"2ndAsset.Common.WinForms",
 
-	"TextMetal.Middleware.Solder",
-	"TextMetal.Middleware.Common",
 	"TextMetal.Middleware.Data",
+	"TextMetal.Middleware.Common",
+	"TextMetal.Middleware.Solder",
 
 	"Newtonsoft.Json")
 
@@ -29,8 +31,23 @@ foreach ($zzz_retract_assembly_name in $zzz_retract_assembly_names)
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "A warning occurred during the operation."; }
 
+	#Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.dll"
+	#Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.dll"
+
+	#Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.pdb"
+	#Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.pdb"
+}
+
+
+$zzz_retract_assembly_names = @("2ndAsset.Ssis.Components")
+
+foreach ($zzz_retract_assembly_name in $zzz_retract_assembly_names)
+{
 	Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.dll"
 	Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.dll"
+
+	Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.pdb"
+	Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.pdb"
 }
 
 echo "The operation completed successfully."

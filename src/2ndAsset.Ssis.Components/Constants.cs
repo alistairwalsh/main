@@ -19,12 +19,14 @@ namespace _2ndAsset.Ssis.Components
 		public const string COMPONENT_OUTPUT_ERROR_NAME = "Obfuscation Strategy Error Output";
 		public const string COMPONENT_PROP_DESC_DEBUGGER_LAUNCH = "A value indicating whether to launch the debugger at component initialization time.";
 		public const string COMPONENT_PROP_DESC_DICTIONARY_CONFIGURATION = "JSON serialized dictionary configuration data.";
+		public const string COMPONENT_PROP_DESC_ObfuscationConfigurationJsonText = "JSON serialized obfuscation configuration data.";
 		public const string COMPONENT_PROP_DESC_SIGN_HASH_MULTIPLIER = "Sign hash multiplier.";
 		public const string COMPONENT_PROP_DESC_SIGN_HASH_SEED = "Sign hash seed.";
 		public const string COMPONENT_PROP_DESC_VALUE_HASH_MULTIPLIER = "Value hash multiplier.";
 		public const string COMPONENT_PROP_DESC_VALUE_HASH_SEED = "Value hash seed.";
 		public const string COMPONENT_PROP_NAME_DEBUGGER_LAUNCH = "DebuggerLaunch";
 		public const string COMPONENT_PROP_NAME_DICTIONARY_CONFIGURATION = "DictionaryConfiguration";
+		public const string COMPONENT_PROP_NAME_ObfuscationConfigurationJsonText = "ObfuscationConfigurationJsonText";
 		public const string COMPONENT_PROP_NAME_SIGN_HASH_MULTIPLIER = "SignHashMultiplier";
 		public const string COMPONENT_PROP_NAME_SIGN_HASH_SEED = "SignHashSeed";
 		public const string COMPONENT_PROP_NAME_VALUE_HASH_MULTIPLIER = "ValueHashMultiplier";

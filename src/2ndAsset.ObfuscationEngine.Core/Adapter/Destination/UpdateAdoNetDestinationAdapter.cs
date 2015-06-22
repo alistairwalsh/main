@@ -13,7 +13,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public sealed class UpdateAdoNetDestinationAdapter : AdoNetDestinationAdapter
+	public class UpdateAdoNetDestinationAdapter : AdoNetDestinationAdapter
 	{
 		#region Constructors/Destructors
 

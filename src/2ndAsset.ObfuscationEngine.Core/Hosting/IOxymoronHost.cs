@@ -5,9 +5,16 @@
 
 using System;
 
+using _2ndAsset.ObfuscationEngine.Core.Config;
+
 namespace _2ndAsset.ObfuscationEngine.Core.Hosting
 {
 	public interface IOxymoronHost : IDisposable
 	{
+		#region Methods/Operators
+
+		object GetValueForIdViaDictionaryResolution(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId);
+
+		#endregion
 	}
 }

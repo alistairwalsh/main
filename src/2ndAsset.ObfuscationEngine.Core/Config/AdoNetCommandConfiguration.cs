@@ -165,10 +165,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			// check for duplicate columns
 			var columnNameSums = this.AdoNetParameterConfigurations.GroupBy(c => c.ParameterName)
 				.Select(cl => new
-				{
-					ParameterName = cl.First().ParameterName,
-					Count = cl.Count()
-				}).Where(cl => cl.Count > 1);
+							{
+								ParameterName = cl.First().ParameterName,
+								Count = cl.Count()
+							}).Where(cl => cl.Count > 1);
 
 			if (columnNameSums.Any())
 				messages.AddRange(columnNameSums.Select(c => NewError(string.Format("ADO.NET command configuration with duplicate ADO.NET parameter configuration found: '{0}'.", c.ParameterName))).ToArray());

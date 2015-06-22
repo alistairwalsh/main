@@ -32,8 +32,11 @@ foreach ($lib_deploy_assembly_name in $lib_deploy_assembly_names)
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
 
-	Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
-	Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 
@@ -55,12 +58,17 @@ foreach ($lib_deploy_assembly_name in $lib_deploy_assembly_names)
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
 
-	Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
-	Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
+	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 
-$src_deploy_assembly_names = @("2ndAsset.ObfuscationEngine.Core",
+$src_deploy_assembly_names = @("2ndAsset.Common.WinForms",
+	"2ndAsset.ObfuscationEngine.Core",
+	"2ndAsset.ObfuscationEngine.UI",
 	"2ndAsset.Ssis.Components",
 	"2ndAsset.Ssis.Components.UI")
 
@@ -76,8 +84,23 @@ foreach ($src_deploy_assembly_name in $src_deploy_assembly_names)
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
 
+	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
+	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+
+	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
+	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
+}
+
+
+$src_deploy_assembly_names = @(	"2ndAsset.Ssis.Components")
+
+foreach ($src_deploy_assembly_name in $src_deploy_assembly_names)
+{
 	Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
 	Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
+
+	Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
+	Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 echo "The operation completed successfully."

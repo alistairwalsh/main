@@ -66,6 +66,11 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DtsDestinationAdapter.cs" />
+    <Compile Include="DtsDictionaryAdapter.cs" />
+    <Compile Include="DtsSourceAdapter.cs" />
+    <Compile Include="DtsAdoNetAdapterConfiguration.cs" />
+    <Compile Include="__ComponentMetadataWrapper.cs" />
     <Compile Include="ComponentMetadataWrapper.cs" />
     <Compile Include="NopConstants.cs" />
     <Compile Include="Constants.cs" />

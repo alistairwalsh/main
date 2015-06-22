@@ -16,7 +16,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public sealed class DelimitedTextSourceAdapter : SourceAdapter, IDelimitedTextAdapter
+	public class DelimitedTextSourceAdapter : SourceAdapter, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors
 
@@ -109,7 +109,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			if ((object)tableConfiguration == null)
 				throw new ArgumentNullException("tableConfiguration");
 
-			sourceDataEnumerable = new ObfuscationRecordTextReader(this.DelimitedTextReader, tableConfiguration.Parent).ReadRecords();
+			sourceDataEnumerable = this.DelimitedTextReader.ReadRecords();
 
 			return sourceDataEnumerable;
 		}

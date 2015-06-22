@@ -15,7 +15,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public sealed class DelimitedTextDestinationAdapter : DestinationAdapter, IDelimitedTextAdapter
+	public class DelimitedTextDestinationAdapter : DestinationAdapter, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors
 

@@ -4,15 +4,12 @@
 */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Data;
 
 using TextMetal.Middleware.Common.Utilities;
-using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.Hosting.Tool;
+using _2ndAsset.ObfuscationEngine.Core.Hosting;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
@@ -20,21 +17,62 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 	{
 		#region Constructors/Destructors
 
-		public SubstitutionObfuscationStrategy()
+		public SubstitutionObfuscationStrategy(IOxymoronHost oxymoronHost, IOxymoronEngine oxymoronEngine)
 		{
+			if ((object)oxymoronHost == null)
+				throw new ArgumentNullException("oxymoronHost");
+
+			if ((object)oxymoronEngine == null)
+				throw new ArgumentNullException("oxymoronEngine");
+
+			this.oxymoronHost = oxymoronHost;
+			this.oxymoronEngine = oxymoronEngine;
+		}
+
+		#endregion
+
+		#region Fields/Constants
+
+		private readonly IOxymoronEngine oxymoronEngine;
+		private readonly IOxymoronHost oxymoronHost;
+
+		#endregion
+
+		#region Properties/Indexers/Events
+
+		public IOxymoronEngine OxymoronEngine
+		{
+			get
+			{
+				return this.oxymoronEngine;
+			}
+		}
+
+		private IOxymoronHost OxymoronHost
+		{
+			get
+			{
+				return this.oxymoronHost;
+			}
 		}
 
 		#endregion
 
 		#region Methods/Operators
 
-		private static object GetSubstitution(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, long surrogateId, object value)
+		private static object GetSubstitution(IOxymoronHost oxymoronHost, IOxymoronEngine oxymoronEngine, DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, long surrogateId, object value)
 		{
 			Type valueType;
 			string _value;
 			const bool SUBSTITUTION_CACHE_ENABLED = true;
 
 			IDictionary<long, object> dictionaryCache;
+
+			if ((object)oxymoronHost == null)
+				throw new ArgumentNullException("oxymoronHost");
+
+			if ((object)oxymoronEngine == null)
+				throw new ArgumentNullException("oxymoronEngine");
 
 			if ((object)dictionaryConfiguration == null)
 				throw new ArgumentNullException("dictionaryConfiguration");
@@ -60,20 +98,20 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((dictionaryConfiguration.RecordCount ?? 0L) <= 0L)
 				return null;
 
-			if (!SUBSTITUTION_CACHE_ENABLED || !ToolHost.Current.SubstitutionCacheRoot.TryGetValue(dictionaryConfiguration.DictionaryId, out dictionaryCache))
+			if (!SUBSTITUTION_CACHE_ENABLED || !oxymoronEngine.SubstitutionCacheRoot.TryGetValue(dictionaryConfiguration.DictionaryId, out dictionaryCache))
 			{
 				dictionaryCache = new Dictionary<long, object>();
 
 				if (SUBSTITUTION_CACHE_ENABLED)
-					ToolHost.Current.SubstitutionCacheRoot.Add(dictionaryConfiguration.DictionaryId, dictionaryCache);
+					oxymoronEngine.SubstitutionCacheRoot.Add(dictionaryConfiguration.DictionaryId, dictionaryCache);
 			}
 
 			if (!SUBSTITUTION_CACHE_ENABLED || !dictionaryCache.TryGetValue(surrogateId, out value))
 			{
 				if (dictionaryConfiguration.PreloadEnabled)
-					throw new InvalidOperationException(string.Format("PreloadEnabled state fail."));
+					throw new InvalidOperationException(string.Format("Cache miss when is preload enabled for dictionary '{0}'; current cache slot item count: {1}.", dictionaryConfiguration.DictionaryId, dictionaryCache.Count));
 
-				value = ToolHost.Current.DictionaryConfigurationToAdapterMappings[dictionaryConfiguration].GetAlternativeValueFromId(dictionaryConfiguration, metaColumn, surrogateId);
+				value = oxymoronHost.GetValueForIdViaDictionaryResolution(dictionaryConfiguration, metaColumn, surrogateId);
 
 				if (SUBSTITUTION_CACHE_ENABLED)
 					dictionaryCache.Add(surrogateId, value);
@@ -95,7 +133,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			surrogateId = hashResult.ValueHash;
 
-			value = GetSubstitution(configurationContext, metaColumn, surrogateId, columnValue);
+			value = GetSubstitution(this.OxymoronHost, this.OxymoronEngine, configurationContext, metaColumn, surrogateId, columnValue);
 
 			return value;
 		}

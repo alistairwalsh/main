@@ -5,13 +5,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public sealed class NullDestinationAdapter : DestinationAdapter, INullAdapter
+	public class NullDestinationAdapter : DestinationAdapter, INullAdapter
 	{
 		#region Constructors/Destructors
 

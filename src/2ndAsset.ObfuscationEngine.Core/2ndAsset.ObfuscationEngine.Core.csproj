@@ -84,6 +84,7 @@
     <Compile Include="Config\AdoNetParameterConfiguration.cs" />
     <Compile Include="Config\AdoNetCommandConfiguration.cs" />
     <Compile Include="Hosting\IOxymoronHost.cs" />
+    <Compile Include="Hosting\OxymoronHost.cs" />
     <Compile Include="Hosting\Tool\ToolHost.cs" />
     <Compile Include="Hosting\Tool\IToolHost.cs" />
     <Compile Include="IMetaColumn.cs" />
@@ -116,7 +117,6 @@
     <Compile Include="Adapter\Destination\SqlServerBulkAdoNetDestinationAdapter.cs" />
     <Compile Include="Support\DelimitedText\FieldType.cs" />
     <Compile Include="Support\DelimitedText\HeaderSpec.cs" />
-    <Compile Include="Support\ObfuscationRecordTextReader.cs" />
     <Compile Include="Config\ColumnConfiguration.cs" />
     <Compile Include="Config\ConfigurationObjectCollection~1.cs" />
     <Compile Include="Config\ConfigurationObject.cs" />
@@ -129,7 +129,6 @@
     <Compile Include="Config\TableConfiguration.cs" />
     <Compile Include="IOxymoronEngine.cs" />
     <Compile Include="OxymoronEngine.cs" />
-    <Compile Include="Support\ObfuscationDataReader.cs" />
     <Compile Include="ObfuscationStrategy.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
     <Compile Include="Support\DisposableList~1.cs" />

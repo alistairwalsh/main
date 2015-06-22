@@ -19,7 +19,11 @@ using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core;
+using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Hosting;
+
+using x__ComponentMetadataWrapper = _2ndAsset.Ssis.Components.__ComponentMetadataWrapper;
 
 namespace _2ndAsset.Ssis.Components
 {
@@ -29,7 +33,7 @@ namespace _2ndAsset.Ssis.Components
 		ComponentType = ComponentType.Transform,
 		CurrentVersion = Constants.COMPONENT_CURRENT_VERSION,
 		IconResource = Constants.COMPONENT_ICON_RESOURCE_NAME)]
-	public class ObfuscationStrategyTransform : PipelineComponent
+	public class ObfuscationStrategyTransform : PipelineComponent, IOxymoronHost
 	{
 		#region Constructors/Destructors
 
@@ -66,8 +70,10 @@ namespace _2ndAsset.Ssis.Components
 																			DataType.DT_UI8
 																		};
 
-		private ComponentMetadataWrapper componentMetadataWrapper;
+		private x__ComponentMetadataWrapper componentMetadataWrapper;
+		private IDictionaryAdapter dictionaryAdapter;
 		private IDbConnection dictionaryDbConnection;
+		private bool disposed;
 		private IOxymoronEngine oxymoronEngine;
 
 		#endregion
@@ -82,7 +88,7 @@ namespace _2ndAsset.Ssis.Components
 			}
 		}
 
-		private ComponentMetadataWrapper ComponentMetadataWrapper
+		private x__ComponentMetadataWrapper ComponentMetadataWrapper
 		{
 			get
 			{
@@ -91,6 +97,18 @@ namespace _2ndAsset.Ssis.Components
 			set
 			{
 				this.componentMetadataWrapper = value;
+			}
+		}
+
+		private IDictionaryAdapter DictionaryAdapter
+		{
+			get
+			{
+				return this.dictionaryAdapter;
+			}
+			set
+			{
+				this.dictionaryAdapter = value;
 			}
 		}
 
@@ -103,6 +121,18 @@ namespace _2ndAsset.Ssis.Components
 			set
 			{
 				this.dictionaryDbConnection = value;
+			}
+		}
+
+		public bool Disposed
+		{
+			get
+			{
+				return this.disposed;
+			}
+			private set
+			{
+				this.disposed = value;
 			}
 		}
 
@@ -251,9 +281,12 @@ namespace _2ndAsset.Ssis.Components
 		/// <param name="transaction"> </param>
 		public override void AcquireConnections(object transaction)
 		{
+			IDbConnection dbConnection;
+
 			base.AcquireConnections(transaction);
 
-			this.DictionaryDbConnection = this.GetDictionaryDbConnection();
+			if(TryGetDictionaryDbConnection(true, out dbConnection))
+				this.DictionaryDbConnection = dbConnection;
 		}
 
 		/// <summary>
@@ -261,12 +294,15 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void Cleanup()
 		{
-			this.OxymoronEngine.Dispose();
-
-			this.OxymoronEngine = null;
-			this.ComponentMetadataWrapper = null;
+			this.CoreDispose(true);
 
 			base.Cleanup();
+		}
+
+		protected virtual void CoreDispose(bool disposing)
+		{
+			if (disposing)
+				this.ComponentMetadataWrapper = null;
 		}
 
 		/// <summary>
@@ -327,6 +363,22 @@ namespace _2ndAsset.Ssis.Components
 			return base.DescribeRedirectedErrorCode(iErrorCode);
 		}
 
+		public void Dispose()
+		{
+			if (this.Disposed)
+				return;
+
+			try
+			{
+				this.CoreDispose(true);
+			}
+			finally
+			{
+				this.Disposed = true;
+				GC.SuppressFinalize(this);
+			}
+		}
+
 		/// <summary>
 		/// (OK)
 		/// </summary>
@@ -343,30 +395,43 @@ namespace _2ndAsset.Ssis.Components
 		/// (OK)
 		/// </summary>
 		/// <returns> </returns>
-		private IDbConnection GetDictionaryDbConnection()
+		private bool TryGetDictionaryDbConnection(bool open, out IDbConnection dbConnection)
 		{
-			IDbConnection dbConnection = null;
 			IDTSRuntimeConnection100 dtsRuntimeConnection100;
 			IDTSConnectionManagerDatabaseParameters100 dtsConnectionManagerDatabaseParameters100;
 			ConnectionManager connectionManager;
 
+			dbConnection = null;
 			dtsRuntimeConnection100 = this.ComponentMetaData.RuntimeConnectionCollection[Constants.COMPONENT_RUNTIMECONNECTION_NAME_DICTIONARY];
 
 			if ((object)dtsRuntimeConnection100.ConnectionManager != null)
 			{
 				connectionManager = DtsConvert.GetWrapper(dtsRuntimeConnection100.ConnectionManager);
 
-				dtsConnectionManagerDatabaseParameters100 = (IDTSConnectionManagerDatabaseParameters100)connectionManager.InnerObject;
+				if ((object)(dtsConnectionManagerDatabaseParameters100 = connectionManager.InnerObject as IDTSConnectionManagerDatabaseParameters100) == null)
+					return false;
 
-				dbConnection = (IDbConnection)dtsConnectionManagerDatabaseParameters100.GetConnectionForSchema();
+				if (open)
+					dbConnection = (IDbConnection)dtsConnectionManagerDatabaseParameters100.GetConnectionForSchema();
 			}
 
-			return dbConnection;
+			return true;
 		}
 
 		private IUnitOfWork GetDictionaryUnitOfWork()
 		{
-			return UnitOfWork.From(this.GetDictionaryDbConnection(), null);
+			IDbConnection dbConnection = null;
+			
+			// should just use cached connection but somehting wonky here.
+			if(TryGetDictionaryDbConnection(true, out dbConnection))
+				return UnitOfWork.From(this.DictionaryDbConnection, null);
+			else
+				return null;
+		}
+
+		public object GetValueForIdViaDictionaryResolution(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId)
+		{
+			return new DtsDictionaryAdapter().GetAlternativeValueFromId(dictionaryConfiguration, metaColumn, surrogateId);
 		}
 
 		/// <summary>
@@ -374,7 +439,7 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void Initialize()
 		{
-			this.ComponentMetadataWrapper = new ComponentMetadataWrapper(this.ComponentMetaData, this.GetDictionaryUnitOfWork);
+			this.ComponentMetadataWrapper = new x__ComponentMetadataWrapper(this.ComponentMetaData, this.GetDictionaryUnitOfWork);
 
 			this.TryLaunchDebugger();
 			base.Initialize();
@@ -552,8 +617,12 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void PostExecute()
 		{
-			// do nothing
-			object obj = new object();
+			this.OxymoronEngine.Dispose();
+			this.OxymoronEngine = null;
+
+			this.DictionaryAdapter.Dispose();
+			this.DictionaryAdapter = null;
+
 			base.PostExecute();
 		}
 
@@ -562,12 +631,25 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void PreExecute()
 		{
+			ObfuscationConfiguration obfuscationConfiguration;
+
 			IDTSInput100 dtsInput100;
 			ColumnInfo columnInfo;
 
 			this.TryLaunchDebugger();
 
-			this.OxymoronEngine = new OxymoronEngine(this.ComponentMetadataWrapper.GetObfuscationConfiguration());
+			obfuscationConfiguration = this.ComponentMetadataWrapper.GetObfuscationConfiguration();
+			
+			this.OxymoronEngine = new OxymoronEngine(this, obfuscationConfiguration);
+
+			this.DictionaryAdapter = new DtsDictionaryAdapter();
+			this.DictionaryAdapter.Initialize(obfuscationConfiguration);
+
+			foreach (DictionaryConfiguration dictionaryConfiguration in obfuscationConfiguration.DictionaryConfigurations)
+			{
+				if (dictionaryConfiguration.PreloadEnabled)
+					this.DictionaryAdapter.InitializePreloadCache(dictionaryConfiguration, this.OxymoronEngine.SubstitutionCacheRoot);
+			}
 
 			// interogate input columns and stash away for later use
 			this.InputColumnInfos.Clear();
@@ -1021,6 +1103,16 @@ namespace _2ndAsset.Ssis.Components
 			{
 				this.ComponentMetaData.FireError(E_FAIL, dtsRuntimeConnection100.IdentificationString, string.Format(ERROR_INVALID_DICTIONARY_CONNECTION_MANAGER, dtsRuntimeConnection100.Name), string.Empty, 0, out cancel);
 				return DTSValidationStatus.VS_ISBROKEN;
+			}
+			else
+			{
+				IDbConnection dbConnection = null;
+
+				if (!TryGetDictionaryDbConnection(false, out dbConnection))
+				{
+					this.ComponentMetaData.FireError(E_FAIL, dtsRuntimeConnection100.IdentificationString, string.Format(ERROR_INVALID_DICTIONARY_CONNECTION_MANAGER, dtsRuntimeConnection100.Name), string.Empty, 0, out cancel);
+					return DTSValidationStatus.VS_ISBROKEN;
+				}
 			}
 
 			// obfuscation specific validation

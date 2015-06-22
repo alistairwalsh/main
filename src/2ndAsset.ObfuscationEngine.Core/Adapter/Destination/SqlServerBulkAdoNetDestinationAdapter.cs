@@ -14,7 +14,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public sealed class SqlServerBulkAdoNetDestinationAdapter : AdoNetDestinationAdapter
+	public class SqlServerBulkAdoNetDestinationAdapter : AdoNetDestinationAdapter
 	{
 		#region Constructors/Destructors
 

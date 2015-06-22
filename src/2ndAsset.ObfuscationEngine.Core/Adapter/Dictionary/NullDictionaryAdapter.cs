@@ -10,7 +10,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public sealed class NullDictionaryAdapter : DictionaryAdapter, INullAdapter
+	public class NullDictionaryAdapter : DictionaryAdapter, INullAdapter
 	{
 		#region Constructors/Destructors
 

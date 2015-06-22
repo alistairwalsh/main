@@ -16,7 +16,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public sealed class DelimitedTextDictionaryAdapter : DictionaryAdapter, IDelimitedTextAdapter
+	public class DelimitedTextDictionaryAdapter : DictionaryAdapter, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors
 
@@ -56,7 +56,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextFilePath"));
-
 
 			using (RecordTextReader delimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec))
 			{

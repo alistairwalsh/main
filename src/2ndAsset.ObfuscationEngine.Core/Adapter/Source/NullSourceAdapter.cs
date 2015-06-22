@@ -10,7 +10,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public sealed class NullSourceAdapter : SourceAdapter, INullAdapter
+	public class NullSourceAdapter : SourceAdapter, INullAdapter
 	{
 		#region Constructors/Destructors
 

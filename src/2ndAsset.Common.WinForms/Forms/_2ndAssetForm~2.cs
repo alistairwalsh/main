@@ -4,7 +4,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 using _2ndAsset.Common.WinForms.Presentation;

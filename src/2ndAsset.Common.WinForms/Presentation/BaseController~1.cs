@@ -53,7 +53,7 @@ namespace _2ndAsset.Common.WinForms.Presentation
 			if ((object)controllerActionUri == null)
 				throw new ArgumentNullException("controllerActionUri");
 
-			if((object)this.View == null)
+			if ((object)this.View == null)
 				throw new InvalidOperationException(string.Format("Cannot dispatch action URI '{0}' when the controller type '{1}' has never been initialized.", controllerActionUri, this.GetType().FullName));
 
 			methodInfos = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);

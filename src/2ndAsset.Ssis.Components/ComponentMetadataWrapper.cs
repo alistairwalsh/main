@@ -5,13 +5,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 
 using TextMetal.Middleware.Data.UoW;
 
+using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
+using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.Ssis.Components
@@ -199,44 +200,10 @@ namespace _2ndAsset.Ssis.Components
 																								RecordCount = d.RecordCount,
 																								DictionaryAdapterConfiguration = new AdapterConfiguration()
 																																{
-																																	AdapterAqtn = null,
-																																	AdoNetAdapterConfiguration = new DtsConnectionAdapterConfiguration(this.DictionaryUnitOfWorkCallback)
+																																	AdapterAqtn = typeof(DtsAdoNetAdapterConfiguration).AssemblyQualifiedName,
+																																	AdoNetAdapterConfiguration = new DtsAdoNetAdapterConfiguration(this.DictionaryUnitOfWorkCallback, null)
 																																}
 																							}));
-
-			temp.Add(new DictionaryConfiguration()
-					{
-						DictionaryId = "null",
-						PreloadEnabled = false,
-						RecordCount = -1,
-						DictionaryAdapterConfiguration = new AdapterConfiguration()
-														{
-															AdapterAqtn = null,
-															AdoNetAdapterConfiguration = new DtsConnectionAdapterConfiguration(this.DictionaryUnitOfWorkCallback)
-														}
-					});
-			temp.Add(new DictionaryConfiguration()
-					{
-						DictionaryId = "nil",
-						PreloadEnabled = false,
-						RecordCount = -1,
-						DictionaryAdapterConfiguration = new AdapterConfiguration()
-														{
-															AdapterAqtn = null,
-															AdoNetAdapterConfiguration = new DtsConnectionAdapterConfiguration(this.DictionaryUnitOfWorkCallback)
-														}
-					});
-			temp.Add(new DictionaryConfiguration()
-					{
-						DictionaryId = "none",
-						PreloadEnabled = false,
-						RecordCount = -1,
-						DictionaryAdapterConfiguration = new AdapterConfiguration()
-														{
-															AdapterAqtn = null,
-															AdoNetAdapterConfiguration = new DtsConnectionAdapterConfiguration(this.DictionaryUnitOfWorkCallback)
-														}
-					});
 
 			return temp;
 		}
@@ -247,8 +214,12 @@ namespace _2ndAsset.Ssis.Components
 
 			obfuscationConfiguration = new ObfuscationConfiguration();
 
+			obfuscationConfiguration.HashConfiguration = new HashConfiguration();
 			obfuscationConfiguration.HashConfiguration.Multiplier = this.HashMuliplier;
 			obfuscationConfiguration.HashConfiguration.Seed = this.HashSeed;
+
+			obfuscationConfiguration.SourceAdapterConfiguration = new AdapterConfiguration() { AdapterAqtn = typeof(NullSourceAdapter).AssemblyQualifiedName };
+			obfuscationConfiguration.DestinationAdapterConfiguration = new AdapterConfiguration() { AdapterAqtn = typeof(NullDestinationAdapter).AssemblyQualifiedName };
 
 			obfuscationConfiguration.TableConfiguration = new TableConfiguration();
 
@@ -259,52 +230,6 @@ namespace _2ndAsset.Ssis.Components
 				obfuscationConfiguration.DictionaryConfigurations.Add(dictionary);
 
 			return obfuscationConfiguration;
-		}
-
-		#endregion
-
-		#region Classes/Structs/Interfaces/Enums/Delegates
-
-		internal class DtsConnectionAdapterConfiguration : AdoNetAdapterConfiguration
-		{
-			#region Constructors/Destructors
-
-			public DtsConnectionAdapterConfiguration(Func<IUnitOfWork> dictionaryUnitOfWorkCallback)
-			{
-				if ((object)dictionaryUnitOfWorkCallback == null)
-					throw new ArgumentNullException("dictionaryUnitOfWorkCallback");
-
-				this.dictionaryUnitOfWorkCallback = dictionaryUnitOfWorkCallback;
-			}
-
-			#endregion
-
-			#region Fields/Constants
-
-			private readonly Func<IUnitOfWork> dictionaryUnitOfWorkCallback;
-
-			#endregion
-
-			#region Properties/Indexers/Events
-
-			private Func<IUnitOfWork> DictionaryUnitOfWorkCallback
-			{
-				get
-				{
-					return this.dictionaryUnitOfWorkCallback;
-				}
-			}
-
-			#endregion
-
-			#region Methods/Operators
-
-			public override IUnitOfWork GetUnitOfWork(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
-			{
-				return this.DictionaryUnitOfWorkCallback();
-			}
-
-			#endregion
 		}
 
 		#endregion
