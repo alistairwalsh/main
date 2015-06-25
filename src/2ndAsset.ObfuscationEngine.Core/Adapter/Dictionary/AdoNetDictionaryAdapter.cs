@@ -26,6 +26,28 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		#endregion
 
+		#region Fields/Constants
+
+		private IUnitOfWork dictionaryUnitOfWork;
+
+		#endregion
+
+		#region Properties/Indexers/Events
+
+		private IUnitOfWork DictionaryUnitOfWork
+		{
+			get
+			{
+				return this.dictionaryUnitOfWork;
+			}
+			set
+			{
+				this.dictionaryUnitOfWork = value;
+			}
+		}
+
+		#endregion
+
 		#region Methods/Operators
 
 		private static IEnumerable<IRecord> WrapRecordCounter(DictionaryConfiguration dictionaryConfiguration, IEnumerable<IRecord> records, Action<string, long, bool, double> recordProcessCallback)
@@ -78,14 +100,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration == null)
 				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.AdoNetAdapterConfiguration"));
 
-			using (IUnitOfWork unitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork())
-			{
-				IDbDataParameter dbDataParameterKey;
+			IDbDataParameter dbDataParameterKey;
 
-				dbDataParameterKey = unitOfWork.CreateParameter(ParameterDirection.Input, DbType.Object, 0, 0, 0, false, "@ID", surrogateId);
+			dbDataParameterKey = this.DictionaryUnitOfWork.CreateParameter(ParameterDirection.Input, DbType.Object, 0, 0, 0, false, "@ID", surrogateId);
 
-				value = unitOfWork.ExecuteScalar<string>(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { dbDataParameterKey });
-			}
+			value = this.DictionaryUnitOfWork.ExecuteScalar<string>(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { dbDataParameterKey });
 
 			return value;
 		}
@@ -107,9 +126,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)substitutionCacheRoot == null)
 				throw new ArgumentNullException("substitutionCacheRoot");
 
-			using (IUnitOfWork unitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork())
+			this.DictionaryUnitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
+
+			if (dictionaryConfiguration.PreloadEnabled)
 			{
-				records = unitOfWork.ExecuteRecords(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
+				records = this.DictionaryUnitOfWork.ExecuteRecords(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
 
 				if ((object)records == null)
 					throw new InvalidOperationException(string.Format("Records were invalid."));
@@ -132,6 +153,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		protected override void CoreTerminate()
 		{
+			if ((object)this.DictionaryUnitOfWork != null)
+				this.DictionaryUnitOfWork.Dispose();
+
+			this.DictionaryUnitOfWork = null;
 		}
 
 		#endregion

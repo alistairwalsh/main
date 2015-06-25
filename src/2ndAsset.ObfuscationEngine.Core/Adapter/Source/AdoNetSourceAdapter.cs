@@ -98,7 +98,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
-			IDataReader dataReader;
 
 			if ((object)tableConfiguration == null)
 				throw new ArgumentNullException("tableConfiguration");

@@ -43,21 +43,6 @@ namespace _2ndAsset.Ssis.Components
 
 		#region Properties/Indexers/Events
 
-		public bool DebuggerLaunch
-		{
-			get
-			{
-				if (!this.HasProperty(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH))
-					return false;
-
-				return this.GetProperty<bool>(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH);
-			}
-			set
-			{
-				this.SetProperty<bool>(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH, value);
-			}
-		}
-
 		private Func<IUnitOfWork> DictionaryUnitOfWorkCallback
 		{
 			get
@@ -71,6 +56,21 @@ namespace _2ndAsset.Ssis.Components
 			get
 			{
 				return this.dtsComponentMetaData100;
+			}
+		}
+
+		public bool DebuggerLaunch
+		{
+			get
+			{
+				if (!this.HasProperty(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH))
+					return false;
+
+				return this.GetProperty<bool>(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH);
+			}
+			set
+			{
+				this.SetProperty<bool>(Constants.COMPONENT_PROP_NAME_DEBUGGER_LAUNCH, value);
 			}
 		}
 

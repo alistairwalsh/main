@@ -4,10 +4,8 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Data;
 
-using TextMetal.Middleware.Common;
 using TextMetal.Middleware.Data.UoW;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;

@@ -104,17 +104,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 					{
 						IDictionaryAdapter dictionaryAdapter;
 
-						dictionaryAdapter = this.DictionaryConfigurationToAdapterMappings.Values.SingleOrDefault(d => d.GetType() == dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterType());
+						dictionaryAdapter = (IDictionaryAdapter)Activator.CreateInstance(dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterType());
+						dictionaryAdapters.Add(dictionaryAdapter);
+						dictionaryAdapter.Initialize(obfuscationConfiguration);
 
-						if ((object)dictionaryAdapter == null)
-						{
-							dictionaryAdapter = (IDictionaryAdapter)Activator.CreateInstance(dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterType());
-							dictionaryAdapters.Add(dictionaryAdapter);
-							dictionaryAdapter.Initialize(obfuscationConfiguration);
-						}
-
-						if (dictionaryConfiguration.PreloadEnabled)
-							dictionaryAdapter.InitializePreloadCache(dictionaryConfiguration, oxymoronEngine.SubstitutionCacheRoot);
+						dictionaryAdapter.InitializePreloadCache(dictionaryConfiguration, oxymoronEngine.SubstitutionCacheRoot);
 
 						this.DictionaryConfigurationToAdapterMappings.Add(dictionaryConfiguration, dictionaryAdapter);
 					}
