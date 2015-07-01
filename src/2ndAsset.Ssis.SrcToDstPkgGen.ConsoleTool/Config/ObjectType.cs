@@ -1,6 +1,6 @@
 ﻿/*
-	Copyright ©2002-2015 Daniel Bullington (dpbullington@gmail.com)
-	Commercial software distribution. May contain open source.
+	Copyright ©2014-2015 2ndAsset.com (info@2ndasset.com) - D. P. Bullington
+	CLOSED SOURCE, COMMERCIAL PRODUCT - THIS IS NOT OPEN SOURCE
 */
 
 using System;

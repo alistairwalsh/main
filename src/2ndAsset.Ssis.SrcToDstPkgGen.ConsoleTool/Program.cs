@@ -1,6 +1,6 @@
 ﻿/*
-	Copyright ©2002-2015 Daniel Bullington (dpbullington@gmail.com)
-	Commercial software distribution. May contain open source.
+	Copyright ©2014-2015 2ndAsset.com (info@2ndasset.com) - D. P. Bullington
+	CLOSED SOURCE, COMMERCIAL PRODUCT - THIS IS NOT OPEN SOURCE
 */
 
 using System;
@@ -13,6 +13,7 @@ using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Tasks.ExecutePackageTask;
 using Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask;
 
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.TmFx;
 using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.Ssis.Components;
 using _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.Config;
@@ -86,38 +87,6 @@ namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool
 		#endregion
 
 		#region Methods/Operators
-
-		private static void Execute(string sourceFilePath, string baseDirectoryPath)
-		{
-			Configuration configuration;
-
-			if ((object)sourceFilePath == null)
-				throw new ArgumentNullException("sourceFilePath");
-
-			if ((object)baseDirectoryPath == null)
-				throw new ArgumentNullException("baseDirectoryPath");
-
-			if (DataTypeFascade.IsWhiteSpace(sourceFilePath))
-				throw new ArgumentOutOfRangeException("sourceFilePath");
-
-			if (DataTypeFascade.IsWhiteSpace(baseDirectoryPath))
-				throw new ArgumentOutOfRangeException("baseDirectoryPath");
-
-			sourceFilePath = Path.GetFullPath(sourceFilePath);
-			baseDirectoryPath = Path.GetFullPath(baseDirectoryPath);
-
-			if (!Directory.Exists(baseDirectoryPath))
-				Directory.CreateDirectory(baseDirectoryPath);
-
-			/*if (!Directory.Exists(baseDirectoryPath))
-				Directory.Delete(baseDirectoryPath, true);
-
-			Directory.CreateDirectory(baseDirectoryPath);*/
-
-			configuration = Configuration.FromJsonFile(sourceFilePath);
-
-			WriteProject(baseDirectoryPath, configuration);
-		}
 
 		private static string GetDestinationConnectionString(FourPartName fourPartName)
 		{
@@ -694,6 +663,38 @@ namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool
 			}
 		}
 
+		private void Execute(string sourceFilePath, string baseDirectoryPath)
+		{
+			Configuration configuration;
+
+			if ((object)sourceFilePath == null)
+				throw new ArgumentNullException("sourceFilePath");
+
+			if ((object)baseDirectoryPath == null)
+				throw new ArgumentNullException("baseDirectoryPath");
+
+			if (this.DataTypeFascade.IsWhiteSpace(sourceFilePath))
+				throw new ArgumentOutOfRangeException("sourceFilePath");
+
+			if (this.DataTypeFascade.IsWhiteSpace(baseDirectoryPath))
+				throw new ArgumentOutOfRangeException("baseDirectoryPath");
+
+			sourceFilePath = Path.GetFullPath(sourceFilePath);
+			baseDirectoryPath = Path.GetFullPath(baseDirectoryPath);
+
+			if (!Directory.Exists(baseDirectoryPath))
+				Directory.CreateDirectory(baseDirectoryPath);
+
+			/*if (!Directory.Exists(baseDirectoryPath))
+				Directory.Delete(baseDirectoryPath, true);
+
+			Directory.CreateDirectory(baseDirectoryPath);*/
+
+			configuration = Configuration.FromJsonFile(sourceFilePath);
+
+			WriteProject(baseDirectoryPath, configuration);
+		}
+
 		protected override IDictionary<string, ArgumentSpec> GetArgumentMap()
 		{
 			IDictionary<string, ArgumentSpec> argumentMap;
@@ -719,7 +720,7 @@ namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool
 			sourceFilePath = (string)arguments[CMDLN_TOKEN_SOURCEFILE].Single();
 			baseDirectoryPath = (string)arguments[CMDLN_TOKEN_BASEDIR].Single();
 
-			Execute(sourceFilePath, baseDirectoryPath);
+			this.Execute(sourceFilePath, baseDirectoryPath);
 
 			return 0;
 		}

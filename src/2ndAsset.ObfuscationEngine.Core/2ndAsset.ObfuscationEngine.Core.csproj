@@ -86,6 +86,7 @@
     <Compile Include="CtrlC_CtrlV\Data\UoW\UnitOfWork.cs" />
     <Compile Include="CtrlC_CtrlV\Data\WrappedDataReader.cs" />
     <Compile Include="CtrlC_CtrlV\Message.cs" />
+    <Compile Include="CtrlC_CtrlV\TmFx\StandardCanonicalNaming.cs" />
     <Compile Include="CtrlC_CtrlV\Serialization\ExtensionMethods.cs" />
     <Compile Include="CtrlC_CtrlV\Serialization\IBinarySerializationStrategy.cs" />
     <Compile Include="CtrlC_CtrlV\Serialization\ISerializationStrategy.cs" />
