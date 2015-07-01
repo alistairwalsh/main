@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndAsset.Utilities.DataObfu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndAsset.ObfuscationEngine.UI", "2ndAsset.ObfuscationEngine.UI\2ndAsset.ObfuscationEngine.UI.csproj", "{2E83014A-F5A2-4E87-8654-1C0477FA281E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool", "2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool\2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.csproj", "{078BA900-9F3B-452E-AE46-0270D6A66710}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,12 @@ Global
 		{2E83014A-F5A2-4E87-8654-1C0477FA281E}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{2E83014A-F5A2-4E87-8654-1C0477FA281E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E83014A-F5A2-4E87-8654-1C0477FA281E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078BA900-9F3B-452E-AE46-0270D6A66710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +106,6 @@ Global
 		{ADF32A63-D140-4D95-988F-3C0DB231C6E3} = {8046C5D4-E7F6-44F9-A5DD-46A0C2EE8CD4}
 		{5701A75D-CDFC-4828-B3A0-8331EEAC9123} = {72ED65BC-805C-4CB4-A25D-728465309605}
 		{2E83014A-F5A2-4E87-8654-1C0477FA281E} = {6C6CAEE2-E4B5-4CA9-9523-8B7CF31A516A}
+		{078BA900-9F3B-452E-AE46-0270D6A66710} = {8046C5D4-E7F6-44F9-A5DD-46A0C2EE8CD4}
 	EndGlobalSection
 EndGlobal

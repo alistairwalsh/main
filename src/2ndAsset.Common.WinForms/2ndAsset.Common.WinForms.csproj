@@ -47,9 +47,42 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\BaseCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseGdiPaintSurface.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\_2ndAssetUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <None Include="DesignTime\Shapes\SketchEllipse.cs" />
+    <None Include="DesignTime\Shapes\SketchImage.cs" />
+    <None Include="DesignTime\Shapes\SketchLine.cs" />
+    <None Include="DesignTime\Shapes\SketchPoint.cs" />
+    <None Include="DesignTime\Shapes\SketchPointSet.cs" />
+    <None Include="DesignTime\Shapes\SketchRectangle.cs" />
+    <None Include="DesignTime\Shapes\SketchText.cs" />
+    <None Include="DesignTime\Shapes\SketchUnknown.cs" />
+    <None Include="DesignTime\Sketch.cs" />
+    <None Include="DesignTime\SketchDesigner.cs">
+      <SubType>UserControl</SubType>
+    </None>
+    <None Include="DesignTime\SketchDesigner.designer.cs">
+      <DependentUpon>SketchDesigner.cs</DependentUpon>
+    </None>
+    <None Include="DesignTime\SketchFactory.cs" />
+    <None Include="DesignTime\SketchShape.cs" />
+    <None Include="DesignTime\SketchUtilities.cs" />
     <Compile Include="Forms\x_2ndAssetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +148,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DesignTime\SketchDesigner.resx">
+      <DependentUpon>SketchDesigner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BackgroundTaskForm.resx">
       <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +172,20 @@
       <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
       <Name>2ndAsset.ObfuscationEngine.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DesignTime\Shapes\Resources\Clean.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\Clear.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\DefaultImage.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchArrow.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchEllipse.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchImage.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchLine.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchPoint.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchPointSet.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchRectangle.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchText.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchUnknown.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

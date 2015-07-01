@@ -1,0 +1,39 @@
+{
+	"ValidateExternalMetadata": true,
+	"TruncateDestination": false,
+
+	"Dictionary":
+	{
+		"ServerName": "(local)",
+		"DatabaseName": "obfu_conf",
+		"SchemaName": "",
+		"ObjectType": "Unknown",
+		"ObjectName": ""
+	},
+
+	"Objects":
+	[
+		{
+			"Source":
+			{
+				"ServerName": "(local)",
+				"DatabaseName": "state_contractor_data",
+				"SchemaName": "staging",
+				"ObjectType": "View",
+				"ObjectName": "StageDimLocation"
+			},
+
+			"ExcludeMemberNames": [ ],
+
+			"Destination":
+			{
+				"ServerName": "(local)",
+				"DatabaseName": "state_contractor_data",
+				"SchemaName": "model",
+				"ObjectType": "Table",
+				"ObjectName": "LocationDimension"
+			}
+		}
+	]
+
+}
