@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-using TextMetal.Middleware.Common;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

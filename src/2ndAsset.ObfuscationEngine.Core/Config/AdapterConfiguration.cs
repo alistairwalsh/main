@@ -6,10 +6,9 @@
 using System;
 using System.Collections.Generic;
 
-using TextMetal.Middleware.Common;
-using TextMetal.Middleware.Common.Utilities;
-
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

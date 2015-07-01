@@ -6,10 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-
-using TextMetal.Middleware.Data.UoW;
+using System.Linq;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
@@ -41,23 +41,30 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 			{
 				IDbDataParameter commandParameter;
 				IDictionary<string, IDbDataParameter> commandParameters;
-				string commandText;
-
-				commandText = configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText;
 
 				commandParameters = new Dictionary<string, IDbDataParameter>();
 
 				while (sourceDataReader.Read())
 				{
+					commandParameters.Clear();
+
 					foreach (ColumnConfiguration columnConfiguration in configuration.ColumnConfigurations)
 					{
-						commandParameter = destinationUnitOfWork.CreateParameter(ParameterDirection.Input, DbType.Object, 0, 0, 0, true, columnConfiguration.ColumnName, sourceDataReader[columnConfiguration.ColumnName]);
+						commandParameter = destinationUnitOfWork.CreateParameter(ParameterDirection.Input, DbType.AnsiString, 0, 0, 0, true, string.Format("@{0}", columnConfiguration.ColumnName), sourceDataReader[columnConfiguration.ColumnName]);
 						commandParameters.Add(columnConfiguration.ColumnName, commandParameter);
 					}
+
+					var resultsets = destinationUnitOfWork.ExecuteResultsets(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, commandParameters.Values.ToArray());
+					resultsets.ToArray();
+					//Console.WriteLine("DESTINATION (update): recordsAffected={0}", resultsets.First().RecordsAffected);
+
+					_rowsCopied++;
 				}
 			}
 
 			rowsCopied = _rowsCopied;
+
+			Console.WriteLine("DESTINATION (update): rowsCopied={0}", rowsCopied);
 		}
 
 		#endregion

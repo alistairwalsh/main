@@ -8,12 +8,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using TextMetal.Middleware.Common;
-
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool

@@ -8,11 +8,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-using TextMetal.Middleware.Common.Utilities;
-using TextMetal.Middleware.Data;
-using TextMetal.Middleware.Data.UoW;
-
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {

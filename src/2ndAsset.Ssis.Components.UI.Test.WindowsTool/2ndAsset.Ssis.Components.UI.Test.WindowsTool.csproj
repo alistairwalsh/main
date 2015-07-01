@@ -53,12 +53,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TextMetal.Middleware.Common">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMetal.Middleware.Data">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="2ndAssetSuite.ico" />
@@ -96,6 +90,14 @@
     <ProjectReference Include="..\2ndAsset.Common.WinForms\2ndAsset.Common.WinForms.csproj">
       <Project>{6BD158BA-429B-422B-AAEB-24A36511C19A}</Project>
       <Name>2ndAsset.Common.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2ndAsset.ObfuscationEngine.Core\2ndAsset.ObfuscationEngine.Core.csproj">
+      <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
+      <Name>2ndAsset.ObfuscationEngine.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2ndAsset.ObfuscationEngine.UI\2ndAsset.ObfuscationEngine.UI.csproj">
+      <Project>{2E83014A-F5A2-4E87-8654-1C0477FA281E}</Project>
+      <Name>2ndAsset.ObfuscationEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\2ndAsset.Ssis.Components.UI\2ndAsset.Ssis.Components.UI.csproj">
       <Project>{e2bdbe66-5440-4b46-b731-1a1b05b2f675}</Project>

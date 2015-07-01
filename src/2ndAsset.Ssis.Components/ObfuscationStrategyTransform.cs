@@ -15,12 +15,11 @@ using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
 
-using TextMetal.Middleware.Common;
-using TextMetal.Middleware.Data.UoW;
-
 using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
 using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 

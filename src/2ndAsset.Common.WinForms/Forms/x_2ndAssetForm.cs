@@ -9,12 +9,11 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 
-using TextMetal.Middleware.Common;
-using TextMetal.Middleware.Common.Utilities;
-
 using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
-using Message = TextMetal.Middleware.Common.Message;
+using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {

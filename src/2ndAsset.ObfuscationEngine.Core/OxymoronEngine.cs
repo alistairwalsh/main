@@ -8,11 +8,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-using TextMetal.Middleware.Common;
-using TextMetal.Middleware.Common.Utilities;
-using TextMetal.Middleware.Solder.Serialization;
-
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Serialization;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Strategy;
 

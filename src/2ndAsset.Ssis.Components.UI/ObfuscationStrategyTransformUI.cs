@@ -10,7 +10,7 @@ using Microsoft.SqlServer.Dts.Pipeline.Design;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime;
 
-using TextMetal.Middleware.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
 
 namespace _2ndAsset.Ssis.Components.UI
 {

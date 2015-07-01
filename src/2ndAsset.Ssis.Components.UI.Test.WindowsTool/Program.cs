@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms;
-using _2ndAsset.Ssis.Components.UI.Forms;
+using _2ndAsset.ObfuscationEngine.UI.Forms;
 
 namespace _2ndAsset.Ssis.Components.UI.Test.WindowsTool
 {
-	internal class Program : WindowsApplicationFascade<ObfuConfMainForm, Form>
+	internal class Program : WindowsApplicationFascade<ObfuscationForm, Form>
 	{
 		#region Fields/Constants
 

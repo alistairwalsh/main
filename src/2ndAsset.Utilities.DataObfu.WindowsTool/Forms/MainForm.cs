@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms.Forms;
+using _2ndAsset.ObfuscationEngine.UI.Forms;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 

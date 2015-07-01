@@ -6,7 +6,9 @@
 using System;
 using System.Collections.Generic;
 
-using TextMetal.Middleware.Common;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+
+using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
 
 namespace _2ndAsset.Common.WinForms.Presentation
 {

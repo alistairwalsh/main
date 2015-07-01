@@ -42,15 +42,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TextMetal.Middleware.Common">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMetal.Middleware.Data">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMetal.Middleware.Solder">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Solder.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionAssemblyInfo.cs">
@@ -139,6 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2ndAsset.ObfuscationEngine.Core\2ndAsset.ObfuscationEngine.Core.csproj">
+      <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
+      <Name>2ndAsset.ObfuscationEngine.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

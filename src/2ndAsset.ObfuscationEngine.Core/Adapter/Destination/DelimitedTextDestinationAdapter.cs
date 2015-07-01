@@ -7,9 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-using TextMetal.Middleware.Common.Utilities;
-
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 

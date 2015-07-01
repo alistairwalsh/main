@@ -6,10 +6,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Windows.Forms;
 using System.Windows.Forms.Design;
-
-using _2ndAsset.Ssis.Components.UI.Forms;
 
 namespace _2ndAsset.Ssis.Components.UI
 {
@@ -39,14 +36,14 @@ namespace _2ndAsset.Ssis.Components.UI
 
 			if ((object)formsEditorService != null)
 			{
-				using (DictConfMainForm dictConfMainForm = new DictConfMainForm())
-				{
-					dictConfMainForm.StartPosition = FormStartPosition.CenterParent;
-					dictConfMainForm.EditValue = (string)value;
+				//using (DictConfMainForm dictConfMainForm = new DictConfMainForm())
+				//{
+				//	dictConfMainForm.StartPosition = FormStartPosition.CenterParent;
+				//	dictConfMainForm.EditValue = (string)value;
 
-					if (formsEditorService.ShowDialog(dictConfMainForm) == DialogResult.OK)
-						return (string)dictConfMainForm.EditValue;
-				}
+				//	if (formsEditorService.ShowDialog(dictConfMainForm) == DialogResult.OK)
+				//		return (string)dictConfMainForm.EditValue;
+				//}
 			}
 
 			return value;

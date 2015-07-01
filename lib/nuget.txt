@@ -1,0 +1,4 @@
+nuget install Newtonsoft.Json -Version 6.0.8
+nuget install NUnit -Version 2.6.4
+nuget install NUnit.Runners -Version 2.6.4
+nuget install NMock3 -Version 3.5.44

@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-using TextMetal.Middleware.Common;
-using TextMetal.Middleware.Common.Utilities;
-using TextMetal.Middleware.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

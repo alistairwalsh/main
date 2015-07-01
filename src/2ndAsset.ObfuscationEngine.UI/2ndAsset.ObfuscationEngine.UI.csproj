@@ -52,21 +52,85 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TextMetal.Middleware.Common">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMetal.Middleware.Data">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMetal.Middleware.Solder">
-      <HintPath>..\..\lib\TextMetal\TextMetal.Middleware.Solder.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\AdapterSettingsController.cs" />
+    <Compile Include="Controllers\ObfuscationController.cs" />
+    <Compile Include="Controllers\ObfuscationController.d2v.p.cs" />
+    <Compile Include="Controllers\ObfuscationController.v2d.p.cs" />
+    <Compile Include="Controls\AdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalancheSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AvalancheSettingsUserControl.Designer.cs">
+      <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DelTxtAdapterSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DelTxtAdapterSettingsUserControl.Designer.cs">
+      <DependentUpon>DelTxtAdapterSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DictionarySettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DictionarySettingsUserControl.Designer.cs">
+      <DependentUpon>DictionarySettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExecutionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExecutionUserControl.Designer.cs">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MetadataSettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MetadataSettingsUserControl.Designer.cs">
+      <DependentUpon>MetadataSettingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdapterSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdapterSettingsForm.Designer.cs">
+      <DependentUpon>AdapterSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataConnectionConfiguration.cs" />
+    <Compile Include="Forms\IDataConnectionConfiguration.cs" />
+    <Compile Include="Forms\ObfuscationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ObfuscationForm.Designer.cs">
+      <DependentUpon>ObfuscationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Views\IAdapterSettingsView.cs" />
+    <Compile Include="Views\IAdapterSettingsView2.cs" />
+    <Compile Include="Views\IAdoNetAdapterSettingsView.cs" />
+    <Compile Include="Views\IAvalancheSettingsView.cs" />
+    <Compile Include="Views\IDelTextAdapterSettingsView.cs" />
+    <Compile Include="Views\IDictionarySettingsView.cs" />
+    <Compile Include="Views\IDictionarySpecView.cs" />
+    <Compile Include="Views\IExecutionView.cs" />
+    <Compile Include="Views\IHeaderSpecView.cs" />
+    <Compile Include="Views\IMetaColumnSpecView.cs" />
+    <Compile Include="Views\IMetadataSettingsView.cs" />
+    <Compile Include="Views\IObfuscationView.cs" />
+    <Compile Include="Views\ISpecificAdapterSettingsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\2ndAssetSuite.snk">
@@ -84,15 +148,39 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\AdapterSettingsUserControl.resx">
+      <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AdoNetAdapterSettingsUserControl.resx">
+      <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AvalancheSettingsUserControl.resx">
+      <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DelTxtAdapterSettingsUserControl.resx">
+      <DependentUpon>DelTxtAdapterSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DictionarySettingsUserControl.resx">
+      <DependentUpon>DictionarySettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ExecutionUserControl.resx">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MetadataSettingsUserControl.resx">
+      <DependentUpon>MetadataSettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdapterSettingsForm.resx">
+      <DependentUpon>AdapterSettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ObfuscationForm.resx">
+      <DependentUpon>ObfuscationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icons\2ndAssetSuite.ico">
       <LogicalName>TextMetal.HostImpl.WindowsTool.Icons.TextMetal.ico</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Forms\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

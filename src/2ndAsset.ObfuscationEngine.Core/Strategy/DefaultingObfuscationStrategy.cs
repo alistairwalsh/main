@@ -5,9 +5,8 @@
 
 using System;
 
-using TextMetal.Middleware.Common.Utilities;
-
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {

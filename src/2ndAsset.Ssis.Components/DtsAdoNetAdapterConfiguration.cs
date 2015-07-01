@@ -6,9 +6,8 @@
 using System;
 using System.Data;
 
-using TextMetal.Middleware.Data.UoW;
-
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
 
 namespace _2ndAsset.Ssis.Components
 {
