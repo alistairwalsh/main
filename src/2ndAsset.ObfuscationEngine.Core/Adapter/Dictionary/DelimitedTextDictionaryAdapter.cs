@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 

@@ -12,7 +12,7 @@ using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.Ssis.Components
 {

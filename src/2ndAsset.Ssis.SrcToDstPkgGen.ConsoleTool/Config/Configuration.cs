@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Serialization;
+using Solder.Framework.Serialization;
 
 namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.Config
 {

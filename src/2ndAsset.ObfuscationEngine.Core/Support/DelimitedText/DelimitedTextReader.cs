@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText
 {

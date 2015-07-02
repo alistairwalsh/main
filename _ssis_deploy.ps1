@@ -31,20 +31,12 @@ foreach ($lib_deploy_assembly_name in $lib_deploy_assembly_names)
 
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
-
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
-
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 
-$lib_subdir_name = "TextMetal"
+$lib_subdir_name = "Solder"
 
-$lib_deploy_assembly_names = @("TextMetal.Middleware.Solder",
-	"TextMetal.Middleware.Common",
-	"TextMetal.Middleware.Data")
+$lib_deploy_assembly_names = @("Solder.Framework")
 
 foreach ($lib_deploy_assembly_name in $lib_deploy_assembly_names)
 {
@@ -57,12 +49,6 @@ foreach ($lib_deploy_assembly_name in $lib_deploy_assembly_names)
 
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
-
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
-
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
-	#Copy-Item "$lib_dir\$lib_subdir_name\$lib_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 
@@ -83,12 +69,6 @@ foreach ($src_deploy_assembly_name in $src_deploy_assembly_names)
 
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "An error occurred during the operation."; return; }
-
-	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x86_dir\."
-	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.dll" "$dts_plc_x64_dir\."
-
-	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x86_dir\."
-	#Copy-Item "$src_dir\$src_deploy_assembly_name\bin\$build_flavor_dir\$src_deploy_assembly_name.pdb" "$dts_plc_x64_dir\."
 }
 
 

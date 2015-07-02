@@ -6,9 +6,10 @@
 using System;
 using System.Collections.Generic;
 
+using Solder.Framework;
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

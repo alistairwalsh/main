@@ -10,9 +10,10 @@ using System.Linq;
 
 using Newtonsoft.Json;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework;
+using Solder.Framework.Utilities;
+
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

@@ -7,7 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Hosting.Tool;
 
 namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
@@ -36,8 +37,8 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 			args = new[]
 					{
 						@"-sourcefile2:Null_to_Null_Example.json",
-						@"-sourcefile2:DB_to_DB-bulksql_Example.json",
-						@"-sourcefile:DB_to_DB-update_Example.json",
+						@"-sourcefile:DB_to_DB-bulksql_Example.json",
+						@"-sourcefile2:DB_to_DB-update_Example.json",
 						@"-sourcefile2:DTF_to_DTF_Example.json"
 					};
 

@@ -46,6 +46,9 @@
     <ApplicationIcon>2ndAssetSuite.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
     </Reference>

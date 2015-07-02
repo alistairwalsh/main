@@ -6,8 +6,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Serialization;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Serialization;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.Ssis.Components
 {

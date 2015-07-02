@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-// TODO: optimize this class
-
 namespace _2ndAsset.ObfuscationEngine.Core.Support
 {
 	public class EnumerableDictionaryDataReader : IDataReader
@@ -29,32 +27,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			if ((object)this.targetEnumerator == null)
 				throw new InvalidOperationException("targetEnumerable");
 
-			this.Initialize();
-
-			if ((object)upstreamMetadata != null)
-			{
-				this.ordinalLookup = upstreamMetadata.Select((mc, i) => new
-																		{
-																			Index = i,
-																			Name = mc.ColumnName
-																		}).ToDictionary(
-																			p => p.Name,
-																			p => p.Index,
-																			StringComparer.InvariantCultureIgnoreCase);
-			}
-			else if (!this.IsEnumerableClosed)
-			{
-				this.ordinalLookup = this.TargetEnumerator.Current.Keys.Select((k, i) => new
-																						{
-																							Index = i,
-																							Name = k
-																						}).ToDictionary(
-																							p => p.Name,
-																							p => p.Index,
-																							StringComparer.InvariantCultureIgnoreCase);
-			}
-			else
-				this.ordinalLookup = new Dictionary<string, int>();
+			this.ordinalLookup = upstreamMetadata.Select((mc, i) => new
+																	{
+																		Index = i,
+																		Name = mc.ColumnName
+																	}).ToDictionary(
+																		p => p.Name,
+																		p => p.Index,
+																		StringComparer.InvariantCultureIgnoreCase);
 		}
 
 		#endregion
@@ -63,7 +43,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		private readonly Dictionary<string, int> ordinalLookup;
 		private readonly IEnumerator<IDictionary<string, object>> targetEnumerator;
-		private bool isEnumerableClosed;
+		private string[] currentKeys;
+		private object[] currentValues;
+		private bool? isEnumerableClosed;
 
 		#endregion
 
@@ -81,7 +63,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 		{
 			get
 			{
-				return this.HasRecord ? this.TargetEnumerator.Current.Values.ToArray()[i] : null;
+				return this.HasRecord ? this.CurrentValues[i] : null;
 			}
 		}
 
@@ -113,7 +95,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 		{
 			get
 			{
-				return this.IsEnumerableClosed;
+				return this.IsEnumerableClosed ?? false;
 			}
 		}
 
@@ -141,7 +123,31 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			}
 		}
 
-		protected bool IsEnumerableClosed
+		private string[] CurrentKeys
+		{
+			get
+			{
+				return this.currentKeys;
+			}
+			set
+			{
+				this.currentKeys = value;
+			}
+		}
+
+		private object[] CurrentValues
+		{
+			get
+			{
+				return this.currentValues;
+			}
+			set
+			{
+				this.currentValues = value;
+			}
+		}
+
+		protected bool? IsEnumerableClosed
 		{
 			get
 			{
@@ -149,9 +155,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			}
 			set
 			{
-				if (this.isEnumerableClosed && !value)
-					throw new InvalidOperationException(string.Format("Set IsEnumerableClosed already."));
-
 				this.isEnumerableClosed = value;
 			}
 		}
@@ -172,12 +175,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		public virtual bool GetBoolean(int i)
 		{
-			return this.HasRecord ? (Boolean)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Boolean);
+			return this.HasRecord ? (Boolean)this.CurrentValues[i] : default(Boolean);
 		}
 
 		public virtual byte GetByte(int i)
 		{
-			return this.HasRecord ? (Byte)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Byte);
+			return this.HasRecord ? (Byte)this.CurrentValues[i] : default(Byte);
 		}
 
 		public virtual long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
@@ -187,7 +190,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		public virtual char GetChar(int i)
 		{
-			return this.HasRecord ? (Char)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Char);
+			return this.HasRecord ? (Char)this.CurrentValues[i] : default(Char);
 		}
 
 		public virtual long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
@@ -207,52 +210,52 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		public virtual DateTime GetDateTime(int i)
 		{
-			return this.HasRecord ? (DateTime)this.TargetEnumerator.Current.Values.ToArray()[i] : default(DateTime);
+			return this.HasRecord ? (DateTime)this.CurrentValues[i] : default(DateTime);
 		}
 
 		public virtual decimal GetDecimal(int i)
 		{
-			return this.HasRecord ? (Decimal)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Decimal);
+			return this.HasRecord ? (Decimal)this.CurrentValues[i] : default(Decimal);
 		}
 
 		public double GetDouble(int i)
 		{
-			return this.HasRecord ? (Double)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Double);
+			return this.HasRecord ? (Double)this.CurrentValues[i] : default(Double);
 		}
 
 		public virtual Type GetFieldType(int i)
 		{
-			return this.HasRecord && (object)this.TargetEnumerator.Current.Values.ToArray()[i] != null ? this.TargetEnumerator.Current.Values.ToArray()[i].GetType() : null;
+			return this.HasRecord && (object)this.CurrentValues[i] != null ? this.CurrentValues[i].GetType() : null;
 		}
 
 		public virtual float GetFloat(int i)
 		{
-			return this.HasRecord ? (Single)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Single);
+			return this.HasRecord ? (Single)this.CurrentValues[i] : default(Single);
 		}
 
 		public virtual Guid GetGuid(int i)
 		{
-			return this.HasRecord ? (Guid)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Guid);
+			return this.HasRecord ? (Guid)this.CurrentValues[i] : default(Guid);
 		}
 
 		public virtual short GetInt16(int i)
 		{
-			return this.HasRecord ? (Int16)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Int16);
+			return this.HasRecord ? (Int16)this.CurrentValues[i] : default(Int16);
 		}
 
 		public virtual int GetInt32(int i)
 		{
-			return this.HasRecord ? (Int32)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Int32);
+			return this.HasRecord ? (Int32)this.CurrentValues[i] : default(Int32);
 		}
 
 		public virtual long GetInt64(int i)
 		{
-			return this.HasRecord ? (Int64)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Int64);
+			return this.HasRecord ? (Int64)this.CurrentValues[i] : default(Int64);
 		}
 
 		public virtual string GetName(int i)
 		{
-			return this.HasRecord ? this.TargetEnumerator.Current.Keys.ToArray()[i] : null;
+			return this.HasRecord ? this.CurrentKeys[i] : null;
 		}
 
 		public virtual int GetOrdinal(string name)
@@ -272,12 +275,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		public virtual string GetString(int i)
 		{
-			return this.HasRecord ? (String)this.TargetEnumerator.Current.Values.ToArray()[i] : default(String);
+			return this.HasRecord ? (String)this.CurrentValues[i] : default(String);
 		}
 
 		public virtual object GetValue(int i)
 		{
-			return this.HasRecord ? (Object)this.TargetEnumerator.Current.Values.ToArray()[i] : default(Object);
+			return this.HasRecord ? (Object)this.CurrentValues[i] : default(Object);
 		}
 
 		public virtual int GetValues(object[] values)
@@ -285,14 +288,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 			return 0;
 		}
 
-		private void Initialize()
-		{
-			this.IsEnumerableClosed = !this.TargetEnumerator.MoveNext();
-		}
-
 		public virtual bool IsDBNull(int i)
 		{
-			return this.HasRecord ? (object)this.TargetEnumerator.Current.Values.ToArray()[i] == null : true;
+			return this.HasRecord ? (object)this.CurrentValues[i] == null : true;
 		}
 
 		public virtual bool NextResult()
@@ -302,7 +300,20 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 
 		public virtual bool Read()
 		{
-			return !(this.IsEnumerableClosed = !this.TargetEnumerator.MoveNext());
+			if (!(this.IsEnumerableClosed ?? false))
+			{
+				var retval = !(bool)(this.IsEnumerableClosed = !this.TargetEnumerator.MoveNext());
+
+				if (retval && this.HasRecord)
+				{
+					this.CurrentKeys = this.TargetEnumerator.Current.Keys.ToArray();
+					this.CurrentValues = this.TargetEnumerator.Current.Values.ToArray();
+				}
+
+				return retval;
+			}
+			else
+				return true;
 		}
 
 		#endregion

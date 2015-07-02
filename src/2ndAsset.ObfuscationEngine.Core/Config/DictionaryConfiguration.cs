@@ -8,8 +8,8 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {

@@ -126,21 +126,41 @@
 
 			DictionaryAdapterConfiguration:
 			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				AdoNetAdapterConfiguration:
+				DelimitedTextAdapterConfiguration:
 				{
-					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+					DelimitedTextFilePath: "LastNameDictionary.txt",
+					DelimitedTextSpec:
+					{
+						FirstRecordIsHeader: true,
+						RecordDelimiter: "\r\n",
+						FieldDelimiter: "\t",
+						QuoteValue: "",
+					}
+				}
+			}
+		},
 
-					PreExecuteCommandType: "",
-					PreExecuteCommandText: "",
-					
-					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_bank_account_demo].[OxConfig].[LastNameDictionary] t ORDER BY t.[Key] ASC",
-					ExecuteCommandType: "Text",
-					
-					PostExecuteCommandType: "",
-					PostExecuteCommandText: ""
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_FirstName",
+			RecordCount: 5495,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				DelimitedTextAdapterConfiguration:
+				{
+					DelimitedTextFilePath: "FirstNameDictionary.txt",
+					DelimitedTextSpec:
+					{
+						FirstRecordIsHeader: true,
+						RecordDelimiter: "\r\n",
+						FieldDelimiter: "\t",
+						QuoteValue: "",
+					}
 				}
 			}
 		}
@@ -151,83 +171,83 @@
 		ColumnConfigurations:
 		[
 			{
-				ColumnName: "txid",
-				IsColumnNullable: true,
-				DictionaryReference: "",
-				ExtentValue: null,
-				ObfuscationStrategy: "None"
+				"ColumnName": "txid",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Defaulting"
 			},
 
 			{
-				ColumnName: "Institution",
-				IsColumnNullable: false,
-				DictionaryReference: "d_CrayonColor",
-				ExtentValue: null,
-				ObfuscationStrategy: "Substitution"
+				"ColumnName": "institution",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_FirstName",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
-				ColumnName: "number",
-				IsColumnNullable: false,
-				DictionaryReference: "",
-				ExtentValue: null,
-				ObfuscationStrategy: "Shuffling"
+				"ColumnName": "number",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Shuffling"
 			},
 
 			{
-				ColumnName: "date",
-				IsColumnNullable: true,
-				DictionaryReference: "",
-				ExtentValue: 25,
-				ObfuscationStrategy: "Variance"
+				"ColumnName": "date",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": 25,
+				"ObfuscationStrategy": "Variance"
 			},
 
 			{
-				ColumnName: "payee",
-				IsColumnNullable: true,
-				DictionaryReference: "d_LastName",
-				ExtentValue: -50,
-				ObfuscationStrategy: "Substitution"
+				"ColumnName": "payee",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_LastName",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
-				ColumnName: "amount",
-				IsColumnNullable: true,
-				DictionaryReference: "",
-				ExtentValue: 100,
-				ObfuscationStrategy: "Variance"
+				"ColumnName": "amount",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": 100,
+				"ObfuscationStrategy": "Variance"
 			},
 
 			{
-				ColumnName: "cleared",
-				IsColumnNullable: true,
-				DictionaryReference: "",
-				ExtentValue: null,
-				ObfuscationStrategy: "None"
+				"ColumnName": "cleared",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "None"
 			},
 
 			{
-				ColumnName: "category",
-				IsColumnNullable: true,
-				DictionaryReference: "d_CrayonColor",
-				ExtentValue: null,
-				ObfuscationStrategy: "Substitution"
+				"ColumnName": "category",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_CrayonColor",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
-				ColumnName: "due",
-				IsColumnNullable: true,
-				DictionaryReference: "",
-				ExtentValue: 10,
-				ObfuscationStrategy: "Variance"
+				"ColumnName": "due",
+				"IsColumnNullable": true,
+				"DictionaryReference": "",
+				"ExtentValue": 10,
+				"ObfuscationStrategy": "Variance"
 			},
 
 			{
-				ColumnName: "comments",
-				IsColumnNullable: true,
-				DictionaryReference: "d_LastName",
-				ExtentValue: null,
-				ObfuscationStrategy: "Substitution"
+				"ColumnName": "comments",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Ciphering"
 			}
 		]
 	}

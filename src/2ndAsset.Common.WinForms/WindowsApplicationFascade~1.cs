@@ -10,9 +10,9 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Utilities;
 
-using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
+using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.Common.WinForms
 {

@@ -9,9 +9,10 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 

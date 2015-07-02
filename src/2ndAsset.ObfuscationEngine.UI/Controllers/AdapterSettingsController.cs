@@ -10,11 +10,12 @@ using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms;
 using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers

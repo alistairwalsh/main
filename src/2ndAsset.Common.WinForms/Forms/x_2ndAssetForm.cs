@@ -9,11 +9,12 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 
-using _2ndAsset.Common.WinForms.Presentation;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework;
+using Solder.Framework.Utilities;
 
-using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
+using _2ndAsset.Common.WinForms.Presentation;
+
+using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {

@@ -15,13 +15,14 @@ using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
 
+using Solder.Framework;
+
 using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
 using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Support;
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 using x__ComponentMetadataWrapper = _2ndAsset.Ssis.Components.__ComponentMetadataWrapper;
 

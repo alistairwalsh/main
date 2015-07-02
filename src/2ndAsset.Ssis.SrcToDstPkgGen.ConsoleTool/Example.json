@@ -5,8 +5,8 @@
 	"Dictionary":
 	{
 		"ServerName": "(local)",
-		"DatabaseName": "obfu_conf",
-		"SchemaName": "",
+		"DatabaseName": "2ndasset_bank_account_demo",
+		"SchemaName": "OxConfig",
 		"ObjectType": "Unknown",
 		"ObjectName": ""
 	},
@@ -17,10 +17,10 @@
 			"Source":
 			{
 				"ServerName": "(local)",
-				"DatabaseName": "state_contractor_data",
-				"SchemaName": "staging",
+				"DatabaseName": "2ndasset_bank_account_demo",
+				"SchemaName": "dbo",
 				"ObjectType": "View",
-				"ObjectName": "StageDimLocation"
+				"ObjectName": "AccountReporting"
 			},
 
 			"ExcludeMemberNames": [ ],
@@ -28,10 +28,10 @@
 			"Destination":
 			{
 				"ServerName": "(local)",
-				"DatabaseName": "state_contractor_data",
-				"SchemaName": "model",
+				"DatabaseName": "2ndasset_bank_account_demo",
+				"SchemaName": "dbo",
 				"ObjectType": "Table",
-				"ObjectName": "LocationDimension"
+				"ObjectName": "Ox_AccountReporting"
 			}
 		}
 	]

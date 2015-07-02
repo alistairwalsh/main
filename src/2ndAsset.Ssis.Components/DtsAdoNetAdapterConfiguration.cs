@@ -7,7 +7,7 @@ using System;
 using System.Data;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Data.UoW;
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.Ssis.Components
 {

@@ -30,10 +30,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
-			int max = new Random().Next(0, 999999);
+			//int max = new Random().Next(0, 999999);
 
-			for (int i = 0; i < max; i++)
-				yield return new Dictionary<string, object>();
+			//for (int i = 0; i < max; i++)
+			//	yield return new Dictionary<string, object>();
+			return new IDictionary<string, object>[] { };
 		}
 
 		protected override void CoreTerminate()

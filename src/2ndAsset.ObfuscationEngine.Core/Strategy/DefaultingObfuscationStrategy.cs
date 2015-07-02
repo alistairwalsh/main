@@ -5,8 +5,9 @@
 
 using System;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {

@@ -13,6 +13,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
+using Solder.Framework;
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms;
 using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.ObfuscationEngine.Core;
@@ -20,12 +23,10 @@ using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
-using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
+using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 {

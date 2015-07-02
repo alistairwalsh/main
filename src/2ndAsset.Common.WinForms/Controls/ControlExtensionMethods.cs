@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {

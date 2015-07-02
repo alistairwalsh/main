@@ -51,6 +51,9 @@
       <Name>2ndAsset.ObfuscationEngine.Core</Name>
     </ProjectReference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -89,6 +92,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LastNameDictionary.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FirstNameDictionary.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="CrayonColorDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

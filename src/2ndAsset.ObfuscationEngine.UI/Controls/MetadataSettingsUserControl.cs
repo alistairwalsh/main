@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
 using _2ndAsset.ObfuscationEngine.Core;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls

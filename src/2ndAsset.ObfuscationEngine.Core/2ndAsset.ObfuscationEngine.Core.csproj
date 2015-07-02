@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -74,40 +77,18 @@
     <Compile Include="Config\AdapterConfiguration.cs" />
     <Compile Include="Config\AdoNetParameterConfiguration.cs" />
     <Compile Include="Config\AdoNetCommandConfiguration.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\AdoNetFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\IAdoNetFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\IRecord.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\IResultset.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\Record.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\Resultset.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\UoW\ExtensionMethods.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\UoW\IUnitOfWork.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\UoW\IUnitOfWorkFactory.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\UoW\UnitOfWork.cs" />
-    <Compile Include="CtrlC_CtrlV\Data\WrappedDataReader.cs" />
-    <Compile Include="CtrlC_CtrlV\Message.cs" />
-    <Compile Include="CtrlC_CtrlV\TmFx\StandardCanonicalNaming.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\ExtensionMethods.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\IBinarySerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\ISerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\ITextSerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\IXmlSerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\JsonSerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Serialization\XmlSerializationStrategy.cs" />
-    <Compile Include="CtrlC_CtrlV\Severity.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\AppConfigFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\AssemblyInformationFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\ConsoleApplicationFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\DataTypeFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\DataTypeFascade.impl.p.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\ExecutableApplicationFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\ExtensionMethods.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\IAppConfigFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\IAssemblyInformationFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\IDataTypeFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\IExecutableApplicationFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\IReflectionFascade.cs" />
-    <Compile Include="CtrlC_CtrlV\Utilities\ReflectionFascade.cs" />
+    <Compile Include="Support\AdoNetFast\AdoNetYieldingFascade.cs" />
+    <Compile Include="Support\AdoNetFast\IAdoNetYieldingFascade.cs" />
+    <Compile Include="Support\AdoNetFast\IRecord.cs" />
+    <Compile Include="Support\AdoNetFast\IResultset.cs" />
+    <Compile Include="Support\AdoNetFast\Record.cs" />
+    <Compile Include="Support\AdoNetFast\Resultset.cs" />
+    <Compile Include="Support\AdoNetFast\UoW\ExtensionMethods.cs" />
+    <Compile Include="Support\AdoNetFast\UoW\IUnitOfWork.cs" />
+    <Compile Include="Support\AdoNetFast\UoW\IUnitOfWorkFactory.cs" />
+    <Compile Include="Support\AdoNetFast\UoW\UnitOfWork.cs" />
+    <Compile Include="Support\AdoNetFast\WrappedDataReader.cs" />
+    <Compile Include="ImportSource\Naming\StandardCanonicalNaming.cs" />
     <Compile Include="Hosting\IOxymoronHost.cs" />
     <Compile Include="Hosting\OxymoronHost.cs" />
     <Compile Include="Hosting\Tool\ToolHost.cs" />

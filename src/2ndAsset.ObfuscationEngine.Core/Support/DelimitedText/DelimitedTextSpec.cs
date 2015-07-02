@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText
 {

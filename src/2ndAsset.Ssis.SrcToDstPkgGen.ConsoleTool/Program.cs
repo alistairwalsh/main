@@ -13,8 +13,9 @@ using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Tasks.ExecutePackageTask;
 using Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.TmFx;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Naming;
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Ssis.Components;
 using _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.Config;
 

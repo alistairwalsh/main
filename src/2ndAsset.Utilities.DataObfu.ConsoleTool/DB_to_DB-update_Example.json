@@ -13,8 +13,8 @@
 			PreExecuteCommandType: "",
 			PreExecuteCommandText: "",
 
-			ExecuteCommandText: "SELECT * FROM [2ndasset_bank_account_demo].[dbo].[CheckingAccount]",
-			ExecuteCommandType: "Text",
+			ExecuteCommandText: "[2ndasset_bank_account_demo].[dbo].[ExecuteExport_AccountReporting]",
+			ExecuteCommandType: "StoredProcedure",
 
 			PostExecuteCommandType: "",
 			PostExecuteCommandText: ""
@@ -31,11 +31,11 @@
 			ConnectionString: "Server=(local);Integrated Security=SSPI;",
 
 			PreExecuteCommandType: "Text",
-			PreExecuteCommandText: "TRUNCATE TABLE [2ndasset_bank_account_demo].[dbo].[Ox_CheckingAccount]",
+			PreExecuteCommandText: "TRUNCATE TABLE [2ndasset_bank_account_demo].[dbo].[Ox_AccountReporting]",
 			
-			ExecuteCommandText: "INSERT INTO [2ndasset_bank_account_demo].[dbo].[Ox_CheckingAccount] VALUES (@InstitutionId, @RefNumber, @TheDate, @PayeeId, @TheAmount, @IsCleared, @CategoryId, @DueDate, @Comments)",
+			ExecuteCommandText: "INSERT INTO [2ndasset_bank_account_demo].[dbo].[Ox_AccountReporting] VALUES (@AccountReportingId, @TransactionNumber, @InstitutionName, @RefNumber, @TheDate, @PayeeName, @TheAmount, @IsCleared, @CategoryName, @DueDate, @Comments)",
 			ExecuteCommandType: "Text",
-			
+
 			PostExecuteCommandType: "",
 			PostExecuteCommandText: ""
 		}
@@ -91,10 +91,36 @@
 
 					PreExecuteCommandType: "",
 					PreExecuteCommandText: "",
-					
+
 					ExecuteCommandText: "SELECT t.[Key], t.[LastName] FROM [2ndasset_bank_account_demo].[OxConfig].[LastNameDictionary] t ORDER BY t.[Key] ASC",
 					ExecuteCommandType: "Text",
-					
+
+					PostExecuteCommandType: "",
+					PostExecuteCommandText: ""
+				}
+			}
+		},
+
+		{
+			PreloadEnabled: true,
+			DictionaryId: "d_FirstName",
+			RecordCount: 5495,
+
+			DictionaryAdapterConfiguration:
+			{
+				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
+
+				AdoNetAdapterConfiguration:
+				{
+					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+					ConnectionString: "Server=(local);Integrated Security=SSPI;",
+
+					PreExecuteCommandType: "",
+					PreExecuteCommandText: "",
+
+					ExecuteCommandText: "SELECT t.[Key], t.[FirstName] FROM [2ndasset_bank_account_demo].[OxConfig].[FirstNameDictionary] t ORDER BY t.[Key] ASC",
+					ExecuteCommandType: "Text",
+
 					PostExecuteCommandType: "",
 					PostExecuteCommandText: ""
 				}
@@ -107,19 +133,27 @@
 		ColumnConfigurations:
 		[
 			{
-				"ColumnName": "TransactionId",
-				"IsColumnNullable": true,
+				"ColumnName": "AccountReportingId",
+				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": null,
 				"ObfuscationStrategy": "None"
 			},
 
 			{
-				"ColumnName": "InstitutionId",
+				"ColumnName": "TransactionNumber",
 				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": null,
-				"ObfuscationStrategy": "None"
+				"ObfuscationStrategy": "Defaulting"
+			},
+
+			{
+				"ColumnName": "InstitutionName",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_FirstName",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
@@ -132,23 +166,23 @@
 
 			{
 				"ColumnName": "TheDate",
-				"IsColumnNullable": true,
+				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": 25,
 				"ObfuscationStrategy": "Variance"
 			},
 
 			{
-				"ColumnName": "PayeeId",
-				"IsColumnNullable": true,
-				"DictionaryReference": "",
-				"ExtentValue": -50,
-				"ObfuscationStrategy": "None"
+				"ColumnName": "PayeeName",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_LastName",
+				"ExtentValue": null,
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
 				"ColumnName": "TheAmount",
-				"IsColumnNullable": true,
+				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": 100,
 				"ObfuscationStrategy": "Variance"
@@ -156,18 +190,18 @@
 
 			{
 				"ColumnName": "IsCleared",
-				"IsColumnNullable": true,
+				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": null,
 				"ObfuscationStrategy": "None"
 			},
 
 			{
-				"ColumnName": "CategoryId",
-				"IsColumnNullable": true,
-				"DictionaryReference": "",
+				"ColumnName": "CategoryName",
+				"IsColumnNullable": false,
+				"DictionaryReference": "d_CrayonColor",
 				"ExtentValue": null,
-				"ObfuscationStrategy": "None"
+				"ObfuscationStrategy": "Substitution"
 			},
 
 			{
@@ -180,10 +214,10 @@
 
 			{
 				"ColumnName": "Comments",
-				"IsColumnNullable": true,
-				"DictionaryReference": "d_LastName",
+				"IsColumnNullable": false,
+				"DictionaryReference": "",
 				"ExtentValue": null,
-				"ObfuscationStrategy": "Substitution"
+				"ObfuscationStrategy": "Ciphering"
 			}
 		]
 	}

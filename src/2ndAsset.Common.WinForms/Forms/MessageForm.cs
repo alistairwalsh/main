@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms.Controls;
 
-using Message = _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Message;
+using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {

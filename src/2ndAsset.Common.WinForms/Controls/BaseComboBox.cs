@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {

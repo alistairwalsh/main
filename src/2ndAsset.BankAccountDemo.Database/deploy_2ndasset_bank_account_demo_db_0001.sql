@@ -1,6 +1,6 @@
 ﻿/*
-	Copyright ©2002-2014 Daniel Bullington (dpbullington@gmail.com)
-	Distributed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+	Copyright ©2014-2015 2ndAsset.com (info@2ndasset.com) - D. P. Bullington
+	CLOSED SOURCE, COMMERCIAL PRODUCT - THIS IS NOT OPEN SOURCE
 */
 
 
@@ -10,17 +10,17 @@ GO
 
 CREATE TABLE [dbo].[CheckingAccountSource]
 (
-	[RecordId] [int] IDENTITY(0,1) NOT NULL,
-	[TransactionId] [int] NULL, -- none
-	[InstitutionName] [nvarchar](255) NULL, -- masking
-	[RefNumber] [nvarchar](255) NULL, -- shuffling
-	[TheDate] [datetime] NULL, -- variance
-	[PayeeName] [nvarchar](255) NULL, -- substitution
-	[TheAmount] [float] NULL, -- variance
-	[IsCleared] [bit] NULL DEFAULT(0), -- none
-	[CategoryName] [nvarchar](255) NULL, -- masking
-	[DueDate] [datetime] NULL, -- defaulting
-	[Comments] [nvarchar](2047) NULL, -- ciphering
+	[RecordId] [bigint] IDENTITY(0,1) NOT NULL,
+	[TransactionId] [int] NULL,
+	[InstitutionName] [nvarchar](255) NULL,
+	[RefNumber] [nvarchar](255) NULL,
+	[TheDate] [datetime] NULL,
+	[PayeeName] [nvarchar](255) NULL,
+	[TheAmount] [float] NULL,
+	[IsCleared] [bit] NULL DEFAULT(0),
+	[CategoryName] [nvarchar](255) NULL,
+	[DueDate] [datetime] NULL,
+	[Comments] [nvarchar](2047) NULL,
 	
 	CONSTRAINT [pk_CheckingAccountSource] PRIMARY KEY
 	(
@@ -32,7 +32,7 @@ GO
 
 CREATE TABLE [dbo].[Institution]
 (
-	[InstitutionId] [int] IDENTITY(0,1) NOT NULL,
+	[InstitutionId] [bigint] IDENTITY(0,1) NOT NULL,
 	[InstitutionName] [nvarchar](255) NULL,
 		
 	CONSTRAINT [pk_Institution] PRIMARY KEY
@@ -50,7 +50,7 @@ GO
 
 CREATE TABLE [dbo].[Payee]
 (
-	[PayeeId] [int] IDENTITY(0,1) NOT NULL,
+	[PayeeId] [bigint] IDENTITY(0,1) NOT NULL,
 	[PayeeName] [nvarchar](255) NULL,
 		
 	CONSTRAINT [pk_Payee] PRIMARY KEY
@@ -68,7 +68,7 @@ GO
 
 CREATE TABLE [dbo].[Category]
 (
-	[CategoryId] [int] IDENTITY(0,1) NOT NULL,
+	[CategoryId] [bigint] IDENTITY(0,1) NOT NULL,
 	[CategoryName] [nvarchar](255) NULL,
 		
 	CONSTRAINT [pk_Category] PRIMARY KEY
@@ -84,25 +84,27 @@ CREATE TABLE [dbo].[Category]
 GO
 
 
-CREATE TABLE [dbo].[CheckingAccount]
+CREATE TABLE [dbo].[AccountLedger]
 (
-	[TransactionId] [int] IDENTITY(0,1) NOT NULL,
-	[InstitutionId] [int] NOT NULL,
+	[AccountLedgerId] [bigint] IDENTITY(0,1) NOT NULL,
+	[SourceRecordId] [bigint] NOT NULL, -- no FK
+	[OriginalTransactionId] [int] NOT NULL, -- no FK
+	[InstitutionId] [bigint] NOT NULL,
 	[RefNumber] [nvarchar](255) NOT NULL,
 	[TheDate] [datetime] NOT NULL,
-	[PayeeId] [int] NOT NULL,
+	[PayeeId] [bigint] NOT NULL,
 	[TheAmount] [float] NOT NULL,
 	[IsCleared] [bit] NOT NULL DEFAULT(0),
-	[CategoryId] [int] NOT NULL,
+	[CategoryId] [bigint] NOT NULL,
 	[DueDate] [datetime] NULL,
 	[Comments] [nvarchar](2047) NOT NULL,
 	
-	CONSTRAINT [pk_CheckingAccount] PRIMARY KEY
+	CONSTRAINT [pk_AccountLedger] PRIMARY KEY
 	(
-		[TransactionId]
+		[AccountLedgerId]
 	),
 
-	CONSTRAINT [fk_CheckingAccount_Institution] FOREIGN KEY
+	CONSTRAINT [fk_AccountLedger_Institution] FOREIGN KEY
 	(
 		[InstitutionId]
 	)
@@ -111,7 +113,7 @@ CREATE TABLE [dbo].[CheckingAccount]
 		[InstitutionId]
 	),
 
-	CONSTRAINT [fk_CheckingAccount_Payee] FOREIGN KEY
+	CONSTRAINT [fk_AccountLedger_Payee] FOREIGN KEY
 	(
 		[PayeeId]
 	)
@@ -120,7 +122,7 @@ CREATE TABLE [dbo].[CheckingAccount]
 		[PayeeId]
 	),
 
-	CONSTRAINT [fk_CheckingAccount_Category] FOREIGN KEY
+	CONSTRAINT [fk_AccountLedger_Category] FOREIGN KEY
 	(
 		[CategoryId]
 	)
@@ -138,173 +140,129 @@ INSERT INTO [dbo].[Category] VALUES ('Unknown');
 GO
 
 
-CREATE TABLE [dbo].[Ox_CheckingAccount]
+CREATE TABLE [dbo].[Ox_AccountReporting]
 (
-	[TransactionId] [int] IDENTITY(0,1) NOT NULL,
-	[InstitutionId] [int] NOT NULL,
+	[AccountReportingId] [bigint] NOT NULL,
+	[TransactionNumber] [int] NOT NULL,
+	[InstitutionName] [nvarchar](255) NOT NULL,
 	[RefNumber] [nvarchar](255) NOT NULL,
 	[TheDate] [datetime] NOT NULL,
-	[PayeeId] [int] NOT NULL,
+	[PayeeName] [nvarchar](255) NOT NULL,
 	[TheAmount] [float] NOT NULL,
 	[IsCleared] [bit] NOT NULL DEFAULT(0),
-	[CategoryId] [int] NOT NULL,
+	[CategoryName] [nvarchar](255) NOT NULL,
 	[DueDate] [datetime] NULL,
 	[Comments] [nvarchar](2047) NOT NULL,
-	
-	CONSTRAINT [pk_Ox_CheckingAccount] PRIMARY KEY
-	(
-		[TransactionId]
-	),
 
-	/*CONSTRAINT [fk_Ox_CheckingAccount_Institution] FOREIGN KEY
+	CONSTRAINT [pk_Ox_AccountReporting] PRIMARY KEY
 	(
-		[InstitutionId]
+		[AccountReportingId]
 	)
-	REFERENCES [dbo].[Institution]
-	(
-		[InstitutionId]
-	),
-
-	CONSTRAINT [fk_Ox_CheckingAccount_Payee] FOREIGN KEY
-	(
-		[PayeeId]
-	)
-	REFERENCES [dbo].[Payee]
-	(
-		[PayeeId]
-	),
-
-	CONSTRAINT [fk_Ox_CheckingAccount_Category] FOREIGN KEY
-	(
-		[CategoryId]
-	)
-	REFERENCES [dbo].[Category]
-	(
-		[CategoryId]
-	)*/
-)	
+)
 GO
 
 
-CREATE VIEW [dbo].[CheckingAccountDailyLedger]
+CREATE TABLE [dbo].[Ox_AccountDailySnapshot]
+(
+	[AccountDailySnapshotId] [bigint] IDENTITY(0,1) NOT NULL,
+	[TheDate] [datetime] NOT NULL,
+	[DailyCount] [int] NOT NULL,
+	[DailyDelta] [money] NOT NULL,
+	[RunningBalance] [money] NOT NULL,
+
+	CONSTRAINT [pk_Ox_AccountDailySnapshot] PRIMARY KEY
+	(
+		[AccountDailySnapshotId]
+	)
+)
+GO
+
+
+CREATE PROCEDURE [dbo].[ExecuteExport_AccountReporting]
+AS
+	SELECT
+	t.[AccountLedgerId] AS [AccountReportingId],
+	t.[OriginalTransactionId] as [TransactionNumber],
+	UPPER(ti.[InstitutionName]) AS [InstitutionName],
+	UPPER(t.[RefNumber]) AS [RefNumber],
+	t.[TheDate] AS [TheDate],
+	UPPER(tp.[PayeeName]) AS [PayeeName],
+	t.[TheAmount] AS [TheAmount],
+	t.[IsCleared] AS [IsCleared],
+	UPPER(tc.[CategoryName]) AS [CategoryName],
+	t.[DueDate] AS [DueDate],
+	UPPER(t.[Comments]) AS [Comments]
+	FROM
+	[dbo].[AccountLedger] t
+	INNER JOIN [dbo].[Institution] ti ON ti.[InstitutionId] = t.[InstitutionId]
+	INNER JOIN [dbo].[Payee] tp ON tp.[PayeeId] = t.[PayeeId]
+	INNER JOIN [dbo].[Category] tc ON tc.[CategoryId] = t.[CategoryId]
+GO
+
+
+CREATE PROCEDURE [dbo].[ExecuteExport_AccountDailySnapshot]
 AS
 	SELECT
 		CAST(t.[TheDate] AS [date]) AS [TheDate],
 
-		COUNT(t.[TransactionId]) AS [DailyCount],
+		COUNT(t.[AccountLedgerId]) AS [DailyCount],
 
 		SUM(CAST(t.[TheAmount] AS [money])) AS [DailyDelta],
 
 		SUM(SUM(CAST(t.[TheAmount] AS [money]))) OVER
 			(ORDER BY CAST(t.[TheDate] AS [date])) AS [RunningBalance]
 	FROM
-		[dbo].[CheckingAccount] t
+		[dbo].[AccountLedger] t
 	GROUP BY
 		CAST(t.[TheDate] AS [date])
 GO
 
 
-CREATE VIEW [dbo].[Ox_CheckingAccountDailyLedger]
+CREATE PROCEDURE [dbo].[ExecuteBeforeImport_Clean]
+AS
+	TRUNCATE TABLE [dbo].[Ox_AccountReporting];
+	TRUNCATE TABLE [dbo].[AccountLedger];
+	TRUNCATE TABLE [dbo].[CheckingAccountSource];
+
+	DELETE FROM [dbo].[Payee] WHERE [PayeeId] <> 0;
+	DELETE FROM [dbo].[Category] WHERE [CategoryId] <> 0;
+	DELETE FROM [dbo].[Institution] WHERE [InstitutionId] <> 0;
+GO
+
+
+CREATE PROCEDURE [dbo].[ExecuteImport_Main]
 AS
 	SELECT
-		CAST(t.[TheDate] AS [date]) AS [TheDate],
-
-		COUNT(t.[TransactionId]) AS [DailyCount],
-
-		SUM(CAST(t.[TheAmount] AS [money])) AS [DailyDelta],
-
-		SUM(SUM(CAST(t.[TheAmount] AS [money]))) OVER
-			(ORDER BY CAST(t.[TheDate] AS [date])) AS [RunningBalance]
+	t.[RecordId] as [RecordId],
+	t.[TransactionId] as [TransactionId],
+	ISNULL((SELECT TOP 1 z.[InstitutionId] FROM [dbo].[Institution] z WHERE z.[InstitutionName] = t.[InstitutionName]), 0) AS [InstitutionId],
+	ISNULL(t.[RefNumber], '') AS [RefNumber],
+	t.[TheDate],
+	ISNULL((SELECT TOP 1 z.[PayeeId] FROM [dbo].[Payee] z WHERE z.[PayeeName] = t.[PayeeName]), 0) AS [PayeeId],
+	t.[TheAmount],
+	t.[IsCleared],
+	ISNULL((SELECT TOP 1 z.[CategoryId] FROM [dbo].[Category] z WHERE z.[CategoryName] = t.[CategoryName]), 0) AS [CategoryId],
+	t.[DueDate],
+	ISNULL(t.[Comments], '') AS [Comments]
 	FROM
-		[dbo].[Ox_CheckingAccount] t
-	GROUP BY
-		CAST(t.[TheDate] AS [date])
+	[dbo].[CheckingAccountSource] t
+	ORDER BY [InstitutionName] DESC, [TransactionId] ASC
 GO
 
 
--- *************************************************************************************************
--- *************************************************************************************************
-
-
-/*
--- Get Balance - sanity checks
-SELECT SUM([TheAmount]) FROM [dbo].[CheckingAccountSource];
-SELECT SUM([TheAmount]) FROM [dbo].[CheckingAccount];
-
-
--- Get Institutions
-SELECT DISTINCT [InstitutionName] FROM [dbo].[CheckingAccountSource] WHERE [InstitutionName] IS NOT NULL ORDER BY [InstitutionName] ASC;
-
-
--- Get Payees
-SELECT DISTINCT [PayeeName] FROM [dbo].[CheckingAccountSource] WHERE [PayeeName] IS NOT NULL ORDER BY [PayeeName] ASC;
-
-
--- Get Categories
-SELECT DISTINCT [CategoryName] FROM [dbo].[CheckingAccountSource] WHERE [CategoryName] IS NOT NULL ORDER BY [CategoryName] ASC;
-
-
--- Get CheckingAccount items
-SELECT
-ISNULL((SELECT TOP 1 z.[InstitutionId] FROM [dbo].[Institution] z WHERE z.[InstitutionName] = t.[InstitutionName]), 0) AS [InstitutionId],
-ISNULL(t.[RefNumber], '') AS [RefNumber],
-t.[TheDate],
-ISNULL((SELECT TOP 1 z.[PayeeId] FROM [dbo].[Payee] z WHERE z.[PayeeName] = t.[PayeeName]), 0) AS [PayeeId],
-t.[TheAmount],
-t.[IsCleared],
-ISNULL((SELECT TOP 1 z.[CategoryId] FROM [dbo].[Category] z WHERE z.[CategoryName] = t.[CategoryName]), 0) AS [CategoryId],
-t.[DueDate],
-ISNULL(t.[Comments], '') AS [Comments]
-FROM
-[dbo].[CheckingAccountSource] t
-ORDER BY [InstitutionName] DESC, [TransactionId] ASC
-
-
-
-
-
-SELECT
-	ca.[TransactionId],
-	i.[InstitutionName],
-	ca.[RefNumber],
-	ca.[TheDate],
-	p.[PayeeName],
-	ca.[TheAmount],
-	ca.[IsCleared],
-	c.[CategoryName],
-	ca.[DueDate],
-	ca.[Comments]
-FROM
-	[dbo].[CheckingAccount] ca
-	INNER JOIN [dbo].[Institution] i ON i.[InstitutionId] = ca.[InstitutionId]
-	INNER JOIN [dbo].[Payee] p ON p.[PayeeId] = ca.[PayeeId]
-	INNER JOIN [dbo].[Category] c ON c.[CategoryId] = ca.[CategoryId]
-ORDER BY
-	ca.[TheDate] ASC
-
-
-SELECT
-	ca.[TheDate],
-	SUM(ca.[TheAmount]) AS [DailyChange]
-FROM
-	[dbo].[CheckingAccount] ca
-GROUP BY
-	ca.[TheDate]
-ORDER BY
-	ca.[TheDate] ASC
-
-
-
-SELECT
-	ca.[TheDate],
-	SUM(SUM(ca.[TheAmount])) OVER
-		(ORDER BY [TheDate]) AS [DailyBalance]
-FROM
-	[dbo].[CheckingAccount] ca
-GROUP BY
-	ca.[TheDate]
-ORDER BY
-	ca.[TheDate] ASC
-
+CREATE PROCEDURE [dbo].[ExecuteImport_Institutions]
+AS
+	SELECT DISTINCT [InstitutionName] FROM [dbo].[CheckingAccountSource] WHERE [InstitutionName] IS NOT NULL ORDER BY [InstitutionName] ASC;
 GO
-*/
+
+
+CREATE PROCEDURE [dbo].[ExecuteImport_Payees]
+AS
+	SELECT DISTINCT [PayeeName] FROM [dbo].[CheckingAccountSource] WHERE [PayeeName] IS NOT NULL ORDER BY [PayeeName] ASC;
+GO
+
+
+CREATE PROCEDURE [dbo].[ExecuteImport_Categories]
+AS
+	SELECT DISTINCT [CategoryName] FROM [dbo].[CheckingAccountSource] WHERE [CategoryName] IS NOT NULL ORDER BY [CategoryName] ASC;
+GO

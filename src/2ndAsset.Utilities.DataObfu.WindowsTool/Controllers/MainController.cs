@@ -6,9 +6,10 @@
 using System;
 using System.Linq;
 
+using Solder.Framework;
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms.Presentation;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers

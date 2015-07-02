@@ -5,11 +5,12 @@
 
 using System;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.CtrlC_CtrlV.Utilities;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 

@@ -37,6 +37,9 @@
     <DocumentationFile>bin\Release\2ndAsset.Common.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Drawing" />

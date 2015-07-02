@@ -46,6 +46,9 @@
     <Reference Include="Microsoft.Data.ConnectionUI.Dialog">
       <HintPath>..\..\lib\DataConnectionDialog\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
     </Reference>
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
     </Reference>

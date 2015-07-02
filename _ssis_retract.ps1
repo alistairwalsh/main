@@ -18,9 +18,7 @@ $zzz_retract_assembly_names = @("2ndAsset.Ssis.Components.UI",
 	"2ndAsset.ObfuscationEngine.Core",
 	"2ndAsset.Common.WinForms",
 
-	"TextMetal.Middleware.Data",
-	"TextMetal.Middleware.Common",
-	"TextMetal.Middleware.Solder",
+	"Solder.Framework",
 
 	"Newtonsoft.Json")
 
@@ -30,12 +28,6 @@ foreach ($zzz_retract_assembly_name in $zzz_retract_assembly_names)
 
 	if (!($LastExitCode -eq $null -or $LastExitCode -eq 0))
 	{ echo "A warning occurred during the operation."; }
-
-	#Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.dll"
-	#Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.dll"
-
-	#Remove-Item "$dts_plc_x86_dir\$zzz_retract_assembly_name.pdb"
-	#Remove-Item "$dts_plc_x64_dir\$zzz_retract_assembly_name.pdb"
 }
 
 
