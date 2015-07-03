@@ -4,17 +4,18 @@
 */
 
 using System;
+using System.Linq;
 using System.Text;
 
 using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class DefaultHashingStrategy : IHashingStrategy
+	public sealed class DefaultPerformanceCriticalStrategy : IPerformanceCriticalStrategy
 	{
 		#region Constructors/Destructors
 
-		private DefaultHashingStrategy()
+		private DefaultPerformanceCriticalStrategy()
 		{
 		}
 
@@ -22,13 +23,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Fields/Constants
 
-		private static readonly DefaultHashingStrategy instance = new DefaultHashingStrategy();
+		private static readonly DefaultPerformanceCriticalStrategy instance = new DefaultPerformanceCriticalStrategy();
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		public static DefaultHashingStrategy Instance
+		public static DefaultPerformanceCriticalStrategy Instance
 		{
 			get
 			{
@@ -39,6 +40,42 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 		#endregion
 
 		#region Methods/Operators
+
+		private static string FisherYatesShuffle(int seed, string value)
+		{
+			Random random;
+			StringBuilder buffer;
+			int index;
+
+			random = new Random(seed);
+			buffer = new StringBuilder(value);
+
+			index = buffer.Length;
+			while (index > 1)
+			{
+				int xedni;
+				char ch;
+
+				index--;
+				xedni = random.Next(index + 1);
+				ch = buffer[xedni];
+				buffer[xedni] = buffer[index];
+				buffer[index] = ch;
+			}
+
+			value = buffer.ToString();
+			return value;
+		}
+
+		private static string LinqRandomOrderShuffle(int seed, string value)
+		{
+			Random random;
+
+			random = new Random(seed);
+			value = new string(value.ToCharArray().OrderBy(s => random.Next(int.MaxValue)).ToArray());
+
+			return value;
+		}
 
 		public long? GetHash(long? multiplier, long? size, long? seed, object value)
 		{
@@ -90,6 +127,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			hashCode = (hashCode % (long)size);
 
 			return (int)hashCode;
+		}
+
+		public string GetShuffle(int seed, string value)
+		{
+			return FisherYatesShuffle(seed, value);
 		}
 
 		#endregion

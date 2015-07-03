@@ -210,11 +210,11 @@ namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool
 		[STAThread]
 		public static int Main(string[] args)
 		{
-			args = new[]
+			/*args = new[]
 					{
 						@"-basedir:.\output",
 						@"-sourcefile:example.json"
-					};
+					};*/
 
 			using (Program program = new Program())
 				return program.EntryPoint(args);

@@ -41,7 +41,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		#region Fields/Constants
 
 		private readonly IDictionary<int, ColumnConfiguration> columnCache = new Dictionary<int, ColumnConfiguration>();
-		private readonly IHashingStrategy hashingStrategy = DefaultHashingStrategy.Instance;
+		private readonly IPerformanceCriticalStrategy performanceCriticalStrategy = DefaultPerformanceCriticalStrategy.Instance;
 		private readonly ObfuscationConfiguration obfuscationConfiguration;
 		private readonly IOxymoronHost oxymoronHost;
 		private readonly IDictionary<string, IDictionary<long, object>> substitutionCacheRoot = new Dictionary<string, IDictionary<long, object>>();
@@ -59,11 +59,11 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			}
 		}
 
-		private IHashingStrategy HashingStrategy
+		private IPerformanceCriticalStrategy PerformanceCriticalStrategy
 		{
 			get
 			{
-				return this.hashingStrategy;
+				return this.performanceCriticalStrategy;
 			}
 		}
 
@@ -218,7 +218,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			hashResult = new HashResult();
 			signHashBucketSize = long.MaxValue;
 
-			hashResult.SignHash = this.HashingStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier,
+			hashResult.SignHash = this.PerformanceCriticalStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier,
 				signHashBucketSize,
 				this.ObfuscationConfiguration.HashConfiguration.Seed,
 				columnValue.SafeToString()) ?? int.MinValue;
@@ -239,7 +239,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 					break;
 			}
 
-			hashResult.ValueHash = this.HashingStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier ?? 0L,
+			hashResult.ValueHash = this.PerformanceCriticalStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier ?? 0L,
 				valueHashBucketSize,
 				this.ObfuscationConfiguration.HashConfiguration.Seed ?? 0L,
 				columnValue.SafeToString()) ?? int.MinValue;

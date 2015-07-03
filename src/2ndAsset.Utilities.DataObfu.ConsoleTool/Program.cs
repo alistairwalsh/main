@@ -66,6 +66,28 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 			if ((object)arguments == null)
 				throw new ArgumentNullException("arguments");
 
+			// minimal viable configuration via code example
+			/*using (ToolHost toolHost = new ToolHost())
+			{
+				toolHost.Host(new ObfuscationConfiguration()
+							{
+								SourceAdapterConfiguration = new AdapterConfiguration()
+															{
+																AdapterAqtn = typeof(NullSourceAdapter).AssemblyQualifiedName
+															},
+								DestinationAdapterConfiguration = new AdapterConfiguration()
+																{
+																	AdapterAqtn = typeof(NullDestinationAdapter).AssemblyQualifiedName
+																},
+								TableConfiguration = new TableConfiguration(),
+								HashConfiguration = new HashConfiguration()
+													{
+														Multiplier = 0,
+														Seed = 0
+													}
+							});
+			}*/
+
 			sourceFilePath = (string)arguments[CMDLN_TOKEN_SOURCEFILE].Single();
 
 			using (IToolHost toolHost = new ToolHost())

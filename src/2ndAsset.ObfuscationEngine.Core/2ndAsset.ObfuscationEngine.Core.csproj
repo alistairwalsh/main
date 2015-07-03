@@ -77,6 +77,7 @@
     <Compile Include="Config\AdapterConfiguration.cs" />
     <Compile Include="Config\AdoNetParameterConfiguration.cs" />
     <Compile Include="Config\AdoNetCommandConfiguration.cs" />
+    <Compile Include="Strategy\DictionaryDynamicObject.cs" />
     <Compile Include="Support\AdoNetFast\AdoNetYieldingFascade.cs" />
     <Compile Include="Support\AdoNetFast\IAdoNetYieldingFascade.cs" />
     <Compile Include="Support\AdoNetFast\IRecord.cs" />
@@ -97,9 +98,9 @@
     <Compile Include="HashResult.cs" />
     <Compile Include="OnlyWhen.cs" />
     <Compile Include="Strategy\CipheringObfuscationStrategy.cs" />
-    <Compile Include="Strategy\DefaultHashingStrategy.cs" />
+    <Compile Include="Strategy\DefaultPerformanceCriticalStrategy.cs" />
     <Compile Include="Strategy\DefaultingObfuscationStrategy.cs" />
-    <Compile Include="Strategy\IHashingStrategy.cs" />
+    <Compile Include="Strategy\IPerformanceCriticalStrategy.cs" />
     <Compile Include="Strategy\IObfuscationStrategy.cs" />
     <Compile Include="MetaColumn.cs" />
     <Compile Include="Config\AdoNetAdapterConfiguration.cs" />

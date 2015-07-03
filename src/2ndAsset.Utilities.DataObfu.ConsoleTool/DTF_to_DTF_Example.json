@@ -223,7 +223,7 @@
 				"IsColumnNullable": false,
 				"DictionaryReference": "",
 				"ExtentValue": null,
-				"ObfuscationStrategy": "None"
+				"ObfuscationStrategy": "Script"
 			},
 
 			{

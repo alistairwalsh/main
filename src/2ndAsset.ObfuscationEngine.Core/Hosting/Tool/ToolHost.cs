@@ -81,15 +81,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 			return this.DictionaryConfigurationToAdapterMappings[dictionaryConfiguration].GetAlternativeValueFromId(dictionaryConfiguration, metaColumn, surrogateId);
 		}
 
-		public void Host(string sourceFilePath)
+		public void Host(ObfuscationConfiguration obfuscationConfiguration)
 		{
-			ObfuscationConfiguration obfuscationConfiguration;
-
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
 			IEnumerable<Message> messages;
 
-			sourceFilePath = Path.GetFullPath(sourceFilePath);
-			obfuscationConfiguration = OxymoronEngine.FromJsonFile<ObfuscationConfiguration>(sourceFilePath);
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
 
 			messages = obfuscationConfiguration.Validate();
 
@@ -130,6 +128,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 					}
 				}
 			}
+		}
+
+		public void Host(string sourceFilePath)
+		{
+			ObfuscationConfiguration obfuscationConfiguration;
+
+			sourceFilePath = Path.GetFullPath(sourceFilePath);
+			obfuscationConfiguration = OxymoronEngine.FromJsonFile<ObfuscationConfiguration>(sourceFilePath);
+
+			this.Host(obfuscationConfiguration);
 		}
 
 		#endregion

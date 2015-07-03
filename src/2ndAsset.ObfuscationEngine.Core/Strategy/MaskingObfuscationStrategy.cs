@@ -26,7 +26,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		private static object GetMask(double maskFactor, object value)
 		{
-			StringBuilder sb;
+			StringBuilder buffer;
 			Type valueType;
 			string _value;
 
@@ -54,22 +54,22 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			_value = _value.Trim();
 
-			sb = new StringBuilder(_value);
+			buffer = new StringBuilder(_value);
 
 			if (Math.Sign(maskFactor) == 1)
 			{
 				for (int index = 0; index < (int)Math.Round((double)_value.Length * maskFactor); index++)
-					sb[index] = '*';
+					buffer[index] = '*';
 			}
 			else if (Math.Sign(maskFactor) == -1)
 			{
 				for (int index = _value.Length - (int)Math.Round((double)_value.Length * Math.Abs(maskFactor)); index < _value.Length; index++)
-					sb[index] = '*';
+					buffer[index] = '*';
 			}
 			else
 				throw new InvalidOperationException("maskFactor");
 
-			return sb.ToString();
+			return buffer.ToString();
 		}
 
 		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)

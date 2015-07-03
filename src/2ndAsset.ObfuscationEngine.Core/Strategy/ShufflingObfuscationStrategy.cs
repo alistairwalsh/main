@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Solder.Framework.Utilities;
@@ -28,7 +27,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		private static object GetShuffle(long randomSeed, object value)
 		{
-			Random random;
 			Type valueType;
 			string _value;
 
@@ -47,9 +45,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			_value = _value.Trim();
 
-			random = new Random((int)randomSeed);
 			var fidelityMap = ImplNormalize(ref _value);
-			_value = new string(_value.ToCharArray().OrderBy(s => random.Next(int.MaxValue)).ToArray());
+
+			_value = DefaultPerformanceCriticalStrategy.Instance.GetShuffle((int)randomSeed, _value);
+
 			ImplDenormalize(fidelityMap, ref _value);
 
 			return _value;

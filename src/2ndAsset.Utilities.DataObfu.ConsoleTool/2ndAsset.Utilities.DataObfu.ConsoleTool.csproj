@@ -50,7 +50,20 @@
       <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
       <Name>2ndAsset.ObfuscationEngine.Core</Name>
     </ProjectReference>
+    <Reference Include="IronRuby">
+      <HintPath>..\..\lib\IronRuby\IronRuby.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries">
+      <HintPath>..\..\lib\IronRuby\IronRuby.Libraries.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\..\lib\IronRuby\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\IronRuby\Microsoft.Scripting.dll</HintPath>
+    </Reference>
     <Reference Include="Solder.Framework">
       <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
     </Reference>
