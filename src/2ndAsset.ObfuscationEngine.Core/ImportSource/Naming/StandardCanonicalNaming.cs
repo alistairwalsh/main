@@ -8,7 +8,7 @@ using System.Text;
 
 using Microsoft.CSharp;
 
-namespace Solder.Framework.Naming
+namespace _2ndAsset.ObfuscationEngine.Core.ImportSource.Naming
 {
 	public class StandardCanonicalNaming
 	{

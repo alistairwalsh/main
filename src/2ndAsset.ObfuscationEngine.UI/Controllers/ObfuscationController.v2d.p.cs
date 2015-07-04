@@ -5,10 +5,10 @@
 
 using System;
 
-using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
@@ -74,7 +74,8 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			ObfuscationConfiguration obfuscationConfiguration;
 
 			obfuscationConfiguration = new ObfuscationConfiguration();
-			obfuscationConfiguration.ConfigurationVersion = CURRENT_CONFIGURATION_VERSION;
+			obfuscationConfiguration.ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion;
+			obfuscationConfiguration.EngineVersion = ObfuscationConfiguration.CurrentEngineVersion;
 
 			this.ApplyViewToDocumentAvalanche(obfuscationConfiguration);
 			this.ApplyViewToDocumentDictionary(obfuscationConfiguration);
@@ -204,9 +205,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 				columnConfiguration = new ColumnConfiguration()
 									{
 										ColumnName = metaColumnSpecView.ColumnName ?? string.Empty,
-										ObfuscationStrategy = metaColumnSpecView.ObfuscationStrategy ?? ObfuscationStrategy.None,
-										DictionaryReference = metaColumnSpecView.DictionaryRef ?? string.Empty,
-										ExtentValue = metaColumnSpecView.ExtentValue
+										ObfuscationStrategyAqtn = metaColumnSpecView.ObfuscationStrategyAqtn
 									};
 
 				obfuscationConfiguration.TableConfiguration.ColumnConfigurations.Add(columnConfiguration);

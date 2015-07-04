@@ -12,7 +12,7 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
-namespace _2ndAsset.ObfuscationEngine.Core.Config
+namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 {
 	public class AdoNetAdapterConfiguration : ConfigurationObject
 	{

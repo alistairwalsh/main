@@ -26,7 +26,7 @@ namespace _2ndAsset.Ssis.Components.UI
 
 		#region Fields/Constants
 
-		private ComponentMetadataWrapper componentMetadataWrapper;
+		private __ComponentMetadataWrapper componentMetadataWrapper;
 		private IDTSComponentMetaData100 dtsComponentMetaData100;
 		private IServiceProvider serviceProvider;
 
@@ -34,7 +34,7 @@ namespace _2ndAsset.Ssis.Components.UI
 
 		#region Properties/Indexers/Events
 
-		private ComponentMetadataWrapper ComponentMetadataWrapper
+		private __ComponentMetadataWrapper ComponentMetadataWrapper
 		{
 			get
 			{
@@ -118,7 +118,7 @@ namespace _2ndAsset.Ssis.Components.UI
 		{
 			this.DtsComponentMetaData100 = dtsComponentMetadata;
 			this.ServiceProvider = serviceProvider;
-			this.ComponentMetadataWrapper = new ComponentMetadataWrapper(this.DtsComponentMetaData100, this.GetDictionaryUnitOfWork);
+			this.ComponentMetadataWrapper = new __ComponentMetadataWrapper(this.DtsComponentMetaData100, this.GetDictionaryUnitOfWork);
 		}
 
 		public void New(IWin32Window parentWindow)

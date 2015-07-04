@@ -11,10 +11,15 @@ using System.Text;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class CipheringObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value that is a binary encryption of the original value.
+	/// DATA TYPE: string
+	/// </summary>
+	public sealed class CipheringObfuscationStrategy : ObfuscationStrategy<ObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -94,13 +99,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return Encoding.UTF8.GetString(cipherTextBytes);
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			string sharedSecret;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");

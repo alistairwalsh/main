@@ -5,12 +5,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Newtonsoft.Json;
 
 using Solder.Framework;
 using Solder.Framework.Utilities;
+
+using _2ndAsset.ObfuscationEngine.Core.Hosting;
+using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
@@ -26,15 +28,21 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Fields/Constants
 
+		private readonly Dictionary<string, object> obfuscationStrategyConfiguration = new Dictionary<string, object>();
 		private string columnName;
-		private string dictionaryReference;
-		private int? extentValue;
-		private bool? isColumnNullable;
-		private ObfuscationStrategy obfuscationStrategy;
+		private string obfuscationStrategyAqtn;
 
 		#endregion
 
 		#region Properties/Indexers/Events
+
+		public Dictionary<string, object> ObfuscationStrategyConfiguration
+		{
+			get
+			{
+				return this.obfuscationStrategyConfiguration;
+			}
+		}
 
 		public string ColumnName
 		{
@@ -48,51 +56,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
-		public string DictionaryReference
+		public string ObfuscationStrategyAqtn
 		{
 			get
 			{
-				return this.dictionaryReference;
+				return this.obfuscationStrategyAqtn;
 			}
 			set
 			{
-				this.dictionaryReference = value;
-			}
-		}
-
-		public int? ExtentValue
-		{
-			get
-			{
-				return this.extentValue;
-			}
-			set
-			{
-				this.extentValue = value;
-			}
-		}
-
-		public bool? IsColumnNullable
-		{
-			get
-			{
-				return this.isColumnNullable;
-			}
-			set
-			{
-				this.isColumnNullable = value;
-			}
-		}
-
-		public ObfuscationStrategy ObfuscationStrategy
-		{
-			get
-			{
-				return this.obfuscationStrategy;
-			}
-			set
-			{
-				this.obfuscationStrategy = value;
+				this.obfuscationStrategyAqtn = value;
 			}
 		}
 
@@ -130,6 +102,33 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return this.ColumnName.SafeToString().ToLower().GetHashCode();
 		}
 
+		public IObfuscationStrategy GetObfuscationStrategyInstance()
+		{
+			IObfuscationStrategy instance;
+			Type type;
+
+			type = this.GetObfuscationStrategyType();
+
+			if ((object)type == null)
+				return null;
+
+			instance = (IObfuscationStrategy)Activator.CreateInstance(type);
+
+			return instance;
+		}
+
+		public Type GetObfuscationStrategyType()
+		{
+			Type type;
+
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ObfuscationStrategyAqtn))
+				return null;
+
+			type = Type.GetType(this.ObfuscationStrategyAqtn, false);
+
+			return type;
+		}
+
 		public override IEnumerable<Message> Validate()
 		{
 			return this.Validate(null);
@@ -138,46 +137,107 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		public IEnumerable<Message> Validate(int? columnIndex)
 		{
 			List<Message> messages;
+			Type type;
+			IObfuscationStrategy obfuscationStrategy;
 
 			messages = new List<Message>();
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ColumnName))
 				messages.Add(NewError(string.Format("Column[{0}] name is required.", columnIndex)));
 
-			if (!Enum.IsDefined(typeof(ObfuscationStrategy), this.ObfuscationStrategy))
-				messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy is invalid.", columnIndex, this.ColumnName)));
-
-			if (this.ObfuscationStrategy != ObfuscationStrategy.None)
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ObfuscationStrategyAqtn))
+				messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy AQTN is required.", columnIndex, this.ColumnName)));
+			else
 			{
-				if (this.ObfuscationStrategy == ObfuscationStrategy.Masking)
+				type = this.GetObfuscationStrategyType();
+
+				if ((object)type == null)
+					messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy failed to load type from AQTN.", columnIndex, this.ColumnName)));
+				else if (typeof(IObfuscationStrategy).IsAssignableFrom(type))
 				{
-					if ((object)this.ExtentValue == null)
-						messages.Add(NewError(string.Format("Column[{0}/{1}] masking extent is required.", columnIndex)));
-					else if (!((int)this.ExtentValue >= -100 && (int)this.ExtentValue <= 100))
-						messages.Add(NewError(string.Format("Column[{0}/{1}] masking extent must be between -100 and +100.", columnIndex, this.ColumnName)));
+					obfuscationStrategy = this.GetObfuscationStrategyInstance();
+
+					if ((object)obfuscationStrategy == null)
+						messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy failed to instatiate type from AQTN.", columnIndex, this.ColumnName)));
+					else
+						messages.AddRange(obfuscationStrategy.ValidateConfiguration(new DummyHost(this.Parent.Parent), new Tuple<ColumnConfiguration, IDictionary<string, object>>(this, this.ObfuscationStrategyConfiguration)));
 				}
-				else if (this.ObfuscationStrategy == ObfuscationStrategy.Substitution)
-				{
-					if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.DictionaryReference))
-						messages.Add(NewError(string.Format("Column[{0}/{1}] dictionary reference is required.", columnIndex, this.ColumnName)));
-					else if (this.Parent.Parent.DictionaryConfigurations.Count(d => d.DictionaryId.SafeToString().Trim().ToLower() == this.DictionaryReference.SafeToString().Trim().ToLower()) != 1)
-						messages.Add(NewError(string.Format("Column[{0}/{1}] dictionary reference lookup failed.", columnIndex, this.ColumnName)));
-				}
-				else if (this.ObfuscationStrategy == ObfuscationStrategy.Variance)
-				{
-					if ((object)this.ExtentValue == null)
-						messages.Add(NewError(string.Format("Column[{0}/{1}] variance extent is required.", columnIndex, this.ColumnName)));
-					else if (!((int)this.ExtentValue > 0 && (int)this.ExtentValue <= 100))
-						messages.Add(NewError(string.Format("Column[{0}/{1}] variance extent must be between 0 and 100.", columnIndex, this.ColumnName)));
-				}
-				else if (this.ObfuscationStrategy == ObfuscationStrategy.Defaulting)
-				{
-					if ((object)this.IsColumnNullable == null)
-						messages.Add(NewError(string.Format("Column[{0}/{1}] is nullable flag is required.", columnIndex, this.ColumnName)));
-				}
+				else
+					messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy loaded an unrecognized type via AQTN.", columnIndex, this.ColumnName)));
 			}
 
 			return messages;
+		}
+
+		#endregion
+
+		#region Classes/Structs/Interfaces/Enums/Delegates
+
+		internal class DummyHost : IOxymoronEngine
+		{
+			#region Constructors/Destructors
+
+			public DummyHost(ObfuscationConfiguration obfuscationConfiguration)
+			{
+				if ((object)obfuscationConfiguration == null)
+					throw new ArgumentNullException("obfuscationConfiguration");
+
+				this.obfuscationConfiguration = obfuscationConfiguration;
+			}
+
+			#endregion
+
+			#region Fields/Constants
+
+			private readonly ObfuscationConfiguration obfuscationConfiguration;
+
+			#endregion
+
+			#region Properties/Indexers/Events
+
+			ObfuscationConfiguration IOxymoronEngine.ObfuscationConfiguration
+			{
+				get
+				{
+					return this.obfuscationConfiguration;
+				}
+			}
+
+			IOxymoronHost IOxymoronEngine.OxymoronHost
+			{
+				get
+				{
+					return null;
+				}
+			}
+
+			IDictionary<string, IDictionary<long, object>> IOxymoronEngine.SubstitutionCacheRoot
+			{
+				get
+				{
+					return null;
+				}
+			}
+
+			#endregion
+
+			#region Methods/Operators
+
+			void IDisposable.Dispose()
+			{
+			}
+
+			object IOxymoronEngine.GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
+			{
+				throw new NotImplementedException();
+			}
+
+			IEnumerable<IDictionary<string, object>> IOxymoronEngine.GetObfuscatedValues(IEnumerable<IDictionary<string, object>> records)
+			{
+				throw new NotImplementedException();
+			}
+
+			#endregion
 		}
 
 		#endregion

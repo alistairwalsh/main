@@ -10,10 +10,15 @@ using System.Text;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class ShufflingObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value using a hashed shuffle of alphanumeric characters (while preserving other characters).
+	/// DATA TYPE: string
+	/// </summary>
+	public sealed class ShufflingObfuscationStrategy : ObfuscationStrategy<ObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -108,13 +113,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return fidelityMap;
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			long randomSeed;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");

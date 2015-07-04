@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.Common.WinForms.Presentation;
-using _2ndAsset.ObfuscationEngine.Core;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
@@ -30,7 +29,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Views
 
 		#region Methods/Operators
 
-		IMetaColumnSpecView AddMetaColumnSpecView(string columnName, bool? isColumnNullable, ObfuscationStrategy? obfuscationStrategy, string dictionaryRef, int? extentValue);
+		IMetaColumnSpecView AddMetaColumnSpecView(string columnName, string obfuscationStrategyAqtn);
 
 		void ClearMetaColumnSpecViews();
 

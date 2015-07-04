@@ -1,5 +1,19 @@
 {
-	ConfigurationNamespace: "http://www.2ndAsset.com/cfg/v0.1.0",
+	ConfigurationVersion:
+	{
+		Major: 1,
+		Minor: 0,
+		Revision: 0,
+		Build: 0
+	},
+
+	EngineVersion:
+	{
+		Major: 1,
+		Minor: 0,
+		Revision: 0,
+		Build: 0
+	},
 
 	SourceAdapterConfiguration:
 	{
@@ -134,90 +148,90 @@
 		[
 			{
 				"ColumnName": "AccountReportingId",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Script"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.ScriptObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"SourceCode": "using System; public static class Script { public static object GetValue(object value) { return value; } }"
+				}
 			},
 
 			{
 				"ColumnName": "TransactionNumber",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Defaulting"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.DefaultingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"DefaultingCanBeNull": false
+				}
 			},
 
 			{
 				"ColumnName": "InstitutionName",
-				"IsColumnNullable": false,
-				"DictionaryReference": "d_FirstName",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Substitution"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"DictionaryReference": "d_FirstName"
+				}
 			},
 
 			{
 				"ColumnName": "RefNumber",
 				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Shuffling"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.ShufflingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core"
 			},
 
 			{
 				"ColumnName": "TheDate",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": 25,
-				"ObfuscationStrategy": "Variance"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"VariancePercentValue": 25
+				}
 			},
 
 			{
 				"ColumnName": "PayeeName",
-				"IsColumnNullable": false,
-				"DictionaryReference": "d_LastName",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Substitution"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"DictionaryReference": "d_LastName"
+				}
 			},
 
 			{
 				"ColumnName": "TheAmount",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": 100,
-				"ObfuscationStrategy": "Variance"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"VariancePercentValue": 100
+				}
 			},
 
 			{
 				"ColumnName": "IsCleared",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "None"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.NoneObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core"
 			},
 
 			{
 				"ColumnName": "CategoryName",
-				"IsColumnNullable": false,
-				"DictionaryReference": "d_CrayonColor",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Substitution"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"DictionaryReference": "d_CrayonColor"
+				}
 			},
 
 			{
 				"ColumnName": "DueDate",
-				"IsColumnNullable": true,
-				"DictionaryReference": "",
-				"ExtentValue": 10,
-				"ObfuscationStrategy": "Variance"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
+				"ObfuscationStrategyConfiguration":
+				{
+					"VariancePercentValue": 10
+				}
 			},
 
 			{
 				"ColumnName": "Comments",
-				"IsColumnNullable": false,
-				"DictionaryReference": "",
-				"ExtentValue": null,
-				"ObfuscationStrategy": "Ciphering"
+				"ObfuscationStrategyAqtn": "_2ndAsset.ObfuscationEngine.Core.Strategy.CipheringObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core"
 			}
 		]
 	}

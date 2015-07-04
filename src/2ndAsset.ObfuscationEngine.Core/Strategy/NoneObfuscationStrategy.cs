@@ -6,10 +6,15 @@
 using System;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class NoneObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns un-obfuscated, original value.
+	/// DATA TYPE: any
+	/// </summary>
+	public sealed class NoneObfuscationStrategy : ObfuscationStrategy<ObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -21,12 +26,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");

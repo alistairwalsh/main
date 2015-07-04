@@ -10,6 +10,7 @@ using Solder.Framework;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
@@ -75,6 +76,22 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Methods/Operators
 
+		public TAdapter GetAdapterInstance<TAdapter>()
+			where TAdapter : class, IAdapter
+		{
+			TAdapter instance;
+			Type type;
+
+			type = this.GetAdapterType();
+
+			if ((object)type == null)
+				return null;
+
+			instance = (TAdapter)Activator.CreateInstance(type);
+
+			return instance;
+		}
+
 		public Type GetAdapterType()
 		{
 			Type sourceAdapterType;
@@ -126,7 +143,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 						messages.AddRange(this.AdoNetAdapterConfiguration.Validate(context));
 				}
 				else
-					messages.Add(NewError(string.Format("{0} adapter an unrecognized type via AQTN.", context)));
+					messages.Add(NewError(string.Format("{0} adapter loaded an unrecognized type via AQTN.", context)));
 			}
 
 			return messages;

@@ -9,10 +9,15 @@ using System.Text;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class MaskingObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value that is a +/- (%) mask of the original value.
+	/// DATA TYPE: string
+	/// </summary>
+	public sealed class MaskingObfuscationStrategy : ObfuscationStrategy<MaskingObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -72,18 +77,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return buffer.ToString();
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, MaskingObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			double maskingFactor;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			maskingFactor = (configurationContext.ExtentValue.GetValueOrDefault() / 100.0);
+			maskingFactor = (contextualConfiguration.Item2.MaskingPercentValue.GetValueOrDefault() / 100.0);
 
 			value = GetMask(maskingFactor, columnValue);
 

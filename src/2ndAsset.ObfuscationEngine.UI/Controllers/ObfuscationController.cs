@@ -441,7 +441,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 						this.View.MetadataSettings.ClearMetaColumnSpecViews();
 
 						foreach (MetaColumn metaColumn in sourceAdapter.UpstreamMetadata)
-							this.View.MetadataSettings.AddMetaColumnSpecView(metaColumn.ColumnName, metaColumn.ColumnIsNullable, ObfuscationStrategy.None, string.Empty, null);
+							this.View.MetadataSettings.AddMetaColumnSpecView(metaColumn.ColumnName, string.Empty);
 					}
 				}
 			}

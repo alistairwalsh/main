@@ -1,5 +1,19 @@
 {
-	ConfigurationNamespace: "http://www.2ndAsset.com/cfg/v0.1.0",
+	ConfigurationVersion:
+	{
+		Major: 1,
+		Minor: 0,
+		Revision: 0,
+		Build: 0
+	},
+
+	EngineVersion:
+	{
+		Major: 1,
+		Minor: 0,
+		Revision: 0,
+		Build: 0
+	},
 
 	SourceAdapterConfiguration:
 	{

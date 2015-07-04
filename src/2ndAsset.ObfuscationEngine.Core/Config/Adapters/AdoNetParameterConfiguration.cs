@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
-namespace _2ndAsset.ObfuscationEngine.Core.Config
+namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 {
 	public class AdoNetParameterConfiguration : ConfigurationObject
 	{

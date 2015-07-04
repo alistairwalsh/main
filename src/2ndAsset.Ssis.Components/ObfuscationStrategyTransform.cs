@@ -24,8 +24,6 @@ using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
-using x__ComponentMetadataWrapper = _2ndAsset.Ssis.Components.__ComponentMetadataWrapper;
-
 namespace _2ndAsset.Ssis.Components
 {
 	[DtsPipelineComponent(DisplayName = Constants.COMPONENT_NAME,
@@ -73,7 +71,7 @@ namespace _2ndAsset.Ssis.Components
 																			DataType.DT_UI8
 																		};
 
-		private x__ComponentMetadataWrapper componentMetadataWrapper;
+		private __ComponentMetadataWrapper componentMetadataWrapper;
 		private IDbConnection dictionaryDbConnection;
 		private bool disposed;
 		private IOxymoronEngine oxymoronEngine;
@@ -106,7 +104,7 @@ namespace _2ndAsset.Ssis.Components
 			}
 		}
 
-		private x__ComponentMetadataWrapper ComponentMetadataWrapper
+		private __ComponentMetadataWrapper ComponentMetadataWrapper
 		{
 			get
 			{
@@ -415,7 +413,7 @@ namespace _2ndAsset.Ssis.Components
 		/// </summary>
 		public override void Initialize()
 		{
-			this.ComponentMetadataWrapper = new x__ComponentMetadataWrapper(this.ComponentMetaData, this.GetDictionaryUnitOfWork);
+			this.ComponentMetadataWrapper = new __ComponentMetadataWrapper(this.ComponentMetaData, this.GetDictionaryUnitOfWork);
 
 			this.TryLaunchDebugger();
 			base.Initialize();

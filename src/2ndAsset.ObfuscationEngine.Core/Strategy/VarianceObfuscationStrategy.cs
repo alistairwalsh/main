@@ -6,10 +6,17 @@
 using System;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class VarianceObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value within +/- (x%) of the original value.
+	/// DATA TYPE: numeric
+	/// Returns an alternate value within +/- (x%:365.25d) of the original value.
+	/// DATA TYPE: temporal
+	/// </summary>
+	public sealed class VarianceObfuscationStrategy : ObfuscationStrategy<VarianceObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -81,13 +88,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, VarianceObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			double varianceFactor;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
@@ -95,6 +102,21 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			varianceFactor = ((((hashResult.ValueHash <= 0 ? 1 : hashResult.ValueHash)) * ((hashResult.SignHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
 
 			value = GetVariance(varianceFactor, columnValue);
+
+			return value;
+		}
+
+		protected override long CoreGetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, VarianceObfuscationStrategyConfiguration> contextualConfiguration)
+		{
+			long value;
+
+			if ((object)oxymoronEngine == null)
+				throw new ArgumentNullException("oxymoronEngine");
+
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
+
+			value = contextualConfiguration.Item2.VariancePercentValue ?? base.CoreGetValueHashBucketSize(oxymoronEngine, contextualConfiguration);
 
 			return value;
 		}

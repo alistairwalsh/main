@@ -4,7 +4,6 @@
 */
 
 using _2ndAsset.Common.WinForms.Presentation;
-using _2ndAsset.ObfuscationEngine.Core;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
@@ -17,22 +16,12 @@ namespace _2ndAsset.ObfuscationEngine.UI.Views
 			get;
 		}
 
-		string DictionaryRef
-		{
-			get;
-		}
-
-		int? ExtentValue
-		{
-			get;
-		}
-
 		bool? IsColumnNullable
 		{
 			get;
 		}
 
-		ObfuscationStrategy? ObfuscationStrategy
+		string ObfuscationStrategyAqtn
 		{
 			get;
 		}

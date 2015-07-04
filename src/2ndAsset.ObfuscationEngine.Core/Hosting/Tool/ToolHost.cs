@@ -102,7 +102,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 					{
 						IDictionaryAdapter dictionaryAdapter;
 
-						dictionaryAdapter = (IDictionaryAdapter)Activator.CreateInstance(dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterType());
+						dictionaryAdapter = dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterInstance<IDictionaryAdapter>();
 						dictionaryAdapters.Add(dictionaryAdapter);
 						dictionaryAdapter.Initialize(obfuscationConfiguration);
 
@@ -111,11 +111,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 						this.DictionaryConfigurationToAdapterMappings.Add(dictionaryConfiguration, dictionaryAdapter);
 					}
 
-					using (ISourceAdapter sourceAdapter = (ISourceAdapter)Activator.CreateInstance(obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterType()))
+					using (ISourceAdapter sourceAdapter = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterInstance<ISourceAdapter>())
 					{
 						sourceAdapter.Initialize(obfuscationConfiguration);
 
-						using (IDestinationAdapter destinationAdapter = (IDestinationAdapter)Activator.CreateInstance(obfuscationConfiguration.DestinationAdapterConfiguration.GetAdapterType()))
+						using (IDestinationAdapter destinationAdapter = obfuscationConfiguration.DestinationAdapterConfiguration.GetAdapterInstance<IDestinationAdapter>())
 						{
 							destinationAdapter.Initialize(obfuscationConfiguration);
 							destinationAdapter.UpstreamMetadata = sourceAdapter.UpstreamMetadata;

@@ -12,7 +12,6 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
@@ -68,18 +67,15 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Methods/Operators
 
-		IMetaColumnSpecView IMetadataSettingsView.AddMetaColumnSpecView(string columnName, bool? isColumnNullable, ObfuscationStrategy? obfuscationStrategy, string dictionaryRef, int? extentValue)
+		IMetaColumnSpecView IMetadataSettingsView.AddMetaColumnSpecView(string columnName, string obfuscationStrategyAqtn)
 		{
 			MetaColumnListViewItem lviMetaColumnSpec;
 
-			lviMetaColumnSpec = new MetaColumnListViewItem(new string[] { columnName.SafeToString(), isColumnNullable.SafeToString(), obfuscationStrategy.SafeToString(), dictionaryRef.SafeToString(), extentValue.SafeToString() });
+			lviMetaColumnSpec = new MetaColumnListViewItem(new string[] { columnName.SafeToString(), obfuscationStrategyAqtn.SafeToString() });
 			lviMetaColumnSpec.Tag = new MetaColumnSpec()
 									{
 										ColumnName = columnName.SafeToString(),
-										ObfuscationStrategy = obfuscationStrategy ?? ObfuscationStrategy.None,
-										DictionaryRef = dictionaryRef.SafeToString(),
-										ExtentValue = extentValue,
-										IsColumnNullable = isColumnNullable
+										ObfuscationStrategyAqtn = obfuscationStrategyAqtn
 									};
 
 			this.lvMetaColumnSpecs.Items.Add(lviMetaColumnSpec);
@@ -91,7 +87,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnAddMetaColumnSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.AddMetaColumnSpecView(string.Format("Column_{0:N}", Guid.NewGuid()), true, ObfuscationStrategy.None, string.Empty, null);
+			this.PartialView.AddMetaColumnSpecView(string.Format("Column_{0:N}", Guid.NewGuid()), string.Empty);
 			this.CoreRefreshControlState();
 		}
 
@@ -166,7 +162,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[0].Text = metaColumnSpec.ColumnName.SafeToString();
 				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[1].Text = metaColumnSpec.IsColumnNullable.SafeToString();
-				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[2].Text = metaColumnSpec.ObfuscationStrategy.ToString();
+				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[2].Text = metaColumnSpec.ObfuscationStrategyAqtn.SafeToString();
 				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[3].Text = metaColumnSpec.DictionaryRef.SafeToString();
 				this.lvMetaColumnSpecs.SelectedItems[0].SubItems[4].Text = metaColumnSpec.ExtentValue.SafeToString();
 			}
@@ -220,27 +216,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			string IMetaColumnSpecView.DictionaryRef
-			{
-				get
-				{
-					return this.SubItems[3].Text;
-				}
-			}
-
-			int? IMetaColumnSpecView.ExtentValue
-			{
-				get
-				{
-					int? value;
-
-					if (DataTypeFascade.Instance.TryParse<int?>(this.SubItems[4].Text, out value))
-						return value;
-
-					return null;
-				}
-			}
-
 			bool? IMetaColumnSpecView.IsColumnNullable
 			{
 				get
@@ -254,13 +229,13 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			ObfuscationStrategy? IMetaColumnSpecView.ObfuscationStrategy
+			string IMetaColumnSpecView.ObfuscationStrategyAqtn
 			{
 				get
 				{
-					ObfuscationStrategy? value;
+					string value;
 
-					if (DataTypeFascade.Instance.TryParse<ObfuscationStrategy?>(this.SubItems[2].Text, out value))
+					if (DataTypeFascade.Instance.TryParse<string>(this.SubItems[2].Text, out value))
 						return value;
 
 					return null;
@@ -286,7 +261,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			private string dictionaryRef;
 			private int? extentValue;
 			private bool? isColumnNullable;
-			private ObfuscationStrategy obfuscationStrategy;
+			private string obfuscationStrategyAqtn;
 
 			#endregion
 
@@ -340,15 +315,15 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			public ObfuscationStrategy ObfuscationStrategy
+			public string ObfuscationStrategyAqtn
 			{
 				get
 				{
-					return this.obfuscationStrategy;
+					return this.obfuscationStrategyAqtn;
 				}
 				set
 				{
-					this.obfuscationStrategy = value;
+					this.obfuscationStrategyAqtn = value;
 				}
 			}
 

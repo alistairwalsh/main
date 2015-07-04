@@ -8,10 +8,15 @@ using System;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class DefaultingObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value that is always null if NULL or the default value if NOT NULL.
+	/// DATA TYPE: any
+	/// </summary>
+	public sealed class DefaultingObfuscationStrategy : ObfuscationStrategy<DefaultingObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -37,17 +42,17 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return DataTypeFascade.Instance.DefaultValue(valueType);
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, DefaultingObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			value = GetDefault(metaColumn.ColumnIsNullable.GetValueOrDefault(), metaColumn.ColumnType);
+			value = GetDefault(metaColumn.ColumnIsNullable ?? contextualConfiguration.Item2.DefaultingCanBeNull ?? false, metaColumn.ColumnType);
 
 			return value;
 		}

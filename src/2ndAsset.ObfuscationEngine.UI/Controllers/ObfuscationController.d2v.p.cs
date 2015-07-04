@@ -11,6 +11,7 @@ using _2ndAsset.ObfuscationEngine.Core.Adapter.Destination;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
@@ -73,7 +74,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
 
-			this.View.ConfigurationVersion = obfuscationConfiguration.ConfigurationVersion;
+			//this.View.ConfigurationVersion = obfuscationConfiguration.ConfigurationVersion;
 
 			this.ApplyDocumentToViewAvalanche(obfuscationConfiguration);
 			this.ApplyDocumentToViewDictionary(obfuscationConfiguration);
@@ -242,7 +243,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 				(object)obfuscationConfiguration.TableConfiguration.ColumnConfigurations != null)
 			{
 				foreach (ColumnConfiguration columnConfiguration in obfuscationConfiguration.TableConfiguration.ColumnConfigurations)
-					this.View.MetadataSettings.AddMetaColumnSpecView(columnConfiguration.ColumnName, columnConfiguration.IsColumnNullable, columnConfiguration.ObfuscationStrategy, columnConfiguration.DictionaryReference, columnConfiguration.ExtentValue);
+					this.View.MetadataSettings.AddMetaColumnSpecView(columnConfiguration.ColumnName, columnConfiguration.ObfuscationStrategyAqtn);
 			}
 		}
 

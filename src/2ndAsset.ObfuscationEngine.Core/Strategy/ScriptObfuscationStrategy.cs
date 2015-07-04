@@ -12,12 +12,17 @@ using System.Reflection;
 using Microsoft.CSharp;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 using ZZZ = System.Func<object, object>;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 {
-	public sealed class ScriptObfuscationStrategy : ObfuscationStrategy<ColumnConfiguration>
+	/// <summary>
+	/// Returns an alternate value that is a script function of the original value.
+	/// DATA TYPE: any
+	/// </summary>
+	public sealed class ScriptObfuscationStrategy : ObfuscationStrategy<ScriptObfuscationStrategyConfiguration>
 	{
 		#region Constructors/Destructors
 
@@ -84,15 +89,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return callback(columnValue);
 		}
 
-		protected override object CoreGetObfuscatedValue(ColumnConfiguration configurationContext, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ScriptObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
 		{
-			if ((object)configurationContext == null)
-				throw new ArgumentNullException("configurationContext");
+			if ((object)contextualConfiguration == null)
+				throw new ArgumentNullException("contextualConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			return CompileCSharpCode(columnValue, "using System; public static class Script { public static object GetValue(object value) { return value; } }");
+			return CompileCSharpCode(columnValue, contextualConfiguration.Item2.SourceCode);
 		}
 
 		#endregion
