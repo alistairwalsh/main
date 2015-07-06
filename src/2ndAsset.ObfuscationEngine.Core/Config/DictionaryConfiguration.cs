@@ -100,12 +100,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Methods/Operators
 
-		public override IEnumerable<Message> Validate()
+		public override sealed IEnumerable<Message> Validate()
 		{
 			return this.Validate(null);
 		}
 
-		public IEnumerable<Message> Validate(int? index)
+		public virtual IEnumerable<Message> Validate(int? index)
 		{
 			List<Message> messages;
 			const string CONTEXT = "Dictionary";

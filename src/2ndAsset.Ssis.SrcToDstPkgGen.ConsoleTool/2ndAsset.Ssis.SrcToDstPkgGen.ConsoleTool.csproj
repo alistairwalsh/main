@@ -88,6 +88,7 @@
     <Compile Include="Config\TwoPartName.cs" />
     <Compile Include="ConsoleComponentEventHandler.cs" />
     <Compile Include="ConsoleEvents.cs" />
+    <Compile Include="ImportSource\Naming\StandardCanonicalNaming.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
   </ItemGroup>

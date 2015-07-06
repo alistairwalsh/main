@@ -104,12 +104,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return sourceAdapterType;
 		}
 
-		public override IEnumerable<Message> Validate()
+		public override sealed IEnumerable<Message> Validate()
 		{
 			return this.Validate(null);
 		}
 
-		public IEnumerable<Message> Validate(string context)
+		public virtual IEnumerable<Message> Validate(string context)
 		{
 			List<Message> messages;
 			Type type;

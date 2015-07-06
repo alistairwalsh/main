@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json.Linq;
 
+using Solder.Framework;
+
 using _2ndAsset.ObfuscationEngine.Core.Config.Strategies;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
@@ -83,6 +85,24 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 				this.ObfuscationStrategyConfiguration = JObject.FromObject(base.ObfuscationStrategyConfiguration).ToObject<TObfuscationStrategyConfiguration>();
 				this.Frozen = true;
 			}
+		}
+
+		public override Type GetObfuscationStrategyConfigurationType()
+		{
+			return typeof(TObfuscationStrategyConfiguration);
+		}
+
+		public override IEnumerable<Message> Validate(int? columnIndex)
+		{
+			List<Message> messages;
+
+			messages = new List<Message>();
+			messages.AddRange(base.Validate(columnIndex));
+
+			if ((object)this.ObfuscationStrategyConfiguration != null)
+				messages.AddRange(this.ObfuscationStrategyConfiguration.Validate(columnIndex));
+
+			return messages;
 		}
 
 		#endregion

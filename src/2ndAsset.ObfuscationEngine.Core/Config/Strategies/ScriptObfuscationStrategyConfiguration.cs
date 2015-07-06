@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 
 using Solder.Framework;
+using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config.Strategies
 {
@@ -43,14 +44,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config.Strategies
 
 		#region Methods/Operators
 
-		public override IEnumerable<Message> Validate()
+		public override IEnumerable<Message> Validate(int? columnIndex)
 		{
-			/*if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.DictionaryReference))
-				messages.Add(NewError(string.Format("Column[{0}/{1}] dictionary reference is required.", columnIndex, this.ColumnName)));
-			else if (this.Parent.Parent.DictionaryConfigurations.Count(d => d.DictionaryId.SafeToString().Trim().ToLower() == this.DictionaryReference.SafeToString().Trim().ToLower()) != 1)
-				messages.Add(NewError(string.Format("Column[{0}/{1}] dictionary reference lookup failed.", columnIndex, this.ColumnName)));*/
+			List<Message> messages;
 
-			return new Message[] { };
+			messages = new List<Message>();
+
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.SourceCode))
+				messages.Add(NewError(string.Format("Column[{0}/{1}] source code is required.", columnIndex, this.Parent.ColumnName)));
+
+			return messages;
 		}
 
 		#endregion

@@ -10,9 +10,6 @@ using System.Linq;
 using Newtonsoft.Json;
 
 using Solder.Framework;
-using Solder.Framework.Utilities;
-
-using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
@@ -164,7 +161,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		{
 			List<Message> messages;
 			int index;
-			Type type;
 			const string SRC_CONTEXT = "Source";
 			const string DST_CONTEXT = "Destination";
 

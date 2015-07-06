@@ -101,6 +101,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return this.ColumnName.SafeToString().ToLower().GetHashCode();
 		}
 
+		public virtual Type GetObfuscationStrategyConfigurationType()
+		{
+			return null;
+		}
+
 		public IObfuscationStrategy GetObfuscationStrategyInstance()
 		{
 			IObfuscationStrategy instance;
@@ -128,12 +133,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return type;
 		}
 
-		public override IEnumerable<Message> Validate()
+		public override sealed IEnumerable<Message> Validate()
 		{
 			return this.Validate(null);
 		}
 
-		public IEnumerable<Message> Validate(int? columnIndex)
+		public virtual IEnumerable<Message> Validate(int? columnIndex)
 		{
 			List<Message> messages;
 			Type type;
@@ -159,7 +164,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 					if ((object)obfuscationStrategy == null)
 						messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy failed to instatiate type from AQTN.", columnIndex, this.ColumnName)));
 					else
-						messages.AddRange(obfuscationStrategy.ValidateConfiguration(this));
+						messages.AddRange(obfuscationStrategy.ValidateConfiguration(this, columnIndex));
 				}
 				else
 					messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy loaded an unrecognized type via AQTN.", columnIndex, this.ColumnName)));

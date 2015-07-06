@@ -5,6 +5,8 @@
 
 using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 using Solder.Framework;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config.Strategies
@@ -19,9 +21,31 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config.Strategies
 
 		#endregion
 
+		#region Properties/Indexers/Events
+
+		[JsonIgnore]
+		public new ColumnConfiguration Parent
+		{
+			get
+			{
+				return (ColumnConfiguration)base.Parent;
+			}
+			set
+			{
+				base.Parent = value;
+			}
+		}
+
+		#endregion
+
 		#region Methods/Operators
 
-		public override IEnumerable<Message> Validate()
+		public override sealed IEnumerable<Message> Validate()
+		{
+			return this.Validate(null);
+		}
+
+		public virtual IEnumerable<Message> Validate(int? columnIndex)
 		{
 			return new Message[] { };
 		}

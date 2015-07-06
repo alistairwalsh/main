@@ -69,7 +69,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 						_value *= val;
 						break;
 					case Op.Div:
-						if(val != 0)
+						if (val != 0)
 							_value /= val;
 						break;
 					case Op.Mod:
@@ -89,13 +89,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			long valueHash;
 			object value;
 			long randomSeed;
-			
+
 			if ((object)columnConfiguration == null)
 				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
-			
+
 			valueHash = this.GetValueHash(oxymoronEngine, null, metaColumn.ColumnName);
 			randomSeed = valueHash;
 

@@ -8,7 +8,7 @@ using System.Text;
 
 using Microsoft.CSharp;
 
-namespace _2ndAsset.ObfuscationEngine.Core.ImportSource.Naming
+namespace _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.ImportSource.Naming
 {
 	public class StandardCanonicalNaming
 	{

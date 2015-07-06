@@ -81,7 +81,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return hash;
 		}
 
-		public IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration)
+		public IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration, int? colummIndex)
 		{
 			ColumnConfiguration<TObfuscationStrategyConfiguration> _columnConfiguration;
 
@@ -90,7 +90,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			_columnConfiguration = new ColumnConfiguration<TObfuscationStrategyConfiguration>(columnConfiguration);
 
-			return _columnConfiguration.ObfuscationStrategyConfiguration.Validate();
+			return _columnConfiguration.ObfuscationStrategyConfiguration.Validate(colummIndex);
 		}
 
 		#endregion

@@ -97,7 +97,6 @@
     <Compile Include="Support\AdoNetFast\UoW\IUnitOfWorkFactory.cs" />
     <Compile Include="Support\AdoNetFast\UoW\UnitOfWork.cs" />
     <Compile Include="Support\AdoNetFast\WrappedDataReader.cs" />
-    <Compile Include="ImportSource\Naming\StandardCanonicalNaming.cs" />
     <Compile Include="Hosting\IOxymoronHost.cs" />
     <Compile Include="Hosting\OxymoronHost.cs" />
     <Compile Include="Hosting\Tool\ToolHost.cs" />

@@ -15,9 +15,9 @@ using Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask;
 
 using Solder.Framework.Utilities;
 
-using _2ndAsset.ObfuscationEngine.Core.ImportSource.Naming;
 using _2ndAsset.Ssis.Components;
 using _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.Config;
+using _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.ImportSource.Naming;
 
 using Configuration = _2ndAsset.Ssis.SrcToDstPkgGen.ConsoleTool.Config.Configuration;
 
