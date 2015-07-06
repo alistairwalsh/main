@@ -182,8 +182,8 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 				}
 				else if (type == typeof(DelimitedTextDestinationAdapter))
 					this.ApplyDocumentToViewDelimitedTextDestination(obfuscationConfiguration);
-				else if (type == typeof(SqlServerBulkAdoNetDestinationAdapter) ||
-						type == typeof(UpdateAdoNetDestinationAdapter))
+				else if (type == typeof(SqlBulkCopyAdoNetDestinationAdapter) ||
+						type == typeof(RecordCommandAdoNetDestinationAdapter))
 					this.ApplyDocumentToViewAdoNetDestination(obfuscationConfiguration);
 				else
 				{

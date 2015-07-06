@@ -42,17 +42,17 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return DataTypeFascade.Instance.DefaultValue(valueType);
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, DefaultingObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<DefaultingObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			value = GetDefault(metaColumn.ColumnIsNullable ?? contextualConfiguration.Item2.DefaultingCanBeNull ?? false, metaColumn.ColumnType);
+			value = GetDefault(metaColumn.ColumnIsNullable ?? columnConfiguration.ObfuscationStrategyConfiguration.DefaultingCanBeNull ?? false, metaColumn.ColumnType);
 
 			return value;
 		}

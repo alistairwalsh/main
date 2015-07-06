@@ -297,7 +297,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			typeListItems = new List<IListItem<Type>>();
 			typeListItems.Add(new ListItem<Type>(typeof(NullDestinationAdapter), "Null/Nop (destination)"));
 			typeListItems.Add(new ListItem<Type>(typeof(DelimitedTextDestinationAdapter), "Delimited Text File (destination)"));
-			typeListItems.Add(new ListItem<Type>(typeof(SqlServerBulkAdoNetDestinationAdapter), "SQL Server Bulk Provider (destination)"));
+			typeListItems.Add(new ListItem<Type>(typeof(SqlBulkCopyAdoNetDestinationAdapter), "SQL Server Bulk Provider (destination)"));
 
 			this.View.DestinationAdapterSettings.AdapterTypes = typeListItems;
 			this.View.DestinationAdapterSettings.SelectedAdapterType = null;
@@ -637,7 +637,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 				}
 				else if (this.View.DestinationAdapterSettings.SelectedAdapterType == typeof(DelimitedTextDestinationAdapter))
 					this.View.DestinationAdapterSettings.DelTextAdapterSettingsView.IsActiveSettings = true;
-				else if (this.View.DestinationAdapterSettings.SelectedAdapterType == typeof(SqlServerBulkAdoNetDestinationAdapter))
+				else if (this.View.DestinationAdapterSettings.SelectedAdapterType == typeof(SqlBulkCopyAdoNetDestinationAdapter))
 				{
 					this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = true;
 					this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ConnectionType = typeof(SqlConnection);
@@ -645,7 +645,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 					this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType = CommandType.TableDirect;
 					this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.IsCommandTypeReadOnly = true;
 				}
-				else if (this.View.DestinationAdapterSettings.SelectedAdapterType == typeof(UpdateAdoNetDestinationAdapter))
+				else if (this.View.DestinationAdapterSettings.SelectedAdapterType == typeof(RecordCommandAdoNetDestinationAdapter))
 					this.View.DestinationAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = true;
 				else
 					throw new InvalidOperationException(string.Format("Unrecognized destination adapter UI-view AQTN '{0}'.", partialView.GetType().FullName));

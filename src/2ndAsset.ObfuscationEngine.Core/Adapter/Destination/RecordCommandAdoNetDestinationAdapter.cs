@@ -13,11 +13,11 @@ using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public class UpdateAdoNetDestinationAdapter : AdoNetDestinationAdapter
+	public class RecordCommandAdoNetDestinationAdapter : AdoNetDestinationAdapter
 	{
 		#region Constructors/Destructors
 
-		public UpdateAdoNetDestinationAdapter()
+		public RecordCommandAdoNetDestinationAdapter()
 		{
 		}
 

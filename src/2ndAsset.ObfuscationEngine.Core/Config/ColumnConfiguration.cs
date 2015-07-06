@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
-using _2ndAsset.ObfuscationEngine.Core.Hosting;
 using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
@@ -160,84 +159,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 					if ((object)obfuscationStrategy == null)
 						messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy failed to instatiate type from AQTN.", columnIndex, this.ColumnName)));
 					else
-						messages.AddRange(obfuscationStrategy.ValidateConfiguration(new DummyHost(this.Parent.Parent), new Tuple<ColumnConfiguration, IDictionary<string, object>>(this, this.ObfuscationStrategyConfiguration)));
+						messages.AddRange(obfuscationStrategy.ValidateConfiguration(this));
 				}
 				else
 					messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy loaded an unrecognized type via AQTN.", columnIndex, this.ColumnName)));
 			}
 
 			return messages;
-		}
-
-		#endregion
-
-		#region Classes/Structs/Interfaces/Enums/Delegates
-
-		internal class DummyHost : IOxymoronEngine
-		{
-			#region Constructors/Destructors
-
-			public DummyHost(ObfuscationConfiguration obfuscationConfiguration)
-			{
-				if ((object)obfuscationConfiguration == null)
-					throw new ArgumentNullException("obfuscationConfiguration");
-
-				this.obfuscationConfiguration = obfuscationConfiguration;
-			}
-
-			#endregion
-
-			#region Fields/Constants
-
-			private readonly ObfuscationConfiguration obfuscationConfiguration;
-
-			#endregion
-
-			#region Properties/Indexers/Events
-
-			ObfuscationConfiguration IOxymoronEngine.ObfuscationConfiguration
-			{
-				get
-				{
-					return this.obfuscationConfiguration;
-				}
-			}
-
-			IOxymoronHost IOxymoronEngine.OxymoronHost
-			{
-				get
-				{
-					return null;
-				}
-			}
-
-			IDictionary<string, IDictionary<long, object>> IOxymoronEngine.SubstitutionCacheRoot
-			{
-				get
-				{
-					return null;
-				}
-			}
-
-			#endregion
-
-			#region Methods/Operators
-
-			void IDisposable.Dispose()
-			{
-			}
-
-			object IOxymoronEngine.GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
-			{
-				throw new NotImplementedException();
-			}
-
-			IEnumerable<IDictionary<string, object>> IOxymoronEngine.GetObfuscatedValues(IEnumerable<IDictionary<string, object>> records)
-			{
-				throw new NotImplementedException();
-			}
-
-			#endregion
 		}
 
 		#endregion

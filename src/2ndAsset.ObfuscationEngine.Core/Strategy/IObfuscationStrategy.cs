@@ -16,11 +16,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 	{
 		#region Methods/Operators
 
-		object GetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue);
+		object GetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration columnConfiguration, IMetaColumn metaColumn, object columnValue);
 
-		long GetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration);
-
-		IEnumerable<Message> ValidateConfiguration(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration);
+		IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration);
 
 		#endregion
 	}

@@ -30,6 +30,32 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
+		private static string FisherYatesShuffle(int seed, string value)
+		{
+			Random random;
+			StringBuilder buffer;
+			int index;
+
+			random = new Random(seed);
+			buffer = new StringBuilder(value);
+
+			index = buffer.Length;
+			while (index > 1)
+			{
+				int xedni;
+				char ch;
+
+				index--;
+				xedni = random.Next(index + 1);
+				ch = buffer[xedni];
+				buffer[xedni] = buffer[index];
+				buffer[index] = ch;
+			}
+
+			value = buffer.ToString();
+			return value;
+		}
+
 		private static object GetShuffle(long randomSeed, object value)
 		{
 			Type valueType;
@@ -52,7 +78,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 			var fidelityMap = ImplNormalize(ref _value);
 
-			_value = DefaultPerformanceCriticalStrategy.Instance.GetShuffle((int)randomSeed, _value);
+			_value = FisherYatesShuffle((int)randomSeed, _value);
 
 			ImplDenormalize(fidelityMap, ref _value);
 
@@ -113,18 +139,20 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return fidelityMap;
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<ObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
+			long valueHash;
 			object value;
 			long randomSeed;
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			randomSeed = hashResult.ValueHash;
+			valueHash = this.GetValueHash(oxymoronEngine, null, columnValue);
+			randomSeed = valueHash;
 
 			value = GetShuffle(randomSeed, columnValue);
 

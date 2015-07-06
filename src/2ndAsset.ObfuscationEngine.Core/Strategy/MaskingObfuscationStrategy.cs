@@ -77,18 +77,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return buffer.ToString();
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, MaskingObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<MaskingObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
 			object value;
 			double maskingFactor;
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			maskingFactor = (contextualConfiguration.Item2.MaskingPercentValue.GetValueOrDefault() / 100.0);
+			maskingFactor = (columnConfiguration.ObfuscationStrategyConfiguration.MaskingPercentValue.GetValueOrDefault() / 100.0);
 
 			value = GetMask(maskingFactor, columnValue);
 

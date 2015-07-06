@@ -89,15 +89,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return callback(columnValue);
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ScriptObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<ScriptObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			return CompileCSharpCode(columnValue, contextualConfiguration.Item2.SourceCode);
+			return CompileCSharpCode(columnValue, columnConfiguration.ObfuscationStrategyConfiguration.SourceCode);
 		}
 
 		#endregion

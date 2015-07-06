@@ -26,19 +26,15 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#region Methods/Operators
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<ObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
-			object value;
-
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			value = columnValue;
-
-			return value;
+			return columnValue;
 		}
 
 		#endregion

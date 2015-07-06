@@ -34,20 +34,9 @@
 	DictionaryConfigurations:
 	[
 		{
-			PreloadEnabled: true,
-			DictionaryId: "d_CrayonColor",
-			RecordCount: 121,
-
-			DictionaryAdapterConfiguration:
-			{
-				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.NullDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core"
-			}
-		},
-
-		{
-			PreloadEnabled: true,
-			DictionaryId: "d_LastName",
-			RecordCount: 88800,
+			PreloadEnabled: false,
+			DictionaryId: "d_Null",
+			RecordCount: 0,
 
 			DictionaryAdapterConfiguration:
 			{

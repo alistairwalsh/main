@@ -77,8 +77,10 @@
     <Compile Include="Config\AdapterConfiguration.cs" />
     <Compile Include="Config\Adapters\AdoNetParameterConfiguration.cs" />
     <Compile Include="Config\Adapters\AdoNetCommandConfiguration.cs" />
+    <Compile Include="Config\ColumnConfiguration~1.cs" />
     <Compile Include="Config\Strategies\DefaultingObfuscationStrategyConfiguration.cs" />
     <Compile Include="Config\Strategies\MaskingObfuscationStrategyConfiguration.cs" />
+    <Compile Include="Strategy\SurrogateKeyObfuscationStrategy.cs" />
     <Compile Include="Strategy\ObfuscationStrategy~1.cs" />
     <Compile Include="Config\Strategies\ObfuscationStrategyConfiguration.cs" />
     <Compile Include="Config\Strategies\ScriptObfuscationStrategyConfiguration.cs" />
@@ -101,12 +103,9 @@
     <Compile Include="Hosting\Tool\ToolHost.cs" />
     <Compile Include="Hosting\Tool\IToolHost.cs" />
     <Compile Include="IMetaColumn.cs" />
-    <Compile Include="HashResult.cs" />
     <Compile Include="OnlyWhen.cs" />
     <Compile Include="Strategy\CipheringObfuscationStrategy.cs" />
-    <Compile Include="Strategy\DefaultPerformanceCriticalStrategy.cs" />
     <Compile Include="Strategy\DefaultingObfuscationStrategy.cs" />
-    <Compile Include="Strategy\IPerformanceCriticalStrategy.cs" />
     <Compile Include="Strategy\IObfuscationStrategy.cs" />
     <Compile Include="MetaColumn.cs" />
     <Compile Include="Config\Adapters\AdoNetAdapterConfiguration.cs" />
@@ -126,8 +125,8 @@
     <Compile Include="Adapter\Source\ISourceAdapter.cs" />
     <Compile Include="Adapter\Destination\IDestinationAdapter.cs" />
     <Compile Include="Adapter\IAdapter.cs" />
-    <Compile Include="Adapter\Destination\UpdateAdoNetDestinationAdapter.cs" />
-    <Compile Include="Adapter\Destination\SqlServerBulkAdoNetDestinationAdapter.cs" />
+    <Compile Include="Adapter\Destination\RecordCommandAdoNetDestinationAdapter.cs" />
+    <Compile Include="Adapter\Destination\SqlBulkCopyAdoNetDestinationAdapter.cs" />
     <Compile Include="Support\DelimitedText\FieldType.cs" />
     <Compile Include="Support\DelimitedText\HeaderSpec.cs" />
     <Compile Include="Config\ColumnConfiguration.cs" />

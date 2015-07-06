@@ -88,35 +88,23 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, VarianceObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<VarianceObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
+			long signHash, valueHash;
 			object value;
 			double varianceFactor;
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			varianceFactor = ((((hashResult.ValueHash <= 0 ? 1 : hashResult.ValueHash)) * ((hashResult.SignHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
+			signHash = this.GetSignHash(oxymoronEngine, columnValue);
+			valueHash = this.GetValueHash(oxymoronEngine, columnConfiguration.ObfuscationStrategyConfiguration.VariancePercentValue, columnValue);
+			varianceFactor = ((((valueHash <= 0 ? 1 : valueHash)) * ((signHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
 
 			value = GetVariance(varianceFactor, columnValue);
-
-			return value;
-		}
-
-		protected override long CoreGetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, VarianceObfuscationStrategyConfiguration> contextualConfiguration)
-		{
-			long value;
-
-			if ((object)oxymoronEngine == null)
-				throw new ArgumentNullException("oxymoronEngine");
-
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
-
-			value = contextualConfiguration.Item2.VariancePercentValue ?? base.CoreGetValueHashBucketSize(oxymoronEngine, contextualConfiguration);
 
 			return value;
 		}

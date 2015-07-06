@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using Solder.Framework;
 using Solder.Framework.Serialization;
@@ -43,7 +44,6 @@ namespace _2ndAsset.ObfuscationEngine.Core
 		private readonly ObfuscationConfiguration obfuscationConfiguration;
 		private readonly IDictionary<string, IObfuscationStrategy> obfuscationStrategyCache = new Dictionary<string, IObfuscationStrategy>();
 		private readonly IOxymoronHost oxymoronHost;
-		private readonly IPerformanceCriticalStrategy performanceCriticalStrategy = DefaultPerformanceCriticalStrategy.Instance;
 		private readonly IDictionary<string, IDictionary<long, object>> substitutionCacheRoot = new Dictionary<string, IDictionary<long, object>>();
 		private bool disposed;
 
@@ -80,14 +80,6 @@ namespace _2ndAsset.ObfuscationEngine.Core
 			get
 			{
 				return this.oxymoronHost;
-			}
-		}
-
-		private IPerformanceCriticalStrategy PerformanceCriticalStrategy
-		{
-			get
-			{
-				return this.performanceCriticalStrategy;
 			}
 		}
 
@@ -150,14 +142,9 @@ namespace _2ndAsset.ObfuscationEngine.Core
 
 		private object _GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)
 		{
-			Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration;
 			IObfuscationStrategy obfuscationStrategy;
 			ColumnConfiguration columnConfiguration;
-			HashResult hashResult;
-			long valueHashBucketSize;
 			object obfuscatedValue;
-
-			const long DEFAULT_HASH_BUCKET_SIZE = long.MaxValue;
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
@@ -186,29 +173,7 @@ namespace _2ndAsset.ObfuscationEngine.Core
 				this.ObfuscationStrategyCache.Add(columnConfiguration.ObfuscationStrategyAqtn, obfuscationStrategy);
 			}
 
-			hashResult = new HashResult();
-
-			hashResult.SignHash = this.PerformanceCriticalStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier,
-				DEFAULT_HASH_BUCKET_SIZE,
-				this.ObfuscationConfiguration.HashConfiguration.Seed,
-				columnValue.SafeToString()) ?? int.MinValue;
-
-			if (hashResult.SignHash == int.MinValue)
-				throw new InvalidOperationException(string.Format("Oxymoron engine failed to calculate a valid sign hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), metaColumn.ColumnName));
-
-			contextualConfiguration = new Tuple<ColumnConfiguration, IDictionary<string, object>>(columnConfiguration, columnConfiguration.ObfuscationStrategyConfiguration);
-
-			valueHashBucketSize = obfuscationStrategy.GetValueHashBucketSize(this, contextualConfiguration);
-
-			hashResult.ValueHash = this.PerformanceCriticalStrategy.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier ?? 0L,
-				valueHashBucketSize,
-				this.ObfuscationConfiguration.HashConfiguration.Seed ?? 0L,
-				columnValue.SafeToString()) ?? int.MinValue;
-
-			if (hashResult.ValueHash == int.MinValue)
-				throw new InvalidOperationException(string.Format("Oxymoron engine failed to calculate a valid value hash for input '{0}' specified for column '{1}'.", columnValue.SafeToString(null, "<null>"), metaColumn.ColumnName));
-
-			obfuscatedValue = obfuscationStrategy.GetObfuscatedValue(this, contextualConfiguration, hashResult, metaColumn, columnValue);
+			obfuscatedValue = obfuscationStrategy.GetObfuscatedValue(this, columnConfiguration, metaColumn, columnValue);
 
 			return obfuscatedValue;
 		}
@@ -236,6 +201,73 @@ namespace _2ndAsset.ObfuscationEngine.Core
 				this.Disposed = true;
 				GC.SuppressFinalize(this);
 			}
+		}
+
+		public long GetBoundedHash(long? size, object value)
+		{
+			long? hash;
+
+			hash = this.GetHash(this.ObfuscationConfiguration.HashConfiguration.Multiplier,
+				size,
+				this.ObfuscationConfiguration.HashConfiguration.Seed,
+				value.SafeToString());
+
+			if ((object)hash == null)
+				throw new InvalidOperationException(string.Format("Oxymoron engine failed to calculate a valid hash for input '{0}'.", value.SafeToString(null, "<null>")));
+
+			return hash.GetValueOrDefault();
+		}
+
+		private long? GetHash(long? multiplier, long? size, long? seed, object value)
+		{
+			const long DEFAULT_HASH = -1L;
+			long hashCode;
+			byte[] buffer;
+			Type valueType;
+			string _value;
+
+			if ((object)multiplier == null)
+				return null;
+
+			if ((object)size == null)
+				return null;
+
+			if ((object)seed == null)
+				return null;
+
+			if (size == 0L)
+				return null; // prevent DIV0
+
+			if ((object)value == null)
+				return null;
+
+			valueType = value.GetType();
+
+			if (valueType != typeof(String))
+				return null;
+
+			_value = (String)value;
+
+			if (DataTypeFascade.Instance.IsWhiteSpace(_value))
+				return DEFAULT_HASH;
+
+			_value = _value.Trim();
+
+			buffer = Encoding.UTF8.GetBytes(_value);
+
+			hashCode = (long)seed;
+			for (int index = 0; index < buffer.Length; index++)
+				hashCode = ((long)multiplier * hashCode + buffer[index]) % uint.MaxValue;
+
+			if (hashCode > int.MaxValue)
+				hashCode = hashCode - uint.MaxValue;
+
+			if (hashCode < 0)
+				hashCode = hashCode + int.MaxValue;
+
+			hashCode = (hashCode % (long)size);
+
+			return (int)hashCode;
 		}
 
 		public object GetObfuscatedValue(IMetaColumn metaColumn, object columnValue)

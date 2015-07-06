@@ -14,11 +14,11 @@ using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public class SqlServerBulkAdoNetDestinationAdapter : AdoNetDestinationAdapter
+	public class SqlBulkCopyAdoNetDestinationAdapter : AdoNetDestinationAdapter
 	{
 		#region Constructors/Destructors
 
-		public SqlServerBulkAdoNetDestinationAdapter()
+		public SqlBulkCopyAdoNetDestinationAdapter()
 		{
 		}
 
@@ -29,7 +29,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 		protected override void CorePublishImpl(TableConfiguration configuration, IUnitOfWork destinationUnitOfWork, IDataReader sourceDataReader, out long rowsCopied)
 		{
 			long _rowsCopied = 0;
-			SqlRowsCopiedEventHandler callback;
+			//SqlRowsCopiedEventHandler callback;
 
 			if ((object)configuration == null)
 				throw new ArgumentNullException("configuration");

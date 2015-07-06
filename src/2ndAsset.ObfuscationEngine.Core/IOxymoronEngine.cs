@@ -34,6 +34,8 @@ namespace _2ndAsset.ObfuscationEngine.Core
 
 		#region Methods/Operators
 
+		long GetBoundedHash(long? size, object value);
+
 		object GetObfuscatedValue(IMetaColumn metaColumn, object columnValue);
 
 		IEnumerable<IDictionary<string, object>> GetObfuscatedValues(IEnumerable<IDictionary<string, object>> records);

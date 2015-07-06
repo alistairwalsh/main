@@ -99,18 +99,21 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return Encoding.UTF8.GetString(cipherTextBytes);
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, ObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<ObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
+			long signHash, valueHash;
 			object value;
 			string sharedSecret;
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			sharedSecret = ((hashResult.ValueHash <= 0 ? 1 : hashResult.ValueHash) * (hashResult.SignHash % 2 == 0 ? -1 : 1)).ToString("X");
+			signHash = this.GetSignHash(oxymoronEngine, columnValue);
+			valueHash = this.GetValueHash(oxymoronEngine, null, columnValue);
+			sharedSecret = ((valueHash <= 0 ? 1 : valueHash) * (signHash % 2 == 0 ? -1 : 1)).ToString("X");
 
 			value = GetCipher(sharedSecret, columnValue);
 

@@ -6,8 +6,6 @@
 using System;
 using System.Collections.Generic;
 
-using Newtonsoft.Json.Linq;
-
 using Solder.Framework;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
@@ -26,34 +24,26 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		#endregion
 
+		#region Fields/Constants
+
+		private const long DEFAULT_HASH_BUCKET_SIZE = long.MaxValue;
+
+		#endregion
+
 		#region Methods/Operators
 
-		protected abstract object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue);
+		protected abstract object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<TObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue);
 
-		protected virtual long CoreGetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration> contextualConfiguration)
+		public object GetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
-			const long DEFAULT_HASH_BUCKET_SIZE = long.MaxValue;
-
-			if ((object)oxymoronEngine == null)
-				throw new ArgumentNullException("oxymoronEngine");
-
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
-
-			return DEFAULT_HASH_BUCKET_SIZE;
-		}
-
-		public object GetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
-		{
-			Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration> _contextualConfiguration;
-			TObfuscationStrategyConfiguration obfuscationStrategyConfiguration;
+			ColumnConfiguration<TObfuscationStrategyConfiguration> _columnConfiguration;
 			object value;
 
 			if ((object)oxymoronEngine == null)
 				throw new ArgumentNullException("oxymoronEngine");
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
@@ -61,47 +51,46 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)columnValue == DBNull.Value)
 				columnValue = null;
 
-			obfuscationStrategyConfiguration = JObject.FromObject(contextualConfiguration.Item2).ToObject<TObfuscationStrategyConfiguration>();
-			_contextualConfiguration = new Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration>(contextualConfiguration.Item1, obfuscationStrategyConfiguration);
-			value = this.CoreGetObfuscatedValue(oxymoronEngine, _contextualConfiguration, hashResult, metaColumn, columnValue);
+			_columnConfiguration = new ColumnConfiguration<TObfuscationStrategyConfiguration>(columnConfiguration);
+			value = this.CoreGetObfuscatedValue(oxymoronEngine, _columnConfiguration, metaColumn, columnValue);
 
 			return value;
 		}
 
-		public long GetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration)
+		protected long GetSignHash(IOxymoronEngine oxymoronEngine, object value)
 		{
-			long value;
-			Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration> _contextualConfiguration;
-			TObfuscationStrategyConfiguration obfuscationStrategyConfiguration;
+			long hash;
 
 			if ((object)oxymoronEngine == null)
 				throw new ArgumentNullException("oxymoronEngine");
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			hash = oxymoronEngine.GetBoundedHash(DEFAULT_HASH_BUCKET_SIZE, value);
 
-			obfuscationStrategyConfiguration = JObject.FromObject(contextualConfiguration.Item2).ToObject<TObfuscationStrategyConfiguration>();
-			_contextualConfiguration = new Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration>(contextualConfiguration.Item1, obfuscationStrategyConfiguration);
-			value = this.CoreGetValueHashBucketSize(oxymoronEngine, _contextualConfiguration);
-
-			return value;
+			return hash;
 		}
 
-		public IEnumerable<Message> ValidateConfiguration(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, IDictionary<string, object>> contextualConfiguration)
+		protected long GetValueHash(IOxymoronEngine oxymoronEngine, long? size, object value)
 		{
-			Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration> _contextualConfiguration;
-			TObfuscationStrategyConfiguration obfuscationStrategyConfiguration;
+			long hash;
 
 			if ((object)oxymoronEngine == null)
 				throw new ArgumentNullException("oxymoronEngine");
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			hash = oxymoronEngine.GetBoundedHash(size ?? DEFAULT_HASH_BUCKET_SIZE, value);
 
-			obfuscationStrategyConfiguration = JObject.FromObject(contextualConfiguration.Item2).ToObject<TObfuscationStrategyConfiguration>();
-			_contextualConfiguration = new Tuple<ColumnConfiguration, TObfuscationStrategyConfiguration>(contextualConfiguration.Item1, obfuscationStrategyConfiguration);
+			return hash;
+		}
 
-			return _contextualConfiguration.Item2.Validate();
+		public IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration)
+		{
+			ColumnConfiguration<TObfuscationStrategyConfiguration> _columnConfiguration;
+
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
+
+			_columnConfiguration = new ColumnConfiguration<TObfuscationStrategyConfiguration>(columnConfiguration);
+
+			return _columnConfiguration.ObfuscationStrategyConfiguration.Validate();
 		}
 
 		#endregion

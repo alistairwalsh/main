@@ -87,8 +87,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return value;
 		}
 
-		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, SubstitutionObfuscationStrategyConfiguration> contextualConfiguration, HashResult hashResult, IMetaColumn metaColumn, object columnValue)
+		protected override object CoreGetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration<SubstitutionObfuscationStrategyConfiguration> columnConfiguration, IMetaColumn metaColumn, object columnValue)
 		{
+			long signHash, valueHash;
 			DictionaryConfiguration dictionaryConfiguration;
 			object value;
 			long surrogateId;
@@ -96,54 +97,38 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)oxymoronEngine == null)
 				throw new ArgumentNullException("oxymoronEngine");
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			dictionaryConfiguration = this.GetDictionaryConfiguration(oxymoronEngine, contextualConfiguration);
-			surrogateId = hashResult.ValueHash;
+			dictionaryConfiguration = this.GetDictionaryConfiguration(oxymoronEngine, columnConfiguration);
+			valueHash = this.GetValueHash(oxymoronEngine, dictionaryConfiguration.RecordCount, columnValue);
+			surrogateId = valueHash;
 
 			value = GetSubstitution(oxymoronEngine, dictionaryConfiguration, metaColumn, surrogateId, columnValue);
 
 			return value;
 		}
 
-		protected override long CoreGetValueHashBucketSize(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, SubstitutionObfuscationStrategyConfiguration> contextualConfiguration)
-		{
-			DictionaryConfiguration dictionaryConfiguration;
-			long value;
-
-			if ((object)oxymoronEngine == null)
-				throw new ArgumentNullException("oxymoronEngine");
-
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
-
-			dictionaryConfiguration = this.GetDictionaryConfiguration(oxymoronEngine, contextualConfiguration);
-			value = dictionaryConfiguration.RecordCount ?? base.CoreGetValueHashBucketSize(oxymoronEngine, contextualConfiguration);
-
-			return value;
-		}
-
-		private DictionaryConfiguration GetDictionaryConfiguration(IOxymoronEngine oxymoronEngine, Tuple<ColumnConfiguration, SubstitutionObfuscationStrategyConfiguration> contextualConfiguration)
+		private DictionaryConfiguration GetDictionaryConfiguration(IOxymoronEngine oxymoronEngine, ColumnConfiguration<SubstitutionObfuscationStrategyConfiguration> columnConfiguration)
 		{
 			DictionaryConfiguration dictionaryConfiguration;
 
 			if ((object)oxymoronEngine == null)
 				throw new ArgumentNullException("oxymoronEngine");
 
-			if ((object)contextualConfiguration == null)
-				throw new ArgumentNullException("contextualConfiguration");
+			if ((object)columnConfiguration == null)
+				throw new ArgumentNullException("columnConfiguration");
 
-			if (contextualConfiguration.Item2.DictionaryReference.SafeToString().Trim().ToLower() == string.Empty)
+			if (columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference.SafeToString().Trim().ToLower() == string.Empty)
 				dictionaryConfiguration = new DictionaryConfiguration();
 			else
-				dictionaryConfiguration = oxymoronEngine.ObfuscationConfiguration.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == contextualConfiguration.Item2.DictionaryReference.SafeToString().Trim().ToLower());
+				dictionaryConfiguration = oxymoronEngine.ObfuscationConfiguration.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference.SafeToString().Trim().ToLower());
 
 			if ((object)dictionaryConfiguration == null)
-				throw new InvalidOperationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", contextualConfiguration.Item2.DictionaryReference, contextualConfiguration.Item1.ColumnName));
+				throw new InvalidOperationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference, columnConfiguration.ColumnName));
 
 			return dictionaryConfiguration;
 		}

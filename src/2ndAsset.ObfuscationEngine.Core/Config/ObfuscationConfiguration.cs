@@ -130,18 +130,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
-		public string PerformanceCriticalStrategyAqtn
-		{
-			get
-			{
-				return this.performanceCriticalStrategyAqtn;
-			}
-			set
-			{
-				this.performanceCriticalStrategyAqtn = value;
-			}
-		}
-
 		public AdapterConfiguration SourceAdapterConfiguration
 		{
 			get
@@ -172,39 +160,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Methods/Operators
 
-		public IPerformanceCriticalStrategy GetPerformanceCriticalStrategyInstance()
-		{
-			IPerformanceCriticalStrategy instance;
-			Type type;
-
-			type = this.GetPerformanceCriticalStrategyType();
-
-			if ((object)type == null)
-				return null;
-
-			instance = (IPerformanceCriticalStrategy)Activator.CreateInstance(type);
-
-			return instance;
-		}
-
-		public Type GetPerformanceCriticalStrategyType()
-		{
-			Type type;
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.PerformanceCriticalStrategyAqtn))
-				return null;
-
-			type = Type.GetType(this.PerformanceCriticalStrategyAqtn, false);
-
-			return type;
-		}
-
 		public override IEnumerable<Message> Validate()
 		{
 			List<Message> messages;
 			int index;
 			Type type;
-			IPerformanceCriticalStrategy performanceCriticalStrategy;
 			const string SRC_CONTEXT = "Source";
 			const string DST_CONTEXT = "Destination";
 
@@ -217,25 +177,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			if ((object)this.EngineVersion == null ||
 				this.EngineVersion != CurrentEngineVersion)
 				messages.Add(NewError("Engine version is invalid."));
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.PerformanceCriticalStrategyAqtn))
-				new object(); //messages.Add(NewError(string.Format("Performance critical strategy AQTN is required.")));
-			else
-			{
-				type = this.GetPerformanceCriticalStrategyType();
-
-				if ((object)type == null)
-					messages.Add(NewError(string.Format("Performance critical strategy failed to load type from AQTN.")));
-				else if (typeof(IObfuscationStrategy).IsAssignableFrom(type))
-				{
-					performanceCriticalStrategy = this.GetPerformanceCriticalStrategyInstance();
-
-					if ((object)performanceCriticalStrategy == null)
-						messages.Add(NewError(string.Format("Performance critical strategy failed to instatiate type from AQTN.")));
-				}
-				else
-					messages.Add(NewError(string.Format("Performance critical strategy loaded an unrecognized type via AQTN.")));
-			}
 
 			if ((object)this.TableConfiguration == null)
 				messages.Add(NewError("Table configuration is required."));

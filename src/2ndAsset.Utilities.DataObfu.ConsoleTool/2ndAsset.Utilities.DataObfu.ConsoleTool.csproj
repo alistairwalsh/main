@@ -70,13 +70,13 @@
     <None Include="..\2ndAssetSuite.snk">
       <Link>2ndAssetSuite.snk</Link>
     </None>
-    <None Include="DB_to_DB-update_Example.json">
+    <None Include="DB_to_DB-reccmd_Example.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Null_to_Null_Example.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="DB_to_DB-bulksql_Example.json">
+    <None Include="DB_to_DB-sqlbcp_Example.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="DTF_to_DTF_Example.json">
