@@ -100,8 +100,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			signHash = this.GetSignHash(oxymoronEngine, columnValue);
-			valueHash = this.GetValueHash(oxymoronEngine, columnConfiguration.ObfuscationStrategyConfiguration.VariancePercentValue, columnValue);
+			valueHash = this.GetValueHash(oxymoronEngine, columnConfiguration.ObfuscationStrategySpecificConfiguration.VariancePercentValue, columnValue);
 			varianceFactor = ((((valueHash <= 0 ? 1 : valueHash)) * ((signHash % 2 == 0 ? 1.0 : -1.0))) / 100.0);
 
 			value = GetVariance(varianceFactor, columnValue);

@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public abstract class DestinationAdapter : Adapter, IDestinationAdapter
+	public abstract class DestinationAdapter<TAdapterSpecificConfiguration> : Adapter<TAdapterSpecificConfiguration>, IDestinationAdapter
+		where TAdapterSpecificConfiguration : AdapterSpecificConfiguration, new()
 	{
 		#region Constructors/Destructors
 

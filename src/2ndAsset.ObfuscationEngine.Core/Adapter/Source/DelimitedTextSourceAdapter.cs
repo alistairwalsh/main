@@ -11,12 +11,13 @@ using System.Linq;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public class DelimitedTextSourceAdapter : SourceAdapter, IDelimitedTextAdapter
+	public class DelimitedTextSourceAdapter : SourceAdapter<DelimitedTextAdapterConfiguration>, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors
 
@@ -69,26 +70,17 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 			}
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
 			IEnumerable<HeaderSpec> headerSpecs;
 
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
+			if ((object)this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextSpec"));
 
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextFilePath"));
 
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration"));
-
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextSpec"));
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextFilePath"));
-
-			this.DelimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec);
+			this.DelimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec);
 			headerSpecs = this.DelimitedTextReader.ReadHeaderSpecs();
 
 			this.UpstreamMetadata = headerSpecs.Select((hs, i) => new MetaColumn()

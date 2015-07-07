@@ -4,6 +4,9 @@
 */
 
 using System;
+using System.Collections.Generic;
+
+using Solder.Framework;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
 
@@ -13,9 +16,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 	{
 		#region Methods/Operators
 
-		void Initialize(ObfuscationConfiguration obfuscationConfiguration);
+		Type GetAdapterSpecificConfigurationType();
+
+		void Initialize(AdapterConfiguration adapterConfiguration);
 
 		void Terminate();
+
+		IEnumerable<Message> ValidateAdapterSpecificConfiguration(AdapterConfiguration adapterConfiguration, string adapterContext);
 
 		#endregion
 	}

@@ -37,9 +37,9 @@ namespace _2ndAsset.Utilities.DataObfu.ConsoleTool
 			args = new[]
 					{
 						@"-sourcefile2:Null_to_Null_Example.json",
-						@"-sourcefile:DB_to_DB-sqlbcp_Example.json",
+						@"-sourcefile2:DB_to_DB-sqlbcp_Example.json",
 						@"-sourcefile2:DB_to_DB-reccmd_Example.json",
-						@"-sourcefile2:DTF_to_DTF_Example.json"
+						@"-sourcefile:DTF_to_DTF_Example.json"
 					};
 
 			using (Program program = new Program())

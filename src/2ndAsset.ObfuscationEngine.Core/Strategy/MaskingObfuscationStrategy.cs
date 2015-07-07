@@ -88,7 +88,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			maskingFactor = (columnConfiguration.ObfuscationStrategyConfiguration.MaskingPercentValue.GetValueOrDefault() / 100.0);
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
+			maskingFactor = (columnConfiguration.ObfuscationStrategySpecificConfiguration.MaskingPercentValue.GetValueOrDefault() / 100.0);
 
 			value = GetMask(maskingFactor, columnValue);
 

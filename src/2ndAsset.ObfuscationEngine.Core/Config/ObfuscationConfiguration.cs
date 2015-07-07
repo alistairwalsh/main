@@ -13,7 +13,7 @@ using Solder.Framework;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
-	public class ObfuscationConfiguration : ConfigurationObject
+	public class ObfuscationConfiguration : ConfigurationObject, IAdapterConfigurationDependency
 	{
 		#region Constructors/Destructors
 
@@ -33,7 +33,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		private AdapterConfiguration destinationAdapterConfiguration;
 		private Version engineVersion;
 		private HashConfiguration hashConfiguration;
-		private string performanceCriticalStrategyAqtn;
 		private AdapterConfiguration sourceAdapterConfiguration;
 		private TableConfiguration tableConfiguration;
 

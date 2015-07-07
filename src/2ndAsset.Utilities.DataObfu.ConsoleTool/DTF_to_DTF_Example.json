@@ -19,7 +19,7 @@
 	{
 		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Source.DelimitedTextSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-		DelimitedTextAdapterConfiguration:
+		AdapterSpecificConfiguration:
 		{
 			DelimitedTextFilePath: "d:\\Confidential_Banking_Data.txt",
 			DelimitedTextSpec:
@@ -89,7 +89,7 @@
 	{
 		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Destination.DelimitedTextDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-		DelimitedTextAdapterConfiguration:
+		AdapterSpecificConfiguration:
 		{
 			DelimitedTextFilePath: "d:\\Public_Banking_Data.csv",
 			DelimitedTextSpec:
@@ -119,7 +119,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				DelimitedTextAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					DelimitedTextFilePath: "CrayonColorDictionary.txt",
 					DelimitedTextSpec:
@@ -142,7 +142,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				DelimitedTextAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					DelimitedTextFilePath: "LastNameDictionary.txt",
 					DelimitedTextSpec:
@@ -165,7 +165,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.DelimitedTextDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				DelimitedTextAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					DelimitedTextFilePath: "FirstNameDictionary.txt",
 					DelimitedTextSpec:
@@ -187,7 +187,7 @@
 			{
 				ColumnName: "AccountReportingId",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SurrogateKeyObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -195,7 +195,7 @@
 			{
 				ColumnName: "txid",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.DefaultingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DefaultingCanBeNull: false
 				}
@@ -204,7 +204,7 @@
 			{
 				ColumnName: "institution",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_FirstName"
 				}
@@ -214,7 +214,7 @@
 				ColumnName: "number",
 				"IsColumnNullable": false,
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.ShufflingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -222,7 +222,7 @@
 			{
 				ColumnName: "date",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 25
 				}
@@ -231,7 +231,7 @@
 			{
 				ColumnName: "payee",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_LastName"
 				}
@@ -240,7 +240,7 @@
 			{
 				ColumnName: "amount",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 100
 				}
@@ -249,7 +249,7 @@
 			{
 				ColumnName: "cleared",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.NoneObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -257,7 +257,7 @@
 			{
 				ColumnName: "category",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_CrayonColor"
 				}
@@ -266,7 +266,7 @@
 			{
 				ColumnName: "due",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 10
 				}
@@ -275,7 +275,7 @@
 			{
 				ColumnName: "comments",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.CipheringObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			}

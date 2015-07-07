@@ -27,7 +27,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Fields/Constants
 
-		private readonly Dictionary<string, object> obfuscationStrategyConfiguration = new Dictionary<string, object>();
+		private readonly Dictionary<string, object> obfuscationStrategySpecificConfiguration = new Dictionary<string, object>();
 		private string columnName;
 		private string obfuscationStrategyAqtn;
 
@@ -35,11 +35,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Properties/Indexers/Events
 
-		public Dictionary<string, object> ObfuscationStrategyConfiguration
+		public Dictionary<string, object> ObfuscationStrategySpecificConfiguration
 		{
 			get
 			{
-				return this.obfuscationStrategyConfiguration;
+				return this.obfuscationStrategySpecificConfiguration;
 			}
 		}
 
@@ -101,11 +101,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return this.ColumnName.SafeToString().ToLower().GetHashCode();
 		}
 
-		public virtual Type GetObfuscationStrategyConfigurationType()
-		{
-			return null;
-		}
-
 		public IObfuscationStrategy GetObfuscationStrategyInstance()
 		{
 			IObfuscationStrategy instance;
@@ -164,7 +159,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 					if ((object)obfuscationStrategy == null)
 						messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy failed to instatiate type from AQTN.", columnIndex, this.ColumnName)));
 					else
-						messages.AddRange(obfuscationStrategy.ValidateConfiguration(this, columnIndex));
+						messages.AddRange(obfuscationStrategy.ValidateObfuscationStrategySpecificConfiguration(this, columnIndex));
 				}
 				else
 					messages.Add(NewError(string.Format("Column[{0}/{1}] obfuscation strategy loaded an unrecognized type via AQTN.", columnIndex, this.ColumnName)));

@@ -11,12 +11,13 @@ using System.Linq;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public class DelimitedTextDictionaryAdapter : DictionaryAdapter, IDelimitedTextAdapter
+	public class DelimitedTextDictionaryAdapter : DictionaryAdapter<DelimitedTextAdapterConfiguration>, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors
 
@@ -45,19 +46,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)surrogateId == null)
 				throw new ArgumentNullException("surrogateId");
 
-			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration"));
+			if ((object)this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextSpec"));
 
-			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration"));
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextFilePath"));
 
-			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec"));
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath))
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration:DelimitedTextFilePath"));
-
-			using (RecordTextReader delimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec))
+			using (RecordTextReader delimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec))
 			{
 				index = surrogateId.ChangeType<int>() - 1;
 
@@ -75,13 +70,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			return value;
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
 		}
 
-		protected override void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
+		protected override void CorePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
 		{
 			HeaderSpec[] headerSpecs;
 			IEnumerable<IDictionary<string, object>> records;
@@ -93,7 +86,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)substitutionCacheRoot == null)
 				throw new ArgumentNullException("substitutionCacheRoot");
 
-			using (RecordTextReader delimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration.DelimitedTextSpec))
+			if ((object)this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextSpec"));
+
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DelimitedTextFilePath"));
+
+			using (RecordTextReader delimitedTextReader = new DelimitedTextReader(new StreamReader(File.Open(this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextFilePath, FileMode.Open, FileAccess.Read, FileShare.None)), this.AdapterConfiguration.AdapterSpecificConfiguration.DelimitedTextSpec))
 			{
 				dictionaryCache = new Dictionary<long, object>();
 

@@ -51,10 +51,22 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)columnValue == DBNull.Value)
 				columnValue = null;
 
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			_columnConfiguration = new ColumnConfiguration<TObfuscationStrategyConfiguration>(columnConfiguration);
+
+			if ((object)_columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			value = this.CoreGetObfuscatedValue(oxymoronEngine, _columnConfiguration, metaColumn, columnValue);
 
 			return value;
+		}
+
+		public Type GetObfuscationStrategySpecificConfigurationType()
+		{
+			return typeof(TObfuscationStrategyConfiguration);
 		}
 
 		protected long GetSignHash(IOxymoronEngine oxymoronEngine, object value)
@@ -81,16 +93,22 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			return hash;
 		}
 
-		public IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration, int? colummIndex)
+		public IEnumerable<Message> ValidateObfuscationStrategySpecificConfiguration(ColumnConfiguration columnConfiguration, int? colummIndex)
 		{
 			ColumnConfiguration<TObfuscationStrategyConfiguration> _columnConfiguration;
 
 			if ((object)columnConfiguration == null)
 				throw new ArgumentNullException("columnConfiguration");
 
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			_columnConfiguration = new ColumnConfiguration<TObfuscationStrategyConfiguration>(columnConfiguration);
 
-			return _columnConfiguration.ObfuscationStrategyConfiguration.Validate(colummIndex);
+			if ((object)_columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
+			return _columnConfiguration.ObfuscationStrategySpecificConfiguration.Validate(colummIndex);
 		}
 
 		#endregion

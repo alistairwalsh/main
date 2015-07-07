@@ -97,7 +97,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			return CompileCSharpCode(columnValue, columnConfiguration.ObfuscationStrategyConfiguration.SourceCode);
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
+			return CompileCSharpCode(columnValue, columnConfiguration.ObfuscationStrategySpecificConfiguration.SourceCode);
 		}
 
 		#endregion

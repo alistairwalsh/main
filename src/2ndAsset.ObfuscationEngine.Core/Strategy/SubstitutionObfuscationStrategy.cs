@@ -103,6 +103,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			dictionaryConfiguration = this.GetDictionaryConfiguration(oxymoronEngine, columnConfiguration);
 			valueHash = this.GetValueHash(oxymoronEngine, dictionaryConfiguration.RecordCount, columnValue);
 			surrogateId = valueHash;
@@ -122,13 +125,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)columnConfiguration == null)
 				throw new ArgumentNullException("columnConfiguration");
 
-			if (columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference.SafeToString().Trim().ToLower() == string.Empty)
+			if (columnConfiguration.ObfuscationStrategySpecificConfiguration.DictionaryReference.SafeToString().Trim().ToLower() == string.Empty)
 				dictionaryConfiguration = new DictionaryConfiguration();
 			else
-				dictionaryConfiguration = oxymoronEngine.ObfuscationConfiguration.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference.SafeToString().Trim().ToLower());
+				dictionaryConfiguration = oxymoronEngine.ObfuscationConfiguration.DictionaryConfigurations.SingleOrDefault(d => d.DictionaryId.SafeToString().Trim().ToLower() == columnConfiguration.ObfuscationStrategySpecificConfiguration.DictionaryReference.SafeToString().Trim().ToLower());
 
 			if ((object)dictionaryConfiguration == null)
-				throw new InvalidOperationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", columnConfiguration.ObfuscationStrategyConfiguration.DictionaryReference, columnConfiguration.ColumnName));
+				throw new InvalidOperationException(string.Format("Unknown dictionary reference '{0}' specified for column '{1}'.", columnConfiguration.ObfuscationStrategySpecificConfiguration.DictionaryReference, columnConfiguration.ColumnName));
 
 			return dictionaryConfiguration;
 		}

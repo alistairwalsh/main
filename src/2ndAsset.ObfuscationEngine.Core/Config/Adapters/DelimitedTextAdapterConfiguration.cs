@@ -12,7 +12,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 {
-	public class DelimitedTextAdapterConfiguration : ConfigurationObject
+	public class DelimitedTextAdapterConfiguration : AdapterSpecificConfiguration
 	{
 		#region Constructors/Destructors
 
@@ -59,32 +59,27 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 
 		#region Methods/Operators
 
-		public override IEnumerable<Message> Validate()
-		{
-			return this.Validate(null);
-		}
-
-		public IEnumerable<Message> Validate(string context)
+		public override IEnumerable<Message> Validate(string adapterContext)
 		{
 			List<Message> messages;
 
 			messages = new List<Message>();
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.DelimitedTextFilePath))
-				messages.Add(NewError(string.Format("Delimited text file path is required.")));
+				messages.Add(NewError(string.Format("{0} adapter delimited text file path is required.", adapterContext)));
 
 			if ((object)this.DelimitedTextSpec == null)
-				messages.Add(NewError(string.Format("Delimited text specification is required.")));
+				messages.Add(NewError(string.Format("{0} adapter delimited text specification is required.", adapterContext)));
 			else
 			{
 				//if (DataTypeFascade.Instance.IsNullOrEmpty(this.DelimitedTextSpec.QuoteValue))
-				//	messages.Add(NewError(string.Format("Delimited text quote value is required.")));
+				//	messages.Add(NewError(string.Format("{0} adapter delimited text quote value is required.", adapterContext)));
 
 				if (DataTypeFascade.Instance.IsNullOrEmpty(this.DelimitedTextSpec.RecordDelimiter))
-					messages.Add(NewError(string.Format("Delimited text record delimiter is required.")));
+					messages.Add(NewError(string.Format("{0} adapter delimited text record delimiter is required.", adapterContext)));
 
 				if (DataTypeFascade.Instance.IsNullOrEmpty(this.DelimitedTextSpec.FieldDelimiter))
-					messages.Add(NewError(string.Format("Delimited text field delimiter is required.")));
+					messages.Add(NewError(string.Format("{0} adapter delimited text field delimiter is required.", adapterContext)));
 			}
 
 			return messages;

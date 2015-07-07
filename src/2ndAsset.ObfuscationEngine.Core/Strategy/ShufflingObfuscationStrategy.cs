@@ -151,6 +151,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
 			valueHash = this.GetValueHash(oxymoronEngine, null, columnValue);
 			randomSeed = valueHash;
 

@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public abstract class DictionaryAdapter : Adapter, IDictionaryAdapter
+	public abstract class DictionaryAdapter<TAdapterSpecificConfiguration> : Adapter<TAdapterSpecificConfiguration>, IDictionaryAdapter
+		where TAdapterSpecificConfiguration : AdapterSpecificConfiguration, new()
 	{
 		#region Constructors/Destructors
 
@@ -24,7 +26,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		protected abstract object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId);
 
-		protected abstract void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot);
+		protected abstract void CorePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot);
 
 		public object GetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId)
 		{
@@ -33,7 +35,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		public void InitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
 		{
-			this.CoreInitializePreloadCache(dictionaryConfiguration, substitutionCacheRoot);
+			this.CorePreloadCache(dictionaryConfiguration, substitutionCacheRoot);
 		}
 
 		#endregion

@@ -40,14 +40,8 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 			if ((object)sourceDataReader == null)
 				throw new ArgumentNullException("sourceDataReader");
 
-			if ((object)configuration.Parent.DestinationAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration"));
-
-			if ((object)configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.AdoNetAdapterConfiguration"));
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText))
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText"));
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ExecuteCommandText"));
 
 			using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy((SqlConnection)destinationUnitOfWork.Connection, SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints | SqlBulkCopyOptions.KeepIdentity | SqlBulkCopyOptions.KeepNulls, (SqlTransaction)destinationUnitOfWork.Transaction))
 			{
@@ -60,7 +54,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 				sqlBulkCopy.BatchSize = 2500;
 				sqlBulkCopy.NotifyAfter = 2500;
 				//sqlBulkCopy.SqlRowsCopied += callback;
-				sqlBulkCopy.DestinationTableName = configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText;
+				sqlBulkCopy.DestinationTableName = this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText;
 
 				sqlBulkCopy.WriteToServer(sourceDataReader);
 

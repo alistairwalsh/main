@@ -14,7 +14,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 {
-	public class AdoNetAdapterConfiguration : ConfigurationObject
+	public class AdoNetAdapterConfiguration : AdapterSpecificConfiguration
 	{
 		#region Constructors/Destructors
 
@@ -169,28 +169,23 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config.Adapters
 			return UnitOfWork.Create(dictionaryConnectionType, this.ConnectionString, false, isolationLevel);
 		}
 
-		public override IEnumerable<Message> Validate()
-		{
-			return this.Validate(null);
-		}
-
-		public IEnumerable<Message> Validate(string context)
+		public override IEnumerable<Message> Validate(string adapterContext)
 		{
 			List<Message> messages;
 
 			messages = new List<Message>();
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ConnectionAqtn))
-				messages.Add(NewError(string.Format("Connection AQTN is required.")));
+				messages.Add(NewError(string.Format("{0} adapter ADO.NET connection AQTN is required.", adapterContext)));
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ConnectionString))
-				messages.Add(NewError(string.Format("Connection string is required.")));
+				messages.Add(NewError(string.Format("{0} adapter ADO.NET connection string is required.", adapterContext)));
 
 			if ((object)this.ExecuteCommandType == null)
-				messages.Add(NewError(string.Format("Execute command type is required.")));
+				messages.Add(NewError(string.Format("{0} adapter ADO.NET execute command type is required.", adapterContext)));
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ExecuteCommandText))
-				messages.Add(NewError(string.Format("Execute command text is required.")));
+				messages.Add(NewError(string.Format("{0} adapter ADO.NET execute command text is required.", adapterContext)));
 
 			return messages;
 		}

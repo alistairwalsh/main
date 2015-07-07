@@ -104,7 +104,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 
 						dictionaryAdapter = dictionaryConfiguration.DictionaryAdapterConfiguration.GetAdapterInstance<IDictionaryAdapter>();
 						dictionaryAdapters.Add(dictionaryAdapter);
-						dictionaryAdapter.Initialize(obfuscationConfiguration);
+						dictionaryAdapter.Initialize(dictionaryConfiguration.DictionaryAdapterConfiguration);
 
 						dictionaryAdapter.InitializePreloadCache(dictionaryConfiguration, oxymoronEngine.SubstitutionCacheRoot);
 
@@ -113,11 +113,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 
 					using (ISourceAdapter sourceAdapter = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterInstance<ISourceAdapter>())
 					{
-						sourceAdapter.Initialize(obfuscationConfiguration);
+						sourceAdapter.Initialize(obfuscationConfiguration.SourceAdapterConfiguration);
 
 						using (IDestinationAdapter destinationAdapter = obfuscationConfiguration.DestinationAdapterConfiguration.GetAdapterInstance<IDestinationAdapter>())
 						{
-							destinationAdapter.Initialize(obfuscationConfiguration);
+							destinationAdapter.Initialize(obfuscationConfiguration.DestinationAdapterConfiguration);
 							destinationAdapter.UpstreamMetadata = sourceAdapter.UpstreamMetadata;
 
 							sourceDataEnumerable = sourceAdapter.PullData(obfuscationConfiguration.TableConfiguration);

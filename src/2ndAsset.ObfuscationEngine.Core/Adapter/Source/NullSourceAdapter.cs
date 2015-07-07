@@ -7,10 +7,11 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public class NullSourceAdapter : SourceAdapter, INullAdapter
+	public class NullSourceAdapter : SourceAdapter<AdapterSpecificConfiguration>, INullAdapter
 	{
 		#region Constructors/Destructors
 
@@ -22,18 +23,12 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
 		}
 
 		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
-			//int max = new Random().Next(0, 999999);
-
-			//for (int i = 0; i < max; i++)
-			//	yield return new Dictionary<string, object>();
 			return new IDictionary<string, object>[] { };
 		}
 

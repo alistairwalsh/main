@@ -11,12 +11,13 @@ using System.Linq;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public class AdoNetDictionaryAdapter : DictionaryAdapter, IAdoNetAdapter
+	public class AdoNetDictionaryAdapter : DictionaryAdapter<AdoNetAdapterConfiguration>, IAdoNetAdapter
 	{
 		#region Constructors/Destructors
 
@@ -50,40 +51,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 
 		#region Methods/Operators
 
-		private static IEnumerable<IRecord> WrapRecordCounter(DictionaryConfiguration dictionaryConfiguration, IEnumerable<IRecord> records, Action<string, long, bool, double> recordProcessCallback)
-		{
-			long recordCount = 0;
-			DateTime startUtc;
-
-			startUtc = DateTime.UtcNow;
-
-			if ((object)dictionaryConfiguration == null)
-				throw new ArgumentNullException("dictionaryConfiguration");
-
-			if ((object)records == null)
-				throw new ArgumentNullException("records");
-
-			foreach (IRecord record in records)
-			{
-				recordCount++;
-
-				if ((recordCount % 1000) == 0)
-				{
-					//Thread.Sleep(250);
-					if ((object)recordProcessCallback != null)
-						recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, false, (DateTime.UtcNow - startUtc).TotalSeconds);
-				}
-
-				yield return record;
-			}
-
-			if ((object)recordProcessCallback != null)
-				recordProcessCallback(dictionaryConfiguration.DictionaryId, recordCount, true, (DateTime.UtcNow - startUtc).TotalSeconds);
-		}
-
 		protected override object CoreGetAlternativeValueFromId(DictionaryConfiguration dictionaryConfiguration, IMetaColumn metaColumn, object surrogateId)
 		{
 			object value;
+			IDbDataParameter dbDataParameterKey;
 
 			if ((object)dictionaryConfiguration == null)
 				throw new ArgumentNullException("dictionaryConfiguration");
@@ -94,28 +65,22 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)surrogateId == null)
 				throw new ArgumentNullException("surrogateId");
 
-			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration"));
-
-			if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DictionaryAdapterConfiguration.AdoNetAdapterConfiguration"));
-
-			IDbDataParameter dbDataParameterKey;
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ExecuteCommandText"));
 
 			dbDataParameterKey = this.DictionaryUnitOfWork.CreateParameter(ParameterDirection.Input, DbType.Object, 0, 0, 0, false, "@ID", surrogateId);
 
-			value = this.DictionaryUnitOfWork.ExecuteScalar<string>(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { dbDataParameterKey });
+			value = this.DictionaryUnitOfWork.ExecuteScalar<string>(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText, new IDbDataParameter[] { dbDataParameterKey });
 
 			return value;
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
+			this.DictionaryUnitOfWork = this.AdapterConfiguration.AdapterSpecificConfiguration.GetUnitOfWork();
 		}
 
-		protected override void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
+		protected override void CorePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
 		{
 			IEnumerable<IRecord> records;
 			IDictionary<long, object> dictionaryCache;
@@ -126,16 +91,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			if ((object)substitutionCacheRoot == null)
 				throw new ArgumentNullException("substitutionCacheRoot");
 
-			this.DictionaryUnitOfWork = dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
-
 			if (dictionaryConfiguration.PreloadEnabled)
 			{
-				records = this.DictionaryUnitOfWork.ExecuteRecords(dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
+				if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText))
+					throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ExecuteCommandText"));
+
+				records = this.DictionaryUnitOfWork.ExecuteRecords(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
 
 				if ((object)records == null)
 					throw new InvalidOperationException(string.Format("Records were invalid."));
 
-				//records = WrapRecordCounter(dictionaryConfiguration, records, (d, x, y, z) => Console.WriteLine("dictionary[{0}]: {1} {2} {3}", d, x, y, z));
 				dictionaryCache = new Dictionary<long, object>();
 
 				foreach (IRecord record in records)

@@ -11,12 +11,14 @@ using System.Linq;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support;
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
-	public abstract class AdoNetDestinationAdapter : DestinationAdapter, IAdoNetAdapter
+	public abstract class AdoNetDestinationAdapter : DestinationAdapter<AdoNetAdapterConfiguration>, IAdoNetAdapter
 	{
 		#region Constructors/Destructors
 
@@ -50,15 +52,21 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
-			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration"));
+			IEnumerable<IResultset> resultsets;
 
-			if ((object)obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "DestinationAdapterConfiguration.AdoNetAdapterConfiguration"));
+			this.DestinationUnitOfWork = this.AdapterConfiguration.AdapterSpecificConfiguration.GetUnitOfWork();
 
-			this.DestinationUnitOfWork = obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandText))
+			{
+				resultsets = this.DestinationUnitOfWork.ExecuteResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandText, new IDbDataParameter[] { });
+
+				if ((object)resultsets == null)
+					throw new InvalidOperationException(string.Format("Resultsets were invalid."));
+
+				resultsets.ToArray();
+			}
 		}
 
 		protected abstract void CorePublishImpl(TableConfiguration configuration, IUnitOfWork destinationUnitOfWork, IDataReader sourceDataReader, out long rowsCopied);
@@ -67,7 +75,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 		{
 			IDataReader sourceDataReader;
 			long rowsCopied;
-			int recordsAffected;
 
 			if ((object)tableConfiguration == null)
 				throw new ArgumentNullException("tableConfiguration");
@@ -75,27 +82,25 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 			if ((object)sourceDataEnumerable == null)
 				throw new ArgumentNullException("sourceDataEnumerable");
 
-			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText))
-			{
-				// prepare destination
-				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PreExecuteCommandText, new IDbDataParameter[] { });
-				Console.WriteLine("DESTINATION (pre): recordsAffected={0}", resultsets.First().RecordsAffected);
-			}
-
 			sourceDataReader = new EnumerableDictionaryDataReader(this.UpstreamMetadata, sourceDataEnumerable);
 
 			this.CorePublishImpl(tableConfiguration, this.DestinationUnitOfWork, sourceDataReader, out rowsCopied);
-
-			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText))
-			{
-				// prepare destination
-				var resultsets = this.DestinationUnitOfWork.ExecuteResultsets(tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.PostExecuteCommandText, new IDbDataParameter[] { });
-				Console.WriteLine("DESTINATION (post): recordsAffected={0}", resultsets.First().RecordsAffected);
-			}
 		}
 
 		protected override void CoreTerminate()
 		{
+			IEnumerable<IResultset> resultsets;
+
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandText))
+			{
+				resultsets = this.DestinationUnitOfWork.ExecuteResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandText, new IDbDataParameter[] { });
+
+				if ((object)resultsets == null)
+					throw new InvalidOperationException(string.Format("Resultsets were invalid."));
+
+				resultsets.ToArray();
+			}
+
 			if ((object)this.DestinationUnitOfWork != null)
 				this.DestinationUnitOfWork.Dispose();
 

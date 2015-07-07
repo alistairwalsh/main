@@ -13,7 +13,7 @@ using Solder.Framework.Utilities;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
-	public class DictionaryConfiguration : ConfigurationObject
+	public class DictionaryConfiguration : ConfigurationObject, IAdapterConfigurationDependency
 	{
 		#region Constructors/Destructors
 

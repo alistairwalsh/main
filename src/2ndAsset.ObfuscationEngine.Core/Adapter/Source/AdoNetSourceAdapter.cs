@@ -6,16 +6,18 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public class AdoNetSourceAdapter : SourceAdapter, IAdoNetAdapter
+	public class AdoNetSourceAdapter : SourceAdapter<AdoNetAdapterConfiguration>, IAdoNetAdapter
 	{
 		#region Constructors/Destructors
 
@@ -49,21 +51,25 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		#region Methods/Operators
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
 			IEnumerable<IResultset> resultsets;
 			IEnumerable<IRecord> records;
 			List<MetaColumn> metaColumns;
 
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
+			this.SourceUnitOfWork = this.AdapterConfiguration.AdapterSpecificConfiguration.GetUnitOfWork();
 
-			if ((object)obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration"));
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandText))
+			{
+				resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.PreExecuteCommandText, new IDbDataParameter[] { });
 
-			this.SourceUnitOfWork = obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration.GetUnitOfWork();
+				if ((object)resultsets == null)
+					throw new InvalidOperationException(string.Format("Resultsets were invalid."));
 
-			resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(obfuscationConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, obfuscationConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { });
+				resultsets.ToArray();
+			}
+
+			resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText, new IDbDataParameter[] { });
 
 			if ((object)resultsets == null)
 				throw new InvalidOperationException(string.Format("Resultsets were invalid."));
@@ -97,21 +103,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		protected override IEnumerable<IDictionary<string, object>> CorePullData(TableConfiguration tableConfiguration)
 		{
+			AdapterConfiguration<AdoNetAdapterConfiguration> adapterConfiguration;
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
 
 			if ((object)tableConfiguration == null)
 				throw new ArgumentNullException("tableConfiguration");
 
-			if ((object)tableConfiguration.Parent.SourceAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration"));
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ExecuteCommandText"));
 
-			if ((object)tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration == null)
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration"));
-
-			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText))
-				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText"));
-
-			sourceDataEnumerable = this.SourceUnitOfWork.ExecuteRecords(tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, tableConfiguration.Parent.SourceAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
+			sourceDataEnumerable = this.SourceUnitOfWork.ExecuteRecords(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText, new IDbDataParameter[] { }, null);
 
 			if ((object)sourceDataEnumerable == null)
 				throw new InvalidOperationException(string.Format("Records were invalid."));
@@ -121,6 +122,18 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		protected override void CoreTerminate()
 		{
+			IEnumerable<IResultset> resultsets;
+
+			if (!DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandText))
+			{
+				resultsets = this.SourceUnitOfWork.ExecuteSchemaResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.PostExecuteCommandText, new IDbDataParameter[] { });
+
+				if ((object)resultsets == null)
+					throw new InvalidOperationException(string.Format("Resultsets were invalid."));
+
+				resultsets.ToArray();
+			}
+
 			if ((object)this.SourceUnitOfWork != null)
 				this.SourceUnitOfWork.Dispose();
 

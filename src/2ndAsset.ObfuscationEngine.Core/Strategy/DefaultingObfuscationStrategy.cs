@@ -52,7 +52,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 			if ((object)metaColumn == null)
 				throw new ArgumentNullException("metaColumn");
 
-			value = GetDefault(metaColumn.ColumnIsNullable ?? columnConfiguration.ObfuscationStrategyConfiguration.DefaultingCanBeNull ?? false, metaColumn.ColumnType);
+			if ((object)columnConfiguration.ObfuscationStrategySpecificConfiguration == null)
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ObfuscationStrategyConfiguration"));
+
+			value = GetDefault(metaColumn.ColumnIsNullable ?? columnConfiguration.ObfuscationStrategySpecificConfiguration.DefaultingCanBeNull ?? false, metaColumn.ColumnType);
 
 			return value;
 		}

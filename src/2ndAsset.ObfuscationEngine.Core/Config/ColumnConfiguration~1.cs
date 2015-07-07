@@ -24,11 +24,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			if ((object)columnConfiguration == null)
 				throw new ArgumentNullException("columnConfiguration");
 
-			if ((object)base.ObfuscationStrategyConfiguration != null &&
-				(object)columnConfiguration.ObfuscationStrategyConfiguration != null)
+			if ((object)base.ObfuscationStrategySpecificConfiguration != null &&
+				(object)columnConfiguration.ObfuscationStrategySpecificConfiguration != null)
 			{
-				foreach (KeyValuePair<string, object> keyValuePair in columnConfiguration.ObfuscationStrategyConfiguration)
-					base.ObfuscationStrategyConfiguration.Add(keyValuePair.Key, keyValuePair.Value);
+				foreach (KeyValuePair<string, object> keyValuePair in columnConfiguration.ObfuscationStrategySpecificConfiguration)
+					base.ObfuscationStrategySpecificConfiguration.Add(keyValuePair.Key, keyValuePair.Value);
 			}
 
 			this.ColumnName = columnConfiguration.ColumnName;
@@ -42,7 +42,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 		#region Fields/Constants
 
 		private bool frozen;
-		private TObfuscationStrategyConfiguration obfuscationStrategyConfiguration;
+		private TObfuscationStrategyConfiguration obfuscationStrategySpecificConfiguration;
 
 		#endregion
 
@@ -60,17 +60,17 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
-		public new TObfuscationStrategyConfiguration ObfuscationStrategyConfiguration
+		public new TObfuscationStrategyConfiguration ObfuscationStrategySpecificConfiguration
 		{
 			get
 			{
-				this.ApplyObfuscationStrategyConfiguration(); // special case
-				return this.obfuscationStrategyConfiguration;
+				this.ApplyObfuscationStrategySpecificConfiguration(); // special case
+				return this.obfuscationStrategySpecificConfiguration;
 			}
 			set
 			{
-				this.EnsureParentOnPropertySet(this.obfuscationStrategyConfiguration, value);
-				this.obfuscationStrategyConfiguration = value;
+				this.EnsureParentOnPropertySet(this.obfuscationStrategySpecificConfiguration, value);
+				this.obfuscationStrategySpecificConfiguration = value;
 			}
 		}
 
@@ -78,18 +78,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Methods/Operators
 
-		public void ApplyObfuscationStrategyConfiguration()
+		public void ApplyObfuscationStrategySpecificConfiguration()
 		{
-			if ((object)base.ObfuscationStrategyConfiguration != null && !this.Frozen)
+			if ((object)base.ObfuscationStrategySpecificConfiguration != null && !this.Frozen)
 			{
-				this.ObfuscationStrategyConfiguration = JObject.FromObject(base.ObfuscationStrategyConfiguration).ToObject<TObfuscationStrategyConfiguration>();
+				this.ObfuscationStrategySpecificConfiguration = JObject.FromObject(base.ObfuscationStrategySpecificConfiguration).ToObject<TObfuscationStrategyConfiguration>();
 				this.Frozen = true;
 			}
-		}
-
-		public override Type GetObfuscationStrategyConfigurationType()
-		{
-			return typeof(TObfuscationStrategyConfiguration);
 		}
 
 		public override IEnumerable<Message> Validate(int? columnIndex)
@@ -99,8 +94,8 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			messages = new List<Message>();
 			messages.AddRange(base.Validate(columnIndex));
 
-			if ((object)this.ObfuscationStrategyConfiguration != null)
-				messages.AddRange(this.ObfuscationStrategyConfiguration.Validate(columnIndex));
+			if ((object)this.ObfuscationStrategySpecificConfiguration != null)
+				messages.AddRange(this.ObfuscationStrategySpecificConfiguration.Validate(columnIndex));
 
 			return messages;
 		}

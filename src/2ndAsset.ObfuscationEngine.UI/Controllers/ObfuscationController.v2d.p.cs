@@ -146,7 +146,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
 
-			obfuscationConfiguration.DestinationAdapterConfiguration = new AdapterConfiguration();
+			obfuscationConfiguration.DestinationAdapterConfiguration = new _LEGACY_AdapterConfiguration();
 
 			type = this.View.DestinationAdapterSettings.SelectedAdapterType;
 
@@ -184,7 +184,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 											DictionaryId = dictionarySpecView.DictionaryId,
 											PreloadEnabled = dictionarySpecView.PreloadEnabled,
 											RecordCount = dictionarySpecView.RecordCount,
-											DictionaryAdapterConfiguration = new AdapterConfiguration()
+											DictionaryAdapterConfiguration = new _LEGACY_AdapterConfiguration()
 										};
 
 				obfuscationConfiguration.DictionaryConfigurations.Add(dictionaryConfiguration);
@@ -219,7 +219,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
 
-			obfuscationConfiguration.SourceAdapterConfiguration = new AdapterConfiguration();
+			obfuscationConfiguration.SourceAdapterConfiguration = new _LEGACY_AdapterConfiguration();
 
 			type = this.View.SourceAdapterSettings.SelectedAdapterType;
 

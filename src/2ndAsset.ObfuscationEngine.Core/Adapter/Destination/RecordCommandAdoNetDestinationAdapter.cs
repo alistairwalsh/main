@@ -8,7 +8,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
@@ -27,6 +30,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		protected override void CorePublishImpl(TableConfiguration configuration, IUnitOfWork destinationUnitOfWork, IDataReader sourceDataReader, out long rowsCopied)
 		{
+			IEnumerable<IResultset> resultsets;
 			long _rowsCopied = 0;
 
 			if ((object)configuration == null)
@@ -38,6 +42,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 			if ((object)sourceDataReader == null)
 				throw new ArgumentNullException("sourceDataReader");
 
+			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText))
+				throw new InvalidOperationException(string.Format("Configuration missing: '{0}'.", "ExecuteCommandText"));
+
+			// ?
 			{
 				IDbDataParameter commandParameter;
 				IDictionary<string, IDbDataParameter> commandParameters;
@@ -54,9 +62,8 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 						commandParameters.Add(columnConfiguration.ColumnName, commandParameter);
 					}
 
-					var resultsets = destinationUnitOfWork.ExecuteResultsets(configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandType ?? CommandType.Text, configuration.Parent.DestinationAdapterConfiguration.AdoNetAdapterConfiguration.ExecuteCommandText, commandParameters.Values.ToArray());
+					resultsets = destinationUnitOfWork.ExecuteResultsets(this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandType ?? CommandType.Text, this.AdapterConfiguration.AdapterSpecificConfiguration.ExecuteCommandText, commandParameters.Values.ToArray());
 					resultsets.ToArray();
-					//Console.WriteLine("DESTINATION (update): recordsAffected={0}", resultsets.First().RecordsAffected);
 
 					_rowsCopied++;
 				}

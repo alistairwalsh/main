@@ -57,15 +57,15 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Adapter\Adapter.cs" />
+    <Compile Include="Adapter\Adapter~1.cs" />
     <Compile Include="Adapter\Destination\NullDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\AdoNetDestinationAdapter.cs" />
-    <Compile Include="Adapter\Destination\DestinationAdapter.cs" />
+    <Compile Include="Adapter\Destination\DestinationAdapter~1.cs" />
     <Compile Include="Adapter\Dictionary\NullDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\DelimitedTextDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\AdoNetDictionaryAdapter.cs" />
     <Compile Include="Adapter\Destination\DelimitedTextDestinationAdapter.cs" />
-    <Compile Include="Adapter\Dictionary\DictionaryAdapter.cs" />
+    <Compile Include="Adapter\Dictionary\DictionaryAdapter~1.cs" />
     <Compile Include="Adapter\Dictionary\IDictionaryAdapter.cs" />
     <Compile Include="Adapter\INullAdapter.cs" />
     <Compile Include="Adapter\Source\NullSourceAdapter.cs" />
@@ -73,8 +73,11 @@
     <Compile Include="Adapter\Source\AdoNetSourceAdapter.cs" />
     <Compile Include="Adapter\IDelimitedTextAdapter.cs" />
     <Compile Include="Adapter\IAdoNetAdapter.cs" />
-    <Compile Include="Adapter\Source\SourceAdapter.cs" />
+    <Compile Include="Adapter\Source\SourceAdapter~1.cs" />
     <Compile Include="Config\AdapterConfiguration.cs" />
+    <Compile Include="Config\AdapterConfiguration~1.cs" />
+    <Compile Include="Config\Adapters\AdapterSpecificConfiguration.cs" />
+    <Compile Include="Config\IAdapterConfigurationDependency.cs" />
     <Compile Include="Config\Adapters\AdoNetParameterConfiguration.cs" />
     <Compile Include="Config\Adapters\AdoNetCommandConfiguration.cs" />
     <Compile Include="Config\ColumnConfiguration~1.cs" />

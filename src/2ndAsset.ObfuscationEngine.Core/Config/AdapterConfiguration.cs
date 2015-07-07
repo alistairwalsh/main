@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
-using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
+using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
@@ -26,13 +28,20 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 
 		#region Fields/Constants
 
+		private readonly Dictionary<string, object> adapterSpecificConfiguration = new Dictionary<string, object>();
 		private string adapterAqtn;
-		private AdoNetAdapterConfiguration adoNetAdapterConfiguration;
-		private DelimitedTextAdapterConfiguration delimitedTextAdapterConfiguration;
 
 		#endregion
 
 		#region Properties/Indexers/Events
+
+		public Dictionary<string, object> AdapterSpecificConfiguration
+		{
+			get
+			{
+				return this.adapterSpecificConfiguration;
+			}
+		}
 
 		public string AdapterAqtn
 		{
@@ -46,29 +55,16 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
-		public AdoNetAdapterConfiguration AdoNetAdapterConfiguration
+		[JsonIgnore]
+		public new IAdapterConfigurationDependency Parent
 		{
 			get
 			{
-				return this.adoNetAdapterConfiguration;
+				return (IAdapterConfigurationDependency)base.Parent;
 			}
 			set
 			{
-				this.EnsureParentOnPropertySet(this.adoNetAdapterConfiguration, value);
-				this.adoNetAdapterConfiguration = value;
-			}
-		}
-
-		public DelimitedTextAdapterConfiguration DelimitedTextAdapterConfiguration
-		{
-			get
-			{
-				return this.delimitedTextAdapterConfiguration;
-			}
-			set
-			{
-				this.EnsureParentOnPropertySet(this.delimitedTextAdapterConfiguration, value);
-				this.delimitedTextAdapterConfiguration = value;
+				base.Parent = value;
 			}
 		}
 
@@ -92,6 +88,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return instance;
 		}
 
+		public virtual Type GetAdapterSpecificConfigurationType()
+		{
+			return null;
+		}
+
 		public Type GetAdapterType()
 		{
 			Type sourceAdapterType;
@@ -109,41 +110,33 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return this.Validate(null);
 		}
 
-		public virtual IEnumerable<Message> Validate(string context)
+		public virtual IEnumerable<Message> Validate(string adapterContext)
 		{
 			List<Message> messages;
 			Type type;
+			IAdapter adapter;
 
 			messages = new List<Message>();
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.AdapterAqtn))
-				messages.Add(NewError(string.Format("{0} adapter AQTN is required.", context)));
+				messages.Add(NewError(string.Format("{0} adapter AQTN is required.", adapterContext)));
 			else
 			{
 				type = this.GetAdapterType();
 
 				if ((object)type == null)
-					messages.Add(NewError(string.Format("{0} adapter failed to load type from AQTN.", context)));
-				else if (typeof(INullAdapter).IsAssignableFrom(type))
+					messages.Add(NewError(string.Format("{0} adapter failed to load type from AQTN.", adapterContext)));
+				else if (typeof(IAdapter).IsAssignableFrom(type))
 				{
-					// do nothing
-				}
-				else if (typeof(IDelimitedTextAdapter).IsAssignableFrom(type))
-				{
-					if ((object)this.DelimitedTextAdapterConfiguration == null)
-						messages.Add(NewError(string.Format("{0} adapter DelimitedTextAdapterConfiguration section missing.", context)));
+					adapter = this.GetAdapterInstance<IAdapter>();
+
+					if ((object)adapter == null)
+						messages.Add(NewError(string.Format("{0} adapter failed to instatiate type from AQTN.", adapterContext)));
 					else
-						messages.AddRange(this.DelimitedTextAdapterConfiguration.Validate(context));
-				}
-				else if (typeof(IAdoNetAdapter).IsAssignableFrom(type))
-				{
-					if ((object)this.AdoNetAdapterConfiguration == null)
-						messages.Add(NewError(string.Format("{0} adapter AdoNetAdapterConfiguration section missing.", context)));
-					else
-						messages.AddRange(this.AdoNetAdapterConfiguration.Validate(context));
+						messages.AddRange(adapter.ValidateAdapterSpecificConfiguration(this, adapterContext));
 				}
 				else
-					messages.Add(NewError(string.Format("{0} adapter loaded an unrecognized type via AQTN.", context)));
+					messages.Add(NewError(string.Format("{0} adapter loaded an unrecognized type via AQTN.", adapterContext)));
 			}
 
 			return messages;

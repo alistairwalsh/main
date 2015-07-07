@@ -18,7 +18,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Strategy
 
 		object GetObfuscatedValue(IOxymoronEngine oxymoronEngine, ColumnConfiguration columnConfiguration, IMetaColumn metaColumn, object columnValue);
 
-		IEnumerable<Message> ValidateConfiguration(ColumnConfiguration columnConfiguration, int? columnIndex);
+		Type GetObfuscationStrategySpecificConfigurationType();
+
+		IEnumerable<Message> ValidateObfuscationStrategySpecificConfiguration(ColumnConfiguration columnConfiguration, int? columnIndex);
 
 		#endregion
 	}

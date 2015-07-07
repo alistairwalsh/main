@@ -19,7 +19,7 @@
 	{
 		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Source.AdoNetSourceAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-		AdoNetAdapterConfiguration:
+		AdapterSpecificConfiguration:
 		{
 			ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 			ConnectionString: "Server=(local);Integrated Security=SSPI;",
@@ -39,7 +39,7 @@
 	{
 		AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Destination.RecordCommandAdoNetDestinationAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-		AdoNetAdapterConfiguration:
+		AdapterSpecificConfiguration:
 		{
 			ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 			ConnectionString: "Server=(local);Integrated Security=SSPI;",
@@ -72,7 +72,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				AdoNetAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 					ConnectionString: "Server=(local);Integrated Security=SSPI;",
@@ -98,7 +98,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				AdoNetAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 					ConnectionString: "Server=(local);Integrated Security=SSPI;",
@@ -124,7 +124,7 @@
 			{
 				AdapterAqtn: "_2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary.AdoNetDictionaryAdapter, 2ndAsset.ObfuscationEngine.Core",
 
-				AdoNetAdapterConfiguration:
+				AdapterSpecificConfiguration:
 				{
 					ConnectionAqtn: "System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 					ConnectionString: "Server=(local);Integrated Security=SSPI;",
@@ -149,7 +149,7 @@
 			{
 				ColumnName: "AccountReportingId",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SurrogateKeyObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -157,7 +157,7 @@
 			{
 				ColumnName: "TransactionNumber",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.DefaultingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DefaultingCanBeNull: false
 				}
@@ -166,7 +166,7 @@
 			{
 				ColumnName: "InstitutionName",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_FirstName"
 				}
@@ -176,7 +176,7 @@
 				ColumnName: "RefNumber",
 				"IsColumnNullable": false,
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.ShufflingObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -184,7 +184,7 @@
 			{
 				ColumnName: "TheDate",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 25
 				}
@@ -193,7 +193,7 @@
 			{
 				ColumnName: "PayeeName",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_LastName"
 				}
@@ -202,7 +202,7 @@
 			{
 				ColumnName: "TheAmount",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 100
 				}
@@ -211,7 +211,7 @@
 			{
 				ColumnName: "IsCleared",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.NoneObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			},
@@ -219,7 +219,7 @@
 			{
 				ColumnName: "CategoryName",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.SubstitutionObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					DictionaryReference: "d_CrayonColor"
 				}
@@ -228,7 +228,7 @@
 			{
 				ColumnName: "DueDate",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.VarianceObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 					VariancePercentValue: 10
 				}
@@ -237,7 +237,7 @@
 			{
 				ColumnName: "Comments",
 				ObfuscationStrategyAqtn: "_2ndAsset.ObfuscationEngine.Core.Strategy.CipheringObfuscationStrategy, 2ndAsset.ObfuscationEngine.Core",
-				ObfuscationStrategyConfiguration:
+				ObfuscationStrategySpecificConfiguration:
 				{
 				}
 			}

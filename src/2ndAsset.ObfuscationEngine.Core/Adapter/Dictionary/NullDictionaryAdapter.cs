@@ -7,10 +7,11 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
-	public class NullDictionaryAdapter : DictionaryAdapter, INullAdapter
+	public class NullDictionaryAdapter : DictionaryAdapter<AdapterSpecificConfiguration>, INullAdapter
 	{
 		#region Constructors/Destructors
 
@@ -36,13 +37,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 			return null;
 		}
 
-		protected override void CoreInitialize(ObfuscationConfiguration obfuscationConfiguration)
+		protected override void CoreInitialize()
 		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
 		}
 
-		protected override void CoreInitializePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
+		protected override void CorePreloadCache(DictionaryConfiguration dictionaryConfiguration, IDictionary<string, IDictionary<long, object>> substitutionCacheRoot)
 		{
 			if ((object)dictionaryConfiguration == null)
 				throw new ArgumentNullException("dictionaryConfiguration");

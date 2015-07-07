@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Config;
+using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
-	public abstract class SourceAdapter : Adapter, ISourceAdapter
+	public abstract class SourceAdapter<TAdapterSpecificConfiguration> : Adapter<TAdapterSpecificConfiguration>, ISourceAdapter
+		where TAdapterSpecificConfiguration : AdapterSpecificConfiguration, new()
 	{
 		#region Constructors/Destructors
 
@@ -48,6 +50,9 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 
 		public IEnumerable<IDictionary<string, object>> PullData(TableConfiguration tableConfiguration)
 		{
+			if ((object)tableConfiguration == null)
+				throw new ArgumentNullException("tableConfiguration");
+
 			return this.CorePullData(tableConfiguration);
 		}
 
