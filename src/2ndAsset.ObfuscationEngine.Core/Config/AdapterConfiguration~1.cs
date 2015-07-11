@@ -91,6 +91,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return typeof(TAdapterSpecificConfiguration);
 		}
 
+		public override void ResetAdapterSpecificConfiguration()
+		{
+			base.ResetAdapterSpecificConfiguration();
+			this.Frozen = false;
+			this.AdapterSpecificConfiguration = null;
+		}
+
 		public override IEnumerable<Message> Validate(string adapterContext)
 		{
 			List<Message> messages;

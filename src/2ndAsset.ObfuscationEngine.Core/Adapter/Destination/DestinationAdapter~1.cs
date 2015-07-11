@@ -24,13 +24,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 
 		#region Fields/Constants
 
-		private IEnumerable<MetaColumn> upstreamMetadata;
+		private IEnumerable<IMetaColumn> upstreamMetadata;
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		public IEnumerable<MetaColumn> UpstreamMetadata
+		public IEnumerable<IMetaColumn> UpstreamMetadata
 		{
 			set
 			{

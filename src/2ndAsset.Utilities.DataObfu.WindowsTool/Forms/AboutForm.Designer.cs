@@ -32,19 +32,19 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-			this.pbAppLogo = new PictureBox();
-			this.lblProduct = new Label();
-			this.lblVersion = new Label();
-			this.lblCopyright = new Label();
-			this.lblCompany = new Label();
-			this.txtBxDescription = new TextBox();
-			this.btnOK = new Button();
-			this.lblWin32FileVersion = new Label();
-			this.lblTrademark = new Label();
-			this.lblTitle = new Label();
-			this.lblInformationalVersion = new Label();
-			this.lblConfiguration = new Label();
-			this.tableLayoutPanel1 = new TableLayoutPanel();
+			this.pbAppLogo = new System.Windows.Forms.PictureBox();
+			this.lblProduct = new System.Windows.Forms.Label();
+			this.lblVersion = new System.Windows.Forms.Label();
+			this.lblCopyright = new System.Windows.Forms.Label();
+			this.lblCompany = new System.Windows.Forms.Label();
+			this.txtBxDescription = new System.Windows.Forms.TextBox();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.lblWin32FileVersion = new System.Windows.Forms.Label();
+			this.lblTrademark = new System.Windows.Forms.Label();
+			this.lblTitle = new System.Windows.Forms.Label();
+			this.lblInformationalVersion = new System.Windows.Forms.Label();
+			this.lblConfiguration = new System.Windows.Forms.Label();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pbAppLogo)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -55,7 +55,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			this.pbAppLogo.Location = new System.Drawing.Point(12, 12);
 			this.pbAppLogo.Name = "pbAppLogo";
 			this.pbAppLogo.Size = new System.Drawing.Size(300, 300);
-			this.pbAppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pbAppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbAppLogo.TabIndex = 12;
 			this.pbAppLogo.TabStop = false;
 			// 

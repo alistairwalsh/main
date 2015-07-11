@@ -16,7 +16,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class MetadataSettingsUserControl : _MetadataSettingsUserControl, IMetadataSettingsView
+	public partial class MetadataSettingsUserControl : _MetadataSettingsUserControl, IMetadataSettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -29,7 +29,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		public IEnumerable<IMetaColumnSpecView> MetaColumnSpecViews
+		public IEnumerable<IMetaColumnSpecListView> MetaColumnSpecListViews
 		{
 			get
 			{
@@ -41,14 +41,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		public IMetaColumnSpecView SelectedMetaColumnSpecView
+		public IMetaColumnSpecListView SelectedMetaColumnSpecListView
 		{
 			get
 			{
 				if (this.lvMetaColumnSpecs.SelectedItems.Count != 1)
 					return null;
 
-				return this.lvMetaColumnSpecs.SelectedItems[0] as IMetaColumnSpecView;
+				return this.lvMetaColumnSpecs.SelectedItems[0] as IMetaColumnSpecListView;
 			}
 			set
 			{
@@ -67,7 +67,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Methods/Operators
 
-		IMetaColumnSpecView IMetadataSettingsView.AddMetaColumnSpecView(string columnName, string obfuscationStrategyAqtn)
+		IMetaColumnSpecListView IMetadataSettingsPartialView.AddMetaColumnSpecView(string columnName, string obfuscationStrategyAqtn)
 		{
 			MetaColumnListViewItem lviMetaColumnSpec;
 
@@ -115,10 +115,10 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveMetaColumnSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveMetaColumnSpecView(this.PartialView.SelectedMetaColumnSpecView);
+			this.PartialView.RemoveMetaColumnSpecView(this.PartialView.SelectedMetaColumnSpecListView);
 		}
 
-		void IMetadataSettingsView.ClearMetaColumnSpecViews()
+		void IMetadataSettingsPartialView.ClearMetaColumnSpecViews()
 		{
 			this.lvMetaColumnSpecs.Items.Clear();
 			this.CoreRefreshControlState();
@@ -173,11 +173,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.CoreRefreshControlState();
 		}
 
-		bool IMetadataSettingsView.RemoveMetaColumnSpecView(IMetaColumnSpecView headerSpecView)
+		bool IMetadataSettingsPartialView.RemoveMetaColumnSpecView(IMetaColumnSpecListView metaColumnSpecListView)
 		{
 			MetaColumnListViewItem lviMetaColumn;
 
-			lviMetaColumn = headerSpecView as MetaColumnListViewItem;
+			lviMetaColumn = metaColumnSpecListView as MetaColumnListViewItem;
 
 			if ((object)lviMetaColumn == null)
 				return false;
@@ -195,7 +195,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Classes/Structs/Interfaces/Enums/Delegates
 
-		private sealed class MetaColumnListViewItem : ListViewItem, IMetaColumnSpecView
+		private sealed class MetaColumnListViewItem : ListViewItem, IMetaColumnSpecListView
 		{
 			#region Constructors/Destructors
 
@@ -208,7 +208,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 			#region Properties/Indexers/Events
 
-			string IMetaColumnSpecView.ColumnName
+			string IMetaColumnSpecListView.ColumnName
 			{
 				get
 				{
@@ -216,7 +216,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			bool? IMetaColumnSpecView.IsColumnNullable
+			bool? IMetaColumnSpecListView.IsColumnNullable
 			{
 				get
 				{
@@ -229,7 +229,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			string IMetaColumnSpecView.ObfuscationStrategyAqtn
+			string IMetaColumnSpecListView.ObfuscationStrategyAqtn
 			{
 				get
 				{
@@ -333,7 +333,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _MetadataSettingsUserControl : _2ndAssetUserControl<IMetadataSettingsView>
+	public class _MetadataSettingsUserControl : BaseUserControl<IMetadataSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

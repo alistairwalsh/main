@@ -12,7 +12,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class AvalancheSettingsUserControl : _AvalancheSettingsUserControl, IAvalancheSettingsView
+	public partial class AvalancheSettingsUserControl : _AvalancheSettingsUserControl, IAvalancheSettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -25,7 +25,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		long? IAvalancheSettingsView.HashMultiplier
+		long? IAvalancheSettingsPartialView.HashMultiplier
 		{
 			get
 			{
@@ -37,7 +37,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		long? IAvalancheSettingsView.HashSeed
+		long? IAvalancheSettingsPartialView.HashSeed
 		{
 			get
 			{
@@ -75,7 +75,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AvalancheSettingsUserControl : _2ndAssetUserControl<IAvalancheSettingsView>
+	public class _AvalancheSettingsUserControl : BaseUserControl<IAvalancheSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

@@ -6,7 +6,6 @@
 using System;
 using System.Data;
 
-using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
@@ -16,42 +15,29 @@ namespace _2ndAsset.Ssis.Components
 	{
 		#region Constructors/Destructors
 
-		public DtsAdoNetAdapterConfiguration(Func<IUnitOfWork> dictionaryUnitOfWorkCallback, AdoNetAdapterConfiguration adoNetAdapterConfiguration)
+		public DtsAdoNetAdapterConfiguration()
 		{
-			if ((object)dictionaryUnitOfWorkCallback == null)
-				throw new ArgumentNullException("dictionaryUnitOfWorkCallback");
-
-			this.dictionaryUnitOfWorkCallback = dictionaryUnitOfWorkCallback;
-
-			this.ConnectionAqtn = string.Format("{0}\r\n{1}", typeof(IDbConnection).AssemblyQualifiedName, Guid.NewGuid().ToString("N"));
-			this.ConnectionString = Guid.NewGuid().ToString("N");
-
-			if ((object)adoNetAdapterConfiguration != null)
-			{
-				this.PreExecuteCommandText = adoNetAdapterConfiguration.PreExecuteCommandText;
-				this.PreExecuteCommandType = adoNetAdapterConfiguration.PreExecuteCommandType;
-				this.ExecuteCommandText = adoNetAdapterConfiguration.ExecuteCommandText;
-				this.ExecuteCommandType = adoNetAdapterConfiguration.ExecuteCommandType;
-				this.PostExecuteCommandText = adoNetAdapterConfiguration.PostExecuteCommandText;
-				this.PostExecuteCommandType = adoNetAdapterConfiguration.PostExecuteCommandType;
-			}
 		}
 
 		#endregion
 
 		#region Fields/Constants
 
-		private readonly Func<IUnitOfWork> dictionaryUnitOfWorkCallback;
+		private Func<IUnitOfWork> dictionaryUnitOfWorkCallback;
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		private Func<IUnitOfWork> DictionaryUnitOfWorkCallback
+		public Func<IUnitOfWork> DictionaryUnitOfWorkCallback
 		{
 			get
 			{
 				return this.dictionaryUnitOfWorkCallback;
+			}
+			set
+			{
+				this.dictionaryUnitOfWorkCallback = value;
 			}
 		}
 
@@ -61,7 +47,10 @@ namespace _2ndAsset.Ssis.Components
 
 		public override IUnitOfWork GetUnitOfWork(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
 		{
-			return this.DictionaryUnitOfWorkCallback();
+			if ((object)this.DictionaryUnitOfWorkCallback != null)
+				return this.DictionaryUnitOfWorkCallback();
+			else
+				return null;
 		}
 
 		#endregion

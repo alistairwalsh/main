@@ -35,7 +35,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 			this.btnOK = new System.Windows.Forms.Button();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.dictionaryAdapterSettingsUc = new AdapterSettingsUserControl();
+			this.adapterSettingsUc = new AdapterSettingsUserControl();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.SuspendLayout();
@@ -66,7 +66,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.dictionaryAdapterSettingsUc);
+			this.tabPage1.Controls.Add(this.adapterSettingsUc);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -77,12 +77,12 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 			// 
 			// dictionaryAdapterSettingsUc
 			// 
-			this.dictionaryAdapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dictionaryAdapterSettingsUc.Location = new System.Drawing.Point(3, 3);
-			this.dictionaryAdapterSettingsUc.MinimumSize = new System.Drawing.Size(460, 313);
-			this.dictionaryAdapterSettingsUc.Name = "dictionaryAdapterSettingsUc";
-			this.dictionaryAdapterSettingsUc.Size = new System.Drawing.Size(460, 313);
-			this.dictionaryAdapterSettingsUc.TabIndex = 0;
+			this.adapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.adapterSettingsUc.Location = new System.Drawing.Point(3, 3);
+			this.adapterSettingsUc.MinimumSize = new System.Drawing.Size(460, 313);
+			this.adapterSettingsUc.Name = "adapterSettingsUc";
+			this.adapterSettingsUc.Size = new System.Drawing.Size(460, 313);
+			this.adapterSettingsUc.TabIndex = 0;
 			// 
 			// AdapterSettingsForm
 			// 
@@ -108,6 +108,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 		private Button btnOK;
 		private TabControl tabControl1;
 		private TabPage tabPage1;
-		private Controls.AdapterSettingsUserControl dictionaryAdapterSettingsUc;
+		private Controls.AdapterSettingsUserControl adapterSettingsUc;
 	}
 }

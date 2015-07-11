@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public partial class PropertyForm : _2ndAssetForm
+	public partial class PropertyForm : BaseForm
 	{
 		#region Constructors/Destructors
 

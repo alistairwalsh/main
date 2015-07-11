@@ -87,6 +87,13 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			}
 		}
 
+		public override void ResetObfuscationStrategySpecificConfiguration()
+		{
+			base.ResetObfuscationStrategySpecificConfiguration();
+			this.Frozen = false;
+			this.ObfuscationStrategySpecificConfiguration = null;
+		}
+
 		public override IEnumerable<Message> Validate(int? columnIndex)
 		{
 			List<Message> messages;

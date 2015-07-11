@@ -4,6 +4,9 @@
 */
 
 using System;
+using System.Collections.Generic;
+
+using _2ndAsset.ObfuscationEngine.Core.Config;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 {
@@ -12,6 +15,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 		#region Methods/Operators
 
 		void Host(string sourceFilePath);
+
+		void Host(ObfuscationConfiguration obfuscationConfiguration, Action<long, bool, double> statusCallback);
+
+		bool TryGetUpstreamMetadata(ObfuscationConfiguration obfuscationConfiguration, out IEnumerable<IMetaColumn> metaColumns);
 
 		#endregion
 	}

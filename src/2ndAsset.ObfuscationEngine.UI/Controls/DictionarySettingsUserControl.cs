@@ -17,7 +17,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class DictionarySettingsUserControl : _DictionarySettingsUserControl, IDictionarySettingsView
+	public partial class DictionarySettingsUserControl : _DictionarySettingsUserControl, IDictionarySettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -30,7 +30,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		public IEnumerable<IDictionarySpecView> DictionarySpecViews
+		public IEnumerable<IDictionarySpecListView> DictionarySpecListViews
 		{
 			get
 			{
@@ -42,14 +42,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		public IDictionarySpecView SelectedDictionarySpecView
+		public IDictionarySpecListView SelectedDictionarySpecListView
 		{
 			get
 			{
 				if (this.lvDictionarySpecs.SelectedItems.Count != 1)
 					return null;
 
-				return this.lvDictionarySpecs.SelectedItems[0] as IDictionarySpecView;
+				return this.lvDictionarySpecs.SelectedItems[0] as IDictionarySpecListView;
 			}
 			set
 			{
@@ -68,7 +68,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Methods/Operators
 
-		IDictionarySpecView IDictionarySettingsView.AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount, IAdapterSettingsView adapterSettingsView)
+		IDictionarySpecListView IDictionarySettingsPartialView.AddDictionarySpecView(string dictionaryId, bool preloadEnabled, long? recordCount, IAdapterSettingsPartialView adapterSettingsPartialView)
 		{
 			DictionaryListViewItem lviDictionarySpec;
 			AdapterSettingsForm adapterSettingsForm;
@@ -114,10 +114,10 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveDictionarySpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveDictionarySpecView(this.PartialView.SelectedDictionarySpecView);
+			this.PartialView.RemoveDictionarySpecView(this.PartialView.SelectedDictionarySpecListView);
 		}
 
-		void IDictionarySettingsView.ClearDictionarySpecViews()
+		void IDictionarySettingsPartialView.ClearDictionarySpecViews()
 		{
 			this.lvDictionarySpecs.Items.OfType<DictionaryListViewItem>().ToList().ForEach(lvi => lvi.DisposeEditor());
 			this.lvDictionarySpecs.Items.Clear();
@@ -172,11 +172,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.CoreRefreshControlState();
 		}
 
-		bool IDictionarySettingsView.RemoveDictionarySpecView(IDictionarySpecView headerSpecView)
+		bool IDictionarySettingsPartialView.RemoveDictionarySpecView(IDictionarySpecListView dictionarySpecListView)
 		{
 			DictionaryListViewItem lviDictionary;
 
-			lviDictionary = headerSpecView as DictionaryListViewItem;
+			lviDictionary = dictionarySpecListView as DictionaryListViewItem;
 
 			if ((object)lviDictionary == null)
 				return false;
@@ -216,7 +216,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Classes/Structs/Interfaces/Enums/Delegates
 
-		private sealed class DictionaryListViewItem : ListViewItem, IDictionarySpecView
+		private sealed class DictionaryListViewItem : ListViewItem, IDictionarySpecListView
 		{
 			#region Constructors/Destructors
 
@@ -239,7 +239,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 			#region Properties/Indexers/Events
 
-			string IDictionarySpecView.AdapterType
+			string IDictionarySpecListView.AdapterType
 			{
 				get
 				{
@@ -247,15 +247,15 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			IAdapterSettingsView IDictionarySpecView.DictionaryAdapterSettings
+			IAdapterSettingsPartialView IDictionarySpecListView.DictionaryAdapterSettingsPartialView
 			{
 				get
 				{
-					return ((IAdapterSettingsView2)this.adapterSettingsForm).DictionaryAdapterSettings;
+					return ((IAdapterSettingsFullView)this.adapterSettingsForm).AdapterSettingsPartialView;
 				}
 			}
 
-			string IDictionarySpecView.DictionaryId
+			string IDictionarySpecListView.DictionaryId
 			{
 				get
 				{
@@ -263,7 +263,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			bool IDictionarySpecView.PreloadEnabled
+			bool IDictionarySpecListView.PreloadEnabled
 			{
 				get
 				{
@@ -276,7 +276,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			long? IDictionarySpecView.RecordCount
+			long? IDictionarySpecListView.RecordCount
 			{
 				get
 				{
@@ -370,7 +370,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _DictionarySettingsUserControl : _2ndAssetUserControl<IDictionarySettingsView>
+	public class _DictionarySettingsUserControl : BaseUserControl<IDictionarySettingsPartialView>
 	{
 		#region Constructors/Destructors
 

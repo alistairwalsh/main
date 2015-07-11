@@ -14,7 +14,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 	{
 		#region Properties/Indexers/Events
 
-		IEnumerable<MetaColumn> UpstreamMetadata
+		IEnumerable<IMetaColumn> UpstreamMetadata
 		{
 			set;
 		}

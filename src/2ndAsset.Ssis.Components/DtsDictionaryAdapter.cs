@@ -9,7 +9,7 @@ using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 
 namespace _2ndAsset.Ssis.Components
 {
-	internal sealed class DtsDictionaryAdapter : AdoNetDictionaryAdapter
+	internal sealed class DtsDictionaryAdapter : AdoNetDictionaryAdapter<DtsAdoNetAdapterConfiguration>
 	{
 		#region Constructors/Destructors
 

@@ -61,6 +61,7 @@
     <Compile Include="Adapter\Destination\NullDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\AdoNetDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\DestinationAdapter~1.cs" />
+    <Compile Include="Adapter\Dictionary\AdoNetDictionaryAdapter~1.cs" />
     <Compile Include="Adapter\Dictionary\NullDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\DelimitedTextDictionaryAdapter.cs" />
     <Compile Include="Adapter\Dictionary\AdoNetDictionaryAdapter.cs" />

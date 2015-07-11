@@ -81,7 +81,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 			return this.DictionaryConfigurationToAdapterMappings[dictionaryConfiguration].GetAlternativeValueFromId(dictionaryConfiguration, metaColumn, surrogateId);
 		}
 
-		public void Host(ObfuscationConfiguration obfuscationConfiguration)
+		public void Host(ObfuscationConfiguration obfuscationConfiguration, Action<long, bool, double> statusCallback)
 		{
 			IEnumerable<IDictionary<string, object>> sourceDataEnumerable;
 			IEnumerable<Message> messages;
@@ -122,7 +122,10 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 
 							sourceDataEnumerable = sourceAdapter.PullData(obfuscationConfiguration.TableConfiguration);
 							sourceDataEnumerable = oxymoronEngine.GetObfuscatedValues(sourceDataEnumerable);
-							sourceDataEnumerable = WrapRecordCounter(sourceDataEnumerable, (x, y, z) => Console.WriteLine("{0} {1} {2}", x, y, z));
+
+							if ((object)statusCallback != null)
+								sourceDataEnumerable = WrapRecordCounter(sourceDataEnumerable, statusCallback);
+
 							destinationAdapter.PushData(obfuscationConfiguration.TableConfiguration, sourceDataEnumerable);
 						}
 					}
@@ -137,7 +140,23 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 			sourceFilePath = Path.GetFullPath(sourceFilePath);
 			obfuscationConfiguration = OxymoronEngine.FromJsonFile<ObfuscationConfiguration>(sourceFilePath);
 
-			this.Host(obfuscationConfiguration);
+			this.Host(obfuscationConfiguration, (x, y, z) => Console.WriteLine("{0} {1} {2}", x, y, z));
+		}
+
+		public bool TryGetUpstreamMetadata(ObfuscationConfiguration obfuscationConfiguration, out IEnumerable<IMetaColumn> metaColumns)
+		{
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
+
+			metaColumns = null;
+
+			using (ISourceAdapter sourceAdapter = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterInstance<ISourceAdapter>())
+			{
+				sourceAdapter.Initialize(obfuscationConfiguration.SourceAdapterConfiguration);
+				metaColumns = sourceAdapter.UpstreamMetadata;
+			}
+
+			return true;
 		}
 
 		#endregion

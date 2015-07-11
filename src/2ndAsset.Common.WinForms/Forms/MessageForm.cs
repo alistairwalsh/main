@@ -14,7 +14,7 @@ using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public partial class MessageForm : _2ndAssetForm
+	public partial class MessageForm : BaseForm
 	{
 		#region Constructors/Destructors
 

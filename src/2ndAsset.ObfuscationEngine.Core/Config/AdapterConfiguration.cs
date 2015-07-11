@@ -12,7 +12,6 @@ using Solder.Framework;
 using Solder.Framework.Utilities;
 
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
-using _2ndAsset.ObfuscationEngine.Core.Strategy;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Config
 {
@@ -103,6 +102,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			sourceAdapterType = Type.GetType(this.AdapterAqtn, false);
 
 			return sourceAdapterType;
+		}
+
+		public virtual void ResetAdapterSpecificConfiguration()
+		{
+			this.AdapterSpecificConfiguration.Clear();
 		}
 
 		public override sealed IEnumerable<Message> Validate()

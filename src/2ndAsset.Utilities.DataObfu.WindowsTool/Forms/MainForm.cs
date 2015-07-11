@@ -8,7 +8,6 @@ using System.Linq;
 using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.ObfuscationEngine.UI.Forms;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
@@ -43,7 +42,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 		#region Methods/Operators
 
-		protected override void CoreDocumentFormClosed(_2ndAssetForm form)
+		protected override void CoreDocumentFormClosed(BaseForm form)
 		{
 			ToolStripMenuItem tsmiWindow;
 
@@ -63,7 +62,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			tsmiWindow.Dispose();
 		}
 
-		protected override void CoreDocumentFormLoaded(_2ndAssetForm form)
+		protected override void CoreDocumentFormLoaded(BaseForm form)
 		{
 			ToolStripMenuItem tsmiWindow;
 
@@ -79,7 +78,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			this.tsmiDocumentWindows.DropDownItems.Add(tsmiWindow);
 		}
 
-		protected override void CoreDocumentFormTextChanged(_2ndAssetForm form)
+		protected override void CoreDocumentFormTextChanged(BaseForm form)
 		{
 			ToolStripMenuItem tsmiWindow;
 
@@ -124,7 +123,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 			// UI URIs
 			this.UriToControlTypes.Add(MainController.AboutBoxViewUri, typeof(AboutForm));
-			this.UriToControlTypes.Add(MainController.DocumentViewUri, typeof(ObfuscationForm));
+			this.UriToControlTypes.Add(MainController.DocumentViewUri, typeof(ExecutableObfuscationDocumentForm));
 		}
 
 		protected override void CoreShown()
@@ -171,19 +170,19 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 		private void tsmiWindow_Click(object sender, EventArgs e)
 		{
-			ObfuscationForm obfuscationForm;
+			ExecutableObfuscationDocumentForm executableObfuscationDocumentForm;
 			ToolStripMenuItem tsmiWindow;
 
 			tsmiWindow = (ToolStripMenuItem)sender;
-			obfuscationForm = (ObfuscationForm)tsmiWindow.Tag;
+			executableObfuscationDocumentForm = (ExecutableObfuscationDocumentForm)tsmiWindow.Tag;
 
-			obfuscationForm.BringToFront();
+			executableObfuscationDocumentForm.BringToFront();
 		}
 
 		#endregion
 	}
 
-	public class _MainForm : _2ndAssetMultiDocumentForm<IMainView, MainController>
+	public class _MainForm : BaseMultiDocumentForm<IMainView, MainController>
 	{
 		#region Constructors/Destructors
 

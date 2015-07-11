@@ -55,7 +55,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 				comboBox.SelectedIndexChanged += selectedIndexChanged;
 		}
 
-		public static _2ndAssetForm CoreGetParentForm(this Control control)
+		public static BaseForm CoreGetParentForm(this Control control)
 		{
 			// Iterative method...
 			Control current;
@@ -67,8 +67,8 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 			while ((object)current != null)
 			{
-				if (current is _2ndAssetForm)
-					return (_2ndAssetForm)current;
+				if (current is BaseForm)
+					return (BaseForm)current;
 
 				current = current.Parent;
 			}
@@ -242,7 +242,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		public static void CoreSetParentFormDirty(this Control control, bool isDirty)
 		{
-			_2ndAssetForm parent;
+			BaseForm parent;
 
 			if ((object)control == null)
 				throw new ArgumentNullException("control");

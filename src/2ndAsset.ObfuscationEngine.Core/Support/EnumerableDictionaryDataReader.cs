@@ -14,7 +14,7 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support
 	{
 		#region Constructors/Destructors
 
-		public EnumerableDictionaryDataReader(IEnumerable<MetaColumn> upstreamMetadata, IEnumerable<IDictionary<string, object>> targetEnumerable)
+		public EnumerableDictionaryDataReader(IEnumerable<IMetaColumn> upstreamMetadata, IEnumerable<IDictionary<string, object>> targetEnumerable)
 		{
 			if ((object)upstreamMetadata == null)
 				throw new ArgumentNullException("upstreamMetadata");

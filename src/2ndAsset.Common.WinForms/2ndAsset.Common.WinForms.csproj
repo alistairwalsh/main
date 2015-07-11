@@ -65,7 +65,7 @@
     <Compile Include="Controls\BaseTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\_2ndAssetUserControl.cs">
+    <Compile Include="Controls\BaseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <None Include="DesignTime\Shapes\SketchEllipse.cs" />
@@ -86,19 +86,19 @@
     <None Include="DesignTime\SketchFactory.cs" />
     <None Include="DesignTime\SketchShape.cs" />
     <None Include="DesignTime\SketchUtilities.cs" />
-    <Compile Include="Forms\x_2ndAssetForm.cs">
+    <Compile Include="Forms\XBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\_2ndAssetMultiDocumentForm~2.cs">
+    <Compile Include="Forms\BaseMultiDocumentForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\_2ndAssetDocumentForm~2.cs">
+    <Compile Include="Forms\BaseDocumentForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentation\IBaseController~1.cs" />
     <Compile Include="Presentation\BaseController~1.cs" />
     <Compile Include="Controls\ControlExtensionMethods.cs" />
-    <Compile Include="Controls\_2ndAssetUserControl~1.cs">
+    <Compile Include="Controls\BaseUserControl~1.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\BackgroundTaskForm.cs">
@@ -119,13 +119,13 @@
     <Compile Include="Forms\PropertyForm.designer.cs">
       <DependentUpon>PropertyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\_2ndAssetForm.cs">
+    <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\_2ndAssetForm.Designer.cs">
-      <DependentUpon>_2ndAssetForm.cs</DependentUpon>
+    <Compile Include="Forms\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\_2ndAssetForm~2.cs">
+    <Compile Include="Forms\BaseForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IListItem.cs" />
@@ -163,8 +163,8 @@
     <EmbeddedResource Include="Forms\PropertyForm.resx">
       <DependentUpon>PropertyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\_2ndAssetForm.resx">
-      <DependentUpon>_2ndAssetForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

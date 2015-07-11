@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public partial class BackgroundTaskForm : _2ndAssetForm
+	public partial class BackgroundTaskForm : BaseForm
 	{
 		#region Constructors/Destructors
 

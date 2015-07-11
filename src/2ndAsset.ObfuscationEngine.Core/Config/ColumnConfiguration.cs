@@ -128,6 +128,11 @@ namespace _2ndAsset.ObfuscationEngine.Core.Config
 			return type;
 		}
 
+		public virtual void ResetObfuscationStrategySpecificConfiguration()
+		{
+			this.ObfuscationStrategySpecificConfiguration.Clear();
+		}
+
 		public override sealed IEnumerable<Message> Validate()
 		{
 			return this.Validate(null);

@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 using Microsoft.Data.ConnectionUI;
@@ -72,6 +73,43 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 		#endregion
 
 		#region Methods/Operators
+
+		public static bool TryGetDatabaseConnection(ref Type connectionType, ref string connectionString)
+		{
+			DialogResult dialogResult;
+			Type _connectionType = connectionType;
+
+			using (DataConnectionDialog dataConnectionDialog = new DataConnectionDialog())
+			{
+				DataConnectionConfiguration dataConnectionConfiguration;
+
+				dataConnectionConfiguration = new DataConnectionConfiguration(null);
+				dataConnectionConfiguration.LoadConfiguration(dataConnectionDialog);
+				//dataConnectionDialog.ConnectionString = connectionString ?? string.Empty;
+
+				/*var useThisOne = dataConnectionDialog.DataSources.Where(ds => (object)ds.DefaultProvider != null && ds.DefaultProvider.TargetConnectionType == _connectionType).Select(ds => new { DataSource = ds, DataProvider = ds.DefaultProvider }).SingleOrDefault();
+
+				if ((object)useThisOne != null)
+				{
+					dataConnectionDialog.SelectedDataProvider = useThisOne.DataProvider;
+					dataConnectionDialog.SelectedDataSource = useThisOne.DataSource;
+					dataConnectionDialog.ConnectionString = connectionString ?? string.Empty;
+				}*/
+
+				dialogResult = DataConnectionDialog.Show(dataConnectionDialog);
+
+				if (dialogResult == DialogResult.OK)
+				{
+					connectionString = dataConnectionDialog.ConnectionString;
+
+					if ((object)dataConnectionDialog.SelectedDataSource != null &&
+						(object)dataConnectionDialog.SelectedDataSource.DefaultProvider != null)
+						connectionType = dataConnectionDialog.SelectedDataSource.DefaultProvider.TargetConnectionType;
+				}
+			}
+
+			return dialogResult == DialogResult.OK;
+		}
 
 		public string GetSelectedProvider()
 		{

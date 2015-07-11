@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Linq;
 
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 
@@ -121,16 +122,14 @@ namespace _2ndAsset.Ssis.Components
 			{
 				if ((object)obfuscationConfiguration.SourceAdapterConfiguration != null)
 				{
+					obfuscationConfiguration.SourceAdapterConfiguration.ResetAdapterSpecificConfiguration();
 					obfuscationConfiguration.SourceAdapterConfiguration.AdapterAqtn = typeof(DtsSourceAdapter).AssemblyQualifiedName;
-					obfuscationConfiguration.SourceAdapterConfiguration.AdoNetAdapterConfiguration = null;
-					obfuscationConfiguration.SourceAdapterConfiguration.DelimitedTextAdapterConfiguration = null;
 				}
 
 				if ((object)obfuscationConfiguration.DestinationAdapterConfiguration != null)
 				{
+					obfuscationConfiguration.DestinationAdapterConfiguration.ResetAdapterSpecificConfiguration();
 					obfuscationConfiguration.DestinationAdapterConfiguration.AdapterAqtn = typeof(DtsDestinationAdapter).AssemblyQualifiedName;
-					obfuscationConfiguration.DestinationAdapterConfiguration.AdoNetAdapterConfiguration = null;
-					obfuscationConfiguration.DestinationAdapterConfiguration.DelimitedTextAdapterConfiguration = null;
 				}
 
 				if ((object)obfuscationConfiguration.DictionaryConfigurations != null)
@@ -139,9 +138,15 @@ namespace _2ndAsset.Ssis.Components
 					{
 						if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration != null)
 						{
+							var items = dictionaryConfiguration.DictionaryAdapterConfiguration.AdapterSpecificConfiguration.Select(kvp => new { KEY = kvp.Key, VAL = kvp.Value }).ToArray();
+
+							dictionaryConfiguration.DictionaryAdapterConfiguration.ResetAdapterSpecificConfiguration();
 							dictionaryConfiguration.DictionaryAdapterConfiguration.AdapterAqtn = typeof(DtsDictionaryAdapter).AssemblyQualifiedName;
-							dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration = new DtsAdoNetAdapterConfiguration(this.DictionaryUnitOfWorkCallback, dictionaryConfiguration.DictionaryAdapterConfiguration.AdoNetAdapterConfiguration);
-							dictionaryConfiguration.DictionaryAdapterConfiguration.DelimitedTextAdapterConfiguration = null;
+
+							foreach (var item in items)
+								dictionaryConfiguration.DictionaryAdapterConfiguration.AdapterSpecificConfiguration.Add(item.KEY, item.VAL);
+
+							dictionaryConfiguration.DictionaryAdapterConfiguration.AdapterSpecificConfiguration.Add("DictionaryUnitOfWorkCallback", this.DictionaryUnitOfWorkCallback);
 						}
 					}
 				}

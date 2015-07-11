@@ -60,8 +60,6 @@
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="NopTransformUI.cs" />
-    <Compile Include="ReadonlyTypeConverter.cs" />
-    <Compile Include="DictConfFormEditor.cs" />
     <Compile Include="ObfuscationStrategyTransformUI.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
   </ItemGroup>
@@ -83,11 +81,6 @@
       <Project>{99b3846c-e233-44fa-8147-4f3bd0cfbffa}</Project>
       <Name>2ndAsset.Ssis.Components</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\2ndAssetSuite.ico">
-      <LogicalName>TextMetal.HostImpl.WindowsTool.Icons.TextMetal.ico</LogicalName>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

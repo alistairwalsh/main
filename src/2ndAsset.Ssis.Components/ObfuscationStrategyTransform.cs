@@ -622,7 +622,7 @@ namespace _2ndAsset.Ssis.Components
 
 				dictionaryAdapter = new DtsDictionaryAdapter();
 				this.DictionaryAdapters.Add(dictionaryAdapter);
-				dictionaryAdapter.Initialize(obfuscationConfiguration);
+				dictionaryAdapter.Initialize(dictionaryConfiguration.DictionaryAdapterConfiguration);
 
 				dictionaryAdapter.InitializePreloadCache(dictionaryConfiguration, this.OxymoronEngine.SubstitutionCacheRoot);
 

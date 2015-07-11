@@ -62,9 +62,16 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\ExecutableObfuscationDocumentController.cs" />
     <Compile Include="Controllers\SplashController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controls\ExecutionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExecutionUserControl.Designer.cs">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +84,12 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ExecutableObfuscationDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecutableObfuscationDocumentForm.Designer.cs">
+      <DependentUpon>ExecutableObfuscationDocumentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SplashForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,9 +98,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Views\IExecutableObfuscationDocumentView.cs" />
     <Compile Include="Views\ISplashView.cs" />
     <Compile Include="Views\IAboutView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <EmbeddedResource Include="Controls\ExecutionUserControl.resx">
+      <DependentUpon>ExecutionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -95,6 +112,9 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExecutableObfuscationDocumentForm.resx">
+      <DependentUpon>ExecutableObfuscationDocumentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>

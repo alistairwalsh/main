@@ -18,7 +18,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class DelTxtAdapterSettingsUserControl : _DelTxtAdapterSettingsUserControl, IDelTextAdapterSettingsView
+	public partial class DelTxtAdapterSettingsUserControl : _DelTxtAdapterSettingsUserControl, IDelTextAdapterSettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -31,7 +31,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		IEnumerable<IHeaderSpecView> IDelTextAdapterSettingsView.HeaderSpecViews
+		IEnumerable<IHeaderSpecListView> IDelTextAdapterSettingsPartialView.HeaderSpecViews
 		{
 			get
 			{
@@ -43,7 +43,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsView.FieldDelimiter
+		string IDelTextAdapterSettingsPartialView.FieldDelimiter
 		{
 			get
 			{
@@ -55,7 +55,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool ISpecificAdapterSettingsView.IsActiveSettings
+		bool ISpecificAdapterSettingsPartialView.IsActiveSettings
 		{
 			get
 			{
@@ -67,7 +67,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool IDelTextAdapterSettingsView.IsFirstRowHeaders
+		bool IDelTextAdapterSettingsPartialView.IsFirstRowHeaders
 		{
 			get
 			{
@@ -79,7 +79,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsView.QuoteValue
+		string IDelTextAdapterSettingsPartialView.QuoteValue
 		{
 			get
 			{
@@ -91,7 +91,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsView.RecordDelimiter
+		string IDelTextAdapterSettingsPartialView.RecordDelimiter
 		{
 			get
 			{
@@ -103,14 +103,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		IHeaderSpecView IDelTextAdapterSettingsView.SelectedHeaderSpecView
+		IHeaderSpecListView IDelTextAdapterSettingsPartialView.SelectedHeaderSpecListView
 		{
 			get
 			{
 				if (this.lvFieldSpecs.SelectedItems.Count != 1)
 					return null;
 
-				return this.lvFieldSpecs.SelectedItems[0] as IHeaderSpecView;
+				return this.lvFieldSpecs.SelectedItems[0] as IHeaderSpecListView;
 			}
 			set
 			{
@@ -125,7 +125,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsView.TextFilePath
+		string IDelTextAdapterSettingsPartialView.TextFilePath
 		{
 			get
 			{
@@ -141,7 +141,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Methods/Operators
 
-		IHeaderSpecView IDelTextAdapterSettingsView.AddHeaderSpecView(string headerName, FieldType? fieldType)
+		IHeaderSpecListView IDelTextAdapterSettingsPartialView.AddHeaderSpecView(string headerName, FieldType? fieldType)
 		{
 			HeaderSpecListViewItem lviHeaderSpec;
 
@@ -196,10 +196,10 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveHeaderSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveHeaderSpecView(this.PartialView.SelectedHeaderSpecView);
+			this.PartialView.RemoveHeaderSpecView(this.PartialView.SelectedHeaderSpecListView);
 		}
 
-		void IDelTextAdapterSettingsView.ClearHeaderSpecViews()
+		void IDelTextAdapterSettingsPartialView.ClearHeaderSpecViews()
 		{
 			this.lvFieldSpecs.Items.Clear();
 			this.CoreRefreshControlState();
@@ -251,11 +251,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.CoreRefreshControlState();
 		}
 
-		bool IDelTextAdapterSettingsView.RemoveHeaderSpecView(IHeaderSpecView headerSpecView)
+		bool IDelTextAdapterSettingsPartialView.RemoveHeaderSpecView(IHeaderSpecListView headerSpecListView)
 		{
 			HeaderSpecListViewItem lviHeaderSpec;
 
-			lviHeaderSpec = headerSpecView as HeaderSpecListViewItem;
+			lviHeaderSpec = headerSpecListView as HeaderSpecListViewItem;
 
 			if ((object)lviHeaderSpec == null)
 				return false;
@@ -273,7 +273,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Classes/Structs/Interfaces/Enums/Delegates
 
-		private sealed class HeaderSpecListViewItem : ListViewItem, IHeaderSpecView
+		private sealed class HeaderSpecListViewItem : ListViewItem, IHeaderSpecListView
 		{
 			#region Constructors/Destructors
 
@@ -286,7 +286,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 			#region Properties/Indexers/Events
 
-			FieldType? IHeaderSpecView.FieldType
+			FieldType? IHeaderSpecListView.FieldType
 			{
 				get
 				{
@@ -299,7 +299,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
-			string IHeaderSpecView.HeaderName
+			string IHeaderSpecListView.HeaderName
 			{
 				get
 				{
@@ -313,7 +313,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _DelTxtAdapterSettingsUserControl : _2ndAssetUserControl<IDelTextAdapterSettingsView>
+	public class _DelTxtAdapterSettingsUserControl : BaseUserControl<IDelTextAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

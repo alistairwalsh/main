@@ -20,7 +20,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 {
-	public sealed class AdapterSettingsController : BaseController<IAdapterSettingsView2>
+	public sealed class AdapterSettingsController : BaseController<IAdapterSettingsFullView>
 	{
 		#region Constructors/Destructors
 
@@ -32,7 +32,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 		#region Methods/Operators
 
-		public override void InitializeView(IAdapterSettingsView2 view)
+		public override void InitializeView(IAdapterSettingsFullView view)
 		{
 			IList<IListItem<Type>> typeListItems;
 			IList<IListItem<CommandType?>> commandTypeListItems;
@@ -49,26 +49,26 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			typeListItems.Add(new ListItem<Type>(typeof(DelimitedTextSourceAdapter), "Delimited Text File (dictionary)"));
 			typeListItems.Add(new ListItem<Type>(typeof(AdoNetSourceAdapter), "ADO.NET DB Provider (dictionary)"));
 
-			this.View.DictionaryAdapterSettings.AdapterTypes = typeListItems;
-			this.View.DictionaryAdapterSettings.SelectedAdapterType = null;
-			this.View.DictionaryAdapterSettings.DelTextAdapterSettingsView.IsActiveSettings = false;
-			this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = false;
+			this.View.AdapterSettingsPartialView.AdapterTypes = typeListItems;
+			this.View.AdapterSettingsPartialView.SelectedAdapterType = null;
+			this.View.AdapterSettingsPartialView.DelTextAdapterSettingsPartialView.IsActiveSettings = false;
+			this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.IsActiveSettings = false;
 
 			typeListItems = new List<IListItem<Type>>();
 			typeListItems.Add(new ListItem<Type>(typeof(OleDbConnection), "OleDbConnection (dictionary)"));
 			typeListItems.Add(new ListItem<Type>(typeof(OdbcConnection), "OdbcConnection (dictionary)"));
 			typeListItems.Add(new ListItem<Type>(typeof(SqlConnection), "SqlConnection (dictionary)"));
 
-			this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ConnectionTypes = typeListItems;
-			this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ConnectionType = null;
+			this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.ConnectionTypes = typeListItems;
+			this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.ConnectionType = null;
 
 			commandTypeListItems = new List<IListItem<CommandType?>>();
 			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.Text, "Text (dictionary)"));
 			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.StoredProcedure, "Stored Procedure (dictionary)"));
 			commandTypeListItems.Add(new ListItem<CommandType?>(CommandType.TableDirect, "Table Direct (dictionary)"));
 
-			this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.CommandTypes = commandTypeListItems;
-			this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.ExecuteCommandType = null;
+			this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.CommandTypes = commandTypeListItems;
+			this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.ExecuteCommandType = null;
 
 			this.View.StatusText = "Ready";
 		}
@@ -84,25 +84,25 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			if ((object)partialView == null)
 				throw new ArgumentNullException("partialView");
 
-			if ((object)partialView == this.View.DictionaryAdapterSettings)
+			if ((object)partialView == this.View.AdapterSettingsPartialView)
 			{
-				this.View.DictionaryAdapterSettings.DelTextAdapterSettingsView.IsActiveSettings = false;
-				this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = false;
-				this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsConnectionTypeReadOnly = false;
-				this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsCommandTypeReadOnly = false;
+				this.View.AdapterSettingsPartialView.DelTextAdapterSettingsPartialView.IsActiveSettings = false;
+				this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.IsActiveSettings = false;
+				this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.IsConnectionTypeReadOnly = false;
+				this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.IsCommandTypeReadOnly = false;
 
-				if ((object)this.View.DictionaryAdapterSettings.SelectedAdapterType == null)
+				if ((object)this.View.AdapterSettingsPartialView.SelectedAdapterType == null)
 				{
 					// do nothing
 				}
-				else if (this.View.DictionaryAdapterSettings.SelectedAdapterType == typeof(NullDictionaryAdapter))
+				else if (this.View.AdapterSettingsPartialView.SelectedAdapterType == typeof(NullDictionaryAdapter))
 				{
 					// do nothing
 				}
-				else if (this.View.DictionaryAdapterSettings.SelectedAdapterType == typeof(DelimitedTextSourceAdapter))
-					this.View.DictionaryAdapterSettings.DelTextAdapterSettingsView.IsActiveSettings = true;
-				else if (this.View.DictionaryAdapterSettings.SelectedAdapterType == typeof(AdoNetSourceAdapter))
-					this.View.DictionaryAdapterSettings.AdoNetAdapterSettingsView.IsActiveSettings = true;
+				else if (this.View.AdapterSettingsPartialView.SelectedAdapterType == typeof(DelimitedTextSourceAdapter))
+					this.View.AdapterSettingsPartialView.DelTextAdapterSettingsPartialView.IsActiveSettings = true;
+				else if (this.View.AdapterSettingsPartialView.SelectedAdapterType == typeof(AdoNetSourceAdapter))
+					this.View.AdapterSettingsPartialView.AdoNetAdapterSettingsPartialView.IsActiveSettings = true;
 				else
 					throw new InvalidOperationException(string.Format("Unrecognized dictionary adapter UI-view AQTN '{0}'.", partialView.GetType().FullName));
 			}

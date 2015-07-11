@@ -33,10 +33,10 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashForm));
-			this.pbAppLogo = new PictureBox();
-			this.btnOK = new Button();
-			this.pnlMain = new Panel();
-			this.pbMain = new ProgressBar();
+			this.pbAppLogo = new System.Windows.Forms.PictureBox();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.pnlMain = new System.Windows.Forms.Panel();
+			this.pbMain = new System.Windows.Forms.ProgressBar();
 			this.tmrMain = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.pbAppLogo)).BeginInit();
 			this.pnlMain.SuspendLayout();
@@ -51,7 +51,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			this.pbAppLogo.Location = new System.Drawing.Point(12, 12);
 			this.pbAppLogo.Name = "pbAppLogo";
 			this.pbAppLogo.Size = new System.Drawing.Size(376, 363);
-			this.pbAppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pbAppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbAppLogo.TabIndex = 12;
 			this.pbAppLogo.TabStop = false;
 			this.pbAppLogo.Click += new System.EventHandler(this.closeFormBy_Click);

@@ -11,7 +11,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Forms
 {
-	public partial class AdapterSettingsForm : _AdapterSettingsForm, IAdapterSettingsView2
+	public partial class AdapterSettingsForm : _AdapterSettingsForm, IAdapterSettingsFullView
 	{
 		#region Constructors/Destructors
 
@@ -24,11 +24,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 
 		#region Properties/Indexers/Events
 
-		IAdapterSettingsView IAdapterSettingsView2.DictionaryAdapterSettings
+		IAdapterSettingsPartialView IAdapterSettingsFullView.AdapterSettingsPartialView
 		{
 			get
 			{
-				return this.dictionaryAdapterSettingsUc;
+				return this.adapterSettingsUc;
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 		#endregion
 	}
 
-	public class _AdapterSettingsForm : _2ndAssetForm<IAdapterSettingsView2, AdapterSettingsController>
+	public class _AdapterSettingsForm : BaseForm<IAdapterSettingsFullView, AdapterSettingsController>
 	{
 		#region Constructors/Destructors
 

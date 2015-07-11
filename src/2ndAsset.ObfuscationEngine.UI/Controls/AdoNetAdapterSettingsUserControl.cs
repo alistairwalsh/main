@@ -13,7 +13,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class AdoNetAdapterSettingsUserControl : _AdoNetAdapterSettingsUserControl, IAdoNetAdapterSettingsView
+	public partial class AdoNetAdapterSettingsUserControl : _AdoNetAdapterSettingsUserControl, IAdoNetAdapterSettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -26,7 +26,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		IEnumerable<IListItem<CommandType?>> IAdoNetAdapterSettingsView.CommandTypes
+		IEnumerable<IListItem<CommandType?>> IAdoNetAdapterSettingsPartialView.CommandTypes
 		{
 			set
 			{
@@ -36,7 +36,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IAdoNetAdapterSettingsView.ConnectionString
+		string IAdoNetAdapterSettingsPartialView.ConnectionString
 		{
 			get
 			{
@@ -48,7 +48,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		Type IAdoNetAdapterSettingsView.ConnectionType
+		Type IAdoNetAdapterSettingsPartialView.ConnectionType
 		{
 			get
 			{
@@ -60,7 +60,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		IEnumerable<IListItem<Type>> IAdoNetAdapterSettingsView.ConnectionTypes
+		IEnumerable<IListItem<Type>> IAdoNetAdapterSettingsPartialView.ConnectionTypes
 		{
 			set
 			{
@@ -68,7 +68,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IAdoNetAdapterSettingsView.ExecuteCommandText
+		string IAdoNetAdapterSettingsPartialView.ExecuteCommandText
 		{
 			get
 			{
@@ -80,7 +80,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		CommandType? IAdoNetAdapterSettingsView.ExecuteCommandType
+		CommandType? IAdoNetAdapterSettingsPartialView.ExecuteCommandType
 		{
 			get
 			{
@@ -92,7 +92,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool ISpecificAdapterSettingsView.IsActiveSettings
+		bool ISpecificAdapterSettingsPartialView.IsActiveSettings
 		{
 			get
 			{
@@ -104,7 +104,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool IAdoNetAdapterSettingsView.IsCommandTypeReadOnly
+		bool IAdoNetAdapterSettingsPartialView.IsCommandTypeReadOnly
 		{
 			get
 			{
@@ -116,7 +116,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool IAdoNetAdapterSettingsView.IsConnectionTypeReadOnly
+		bool IAdoNetAdapterSettingsPartialView.IsConnectionTypeReadOnly
 		{
 			get
 			{
@@ -128,7 +128,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IAdoNetAdapterSettingsView.PostExecuteCommandText
+		string IAdoNetAdapterSettingsPartialView.PostExecuteCommandText
 		{
 			get
 			{
@@ -140,7 +140,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		CommandType? IAdoNetAdapterSettingsView.PostExecuteCommandType
+		CommandType? IAdoNetAdapterSettingsPartialView.PostExecuteCommandType
 		{
 			get
 			{
@@ -152,7 +152,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IAdoNetAdapterSettingsView.PreExecuteCommandText
+		string IAdoNetAdapterSettingsPartialView.PreExecuteCommandText
 		{
 			get
 			{
@@ -164,7 +164,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		CommandType? IAdoNetAdapterSettingsView.PreExecuteCommandType
+		CommandType? IAdoNetAdapterSettingsPartialView.PreExecuteCommandType
 		{
 			get
 			{
@@ -193,7 +193,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AdoNetAdapterSettingsUserControl : _2ndAssetUserControl<IAdoNetAdapterSettingsView>
+	public class _AdoNetAdapterSettingsUserControl : BaseUserControl<IAdoNetAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

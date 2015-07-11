@@ -15,7 +15,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class AdapterSettingsUserControl : _AdapterSettingsUserControl, IAdapterSettingsView
+	public partial class AdapterSettingsUserControl : _AdapterSettingsUserControl, IAdapterSettingsPartialView
 	{
 		#region Constructors/Destructors
 
@@ -28,7 +28,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		IAdoNetAdapterSettingsView IAdapterSettingsView.AdoNetAdapterSettingsView
+		IAdoNetAdapterSettingsPartialView IAdapterSettingsPartialView.AdoNetAdapterSettingsPartialView
 		{
 			get
 			{
@@ -36,7 +36,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		IDelTextAdapterSettingsView IAdapterSettingsView.DelTextAdapterSettingsView
+		IDelTextAdapterSettingsPartialView IAdapterSettingsPartialView.DelTextAdapterSettingsPartialView
 		{
 			get
 			{
@@ -44,7 +44,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		IEnumerable<IListItem<Type>> IAdapterSettingsView.AdapterTypes
+		IEnumerable<IListItem<Type>> IAdapterSettingsPartialView.AdapterTypes
 		{
 			set
 			{
@@ -52,7 +52,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		Type IAdapterSettingsView.SelectedAdapterType
+		Type IAdapterSettingsPartialView.SelectedAdapterType
 		{
 			get
 			{
@@ -100,7 +100,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AdapterSettingsUserControl : _2ndAssetUserControl<IAdapterSettingsView>
+	public class _AdapterSettingsUserControl : BaseUserControl<IAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

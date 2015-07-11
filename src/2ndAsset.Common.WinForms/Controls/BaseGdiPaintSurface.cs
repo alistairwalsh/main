@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {
-	public class BaseGdiPaintSurface : _2ndAssetUserControl
+	public class BaseGdiPaintSurface : BaseUserControl
 	{
 		#region Constructors/Destructors
 
