@@ -55,7 +55,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool ISpecificAdapterSettingsPartialView.IsActiveSettings
+		bool IAdapterSpecificSettingsPartialView.IsActiveSettings
 		{
 			get
 			{
@@ -313,7 +313,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _DelTxtAdapterSettingsUserControl : BaseUserControl<IDelTextAdapterSettingsPartialView>
+	public class _DelTxtAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IDelTextAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

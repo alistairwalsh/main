@@ -4,9 +4,6 @@
 */
 
 using System;
-using System.Windows.Forms;
-
-using Microsoft.Data.ConnectionUI;
 
 using _2ndAsset.Common.WinForms.Forms;
 using _2ndAsset.ObfuscationEngine.UI.Forms;
@@ -16,7 +13,7 @@ using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 {
-	public partial class ExecutableObfuscationDocumentForm : _ExecutableObfuscationDocumentForm, IObfuscationDocumentView
+	public partial class ExecutableObfuscationDocumentForm : _ExecutableObfuscationDocumentForm, IExecutableObfuscationDocumentView, IExecutionPartialView
 	{
 		#region Constructors/Destructors
 
@@ -37,6 +34,14 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 		#region Properties/Indexers/Events
 
+		public IExecutionPartialView ExecutionPartialView
+		{
+			get
+			{
+				return this;
+			}
+		}
+
 		IObfuscationPartialView IObfuscationDocumentView.ObfuscationPartialView
 		{
 			get
@@ -54,6 +59,34 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			set
 			{
 				this.tsslMain.Text = value;
+			}
+		}
+
+		double? IExecutionPartialView.DurationSeconds
+		{
+			set
+			{
+				// do nothing
+			}
+		}
+
+		bool? IExecutionPartialView.IsComplete
+		{
+			set
+			{
+				if (value.GetValueOrDefault())
+					this.FullView.StatusText = "Execution completed.";
+			}
+		}
+
+		long? IExecutionPartialView.RecordCount
+		{
+			set
+			{
+				if ((object)value == null)
+					this.FullView.StatusText = "Execution starting...";
+				else
+					this.FullView.StatusText = string.Format("Executing: {0}...", value);
 			}
 		}
 
@@ -81,39 +114,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 		bool IObfuscationDocumentView.TryGetDatabaseConnection(ref Type connectionType, ref string connectionString)
 		{
-			DialogResult dialogResult;
-			Type _connectionType = connectionType;
-
-			using (DataConnectionDialog dataConnectionDialog = new DataConnectionDialog())
-			{
-				DataConnectionConfiguration dataConnectionConfiguration;
-
-				dataConnectionConfiguration = new DataConnectionConfiguration(null);
-				dataConnectionConfiguration.LoadConfiguration(dataConnectionDialog);
-				//dataConnectionDialog.ConnectionString = connectionString ?? string.Empty;
-
-				/*var useThisOne = dataConnectionDialog.DataSources.Where(ds => (object)ds.DefaultProvider != null && ds.DefaultProvider.TargetConnectionType == _connectionType).Select(ds => new { DataSource = ds, DataProvider = ds.DefaultProvider }).SingleOrDefault();
-
-				if ((object)useThisOne != null)
-				{
-					dataConnectionDialog.SelectedDataProvider = useThisOne.DataProvider;
-					dataConnectionDialog.SelectedDataSource = useThisOne.DataSource;
-					dataConnectionDialog.ConnectionString = connectionString ?? string.Empty;
-				}*/
-
-				dialogResult = DataConnectionDialog.Show(dataConnectionDialog);
-
-				if (dialogResult == DialogResult.OK)
-				{
-					connectionString = dataConnectionDialog.ConnectionString;
-
-					if ((object)dataConnectionDialog.SelectedDataSource != null &&
-						(object)dataConnectionDialog.SelectedDataSource.DefaultProvider != null)
-						connectionType = dataConnectionDialog.SelectedDataSource.DefaultProvider.TargetConnectionType;
-				}
-			}
-
-			return dialogResult == DialogResult.OK;
+			return DataConnectionConfiguration.TryGetDatabaseConnection(ref connectionType, ref connectionString);
 		}
 
 		private void tsmiClose_Click(object sender, EventArgs e)
@@ -124,7 +125,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		private void tsmiExecute_Click(object sender, EventArgs e)
 		{
 			//this.tabMain.SelectedTab = this.tpExecution;
-			//this.Controller.ExecuteObfuscation(this.executionUc, null);
+			this.Controller.ExecuteObfuscation(this, null);
 		}
 
 		private void tsmiSave_Click(object sender, EventArgs e)

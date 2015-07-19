@@ -23,7 +23,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Fields/Constants
 
-		private int configurationVersion;
+		private string configurationVersion;
 
 		#endregion
 
@@ -69,7 +69,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		int IObfuscationPartialView.ConfigurationVersion
+		string IObfuscationPartialView.ConfigurationVersion
 		{
 			get
 			{

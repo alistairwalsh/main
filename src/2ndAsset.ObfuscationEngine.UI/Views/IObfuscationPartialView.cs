@@ -38,7 +38,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Views
 			get;
 		}
 
-		int ConfigurationVersion
+		string ConfigurationVersion
 		{
 			get;
 			set;

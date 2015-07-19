@@ -11,7 +11,7 @@ using _2ndAsset.Common.WinForms;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
-	public interface IAdoNetAdapterSettingsPartialView : ISpecificAdapterSettingsPartialView
+	public interface IAdoNetAdapterSettingsPartialView : IAdapterSpecificSettingsPartialView
 	{
 		#region Properties/Indexers/Events
 

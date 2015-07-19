@@ -208,7 +208,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 					dictionarySpecListView = this.View.ObfuscationPartialView.DictionarySettingsPartialView.AddDictionarySpecView(dictionaryConfiguration.DictionaryId, dictionaryConfiguration.PreloadEnabled, dictionaryConfiguration.RecordCount, null);
 
-					_InitializeDictionaryAdapterView(dictionarySpecListView);
+					this.InitializeDictionaryAdapterView(dictionarySpecListView);
 
 					if ((object)dictionaryConfiguration.DictionaryAdapterConfiguration != null)
 					{

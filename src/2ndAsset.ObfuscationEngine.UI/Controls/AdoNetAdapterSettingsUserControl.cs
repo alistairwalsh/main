@@ -92,7 +92,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool ISpecificAdapterSettingsPartialView.IsActiveSettings
+		bool IAdapterSpecificSettingsPartialView.IsActiveSettings
 		{
 			get
 			{
@@ -193,7 +193,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AdoNetAdapterSettingsUserControl : BaseUserControl<IAdoNetAdapterSettingsPartialView>
+	public class _AdoNetAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IAdoNetAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 

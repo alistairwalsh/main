@@ -9,7 +9,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
-	public interface IDelTextAdapterSettingsPartialView : ISpecificAdapterSettingsPartialView
+	public interface IDelTextAdapterSettingsPartialView : IAdapterSpecificSettingsPartialView
 	{
 		#region Properties/Indexers/Events
 

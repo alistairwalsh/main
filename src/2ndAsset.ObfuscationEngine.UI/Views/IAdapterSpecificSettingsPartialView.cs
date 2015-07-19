@@ -7,7 +7,7 @@ using _2ndAsset.Common.WinForms.Presentation;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
-	public interface ISpecificAdapterSettingsPartialView : IPartialView
+	public interface IAdapterSpecificSettingsPartialView : IPartialView
 	{
 		#region Properties/Indexers/Events
 

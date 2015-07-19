@@ -70,6 +70,9 @@
     <Compile Include="Controls\AdapterSettingsUserControl.Designer.cs">
       <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdapterSpecificConfigurationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\AdoNetAdapterSettingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,7 +131,7 @@
     <Compile Include="Views\IMetadataSettingsPartialView.cs" />
     <Compile Include="Views\IObfuscationPartialView.cs" />
     <Compile Include="Views\IObfuscationDocumentView.cs" />
-    <Compile Include="Views\ISpecificAdapterSettingsPartialView.cs" />
+    <Compile Include="Views\IAdapterSpecificSettingsPartialView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\2ndAssetSuite.snk">
