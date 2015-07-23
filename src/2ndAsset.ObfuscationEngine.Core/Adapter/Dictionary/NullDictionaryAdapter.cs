@@ -11,6 +11,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
+	[AdapterSpecificConfiguration(SpecificConfigurationAqtn = "", UserControlAqtn = "")]
 	public class NullDictionaryAdapter : DictionaryAdapter<AdapterSpecificConfiguration>, INullAdapter
 	{
 		#region Constructors/Destructors

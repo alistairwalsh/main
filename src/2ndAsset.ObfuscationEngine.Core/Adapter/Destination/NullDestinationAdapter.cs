@@ -11,6 +11,7 @@ using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Destination
 {
+	[AdapterSpecificConfiguration(SpecificConfigurationAqtn = "", UserControlAqtn = "")]
 	public class NullDestinationAdapter : DestinationAdapter<AdapterSpecificConfiguration>, INullAdapter
 	{
 		#region Constructors/Destructors

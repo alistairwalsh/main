@@ -6,7 +6,7 @@
 using System;
 using System.Drawing;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Views
 {

@@ -5,7 +5,7 @@
 
 using System;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {

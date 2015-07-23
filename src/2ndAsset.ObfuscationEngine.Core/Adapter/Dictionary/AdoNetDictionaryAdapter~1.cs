@@ -17,6 +17,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary
 {
+	[AdapterSpecificConfiguration(SpecificConfigurationAqtn = "", UserControlAqtn = "")]
 	public class AdoNetDictionaryAdapter<TAdoNetAdapterConfiguration> : DictionaryAdapter<TAdoNetAdapterConfiguration>, IAdoNetAdapter
 		where TAdoNetAdapterConfiguration : AdoNetAdapterConfiguration, new()
 	{

@@ -12,6 +12,9 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
@@ -109,7 +112,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRefreshMetaColumnSpecs_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/metadata-settings/refresh-meta-column-specs"), null);
+			this.Controller.RefreshUpstream();
 			this.CoreRefreshControlState();
 		}
 
@@ -216,6 +219,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
+			IBaseController IBaseView.Controller
+			{
+				get
+				{
+					return null;
+				}
+			}
+
 			bool? IMetaColumnSpecListView.IsColumnNullable
 			{
 				get
@@ -238,6 +249,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 					if (DataTypeFascade.Instance.TryParse<string>(this.SubItems[2].Text, out value))
 						return value;
 
+					return null;
+				}
+			}
+
+			IBaseView IBaseView.ParentView
+			{
+				get
+				{
 					return null;
 				}
 			}
@@ -333,7 +352,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _MetadataSettingsUserControl : BaseUserControl<IMetadataSettingsPartialView>
+	public class _MetadataSettingsUserControl : BaseUserControl<IMetadataSettingsPartialView, MetadataSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

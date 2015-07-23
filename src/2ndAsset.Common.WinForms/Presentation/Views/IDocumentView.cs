@@ -5,7 +5,7 @@
 
 using System;
 
-namespace _2ndAsset.Common.WinForms.Presentation
+namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
 	public interface IDocumentView : IFullView
 	{

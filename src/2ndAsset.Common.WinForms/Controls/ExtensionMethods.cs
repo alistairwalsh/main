@@ -14,7 +14,7 @@ using _2ndAsset.Common.WinForms.Forms;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {
-	public static class ControlExtensionMethods
+	public static class ExtensionMethods
 	{
 		#region Fields/Constants
 
@@ -55,7 +55,8 @@ namespace _2ndAsset.Common.WinForms.Controls
 				comboBox.SelectedIndexChanged += selectedIndexChanged;
 		}
 
-		public static BaseForm CoreGetParentForm(this Control control)
+		public static T CoreGetParent<T>(this Control control)
+			where T: Control, new()
 		{
 			// Iterative method...
 			Control current;
@@ -65,13 +66,14 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 			current = control;
 
-			while ((object)current != null)
+			do
 			{
-				if (current is BaseForm)
-					return (BaseForm)current;
-
 				current = current.Parent;
+
+				if (current is T)
+					return (T)current;
 			}
+			while ((object)current != null);
 
 			return null;
 		}
@@ -179,12 +181,12 @@ namespace _2ndAsset.Common.WinForms.Controls
 			{
 				previousBackgroundColors.Add(control, control.BackColor);
 				control.BackColor = Color.Pink;
-				control.CoreGetParentForm().CoreSetToolTipText(control, "Input validation failed.");
+				control.CoreGetParent<BaseForm>().CoreSetToolTipText(control, "Input validation failed.");
 			}
 			else
 			{
 				control.BackColor = previousBackgroundColor;
-				control.CoreGetParentForm().CoreSetToolTipText(control, string.Empty);
+				control.CoreGetParent<BaseForm>().CoreSetToolTipText(control, string.Empty);
 			}
 		}
 
@@ -247,7 +249,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 			if ((object)control == null)
 				throw new ArgumentNullException("control");
 
-			parent = control.CoreGetParentForm();
+			parent = control.CoreGetParent<BaseForm>();
 
 			if ((object)parent != null)
 				parent.CoreIsDirty = true;

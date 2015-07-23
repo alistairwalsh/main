@@ -13,16 +13,19 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	public partial class DelTxtAdapterSettingsUserControl : _DelTxtAdapterSettingsUserControl, IDelTextAdapterSettingsPartialView
+	public partial class DelimitedTextAdapterSettingsUserControl : _DelimitedTextAdapterSettingsUserControl, IDelimitedTextAdapterSettingsPartialView
 	{
 		#region Constructors/Destructors
 
-		public DelTxtAdapterSettingsUserControl()
+		public DelimitedTextAdapterSettingsUserControl()
 		{
 			this.InitializeComponent();
 		}
@@ -31,7 +34,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Properties/Indexers/Events
 
-		IEnumerable<IHeaderSpecListView> IDelTextAdapterSettingsPartialView.HeaderSpecViews
+		IEnumerable<IHeaderSpecListView> IDelimitedTextAdapterSettingsPartialView.HeaderSpecViews
 		{
 			get
 			{
@@ -43,7 +46,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsPartialView.FieldDelimiter
+		string IDelimitedTextAdapterSettingsPartialView.FieldDelimiter
 		{
 			get
 			{
@@ -55,19 +58,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool IAdapterSpecificSettingsPartialView.IsActiveSettings
-		{
-			get
-			{
-				return this.Visible;
-			}
-			set
-			{
-				this.Visible = value;
-			}
-		}
-
-		bool IDelTextAdapterSettingsPartialView.IsFirstRowHeaders
+		bool IDelimitedTextAdapterSettingsPartialView.IsFirstRowHeaders
 		{
 			get
 			{
@@ -79,7 +70,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsPartialView.QuoteValue
+		string IDelimitedTextAdapterSettingsPartialView.QuoteValue
 		{
 			get
 			{
@@ -91,7 +82,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsPartialView.RecordDelimiter
+		string IDelimitedTextAdapterSettingsPartialView.RecordDelimiter
 		{
 			get
 			{
@@ -103,7 +94,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		IHeaderSpecListView IDelTextAdapterSettingsPartialView.SelectedHeaderSpecListView
+		IHeaderSpecListView IDelimitedTextAdapterSettingsPartialView.SelectedHeaderSpecListView
 		{
 			get
 			{
@@ -125,7 +116,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		string IDelTextAdapterSettingsPartialView.TextFilePath
+		string IDelimitedTextAdapterSettingsPartialView.TextFilePath
 		{
 			get
 			{
@@ -141,7 +132,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		#region Methods/Operators
 
-		IHeaderSpecListView IDelTextAdapterSettingsPartialView.AddHeaderSpecView(string headerName, FieldType? fieldType)
+		IHeaderSpecListView IDelimitedTextAdapterSettingsPartialView.AddHeaderSpecView(string headerName, FieldType? fieldType)
 		{
 			HeaderSpecListViewItem lviHeaderSpec;
 
@@ -168,7 +159,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/adapter-settings/delimited-text/browse-file-system-location"), null);
+			this.Controller.BrowseFileSystemLocation();
 			this.CoreRefreshControlState();
 		}
 
@@ -190,7 +181,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRefreshFieldSpecs_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/adapter-settings/delimited-text/refresh-field-specs"), null);
+			this.Controller.RefreshDelimitedTextFieldSpecs();
 			this.CoreRefreshControlState();
 		}
 
@@ -199,7 +190,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.PartialView.RemoveHeaderSpecView(this.PartialView.SelectedHeaderSpecListView);
 		}
 
-		void IDelTextAdapterSettingsPartialView.ClearHeaderSpecViews()
+		void IDelimitedTextAdapterSettingsPartialView.ClearHeaderSpecViews()
 		{
 			this.lvFieldSpecs.Items.Clear();
 			this.CoreRefreshControlState();
@@ -251,7 +242,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.CoreRefreshControlState();
 		}
 
-		bool IDelTextAdapterSettingsPartialView.RemoveHeaderSpecView(IHeaderSpecListView headerSpecListView)
+		bool IDelimitedTextAdapterSettingsPartialView.RemoveHeaderSpecView(IHeaderSpecListView headerSpecListView)
 		{
 			HeaderSpecListViewItem lviHeaderSpec;
 
@@ -286,6 +277,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 			#region Properties/Indexers/Events
 
+			IBaseController IBaseView.Controller
+			{
+				get
+				{
+					return null;
+				}
+			}
+
 			FieldType? IHeaderSpecListView.FieldType
 			{
 				get
@@ -307,17 +306,25 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
+			IBaseView IBaseView.ParentView
+			{
+				get
+				{
+					return null;
+				}
+			}
+
 			#endregion
 		}
 
 		#endregion
 	}
 
-	public class _DelTxtAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IDelTextAdapterSettingsPartialView>
+	public class _DelimitedTextAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IDelimitedTextAdapterSettingsPartialView, DelimitedTextAdapterSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 
-		public _DelTxtAdapterSettingsUserControl()
+		public _DelimitedTextAdapterSettingsUserControl()
 		{
 		}
 

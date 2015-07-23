@@ -7,7 +7,8 @@ using System;
 using System.Collections.Generic;
 
 using _2ndAsset.Common.WinForms;
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Views;
+using _2ndAsset.ObfuscationEngine.Core.Adapter;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
@@ -15,14 +16,15 @@ namespace _2ndAsset.ObfuscationEngine.UI.Views
 	{
 		#region Properties/Indexers/Events
 
-		IAdoNetAdapterSettingsPartialView AdoNetAdapterSettingsPartialView
+		IAdapterSpecificSettingsPartialView CurrentAdapterSpecificSettingsPartialView
 		{
 			get;
 		}
 
-		IDelTextAdapterSettingsPartialView DelTextAdapterSettingsPartialView
+		AdapterDirection AdapterDirection
 		{
 			get;
+			set;
 		}
 
 		IEnumerable<IListItem<Type>> AdapterTypes

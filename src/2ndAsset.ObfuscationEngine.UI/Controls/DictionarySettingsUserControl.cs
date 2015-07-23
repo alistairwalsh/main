@@ -12,6 +12,9 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Forms;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
@@ -247,6 +250,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				}
 			}
 
+			IBaseController IBaseView.Controller
+			{
+				get
+				{
+					return null;
+				}
+			}
+
 			IAdapterSettingsPartialView IDictionarySpecListView.DictionaryAdapterSettingsPartialView
 			{
 				get
@@ -260,6 +271,14 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				get
 				{
 					return this.SubItems[0].Text;
+				}
+			}
+
+			IBaseView IBaseView.ParentView
+			{
+				get
+				{
+					return null;
 				}
 			}
 
@@ -301,7 +320,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			public void ShowEditorModal()
 			{
 				Form form;
-				form = this.ListView.CoreGetParentForm();
+				form = this.ListView.CoreGetParent<Form>();
 				this.adapterSettingsForm.ShowDialog(form);
 			}
 
@@ -370,7 +389,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _DictionarySettingsUserControl : BaseUserControl<IDictionarySettingsPartialView>
+	public class _DictionarySettingsUserControl : BaseUserControl<IDictionarySettingsPartialView, DictionarySettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

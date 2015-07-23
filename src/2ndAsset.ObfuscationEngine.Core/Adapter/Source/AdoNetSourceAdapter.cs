@@ -17,6 +17,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.AdoNetFast.UoW;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
+	[AdapterSpecificConfiguration(SpecificConfigurationAqtn = "", UserControlAqtn = "_2ndAsset.ObfuscationEngine.UI.Controls.AdoNetAdapterSettingsUserControl, 2ndAsset.ObfuscationEngine.UI")]
 	public class AdoNetSourceAdapter : SourceAdapter<AdoNetAdapterConfiguration>, IAdoNetAdapter
 	{
 		#region Constructors/Destructors

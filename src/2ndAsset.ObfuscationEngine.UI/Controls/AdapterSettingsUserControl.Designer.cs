@@ -33,9 +33,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.lblAdapterType = new System.Windows.Forms.Label();
 			this.ddlType = new System.Windows.Forms.ComboBox();
 			this.pnlAdapterConfigHost = new System.Windows.Forms.Panel();
-			this.adoNetAdapterSettingsUc = new AdoNetAdapterSettingsUserControl();
-			this.delTxtAdapterSettingsUc = new DelTxtAdapterSettingsUserControl();
-			this.pnlAdapterConfigHost.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// lblAdapterType
@@ -65,31 +62,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlAdapterConfigHost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.pnlAdapterConfigHost.Controls.Add(this.adoNetAdapterSettingsUc);
-			this.pnlAdapterConfigHost.Controls.Add(this.delTxtAdapterSettingsUc);
 			this.pnlAdapterConfigHost.Location = new System.Drawing.Point(6, 30);
 			this.pnlAdapterConfigHost.Name = "pnlAdapterConfigHost";
 			this.pnlAdapterConfigHost.Size = new System.Drawing.Size(448, 280);
 			this.pnlAdapterConfigHost.TabIndex = 2;
 			this.pnlAdapterConfigHost.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAdapterConfigHost_Paint);
-			// 
-			// adoNetAdapterSettingsUc
-			// 
-			this.adoNetAdapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.adoNetAdapterSettingsUc.Location = new System.Drawing.Point(0, 0);
-			this.adoNetAdapterSettingsUc.MinimumSize = new System.Drawing.Size(424, 287);
-			this.adoNetAdapterSettingsUc.Name = "adoNetAdapterSettingsUc";
-			this.adoNetAdapterSettingsUc.Size = new System.Drawing.Size(444, 287);
-			this.adoNetAdapterSettingsUc.TabIndex = 3;
-			// 
-			// delTxtAdapterSettingsUc
-			// 
-			this.delTxtAdapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.delTxtAdapterSettingsUc.Location = new System.Drawing.Point(0, 0);
-			this.delTxtAdapterSettingsUc.MinimumSize = new System.Drawing.Size(424, 287);
-			this.delTxtAdapterSettingsUc.Name = "delTxtAdapterSettingsUc";
-			this.delTxtAdapterSettingsUc.Size = new System.Drawing.Size(444, 287);
-			this.delTxtAdapterSettingsUc.TabIndex = 0;
 			// 
 			// AdapterSettingsUserControl
 			// 
@@ -101,7 +78,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.MinimumSize = new System.Drawing.Size(460, 313);
 			this.Name = "AdapterSettingsUserControl";
 			this.Size = new System.Drawing.Size(460, 313);
-			this.pnlAdapterConfigHost.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -112,8 +88,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		private Label lblAdapterType;
 		private ComboBox ddlType;
 		private Panel pnlAdapterConfigHost;
-		private DelTxtAdapterSettingsUserControl delTxtAdapterSettingsUc;
-		private AdoNetAdapterSettingsUserControl adoNetAdapterSettingsUc;
 
 
 

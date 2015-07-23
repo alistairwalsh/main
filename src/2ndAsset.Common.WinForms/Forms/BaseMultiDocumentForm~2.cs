@@ -7,13 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseMultiDocumentForm<TMultiDocumentView, TController> : BaseForm<TMultiDocumentView, TController>, IMultiDocumentView
+	public class BaseMultiDocumentForm<TMultiDocumentView, TMasterController> : BaseForm<TMultiDocumentView, TMasterController>, IMultiDocumentView
 		where TMultiDocumentView : class, IMultiDocumentView
-		where TController : class, IBaseController<TMultiDocumentView>, new()
+		where TMasterController : MasterController<TMultiDocumentView>, new()
 	{
 		#region Constructors/Destructors
 

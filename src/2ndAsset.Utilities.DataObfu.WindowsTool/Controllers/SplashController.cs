@@ -9,12 +9,12 @@ using System.IO;
 
 using Solder.Framework.Utilities;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 {
-	public sealed class SplashController : BaseController<ISplashView>
+	public sealed class SplashController : MasterController<ISplashView>
 	{
 		#region Constructors/Destructors
 

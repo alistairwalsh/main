@@ -4,8 +4,11 @@
 */
 
 using System;
+using System.Linq;
+using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms.Controls;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
@@ -82,9 +85,19 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		}
 
 		#endregion
+
+		#region Methods/Operators
+
+		private void ObfuscationUserControl_Load(object sender, EventArgs e)
+		{
+			foreach (TabPage tabPage in this.tabMain.TabPages.Cast<TabPage>().Reverse())
+				tabPage.Show();
+		}
+
+		#endregion
 	}
 
-	public class _ObfuscationUserControl : BaseUserControl<IObfuscationPartialView>
+	public class _ObfuscationUserControl : BaseUserControl<IObfuscationPartialView, ObfuscationSlaveController>
 	{
 		#region Constructors/Destructors
 

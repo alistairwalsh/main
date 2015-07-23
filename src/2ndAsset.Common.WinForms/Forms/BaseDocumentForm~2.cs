@@ -5,13 +5,14 @@
 
 using System;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseDocumentForm<TDocumentView, TController> : BaseForm<TDocumentView, TController>, IDocumentView
+	public class BaseDocumentForm<TDocumentView, TMasterController> : BaseForm<TDocumentView, TMasterController>, IDocumentView
 		where TDocumentView : class, IDocumentView
-		where TController : class, IBaseController<TDocumentView>, new()
+		where TMasterController : MasterController<TDocumentView>, new()
 	{
 		#region Constructors/Destructors
 

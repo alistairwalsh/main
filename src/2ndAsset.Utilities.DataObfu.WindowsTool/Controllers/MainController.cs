@@ -9,12 +9,13 @@ using System.Linq;
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 {
-	public sealed class MainController : BaseController<IMainView>
+	public sealed class MainController : MasterController<IMainView>
 	{
 		#region Constructors/Destructors
 

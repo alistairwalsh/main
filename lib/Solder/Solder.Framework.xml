@@ -85,27 +85,19 @@
             <param name="dependencyManager"> The current in-effect dependency manager requesting this resolution. </param>
             <returns> An instance of an object or null. </returns>
         </member>
-        <member name="T:Solder.Framework.Injection.DelegateDependencyResolution">
+        <member name="T:Solder.Framework.Injection.DelegateDependencyResolution`1">
             <summary>
             Provides the Factory Method pattern used to resolve dependencies.
             This implementation executes a callback each time a dependency resolution occurs.
             </summary>
         </member>
-        <member name="M:Solder.Framework.Injection.DelegateDependencyResolution.#ctor(System.Delegate)">
+        <member name="M:Solder.Framework.Injection.DelegateDependencyResolution`1.#ctor(System.Func{`0})">
             <summary>
-            Initializes a new instance of the DelegateDependencyResolution class.
+            Initializes a new instance of the DelegateDependencyResolution`1 class.
             </summary>
-            <param name="method"> The callback method to execute during resolution. </param>
+            <param name="factoryCallback"> The callback method to execute during resolution. </param>
         </member>
-        <member name="M:Solder.Framework.Injection.DelegateDependencyResolution.FromFunc``1(System.Func{``0})">
-            <summary>
-            Gets an instance of DelegateDependencyResolution from the specified Func`1 delegate.
-            </summary>
-            <typeparam name="TObject"> The target type of resolution. </typeparam>
-            <param name="func"> The callback method to execute during resolution. </param>
-            <returns> A DelegateDependencyResolution instance. </returns>
-        </member>
-        <member name="M:Solder.Framework.Injection.DelegateDependencyResolution.Resolve(Solder.Framework.Injection.IDependencyManager)">
+        <member name="M:Solder.Framework.Injection.DelegateDependencyResolution`1.Resolve(Solder.Framework.Injection.IDependencyManager)">
             <summary>
             Resolves a dependency.
             </summary>
@@ -401,34 +393,11 @@
             The singleton instance is the result a value passed as a constructor parameter.
             </summary>
         </member>
-        <member name="M:Solder.Framework.Injection.SingletonDependencyResolution.#ctor(System.Object)">
-            <summary>
-            Initializes a new instance of the SingletonDependencyResolution class.
-            </summary>
-            <param name="instance"> The singleton instance. </param>
-        </member>
         <member name="M:Solder.Framework.Injection.SingletonDependencyResolution.#ctor(Solder.Framework.Injection.IDependencyResolution)">
             <summary>
             Initializes a new instance of the SingletonDependencyResolution class.
             </summary>
             <param name="chainedDependencyResolution"> The chained dependency resolution which is called only once. </param>
-        </member>
-        <member name="M:Solder.Framework.Injection.SingletonDependencyResolution.LazyConstructorOfType``1">
-            <summary>
-            Gets an instance of an IDependencyResolution using the specified generic type.
-            The default constructor will be used to initialize a lazy singled in the current application domain on first request.
-            This method is never guaranteed to return a SingletonDependencyResolution instance.
-            </summary>
-            <typeparam name="TObject"> The target type of resolution. </typeparam>
-            <returns> An IDependencyResolution instance. </returns>
-        </member>
-        <member name="M:Solder.Framework.Injection.SingletonDependencyResolution.OfType``1(``0)">
-            <summary>
-            Gets an instance of SingletonDependencyResolution from the specified object instance.
-            </summary>
-            <typeparam name="TObject"> The target type of resolution. </typeparam>
-            <param name="instance"> The singleton instance. </param>
-            <returns> A SingletonDependencyResolution instance. </returns>
         </member>
         <member name="M:Solder.Framework.Injection.SingletonDependencyResolution.Resolve(Solder.Framework.Injection.IDependencyManager)">
             <summary>
@@ -593,19 +562,19 @@
             Gets a value indicating whether the current instance has been disposed.
             </summary>
         </member>
-        <member name="T:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1">
+        <member name="T:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy">
             <summary>
             Provides a (remoting) real proxy for objects which leverage the dynamic invoker infrastructure (i.e. IDynamicInvocation).
             </summary>
-            <typeparam name="TTransparentProxy"> The type of the transparent proxy object served up by this class. </typeparam>
         </member>
-        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.#ctor(Solder.Framework.Interception.IDynamicInvocation)">
+        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.#ctor(System.Type,Solder.Framework.Interception.IDynamicInvocation)">
             <summary>
-            Initializes a new instance of the DynamicInvokerRealProxy`1 class.
+            Initializes a new instance of the DynamicInvokerRealProxy class.
             </summary>
+            <param name="proxiedType"> The proxied type for which to return a proxy instance. </param>
             <param name="dynamicInvocation"> The dynamic invoker object to use. </param>
         </member>
-        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.CanCastTo(System.Type,System.Object)">
+        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.CanCastTo(System.Type,System.Object)">
             <summary>
             Checks whether the proxy that represents the specified object type can be cast to the type represented by the IRemotingTypeInfo interface.
             </summary>
@@ -613,24 +582,24 @@
             <param name="fromType"> The type to cast to. </param>
             <param name="o"> The object for which to check casting. </param>
         </member>
-        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Dispose">
+        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.Dispose">
             <summary>
             Disposes of the inner dynamic invoker. Once disposed, the instance cannot be reused.
             </summary>
         </member>
-        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Invoke(System.Runtime.Remoting.Messaging.IMessage)">
+        <member name="M:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.Invoke(System.Runtime.Remoting.Messaging.IMessage)">
             <summary>
             Runtime real proxy invocation.
             </summary>
             <param name="msg"> Invocation call message </param>
             <returns> Invocation return message. </returns>
         </member>
-        <member name="P:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.Disposed">
+        <member name="P:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.Disposed">
             <summary>
             Gets a value indicating whether the current instance has been disposed.
             </summary>
         </member>
-        <member name="P:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy`1.TypeName">
+        <member name="P:Solder.Framework.Interception.RemotingImpl.DynamicInvokerRealProxy.TypeName">
             <summary>
             Gets or sets the fully qualified type name of the server object in a ObjRef. No implementation is provided; any calls will throw a NotSupportedException.
             </summary>
@@ -675,19 +644,18 @@
             Gets the message severity.
             </summary>
         </member>
-        <member name="T:Solder.Framework.Injection.LoggingAspectConstructorDependencyResolution`1">
+        <member name="T:Solder.Framework.Injection.LoggingAspectDependencyResolution">
             <summary>
             TODO
             </summary>
-            <typeparam name="TObject"> The actual type of the resolution. </typeparam>
         </member>
-        <member name="M:Solder.Framework.Injection.LoggingAspectConstructorDependencyResolution`1.#ctor(Solder.Framework.Injection.IDependencyResolution)">
+        <member name="M:Solder.Framework.Injection.LoggingAspectDependencyResolution.#ctor(Solder.Framework.Injection.IDependencyResolution)">
             <summary>
             Initializes a new instance of the LoggingAspectConstructorDependencyResolution`1 class.
             </summary>
             <param name="chainedDependencyResolution"> The singleton instance. </param>
         </member>
-        <member name="M:Solder.Framework.Injection.LoggingAspectConstructorDependencyResolution`1.Resolve(Solder.Framework.Injection.IDependencyManager)">
+        <member name="M:Solder.Framework.Injection.LoggingAspectDependencyResolution.Resolve(Solder.Framework.Injection.IDependencyManager)">
             <summary>
             Resolves a dependency.
             </summary>

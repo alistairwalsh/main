@@ -106,6 +106,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			// 
 			// sourceAdapterSettingsUc
 			// 
+			this.sourceAdapterSettingsUc.AdapterDirection = _2ndAsset.ObfuscationEngine.Core.Adapter.AdapterDirection.Source;
 			this.sourceAdapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.sourceAdapterSettingsUc.Location = new System.Drawing.Point(3, 3);
 			this.sourceAdapterSettingsUc.MinimumSize = new System.Drawing.Size(460, 313);
@@ -166,6 +167,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			// 
 			// destinationAdapterSettingsUc
 			// 
+			this.destinationAdapterSettingsUc.AdapterDirection = _2ndAsset.ObfuscationEngine.Core.Adapter.AdapterDirection.Destination;
 			this.destinationAdapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.destinationAdapterSettingsUc.Location = new System.Drawing.Point(3, 3);
 			this.destinationAdapterSettingsUc.MinimumSize = new System.Drawing.Size(460, 313);
@@ -181,6 +183,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.MinimumSize = new System.Drawing.Size(460, 313);
 			this.Name = "ObfuscationUserControl";
 			this.Size = new System.Drawing.Size(883, 387);
+			this.Load += new System.EventHandler(this.ObfuscationUserControl_Load);
 			this.tabMain.ResumeLayout(false);
 			this.tpAvalanche.ResumeLayout(false);
 			this.tpSource.ResumeLayout(false);

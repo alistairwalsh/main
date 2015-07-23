@@ -5,14 +5,16 @@
 
 using System;
 
-namespace _2ndAsset.Common.WinForms.Presentation
+using _2ndAsset.Common.WinForms.Presentation.Views;
+
+namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 {
-	public interface IBaseController<TView>
+	public interface IBaseController<TView> : IBaseController
 		where TView : class, IBaseView
 	{
 		#region Properties/Indexers/Events
 
-		TView View
+		new TView View
 		{
 			get;
 		}
@@ -21,15 +23,7 @@ namespace _2ndAsset.Common.WinForms.Presentation
 
 		#region Methods/Operators
 
-		object DispatchAction(IPartialView partialView, Uri controllerActionUri, object context);
-
 		void InitializeView(TView view);
-
-		void ReadyView();
-
-		void TerminateView();
-
-		object UnhandledActionDispatch(IPartialView partialView, Uri controllerActionUri, object context);
 
 		#endregion
 	}

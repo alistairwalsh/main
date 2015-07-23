@@ -6,13 +6,14 @@
 using System;
 using System.ComponentModel;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseForm<TFullView, TController> : XBaseForm
+	public class BaseForm<TFullView, TMasterController> : XBaseForm
 		where TFullView : class, IFullView
-		where TController : class, IBaseController<TFullView>, new()
+		where TMasterController : MasterController<TFullView>, new()
 	{
 		#region Constructors/Destructors
 
@@ -24,7 +25,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Fields/Constants
 
-		private readonly TController controller = new TController();
+		private readonly TMasterController controller = new TMasterController();
 
 		#endregion
 
@@ -32,7 +33,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public TController Controller
+		public new TMasterController Controller
 		{
 			get
 			{
@@ -53,6 +54,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 		#endregion
 
 		#region Methods/Operators
+
+		protected override IBaseController CoreGetController()
+		{
+			return this.Controller;
+		}
 
 		protected override void CoreSetup()
 		{
@@ -76,11 +82,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 				this.Controller.TerminateView();
 
 			base.CoreTeardown();
-		}
-
-		protected override object OnDispatchControllerAction(IPartialView partialView, Uri controllerActionUri, object context)
-		{
-			return this.Controller.DispatchAction(partialView, controllerActionUri, context);
 		}
 
 		#endregion

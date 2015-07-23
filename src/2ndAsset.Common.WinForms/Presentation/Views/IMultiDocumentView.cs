@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _2ndAsset.Common.WinForms.Presentation
+namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
 	public interface IMultiDocumentView : IFullView
 	{

@@ -7,6 +7,7 @@ using System;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 {
@@ -53,13 +54,13 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 
 		private void btnExecute_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/execute"), null);
+			this.Controller.Execute();
 		}
 
 		#endregion
 	}
 
-	public class _ExecutionUserControl : BaseUserControl<IExecutionPartialView>
+	public class _ExecutionUserControl : BaseUserControl<IExecutionPartialView, ExecutionController>
 	{
 		#region Constructors/Destructors
 

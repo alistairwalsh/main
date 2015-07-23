@@ -17,6 +17,7 @@ using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
 namespace _2ndAsset.ObfuscationEngine.Core.Adapter.Source
 {
+	[AdapterSpecificConfiguration(SpecificConfigurationAqtn = "", UserControlAqtn = "_2ndAsset.ObfuscationEngine.UI.Controls.DelimitedTextAdapterSettingsUserControl, 2ndAsset.ObfuscationEngine.UI")]
 	public class DelimitedTextSourceAdapter : SourceAdapter<DelimitedTextAdapterConfiguration>, IDelimitedTextAdapter
 	{
 		#region Constructors/Destructors

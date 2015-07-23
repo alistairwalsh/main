@@ -35,7 +35,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 			this.btnOK = new System.Windows.Forms.Button();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.adapterSettingsUc = new AdapterSettingsUserControl();
+			this.adapterSettingsUc = new _2ndAsset.ObfuscationEngine.UI.Controls.AdapterSettingsUserControl();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.SuspendLayout();
@@ -75,8 +75,9 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 			this.tabPage1.Text = "Dictionary";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
-			// dictionaryAdapterSettingsUc
+			// adapterSettingsUc
 			// 
+			this.adapterSettingsUc.AdapterDirection = _2ndAsset.ObfuscationEngine.Core.Adapter.AdapterDirection.Unknown;
 			this.adapterSettingsUc.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.adapterSettingsUc.Location = new System.Drawing.Point(3, 3);
 			this.adapterSettingsUc.MinimumSize = new System.Drawing.Size(460, 313);

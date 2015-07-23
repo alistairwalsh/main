@@ -9,12 +9,12 @@ using System.IO;
 
 using Solder.Framework.Utilities;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Views;
 
 namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 {
-	public sealed class AboutController : BaseController<IAboutView>
+	public sealed class AboutController : MasterController<IAboutView>
 	{
 		#region Constructors/Destructors
 

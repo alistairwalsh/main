@@ -12,7 +12,8 @@ using System.Windows.Forms;
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
-using _2ndAsset.Common.WinForms.Presentation;
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 
 using Message = Solder.Framework.Message;
 
@@ -37,6 +38,18 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Properties/Indexers/Events
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public virtual IBaseController Controller
+		{
+			get
+			{
+				return this.CoreGetController();
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public IFullView FullView
 		{
 			get
@@ -45,11 +58,23 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		bool IFullView.IsViewDirty
 		{
 			get
 			{
 				return this.CoreIsDirty;
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public IBaseView ParentView
+		{
+			get
+			{
+				return null;
 			}
 		}
 
@@ -63,6 +88,8 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		string IFullView.StatusText
 		{
 			get
@@ -75,6 +102,8 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		string IFullView.ViewText
 		{
 			get
@@ -120,6 +149,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.Close(); // direct
 		}
 
+		protected virtual IBaseController CoreGetController()
+		{
+			return null;
+		}
+
 		/*TFullView IFullView.CreateView<TFullView>(Uri viewUri)
 		{
 			return (TFullView)this.FullView.CreateView(viewUri);
@@ -146,11 +180,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}*/
 
-		object IFullView.DispatchControllerAction(IPartialView partialView, Uri controllerActionUri, object context)
-		{
-			return this.OnDispatchControllerAction(partialView, controllerActionUri, context);
-		}
-
 		private XBaseForm GetFormFromUri(Uri viewUri)
 		{
 			XBaseForm form;
@@ -165,11 +194,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 			form = (XBaseForm)Activator.CreateInstance(controlType);
 
 			return form;
-		}
-
-		protected virtual object OnDispatchControllerAction(IPartialView partialView, Uri controllerActionUri, object context)
-		{
-			throw new NotImplementedException(string.Format("OnDispatchControllerAction must be overriden."));
 		}
 
 		void IFullView.RefreshView()

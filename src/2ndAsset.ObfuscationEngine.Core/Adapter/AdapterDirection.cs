@@ -5,9 +5,14 @@
 
 using System;
 
-namespace _2ndAsset.Common.WinForms.Presentation
+namespace _2ndAsset.ObfuscationEngine.Core.Adapter
 {
-	public interface IBaseView
+	public enum AdapterDirection
 	{
+		Unknown = 0,
+
+		Source,
+		Dictionary,
+		Destination
 	}
 }

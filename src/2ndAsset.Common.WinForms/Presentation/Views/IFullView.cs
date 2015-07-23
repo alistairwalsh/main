@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 using Solder.Framework;
 
-namespace _2ndAsset.Common.WinForms.Presentation
+namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
 	public interface IFullView : IBaseView
 	{
@@ -42,8 +42,6 @@ namespace _2ndAsset.Common.WinForms.Presentation
 		//TFullView CreateView<TFullView>(Uri viewUri) where TFullView : IFullView;
 
 		//void DestroyView(IFullView view);
-
-		object DispatchControllerAction(IPartialView partialView, Uri controllerActionUri, object context);
 
 		void RefreshView();
 

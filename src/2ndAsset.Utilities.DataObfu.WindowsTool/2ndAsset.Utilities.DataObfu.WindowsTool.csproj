@@ -62,7 +62,8 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\ExecutableObfuscationDocumentController.cs" />
+    <Compile Include="Controllers\ExecutionController.cs" />
+    <Compile Include="Controllers\ExecutableObfuscationDocumentMasterController.cs" />
     <Compile Include="Controllers\SplashController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\MainController.cs" />

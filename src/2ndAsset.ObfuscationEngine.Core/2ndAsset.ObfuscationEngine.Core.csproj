@@ -57,6 +57,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Adapter\AdapterSpecificConfigurationAttribute.cs" />
     <Compile Include="Adapter\Adapter~1.cs" />
     <Compile Include="Adapter\Destination\NullDestinationAdapter.cs" />
     <Compile Include="Adapter\Destination\AdoNetDestinationAdapter.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Adapter\Destination\DelimitedTextDestinationAdapter.cs" />
     <Compile Include="Adapter\Dictionary\DictionaryAdapter~1.cs" />
     <Compile Include="Adapter\Dictionary\IDictionaryAdapter.cs" />
+    <Compile Include="Adapter\AdapterDirection.cs" />
     <Compile Include="Adapter\INullAdapter.cs" />
     <Compile Include="Adapter\Source\NullSourceAdapter.cs" />
     <Compile Include="Adapter\Source\DelimitedTextSourceAdapter.cs" />

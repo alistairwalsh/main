@@ -1,6 +1,6 @@
 ﻿namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
-	partial class DelTxtAdapterSettingsUserControl
+	partial class DelimitedTextAdapterSettingsUserControl
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -305,7 +305,7 @@
 			this.Controls.Add(this.txtBxTextFilePath);
 			this.Controls.Add(this.lblTextFilePath);
 			this.MinimumSize = new System.Drawing.Size(424, 287);
-			this.Name = "DelTxtAdapterSettingsUserControl";
+			this.Name = "DelimitedTextAdapterSettingsUserControl";
 			this.Size = new System.Drawing.Size(424, 287);
 			this.grpBxDelimitedTextSpec.ResumeLayout(false);
 			this.tmTableLayoutPanel1.ResumeLayout(false);

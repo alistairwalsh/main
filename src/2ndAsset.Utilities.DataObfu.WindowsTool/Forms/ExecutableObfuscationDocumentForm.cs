@@ -6,6 +6,7 @@
 using System;
 
 using _2ndAsset.Common.WinForms.Forms;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.UI.Forms;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 using _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers;
@@ -94,6 +95,11 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 
 		#region Methods/Operators
 
+		void IPartialView._()
+		{
+			throw new NotImplementedException();
+		}
+
 		protected override void CoreQuit(out bool cancel)
 		{
 			base.CoreQuit(out cancel);
@@ -109,7 +115,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			base.CoreSetup();
 
 			// UI URIs
-			this.UriToControlTypes.Add(ExecutableObfuscationDocumentController.AdapterSettingsViewUri, typeof(AdapterSettingsForm));
+			this.UriToControlTypes.Add(ExecutableObfuscationDocumentMasterController.AdapterSettingsViewUri, typeof(AdapterSettingsForm));
 		}
 
 		bool IObfuscationDocumentView.TryGetDatabaseConnection(ref Type connectionType, ref string connectionString)
@@ -141,7 +147,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		#endregion
 	}
 
-	public class _ExecutableObfuscationDocumentForm : BaseDocumentForm<IExecutableObfuscationDocumentView, ExecutableObfuscationDocumentController>
+	public class _ExecutableObfuscationDocumentForm : BaseDocumentForm<IExecutableObfuscationDocumentView, ExecutableObfuscationDocumentMasterController>
 	{
 	}
 }

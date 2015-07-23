@@ -4,7 +4,10 @@
 */
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
+
+using _2ndAsset.Common.WinForms.Forms;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {
@@ -14,6 +17,30 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		public BaseUserControl()
 		{
+		}
+
+		#endregion
+
+		#region Properties/Indexers/Events
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		protected BaseForm CoreOwnerForm
+		{
+			get
+			{
+				return this.CoreGetParent<BaseForm>();
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		protected BaseUserControl CoreParentUserControl
+		{
+			get
+			{
+				return this.CoreGetParent<BaseUserControl>();
+			}
 		}
 
 		#endregion
@@ -30,6 +57,11 @@ namespace _2ndAsset.Common.WinForms.Controls
 			// do nothing
 		}
 
+		protected virtual void CoreShown()
+		{
+			// do nothing
+		}
+
 		protected virtual void CoreTeardown()
 		{
 			// do nothing
@@ -41,9 +73,9 @@ namespace _2ndAsset.Common.WinForms.Controls
 			base.Dispose(disposing);
 		}
 
-		protected override void OnLoad(EventArgs e)
+		protected override void OnHandleCreated(EventArgs e)
 		{
-			base.OnLoad(e);
+			base.OnHandleCreated(e);
 			this.CoreSetup();
 			this.CoreRefreshControlState();
 		}

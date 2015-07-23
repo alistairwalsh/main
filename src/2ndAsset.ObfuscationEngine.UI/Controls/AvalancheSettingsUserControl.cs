@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 using _2ndAsset.Common.WinForms.Controls;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
@@ -69,13 +70,13 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRegenerateHashValues_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/hash-settings/regenerate-all"), null);
+			this.Controller.RegenerateHashSettings();
 		}
 
 		#endregion
 	}
 
-	public class _AvalancheSettingsUserControl : BaseUserControl<IAvalancheSettingsPartialView>
+	public class _AvalancheSettingsUserControl : BaseUserControl<IAvalancheSettingsPartialView, AvalancheSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

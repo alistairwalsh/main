@@ -9,6 +9,7 @@ using System.Data;
 
 using _2ndAsset.Common.WinForms;
 using _2ndAsset.Common.WinForms.Controls;
+using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
@@ -92,18 +93,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		bool IAdapterSpecificSettingsPartialView.IsActiveSettings
-		{
-			get
-			{
-				return this.Visible;
-			}
-			set
-			{
-				this.Visible = value;
-			}
-		}
-
 		bool IAdoNetAdapterSettingsPartialView.IsCommandTypeReadOnly
 		{
 			get
@@ -182,7 +171,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			this.FullView.DispatchControllerAction(this, new Uri("action://obfuscation/adapter-settings/ado-net/browse-database-connection"), null);
+			this.Controller.BrowseDatabaseConnection();
 			this.CoreRefreshControlState();
 		}
 
@@ -193,7 +182,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AdoNetAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IAdoNetAdapterSettingsPartialView>
+	public class _AdoNetAdapterSettingsUserControl : AdapterSpecificConfigurationUserControl<IAdoNetAdapterSettingsPartialView, AdoNetAdapterSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 
