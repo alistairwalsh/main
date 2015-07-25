@@ -61,7 +61,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		#endregion
 	}
 
-	public class _SplashForm : BaseForm<ISplashView, SplashController>
+	public class _SplashForm : BaseFullViewForm<ISplashView, SplashController>
 	{
 		#region Constructors/Destructors
 

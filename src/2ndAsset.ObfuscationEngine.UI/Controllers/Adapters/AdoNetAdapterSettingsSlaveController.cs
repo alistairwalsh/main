@@ -11,15 +11,14 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 
 using _2ndAsset.Common.WinForms;
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
-using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Controllers
+namespace _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters
 {
-	public sealed class AdoNetAdapterSettingsSlaveController : SlaveController<IAdoNetAdapterSettingsPartialView>
+	public sealed class AdoNetAdapterSettingsSlaveController : AdapterSpecificSettingsSlaveController<IAdoNetAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 
@@ -136,7 +135,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			connectionType = this.View.ConnectionType;
 			connectionString = this.View.ConnectionString;
 
-			if (!this.View.CoreGetParent<IObfuscationDocumentView>().TryGetDatabaseConnection(ref connectionType, ref connectionString))
+			if (!((IObfuscationDocumentView)this.View.FullView).TryGetDatabaseConnection(ref connectionType, ref connectionString))
 				return;
 
 			this.View.ConnectionType = connectionType;

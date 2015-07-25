@@ -11,13 +11,13 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseForm<TFullView, TMasterController> : XBaseForm
+	public class BaseFullViewForm<TFullView, TMasterController> : BaseFullViewForm, IDispatchTargetProvider
 		where TFullView : class, IFullView
 		where TMasterController : MasterController<TFullView>, new()
 	{
 		#region Constructors/Destructors
 
-		public BaseForm()
+		public BaseFullViewForm()
 		{
 		}
 
@@ -33,7 +33,17 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new TMasterController Controller
+		protected new TFullView _
+		{
+			get
+			{
+				return this as TFullView;
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		protected TMasterController Controller
 		{
 			get
 			{
@@ -41,13 +51,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}
 
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new TFullView FullView
+		object IDispatchTargetProvider.Target
 		{
 			get
 			{
-				return base.FullView as TFullView;
+				return this.Controller;
 			}
 		}
 
@@ -55,30 +63,25 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Methods/Operators
 
-		protected override IBaseController CoreGetController()
-		{
-			return this.Controller;
-		}
-
 		protected override void CoreSetup()
 		{
 			base.CoreSetup();
 
-			if ((object)this.FullView != null)
-				this.Controller.InitializeView(this.FullView);
+			if ((object)this._ != null) // prevent designer from barfing
+				this.Controller.InitializeView(this._);
 		}
 
 		protected override void CoreShown()
 		{
 			base.CoreShown();
 
-			if ((object)this.FullView != null)
+			if ((object)this._ != null) // prevent designer from barfing
 				this.Controller.ReadyView();
 		}
 
 		protected override void CoreTeardown()
 		{
-			if ((object)this.FullView != null)
+			if ((object)this._ != null) // prevent designer from barfing
 				this.Controller.TerminateView();
 
 			base.CoreTeardown();

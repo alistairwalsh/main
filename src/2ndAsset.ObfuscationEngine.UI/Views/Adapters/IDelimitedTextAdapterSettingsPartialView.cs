@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Views
+namespace _2ndAsset.ObfuscationEngine.UI.Views.Adapters
 {
 	public interface IDelimitedTextAdapterSettingsPartialView : IAdapterSpecificSettingsPartialView
 	{

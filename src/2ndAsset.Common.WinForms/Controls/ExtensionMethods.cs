@@ -56,7 +56,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 		}
 
 		public static T CoreGetParent<T>(this Control control)
-			where T: Control, new()
+			where T : Control, new()
 		{
 			// Iterative method...
 			Control current;

@@ -131,7 +131,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		#endregion
 	}
 
-	public class _AboutForm : BaseForm<IAboutView, AboutController>
+	public class _AboutForm : BaseFullViewForm<IAboutView, AboutController>
 	{
 		#region Constructors/Destructors
 

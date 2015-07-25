@@ -12,7 +12,7 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseMultiDocumentForm<TMultiDocumentView, TMasterController> : BaseForm<TMultiDocumentView, TMasterController>, IMultiDocumentView
+	public class BaseMultiDocumentForm<TMultiDocumentView, TMasterController> : BaseFullViewForm<TMultiDocumentView, TMasterController>, IMultiDocumentView
 		where TMultiDocumentView : class, IMultiDocumentView
 		where TMasterController : MasterController<TMultiDocumentView>, new()
 	{
@@ -26,13 +26,13 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Fields/Constants
 
-		private readonly IList<XBaseForm> documentForms = new List<XBaseForm>();
+		private readonly IList<BaseFullViewForm> documentForms = new List<BaseFullViewForm>();
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
-		protected IList<XBaseForm> DocumentForms
+		protected IList<BaseFullViewForm> DocumentForms
 		{
 			get
 			{
@@ -86,7 +86,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		IDocumentView IMultiDocumentView.CreateDocumentView(Uri viewUri, string documentFilePath)
 		{
-			XBaseForm form;
+			BaseFullViewForm form;
 			IDocumentView documentView;
 			Type controlType;
 
@@ -96,7 +96,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 			if (!this.UriToControlTypes.TryGetValue(viewUri, out controlType))
 				throw new InvalidOperationException(string.Format("{0}", viewUri));
 
-			form = (XBaseForm)Activator.CreateInstance(controlType);
+			form = (BaseFullViewForm)Activator.CreateInstance(controlType);
 			form.HandleCreated += this.documentForm_HandleCreated;
 			form.Load += this.documentForm_Load;
 			form.TextChanged += this.documentForm_TextChanged;
@@ -112,9 +112,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		private void documentForm_Closed(object sender, EventArgs e)
 		{
-			XBaseForm form;
+			BaseFullViewForm form;
 
-			form = (XBaseForm)sender;
+			form = (BaseFullViewForm)sender;
 			form.Closed -= this.documentForm_Closed;
 			form.TextChanged -= this.documentForm_TextChanged;
 			form.Load -= this.documentForm_Load;
@@ -131,9 +131,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		private void documentForm_HandleCreated(object sender, EventArgs e)
 		{
-			XBaseForm form;
+			BaseFullViewForm form;
 
-			form = (XBaseForm)sender;
+			form = (BaseFullViewForm)sender;
 
 			this.DocumentForms.Add(form);
 
@@ -147,9 +147,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		private void documentForm_TextChanged(object sender, EventArgs e)
 		{
-			XBaseForm form;
+			BaseFullViewForm form;
 
-			form = (XBaseForm)sender;
+			form = (BaseFullViewForm)sender;
 
 			this.CoreDocumentFormTextChanged(form);
 			this.CoreRefreshControlState();

@@ -46,7 +46,8 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 			this.View.ExecutionPartialView.IsComplete = null;
 			this.View.ExecutionPartialView.DurationSeconds = null;
 
-			obfuscationConfiguration = this.ApplyViewToDocument();
+			obfuscationConfiguration = new ObfuscationConfiguration();
+			this.ApplyViewToDocument(obfuscationConfiguration);
 
 			messages = obfuscationConfiguration.Validate();
 
@@ -71,7 +72,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 			this.View.ShowAlert("Done.");
 		}
 
-		protected override void InitializeDictionaryAdapterView(IDictionarySpecListView view)
+		protected /*override*/ void InitializeDictionaryAdapterView(IDictionarySpecListView view)
 		{
 			IList<IListItem<Type>> typeListItems;
 

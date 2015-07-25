@@ -69,7 +69,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		protected override void Dispose(bool disposing)
 		{
-			this.CoreTeardown();
+			//this.CoreTeardown();
 			base.Dispose(disposing);
 		}
 

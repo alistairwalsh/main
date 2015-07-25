@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms;
 using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.Common.WinForms.Presentation.Controllers;
-using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Dictionary;
 using _2ndAsset.ObfuscationEngine.Core.Adapter.Source;
 using _2ndAsset.ObfuscationEngine.UI.Views;
@@ -66,19 +66,12 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 		}
 
 		[DispatchActionUri(Uri = Constants.URI_ADAPTER_UPDATE_EVENT)]
-		public void UpdateAdapter(IPartialView partialView, object context)
+		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, object actionContext)
 		{
-			if ((object)partialView == null)
-				throw new ArgumentNullException("partialView");
+			if ((object)sourceView == null)
+				throw new ArgumentNullException("sourceView");
 
-			if ((object)partialView == this.View.AdapterSettingsPartialView)
-			{
-				// do nothing
-			}
-			else
-				throw new InvalidOperationException(string.Format(partialView.GetType().FullName));
-
-			this.View.RefreshView();
+			Debug.WriteLine(Constants.URI_ADAPTER_UPDATE_EVENT);
 		}
 
 		#endregion

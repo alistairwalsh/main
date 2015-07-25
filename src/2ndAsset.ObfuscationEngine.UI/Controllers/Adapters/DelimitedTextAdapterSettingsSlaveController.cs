@@ -9,8 +9,6 @@ using System.Linq;
 
 using Solder.Framework;
 
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
-using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
 using _2ndAsset.ObfuscationEngine.Core.Config;
@@ -18,10 +16,11 @@ using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Hosting.Tool;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Controllers
+namespace _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters
 {
-	public sealed class DelimitedTextAdapterSettingsSlaveController : SlaveController<IDelimitedTextAdapterSettingsPartialView>
+	public sealed class DelimitedTextAdapterSettingsSlaveController : AdapterSpecificSettingsSlaveController<IDelimitedTextAdapterSettingsPartialView>
 	{
 		#region Constructors/Destructors
 
@@ -190,15 +189,15 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 			filePath = this.View.TextFilePath;
 
-			switch (this.View.CoreGetParent<IAdapterSettingsPartialView>().AdapterDirection)
+			switch (((IAdapterSettingsPartialView)this.View.ParentView).AdapterDirection)
 			{
 				case AdapterDirection.Source:
 				case AdapterDirection.Dictionary:
-					if (!this.View.CoreGetParent<IObfuscationDocumentView>().TryGetOpenFilePath(out filePath))
+					if (!this.View.FullView.TryGetOpenFilePath(out filePath))
 						return;
 					break;
 				case AdapterDirection.Destination:
-					if (!this.View.CoreGetParent<IObfuscationDocumentView>().TryGetSaveFilePath(out filePath))
+					if (!this.View.FullView.TryGetSaveFilePath(out filePath))
 						return;
 					break;
 				default:
@@ -233,7 +232,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 			if ((object)messages != null && messages.Any())
 			{
-				result = this.View.CoreGetParent<IFullView>().ShowMessages(messages, "Configuration validation on refresh delimited text field spec", true);
+				result = this.View.FullView.ShowMessages(messages, "Configuration validation on refresh delimited text field spec", true);
 
 				if (!(result ?? false))
 				{
@@ -241,7 +240,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 					return;
 				}
 			}
-			
+
 			using (IToolHost toolHost = new ToolHost())
 				succeeded = toolHost.TryGetUpstreamMetadata(obfuscationConfiguration, out metaColumns);
 

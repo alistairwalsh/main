@@ -17,6 +17,7 @@ using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
 using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controls
 {
@@ -35,7 +36,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private readonly IDependencyManager dependencyManager = new DependencyManager();
 		private AdapterDirection adapterDirection;
-		private XBaseUserControl currentAdapterSpecificConfigurationUc;
+		private BasePartialViewUserControl currentAdapterSpecificConfigurationUc;
 		private string paintText;
 
 		#endregion
@@ -78,7 +79,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			}
 		}
 
-		private XBaseUserControl CurrentAdapterSpecificConfigurationUc
+		private BasePartialViewUserControl CurrentAdapterSpecificConfigurationUc
 		{
 			get
 			{
@@ -131,7 +132,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void ddlType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			this.ShowAdapterSpecificConfigurationUserControl(this.PartialView.SelectedAdapterType);
+			this.ShowAdapterSpecificConfigurationUserControl(this._.SelectedAdapterType);
 
 			this.Controller.ActivateAdapter();
 			this.PaintText = this.ddlType.CoreGetSelectedText(true);
@@ -186,7 +187,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			if (!this.DependencyManager.HasTypeResolution(adapterSpecificConfigurationUcType, string.Empty))
 				this.DependencyManager.AddResolution(adapterSpecificConfigurationUcType, string.Empty, new SingletonDependencyResolution(new ActivatorDependencyResolution(adapterSpecificConfigurationUcType)));
 
-			this.CurrentAdapterSpecificConfigurationUc = (XBaseUserControl)this.DependencyManager.ResolveDependency(adapterSpecificConfigurationUcType, string.Empty);
+			this.CurrentAdapterSpecificConfigurationUc = (BasePartialViewUserControl)this.DependencyManager.ResolveDependency(adapterSpecificConfigurationUcType, string.Empty);
 
 			//this.CurrentAdapterSpecificConfigurationUc = (XBaseUserControl)Activator.CreateInstance(adapterSpecificConfigurationUcType);
 			this.CurrentAdapterSpecificConfigurationUc.Parent = this.pnlAdapterConfigHost;
@@ -198,7 +199,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AdapterSettingsUserControl : BaseUserControl<IAdapterSettingsPartialView, AdapterSettingsSlaveController>
+	public class _AdapterSettingsUserControl : BasePartialViewUserControl<IAdapterSettingsPartialView, AdapterSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

@@ -4,11 +4,10 @@
 */
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 
 using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.Common.WinForms.Presentation.Controllers;
-using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers
@@ -27,14 +26,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 		public void ActivateAdapter()
 		{
-			IDictionary<string, object> context;
-			IAdapterSpecificSettingsPartialView adapterSpecificSettingsPartialView;
-
-			context = new Dictionary<string, object>();
-			adapterSpecificSettingsPartialView = this.View.CurrentAdapterSpecificSettingsPartialView;
-			context.Add(string.Empty, adapterSpecificSettingsPartialView);
-
-			this.DispatchPresentationEvent(Constants.AdapterUpdateEventUri, context);
+			this.EmitPresentationEvent(Constants.AdapterUpdateEventUri, this.View.SelectedAdapterType);
 		}
 
 		public override void InitializeView(IAdapterSettingsPartialView view)
@@ -46,10 +38,12 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 		}
 
 		[DispatchActionUri(Uri = Constants.URI_ADAPTER_UPDATE_EVENT)]
-		public void UpdateAdapter(IPartialView partialView, object context)
+		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, Type actionContext)
 		{
-			if ((object)partialView == null)
-				throw new ArgumentNullException("partialView");
+			if ((object)sourceView == null)
+				throw new ArgumentNullException("sourceView");
+
+			Debug.WriteLine(actionContext);
 		}
 
 		#endregion

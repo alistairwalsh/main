@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 using Solder.Framework;
 
+using _2ndAsset.Common.WinForms.Presentation.Controllers;
+
 namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
 	public interface IFullView : IBaseView
@@ -15,6 +17,11 @@ namespace _2ndAsset.Common.WinForms.Presentation.Views
 		#region Properties/Indexers/Events
 
 		bool IsViewDirty
+		{
+			get;
+		}
+
+		IList<IPartialView> PartialViews
 		{
 			get;
 		}

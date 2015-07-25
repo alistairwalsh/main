@@ -65,7 +65,7 @@
     <Compile Include="Controls\BaseTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\XBaseUserControl.cs">
+    <Compile Include="Controls\BasePartialViewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\BaseUserControl.cs">
@@ -89,20 +89,21 @@
     <None Include="DesignTime\SketchFactory.cs" />
     <None Include="DesignTime\SketchShape.cs" />
     <None Include="DesignTime\SketchUtilities.cs" />
-    <Compile Include="Controls\BaseUserControl~2.cs">
+    <Compile Include="Controls\BasePartialViewUserControl~2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\XBaseForm.cs">
+    <Compile Include="Forms\BaseFullViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\BaseMultiDocumentForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BaseDocumentForm~2.cs">
+    <Compile Include="Forms\BaseDocumentViewForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentation\Controllers\BaseController.cs" />
     <Compile Include="Presentation\Controllers\BaseController~1.cs" />
+    <Compile Include="Presentation\Controllers\IMasterController.cs" />
     <Compile Include="Presentation\Controllers\IBaseController.cs" />
     <Compile Include="Presentation\Controllers\IBaseController~1.cs" />
     <Compile Include="Presentation\Controllers\SlaveController~1.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="Forms\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BaseForm~2.cs">
+    <Compile Include="Forms\BaseFullViewForm~2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IListItem.cs" />
@@ -140,8 +141,7 @@
     <Compile Include="ListItem.cs" />
     <Compile Include="ListItem~1.cs" />
     <Compile Include="Presentation\DispatchActionUriAttribute.cs" />
-    <Compile Include="Presentation\Views\ExtensionMethods.cs" />
-    <Compile Include="Presentation\Views\IDocumentView~1.cs" />
+    <Compile Include="IDispatchTargetProvider.cs" />
     <Compile Include="Presentation\Views\IDocumentView.cs" />
     <Compile Include="Presentation\Views\IFullView.cs" />
     <Compile Include="Presentation\Views\IMultiDocumentView.cs" />

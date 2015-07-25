@@ -5,18 +5,11 @@
 
 using System;
 
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
-
 namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
 	public interface IBaseView
 	{
 		#region Properties/Indexers/Events
-
-		IBaseController Controller
-		{
-			get;
-		}
 
 		IBaseView ParentView
 		{

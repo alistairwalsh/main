@@ -1,4 +1,4 @@
-﻿namespace _2ndAsset.ObfuscationEngine.UI.Controls
+﻿namespace _2ndAsset.ObfuscationEngine.UI.Controls.Adapters
 {
 	partial class AdoNetAdapterSettingsUserControl
 	{

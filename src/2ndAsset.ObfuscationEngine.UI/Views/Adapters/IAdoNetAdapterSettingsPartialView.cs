@@ -9,7 +9,7 @@ using System.Data;
 
 using _2ndAsset.Common.WinForms;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Views
+namespace _2ndAsset.ObfuscationEngine.UI.Views.Adapters
 {
 	public interface IAdoNetAdapterSettingsPartialView : IAdapterSpecificSettingsPartialView
 	{

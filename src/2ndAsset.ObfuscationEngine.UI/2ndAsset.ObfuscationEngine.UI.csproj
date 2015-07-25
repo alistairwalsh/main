@@ -61,13 +61,15 @@
       <Link>SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\Adapters\AdapterSpecificSettingsSlaveController~2.cs" />
+    <Compile Include="Controllers\Adapters\AdapterSpecificSettingsSlaveController~1.cs" />
     <Compile Include="Controllers\DictionarySettingsSlaveController.cs" />
     <Compile Include="Controllers\AdapterSettingsSlaveController.cs" />
     <Compile Include="Controllers\ObfuscationSlaveController.cs" />
     <Compile Include="Controllers\MetadataSettingsSlaveController.cs" />
     <Compile Include="Controllers\AvalancheSettingsSlaveController.cs" />
-    <Compile Include="Controllers\DelimitedTextAdapterSettingsSlaveController.cs" />
-    <Compile Include="Controllers\AdoNetAdapterSettingsSlaveController.cs" />
+    <Compile Include="Controllers\Adapters\DelimitedTextAdapterSettingsSlaveController.cs" />
+    <Compile Include="Controllers\Adapters\AdoNetAdapterSettingsSlaveController.cs" />
     <Compile Include="Controllers\AdapterSettingsMasterController.cs" />
     <Compile Include="Controllers\ObfuscationDocumentMasterController.cs" />
     <Compile Include="Controls\AdapterSettingsUserControl.cs">
@@ -76,13 +78,13 @@
     <Compile Include="Controls\AdapterSettingsUserControl.Designer.cs">
       <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdapterSpecificConfigurationUserControl~2.cs">
+    <Compile Include="Controls\Adapters\AdapterSpecificConfigurationUserControl~2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.cs">
+    <Compile Include="Controls\Adapters\AdoNetAdapterSettingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AdoNetAdapterSettingsUserControl.Designer.cs">
+    <Compile Include="Controls\Adapters\AdoNetAdapterSettingsUserControl.Designer.cs">
       <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\AvalancheSettingsUserControl.cs">
@@ -91,10 +93,10 @@
     <Compile Include="Controls\AvalancheSettingsUserControl.Designer.cs">
       <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DelimitedTextAdapterSettingsUserControl.cs">
+    <Compile Include="Controls\Adapters\DelimitedTextAdapterSettingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DelimitedTextAdapterSettingsUserControl.Designer.cs">
+    <Compile Include="Controls\Adapters\DelimitedTextAdapterSettingsUserControl.Designer.cs">
       <DependentUpon>DelimitedTextAdapterSettingsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DictionarySettingsUserControl.cs">
@@ -126,9 +128,9 @@
     <Compile Include="ProjectAssemblyInfo.cs" />
     <Compile Include="Views\IAdapterSettingsPartialView.cs" />
     <Compile Include="Views\IAdapterSettingsFullView.cs" />
-    <Compile Include="Views\IAdoNetAdapterSettingsPartialView.cs" />
+    <Compile Include="Views\Adapters\IAdoNetAdapterSettingsPartialView.cs" />
     <Compile Include="Views\IAvalancheSettingsPartialView.cs" />
-    <Compile Include="Views\IDelimitedTextAdapterSettingsPartialView.cs" />
+    <Compile Include="Views\Adapters\IDelimitedTextAdapterSettingsPartialView.cs" />
     <Compile Include="Views\IDictionarySettingsPartialView.cs" />
     <Compile Include="Views\IDictionarySpecListView.cs" />
     <Compile Include="Views\IExecutionPartialView.cs" />
@@ -137,7 +139,7 @@
     <Compile Include="Views\IMetadataSettingsPartialView.cs" />
     <Compile Include="Views\IObfuscationPartialView.cs" />
     <Compile Include="Views\IObfuscationDocumentView.cs" />
-    <Compile Include="Views\IAdapterSpecificSettingsPartialView.cs" />
+    <Compile Include="Views\Adapters\IAdapterSpecificSettingsPartialView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\2ndAssetSuite.snk">
@@ -158,13 +160,13 @@
     <EmbeddedResource Include="Controls\AdapterSettingsUserControl.resx">
       <DependentUpon>AdapterSettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\AdoNetAdapterSettingsUserControl.resx">
+    <EmbeddedResource Include="Controls\Adapters\AdoNetAdapterSettingsUserControl.resx">
       <DependentUpon>AdoNetAdapterSettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AvalancheSettingsUserControl.resx">
       <DependentUpon>AvalancheSettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DelimitedTextAdapterSettingsUserControl.resx">
+    <EmbeddedResource Include="Controls\Adapters\DelimitedTextAdapterSettingsUserControl.resx">
       <DependentUpon>DelimitedTextAdapterSettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DictionarySettingsUserControl.resx">

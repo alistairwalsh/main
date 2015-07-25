@@ -25,7 +25,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 
 		public void Execute()
 		{
-			this.DispatchPresentationEvent(Constants.ExecuteObfuscationEventUri, null);
+			this.EmitPresentationEvent(Constants.ExecuteObfuscationEventUri, null);
 		}
 
 		public override void InitializeView(IExecutionPartialView view)

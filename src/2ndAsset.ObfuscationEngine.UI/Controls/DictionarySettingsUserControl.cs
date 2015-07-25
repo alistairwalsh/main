@@ -12,7 +12,6 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Forms;
@@ -95,13 +94,13 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnAddDictionarySpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.AddDictionarySpecView(string.Format("Dictionary_{0:N}", Guid.NewGuid()), false, null, null);
+			this._.AddDictionarySpecView(string.Format("Dictionary_{0:N}", Guid.NewGuid()), false, null, null);
 			this.CoreRefreshControlState();
 		}
 
 		private void btnClearDictionarySpecs_Click(object sender, EventArgs e)
 		{
-			this.PartialView.ClearDictionarySpecViews();
+			this._.ClearDictionarySpecViews();
 			this.CoreRefreshControlState();
 		}
 
@@ -117,7 +116,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveDictionarySpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveDictionarySpecView(this.PartialView.SelectedDictionarySpecListView);
+			this._.RemoveDictionarySpecView(this._.SelectedDictionarySpecListView);
 		}
 
 		void IDictionarySettingsPartialView.ClearDictionarySpecViews()
@@ -247,14 +246,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				get
 				{
 					return this.SubItems[3].Text;
-				}
-			}
-
-			IBaseController IBaseView.Controller
-			{
-				get
-				{
-					return null;
 				}
 			}
 
@@ -389,7 +380,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _DictionarySettingsUserControl : BaseUserControl<IDictionarySettingsPartialView, DictionarySettingsSlaveController>
+	public class _DictionarySettingsUserControl : BasePartialViewUserControl<IDictionarySettingsPartialView, DictionarySettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

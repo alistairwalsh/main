@@ -31,7 +31,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		private void InitializeComponent()
 		{
 			this.tabMain = new System.Windows.Forms.TabControl();
-			this.tpWelcome = new System.Windows.Forms.TabPage();
 			this.tpAvalanche = new System.Windows.Forms.TabPage();
 			this.avalancheSettingsUc = new _2ndAsset.ObfuscationEngine.UI.Controls.AvalancheSettingsUserControl();
 			this.tpSource = new System.Windows.Forms.TabPage();
@@ -52,7 +51,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			// 
 			// tabMain
 			// 
-			this.tabMain.Controls.Add(this.tpWelcome);
 			this.tabMain.Controls.Add(this.tpAvalanche);
 			this.tabMain.Controls.Add(this.tpSource);
 			this.tabMain.Controls.Add(this.tpDictionaries);
@@ -64,15 +62,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			this.tabMain.SelectedIndex = 0;
 			this.tabMain.Size = new System.Drawing.Size(883, 387);
 			this.tabMain.TabIndex = 6;
-			// 
-			// tpWelcome
-			// 
-			this.tpWelcome.Location = new System.Drawing.Point(4, 22);
-			this.tpWelcome.Name = "tpWelcome";
-			this.tpWelcome.Size = new System.Drawing.Size(875, 361);
-			this.tpWelcome.TabIndex = 6;
-			this.tpWelcome.Text = "Welcome";
-			this.tpWelcome.UseVisualStyleBackColor = true;
 			// 
 			// tpAvalanche
 			// 
@@ -197,7 +186,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 
 		private TabControl tabMain;
-		private TabPage tpWelcome;
 		private TabPage tpAvalanche;
 		private AvalancheSettingsUserControl avalancheSettingsUc;
 		private TabPage tpSource;

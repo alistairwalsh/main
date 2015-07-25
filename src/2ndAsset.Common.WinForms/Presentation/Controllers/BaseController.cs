@@ -43,15 +43,15 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		#region Methods/Operators
 
-		protected abstract object DispatchPresentationEvent(Uri controllerActionUri, IDictionary<string, object> controllerActionContext);
-
-		protected bool DispatchPresentationEvent(IBaseView targetView, Uri controllerActionUri, IDictionary<string, object> controllerActionContext, out object controllerActionResult)
+		protected bool DispatchPresentationEvent(IBaseView targetView, Uri controllerActionUri, object controllerActionContext, out IEnumerable<object> controllerActionResult)
 		{
 			MethodInfo[] methodInfos;
 			DispatchActionUriAttribute dispatchActionUriAttribute;
 			Uri tempUri;
 			object retval;
 			List<object> controllerActionResults;
+			IDispatchTargetProvider dispatchTargetProvider;
+			object dispatchTarget;
 
 			if ((object)controllerActionUri == null)
 				throw new ArgumentNullException("controllerActionUri");
@@ -61,9 +61,15 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 			controllerActionResults = new List<object>();
 
-			if ((object)targetView.Controller != null)
+			dispatchTarget = null;
+			dispatchTargetProvider = targetView as IDispatchTargetProvider;
+
+			if ((object)dispatchTargetProvider != null)
+				dispatchTarget = dispatchTargetProvider.Target;
+
+			if ((object)dispatchTarget != null)
 			{
-				methodInfos = targetView.Controller.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+				methodInfos = dispatchTarget.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
 
 				if ((object)methodInfos != null)
 				{
@@ -75,7 +81,7 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 							Uri.TryCreate(dispatchActionUriAttribute.Uri, UriKind.Absolute, out tempUri) &&
 							tempUri == controllerActionUri)
 						{
-							retval = methodInfo.Invoke(targetView.Controller, new object[] { /* the view of the controller raising event */ this.View, controllerActionContext });
+							retval = methodInfo.Invoke(dispatchTarget, new object[] { /* the view of the controller raising event */ this.View, controllerActionContext });
 							controllerActionResults.Add(retval);
 						}
 					}
@@ -99,19 +105,9 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 			this.view = null;
 		}
 
-		protected virtual object UnhandledEventDispatch(Uri controllerActionUri, IDictionary<string, object> controllerActionContext)
+		protected virtual IEnumerable<IEnumerable<object>> UnhandledEventDispatch(Uri controllerActionUri, object controllerActionContext)
 		{
 			throw new InvalidOperationException(string.Format("An unhandled event dispatch occured with URI '{0}'.", controllerActionUri));
-		}
-
-		public virtual void ApplyViewToModel(object model)
-		{
-			// do nothing
-		}
-
-		public virtual void ApplyModelToView(object model)
-		{
-			// do nothing
 		}
 
 		#endregion

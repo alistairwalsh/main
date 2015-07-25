@@ -22,7 +22,7 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		#region Properties/Indexers/Events
 
-		new public TView View
+		public new TView View
 		{
 			get
 			{
@@ -35,6 +35,14 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 		#region Methods/Operators
 
 		public virtual void InitializeView(TView view)
+		{
+			if ((object)view == null)
+				throw new ArgumentNullException("view");
+
+			base.InitializeView(view);
+		}
+
+		public override sealed void InitializeView(IBaseView view)
 		{
 			if ((object)view == null)
 				throw new ArgumentNullException("view");

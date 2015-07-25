@@ -10,13 +10,13 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseDocumentForm<TDocumentView, TMasterController> : BaseForm<TDocumentView, TMasterController>, IDocumentView
+	public class BaseDocumentViewForm<TDocumentView, TMasterController> : BaseFullViewForm<TDocumentView, TMasterController>, IDocumentView
 		where TDocumentView : class, IDocumentView
 		where TMasterController : MasterController<TDocumentView>, new()
 	{
 		#region Constructors/Destructors
 
-		public BaseDocumentForm()
+		public BaseDocumentViewForm()
 		{
 		}
 

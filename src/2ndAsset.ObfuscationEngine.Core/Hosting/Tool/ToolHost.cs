@@ -150,10 +150,14 @@ namespace _2ndAsset.ObfuscationEngine.Core.Hosting.Tool
 
 			metaColumns = null;
 
-			using (ISourceAdapter sourceAdapter = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterInstance<ISourceAdapter>())
+			if ((object)obfuscationConfiguration.SourceAdapterConfiguration != null &&
+				(object)obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterType() != null)
 			{
-				sourceAdapter.Initialize(obfuscationConfiguration.SourceAdapterConfiguration);
-				metaColumns = sourceAdapter.UpstreamMetadata;
+				using (ISourceAdapter sourceAdapter = obfuscationConfiguration.SourceAdapterConfiguration.GetAdapterInstance<ISourceAdapter>())
+				{
+					sourceAdapter.Initialize(obfuscationConfiguration.SourceAdapterConfiguration);
+					metaColumns = sourceAdapter.UpstreamMetadata;
+				}
 			}
 
 			return true;

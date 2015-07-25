@@ -13,13 +13,13 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
-using _2ndAsset.ObfuscationEngine.UI.Controllers;
+using _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters;
 using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Controls
+namespace _2ndAsset.ObfuscationEngine.UI.Controls.Adapters
 {
 	public partial class DelimitedTextAdapterSettingsUserControl : _DelimitedTextAdapterSettingsUserControl, IDelimitedTextAdapterSettingsPartialView
 	{
@@ -153,7 +153,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnAddHeaderSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.AddHeaderSpecView(string.Format("Field_{0:N}", Guid.NewGuid()), FieldType.String);
+			this._.AddHeaderSpecView(string.Format("Field_{0:N}", Guid.NewGuid()), FieldType.String);
 			this.CoreRefreshControlState();
 		}
 
@@ -165,7 +165,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnClearHeaderSpecs_Click(object sender, EventArgs e)
 		{
-			this.PartialView.ClearHeaderSpecViews();
+			this._.ClearHeaderSpecViews();
 			this.CoreRefreshControlState();
 		}
 
@@ -187,7 +187,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveHeaderSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveHeaderSpecView(this.PartialView.SelectedHeaderSpecListView);
+			this._.RemoveHeaderSpecView(this._.SelectedHeaderSpecListView);
 		}
 
 		void IDelimitedTextAdapterSettingsPartialView.ClearHeaderSpecViews()
@@ -276,14 +276,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			#endregion
 
 			#region Properties/Indexers/Events
-
-			IBaseController IBaseView.Controller
-			{
-				get
-				{
-					return null;
-				}
-			}
 
 			FieldType? IHeaderSpecListView.FieldType
 			{

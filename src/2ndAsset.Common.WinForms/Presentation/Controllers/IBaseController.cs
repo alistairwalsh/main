@@ -26,10 +26,6 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		void TerminateView();
 
-		void ApplyViewToModel(object model);
-
-		void ApplyModelToView(object model);
-
 		#endregion
 	}
 }

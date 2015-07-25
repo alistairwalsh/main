@@ -7,16 +7,15 @@ using System;
 using System.ComponentModel;
 
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {
-	public class XBaseUserControl : BaseUserControl, IPartialView
+	public class BasePartialViewUserControl : BaseUserControl, IPartialView
 	{
 		#region Constructors/Destructors
 
-		public XBaseUserControl()
+		public BasePartialViewUserControl()
 		{
 		}
 
@@ -26,38 +25,7 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public virtual IBaseController Controller
-		{
-			get
-			{
-				return this.CoreGetController();
-			}
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IFullView FullView
-		{
-			get
-			{
-				return ((object)this.CoreGetParent<XBaseForm>()) as IFullView;
-			}
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IBaseView ParentView
-		{
-			get
-			{
-				return ((object)this.CoreGetParent<XBaseUserControl>()) as IBaseView ??
-						this.FullView;
-			}
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IPartialView PartialView
+		protected IPartialView _
 		{
 			get
 			{
@@ -65,18 +33,25 @@ namespace _2ndAsset.Common.WinForms.Controls
 			}
 		}
 
-		#endregion
-
-		#region Methods/Operators
-
-		void IPartialView._()
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		IFullView IPartialView.FullView
 		{
-			throw new NotImplementedException();
+			get
+			{
+				return ((object)this.CoreGetParent<BaseFullViewForm>()) as IFullView;
+			}
 		}
 
-		protected virtual IBaseController CoreGetController()
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		IBaseView IBaseView.ParentView
 		{
-			return null;
+			get
+			{
+				return ((object)this.CoreGetParent<BasePartialViewUserControl>()) as IBaseView ??
+						this._.FullView;
+			}
 		}
 
 		#endregion

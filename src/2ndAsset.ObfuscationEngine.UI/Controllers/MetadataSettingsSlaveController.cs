@@ -6,6 +6,7 @@
 using System;
 
 using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers
@@ -22,6 +23,40 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 		#region Methods/Operators
 
+		public void ApplyDocumentToView(ObfuscationConfiguration obfuscationConfiguration)
+		{
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
+
+			if ((object)obfuscationConfiguration.TableConfiguration != null &&
+				(object)obfuscationConfiguration.TableConfiguration.ColumnConfigurations != null)
+			{
+				foreach (ColumnConfiguration columnConfiguration in obfuscationConfiguration.TableConfiguration.ColumnConfigurations)
+					this.View.AddMetaColumnSpecView(columnConfiguration.ColumnName, columnConfiguration.ObfuscationStrategyAqtn);
+			}
+		}
+
+		public void ApplyViewToDocument(ObfuscationConfiguration obfuscationConfiguration)
+		{
+			if ((object)obfuscationConfiguration == null)
+				throw new ArgumentNullException("obfuscationConfiguration");
+
+			obfuscationConfiguration.TableConfiguration = obfuscationConfiguration.TableConfiguration ?? new TableConfiguration();
+
+			foreach (IMetaColumnSpecListView metaColumnSpecView in this.View.MetaColumnSpecListViews)
+			{
+				ColumnConfiguration columnConfiguration;
+
+				columnConfiguration = new ColumnConfiguration()
+									{
+										ColumnName = metaColumnSpecView.ColumnName ?? string.Empty,
+										ObfuscationStrategyAqtn = metaColumnSpecView.ObfuscationStrategyAqtn
+									};
+
+				obfuscationConfiguration.TableConfiguration.ColumnConfigurations.Add(columnConfiguration);
+			}
+		}
+
 		public override void InitializeView(IMetadataSettingsPartialView view)
 		{
 			if ((object)view == null)
@@ -32,7 +67,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 		public void RefreshUpstream()
 		{
-			this.DispatchPresentationEvent(Constants.RefreshUpstreamMetadataColumnsEventUri, null);
+			this.EmitPresentationEvent(Constants.RefreshUpstreamMetadataColumnsEventUri, null);
 		}
 
 		#endregion

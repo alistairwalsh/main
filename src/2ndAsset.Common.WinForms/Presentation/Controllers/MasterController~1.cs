@@ -10,7 +10,7 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 {
-	public abstract class MasterController<TView> : BaseController<TView>
+	public abstract class MasterController<TView> : BaseController<TView>, IMasterController
 		where TView : class, IFullView
 	{
 		#region Constructors/Destructors
@@ -23,28 +23,39 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		#region Methods/Operators
 
-		protected override object DispatchPresentationEvent(Uri controllerActionUri, IDictionary<string, object> controllerActionContext)
+		protected IEnumerable<IEnumerable<object>> BroadcastPresentationEvent(Uri controllerActionUri, object controllerActionContext)
 		{
-			// BUBBLE
-			object controllerActionResult;
-			IBaseView current;
+			// TUNNEL
+			IEnumerable<object> controllerActionResult;
+			List<IEnumerable<object>> controllerActionResults;
 
-			current = this.View;
+			controllerActionResults = new List<IEnumerable<object>>();
 
-			while ((object)current != null)
+			foreach (IPartialView partialView in this.View.PartialViews)
 			{
-				if (this.DispatchPresentationEvent(current, controllerActionUri, controllerActionContext, out controllerActionResult))
-					return controllerActionResult;
-
-				current = current.ParentView;
+				if (this.DispatchPresentationEvent(partialView, controllerActionUri, controllerActionContext, out controllerActionResult))
+					controllerActionResults.Add(controllerActionResult);
 			}
 
-			return this.UnhandledEventDispatch(controllerActionUri, controllerActionContext);
+			if (controllerActionResults.Count < 1)
+				return this.UnhandledEventDispatch(controllerActionUri, controllerActionContext);
+
+			return controllerActionResults;
 		}
 
 		public virtual void ReadyView()
 		{
 			this.View.StatusText = "Ready.";
+		}
+
+		public override void TerminateView()
+		{
+			/*foreach (IPartialView partialView in this.View.PartialViews)
+				partialView;*/
+
+			this.View.PartialViews.Clear();
+
+			base.TerminateView();
 		}
 
 		#endregion

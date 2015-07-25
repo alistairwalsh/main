@@ -76,7 +76,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _AvalancheSettingsUserControl : BaseUserControl<IAvalancheSettingsPartialView, AvalancheSettingsSlaveController>
+	public class _AvalancheSettingsUserControl : BasePartialViewUserControl<IAvalancheSettingsPartialView, AvalancheSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

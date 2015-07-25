@@ -60,7 +60,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controls
 		#endregion
 	}
 
-	public class _ExecutionUserControl : BaseUserControl<IExecutionPartialView, ExecutionController>
+	public class _ExecutionUserControl : BasePartialViewUserControl<IExecutionPartialView, ExecutionController>
 	{
 		#region Constructors/Destructors
 

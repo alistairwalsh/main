@@ -12,18 +12,17 @@ using System.Windows.Forms;
 using Solder.Framework;
 using Solder.Framework.Utilities;
 
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Common.WinForms.Presentation.Views;
 
 using Message = Solder.Framework.Message;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class XBaseForm : BaseForm, IFullView
+	public class BaseFullViewForm : BaseForm, IFullView
 	{
 		#region Constructors/Destructors
 
-		public XBaseForm()
+		public BaseFullViewForm()
 		{
 		}
 
@@ -31,8 +30,8 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Fields/Constants
 
+		private readonly IList<IPartialView> partialViews = new List<IPartialView>();
 		private readonly IDictionary<Uri, Type> uriToControlTypes = new Dictionary<Uri, Type>();
-		private object document;
 
 		#endregion
 
@@ -40,17 +39,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public virtual IBaseController Controller
-		{
-			get
-			{
-				return this.CoreGetController();
-			}
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IFullView FullView
+		protected IFullView _
 		{
 			get
 			{
@@ -70,11 +59,21 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IBaseView ParentView
+		IBaseView IBaseView.ParentView
 		{
 			get
 			{
 				return null;
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		IList<IPartialView> IFullView.PartialViews
+		{
+			get
+			{
+				return this.partialViews;
 			}
 		}
 
@@ -149,11 +148,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.Close(); // direct
 		}
 
-		protected virtual IBaseController CoreGetController()
-		{
-			return null;
-		}
-
 		/*TFullView IFullView.CreateView<TFullView>(Uri viewUri)
 		{
 			return (TFullView)this.FullView.CreateView(viewUri);
@@ -180,9 +174,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}*/
 
-		private XBaseForm GetFormFromUri(Uri viewUri)
+		private BaseFullViewForm GetFormFromUri(Uri viewUri)
 		{
-			XBaseForm form;
+			BaseFullViewForm form;
 			Type controlType;
 
 			if ((object)viewUri == null)
@@ -191,7 +185,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 			if (!this.UriToControlTypes.TryGetValue(viewUri, out controlType))
 				throw new InvalidOperationException(string.Format("{0}", viewUri));
 
-			form = (XBaseForm)Activator.CreateInstance(controlType);
+			form = (BaseFullViewForm)Activator.CreateInstance(controlType);
 
 			return form;
 		}
@@ -220,7 +214,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 			if ((object)asyncCallback == null)
 				throw new ArgumentNullException("asyncCallback");
 
-			this.FullView.StatusText = "Asynchronous operation started...";
+			this._.StatusText = "Asynchronous operation started...";
 
 			dialogResult = BackgroundTaskForm.Show<TObject>(this, text, o =>
 																		{
@@ -238,7 +232,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 				// should never reach this point
 			}
 
-			this.FullView.StatusText = "Asynchronous operation completed successfully.";
+			this._.StatusText = "Asynchronous operation completed successfully.";
 
 			return asyncResult;
 		}
@@ -299,7 +293,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 			if ((object)viewUri == null)
 				throw new ArgumentNullException("viewUri");
 
-			using (XBaseForm form = this.GetFormFromUri(viewUri))
+			using (BaseFullViewForm form = this.GetFormFromUri(viewUri))
 				dialogResult = form.ShowDialog(this);
 
 			return dialogResult == DialogResult.OK;
@@ -307,11 +301,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		void IFullView.ShowVoidAsync(string text, Action asyncCallback)
 		{
-			this.FullView.ShowAsync<object>(text, (p) =>
-												{
-													asyncCallback();
-													return null;
-												}, null);
+			this._.ShowAsync<object>(text, (p) =>
+											{
+												asyncCallback();
+												return null;
+											}, null);
 		}
 
 		bool IFullView.TryGetOpenFilePath(out string filePath)

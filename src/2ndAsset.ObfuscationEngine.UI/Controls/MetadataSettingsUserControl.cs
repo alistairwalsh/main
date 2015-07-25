@@ -12,7 +12,6 @@ using Solder.Framework.Utilities;
 
 using _2ndAsset.Common.WinForms.Controls;
 using _2ndAsset.Common.WinForms.Forms;
-using _2ndAsset.Common.WinForms.Presentation.Controllers;
 using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.UI.Controllers;
 using _2ndAsset.ObfuscationEngine.UI.Views;
@@ -90,13 +89,13 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnAddMetaColumnSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.AddMetaColumnSpecView(string.Format("Column_{0:N}", Guid.NewGuid()), string.Empty);
+			this._.AddMetaColumnSpecView(string.Format("Column_{0:N}", Guid.NewGuid()), string.Empty);
 			this.CoreRefreshControlState();
 		}
 
 		private void btnClearMetaColumnSpecs_Click(object sender, EventArgs e)
 		{
-			this.PartialView.ClearMetaColumnSpecViews();
+			this._.ClearMetaColumnSpecViews();
 			this.CoreRefreshControlState();
 		}
 
@@ -118,7 +117,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 
 		private void btnRemoveMetaColumnSpec_Click(object sender, EventArgs e)
 		{
-			this.PartialView.RemoveMetaColumnSpecView(this.PartialView.SelectedMetaColumnSpecListView);
+			this._.RemoveMetaColumnSpecView(this._.SelectedMetaColumnSpecListView);
 		}
 
 		void IMetadataSettingsPartialView.ClearMetaColumnSpecViews()
@@ -216,14 +215,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 				get
 				{
 					return this.SubItems[0].Text;
-				}
-			}
-
-			IBaseController IBaseView.Controller
-			{
-				get
-				{
-					return null;
 				}
 			}
 
@@ -352,7 +343,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _MetadataSettingsUserControl : BaseUserControl<IMetadataSettingsPartialView, MetadataSettingsSlaveController>
+	public class _MetadataSettingsUserControl : BasePartialViewUserControl<IMetadataSettingsPartialView, MetadataSettingsSlaveController>
 	{
 		#region Constructors/Destructors
 

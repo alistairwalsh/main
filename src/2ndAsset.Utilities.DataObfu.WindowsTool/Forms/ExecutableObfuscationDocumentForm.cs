@@ -43,6 +43,14 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			}
 		}
 
+		IFullView IPartialView.FullView
+		{
+			get
+			{
+				return this;
+			}
+		}
+
 		IObfuscationPartialView IObfuscationDocumentView.ObfuscationPartialView
 		{
 			get
@@ -76,7 +84,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			set
 			{
 				if (value.GetValueOrDefault())
-					this.FullView.StatusText = "Execution completed.";
+					this._.StatusText = "Execution completed.";
 			}
 		}
 
@@ -85,20 +93,15 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 			set
 			{
 				if ((object)value == null)
-					this.FullView.StatusText = "Execution starting...";
+					this._.StatusText = "Execution starting...";
 				else
-					this.FullView.StatusText = string.Format("Executing: {0}...", value);
+					this._.StatusText = string.Format("Executing: {0}...", value);
 			}
 		}
 
 		#endregion
 
 		#region Methods/Operators
-
-		void IPartialView._()
-		{
-			throw new NotImplementedException();
-		}
 
 		protected override void CoreQuit(out bool cancel)
 		{
@@ -147,7 +150,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Forms
 		#endregion
 	}
 
-	public class _ExecutableObfuscationDocumentForm : BaseDocumentForm<IExecutableObfuscationDocumentView, ExecutableObfuscationDocumentMasterController>
+	public class _ExecutableObfuscationDocumentForm : BaseDocumentViewForm<IExecutableObfuscationDocumentView, ExecutableObfuscationDocumentMasterController>
 	{
 	}
 }

@@ -5,13 +5,13 @@
 
 using System;
 
-namespace _2ndAsset.Common.WinForms.Presentation.Views
+namespace _2ndAsset.Common.WinForms
 {
-	public interface IPartialView : IBaseView
+	public interface IDispatchTargetProvider
 	{
 		#region Properties/Indexers/Events
 
-		IFullView FullView
+		object Target
 		{
 			get;
 		}

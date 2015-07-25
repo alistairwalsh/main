@@ -49,7 +49,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Forms
 		#endregion
 	}
 
-	public class _AdapterSettingsForm : BaseForm<IAdapterSettingsFullView, AdapterSettingsMasterController>
+	public class _AdapterSettingsForm : BaseFullViewForm<IAdapterSettingsFullView, AdapterSettingsMasterController>
 	{
 		#region Constructors/Destructors
 

@@ -9,10 +9,10 @@ using System.Data;
 
 using _2ndAsset.Common.WinForms;
 using _2ndAsset.Common.WinForms.Controls;
-using _2ndAsset.ObfuscationEngine.UI.Controllers;
-using _2ndAsset.ObfuscationEngine.UI.Views;
+using _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters;
+using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
-namespace _2ndAsset.ObfuscationEngine.UI.Controls
+namespace _2ndAsset.ObfuscationEngine.UI.Controls.Adapters
 {
 	public partial class AdoNetAdapterSettingsUserControl : _AdoNetAdapterSettingsUserControl, IAdoNetAdapterSettingsPartialView
 	{

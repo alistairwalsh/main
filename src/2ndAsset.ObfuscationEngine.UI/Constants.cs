@@ -12,8 +12,10 @@ namespace _2ndAsset.ObfuscationEngine.UI
 		#region Fields/Constants
 
 		public const string URI_ADAPTER_UPDATE_EVENT = "event://obfuscation/adapter/update";
+		public const string URI_DOCUMENT_TO_VIEW_EVENT = "event://obfuscation/document-to-view";
 		public const string URI_EXECUTE_OBFUSCATION_EVENT = "event://obfuscation/execute";
 		public const string URI_REFRESH_UPSTREAM_METADATA_COLUMNS_EVENT = "event://obfuscation/metadata-settings/refresh-meta-column-specs";
+		public const string URI_VIEW_TO_DOCUMENT_EVENT = "event://obfuscation/view-to-document";
 		private static readonly Uri refreshUpstreamMetadataColumnsEventUri = new Uri(URI_REFRESH_UPSTREAM_METADATA_COLUMNS_EVENT);
 		private static readonly Uri adapterUpdateEventUri = new Uri(URI_ADAPTER_UPDATE_EVENT);
 		private static readonly Uri executeObfuscationEventUri = new Uri(URI_EXECUTE_OBFUSCATION_EVENT);

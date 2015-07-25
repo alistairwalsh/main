@@ -174,7 +174,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 		protected override void OnClosed(EventArgs e)
 		{
 			base.OnClosed(e);
-			this.CoreTeardown();
+			//this.CoreTeardown();
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
@@ -189,6 +189,9 @@ namespace _2ndAsset.Common.WinForms.Forms
 			this.CoreQuit(out cancel);
 
 			e.Cancel = cancel;
+
+			if (!cancel)
+				this.CoreTeardown(); // ???
 		}
 
 		protected override void OnHandleCreated(EventArgs e)

@@ -97,7 +97,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 		#endregion
 	}
 
-	public class _ObfuscationUserControl : BaseUserControl<IObfuscationPartialView, ObfuscationSlaveController>
+	public class _ObfuscationUserControl : BasePartialViewUserControl<IObfuscationPartialView, ObfuscationSlaveController>
 	{
 		#region Constructors/Destructors
 

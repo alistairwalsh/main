@@ -11,13 +11,13 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Controls
 {
-	public class BaseUserControl<TPartialView, TSlaveController> : XBaseUserControl
+	public class BasePartialViewUserControl<TPartialView, TSlaveController> : BasePartialViewUserControl, IDispatchTargetProvider
 		where TPartialView : class, IPartialView
 		where TSlaveController : SlaveController<TPartialView>, new()
 	{
 		#region Constructors/Destructors
 
-		public BaseUserControl()
+		public BasePartialViewUserControl()
 		{
 		}
 
@@ -33,7 +33,17 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public TSlaveController Controller
+		protected new TPartialView _
+		{
+			get
+			{
+				return this as TPartialView;
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		protected TSlaveController Controller
 		{
 			get
 			{
@@ -41,13 +51,11 @@ namespace _2ndAsset.Common.WinForms.Controls
 			}
 		}
 
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new TPartialView PartialView
+		object IDispatchTargetProvider.Target
 		{
 			get
 			{
-				return base.PartialView as TPartialView;
+				return this.Controller;
 			}
 		}
 
@@ -55,22 +63,17 @@ namespace _2ndAsset.Common.WinForms.Controls
 
 		#region Methods/Operators
 
-		protected override IBaseController CoreGetController()
-		{
-			return this.Controller;
-		}
-
 		protected override void CoreSetup()
 		{
 			base.CoreSetup();
 
-			if ((object)this.PartialView != null)
-				this.Controller.InitializeView(this.PartialView);
+			if ((object)this._ != null) // prevent designer from barfing
+				this.Controller.InitializeView(this._);
 		}
 
 		protected override void CoreTeardown()
 		{
-			if ((object)this.PartialView != null)
+			if ((object)this._ != null) // prevent designer from barfing
 				this.Controller.TerminateView();
 
 			base.CoreTeardown();
