@@ -30,7 +30,7 @@ namespace _2ndAsset.Ssis.Components
 		public const int COMPONENT_RUNTIMECONNECTION_IDX_DESTINATION = 0;
 		public const int COMPONENT_RUNTIMECONNECTION_IDX_SOURCE = 0;
 		public const string COMPONENT_RUNTIMECONNECTION_NAME_DICTIONARY = "DictionaryConnection";
-		public const string COMPONENT_UI_AQTN = "_2ndAsset.Ssis.Components.UI.ObfuscationStrategyTransformUI, 2ndAsset.Ssis.Components.UI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=36f631e1fe773b98, processorArchitecture=MSIL";
+		public const string COMPONENT_UI_AQTN = null;
 		public const string INPUTCOLUMN_PROP_DESC_DICTIONARY_REFERENCE = "Dictionary reference.";
 		public const string INPUTCOLUMN_PROP_DESC_IS_COLUMN_NULLABLE = "Is column nullable.";
 		public const string INPUTCOLUMN_PROP_DESC_OBFUSCATION_STRATEGY = "Obfuscation strategy.";
