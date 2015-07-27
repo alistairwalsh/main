@@ -37,7 +37,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 		#region Methods/Operators
 
 		[DispatchActionUri(Uri = Constants.URI_EXECUTE_OBFUSCATION_EVENT)]
-		public void ExecuteObfuscation(IPartialView partialView, object context)
+		public void ExecuteObfuscation(IPartialView sourceView, object actionContext)
 		{
 			ObfuscationConfiguration obfuscationConfiguration;
 			IEnumerable<Message> messages;
@@ -46,7 +46,11 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 			this.View.ExecutionPartialView.IsComplete = null;
 			this.View.ExecutionPartialView.DurationSeconds = null;
 
-			obfuscationConfiguration = new ObfuscationConfiguration();
+			obfuscationConfiguration = new ObfuscationConfiguration()
+										{
+											ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion,
+											EngineVersion = ObfuscationConfiguration.CurrentEngineVersion
+										};
 			this.ApplyViewToDocument(obfuscationConfiguration);
 
 			messages = obfuscationConfiguration.Validate();
@@ -72,7 +76,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 			this.View.ShowAlert("Done.");
 		}
 
-		protected /*override*/ void InitializeDictionaryAdapterView(IDictionarySpecListView view)
+		protected override void InitializeDictionaryAdapterView(IDictionarySpecListView view)
 		{
 			IList<IListItem<Type>> typeListItems;
 

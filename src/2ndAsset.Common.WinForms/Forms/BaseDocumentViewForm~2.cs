@@ -10,8 +10,8 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseDocumentViewForm<TDocumentView, TMasterController> : BaseFullViewForm<TDocumentView, TMasterController>, IDocumentView
-		where TDocumentView : class, IDocumentView
+	public class BaseDocumentViewForm<TDocumentView, TMasterController> : BaseFullViewForm<TDocumentView, TMasterController>, IDocumentFullView
+		where TDocumentView : class, IDocumentFullView
 		where TMasterController : MasterController<TDocumentView>, new()
 	{
 		#region Constructors/Destructors
@@ -30,7 +30,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Properties/Indexers/Events
 
-		string IDocumentView.FilePath
+		string IDocumentFullView.FilePath
 		{
 			get
 			{

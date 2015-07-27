@@ -4,18 +4,24 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace _2ndAsset.Common.WinForms.Presentation.Views
 {
-	public interface IDocumentView : IFullView
+	public interface IMultiDocumentFullView : IFullView
 	{
 		#region Properties/Indexers/Events
 
-		string FilePath
+		IList<IDocumentFullView> DocumentViews
 		{
 			get;
-			set;
 		}
+
+		#endregion
+
+		#region Methods/Operators
+
+		IDocumentFullView CreateDocumentView(Uri viewUri, string documentFilePath);
 
 		#endregion
 	}

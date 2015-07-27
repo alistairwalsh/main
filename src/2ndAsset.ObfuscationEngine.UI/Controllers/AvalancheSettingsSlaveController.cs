@@ -7,7 +7,9 @@ using System;
 
 using Solder.Framework;
 
+using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
 using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
@@ -24,28 +26,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 		#endregion
 
 		#region Methods/Operators
-
-		public void ApplyDocumentToView(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			if ((object)obfuscationConfiguration.HashConfiguration != null)
-			{
-				this.View.HashMultiplier = obfuscationConfiguration.HashConfiguration.Multiplier;
-				this.View.HashSeed = obfuscationConfiguration.HashConfiguration.Seed;
-			}
-		}
-
-		public void ApplyViewToDocument(ObfuscationConfiguration obfuscationConfiguration)
-		{
-			if ((object)obfuscationConfiguration == null)
-				throw new ArgumentNullException("obfuscationConfiguration");
-
-			obfuscationConfiguration.HashConfiguration = obfuscationConfiguration.HashConfiguration ?? new HashConfiguration();
-			obfuscationConfiguration.HashConfiguration.Multiplier = this.View.HashMultiplier;
-			obfuscationConfiguration.HashConfiguration.Seed = this.View.HashSeed;
-		}
 
 		public override void InitializeView(IAvalancheSettingsPartialView view)
 		{

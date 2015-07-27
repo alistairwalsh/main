@@ -21,7 +21,53 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		#endregion
 
+		#region Fields/Constants
+
+		private readonly IDictionary<IPartialView, ISlaveController> childMap = new Dictionary<IPartialView, ISlaveController>();
+
+		#endregion
+
+		#region Properties/Indexers/Events
+
+		public IDictionary<IPartialView, ISlaveController> ChildMap
+		{
+			get
+			{
+				return this.childMap;
+			}
+		}
+
+		#endregion
+
 		#region Methods/Operators
+
+		public void ApplyModelToView<TModel>(TModel model)
+		{
+			if ((object)model == null)
+				throw new ArgumentNullException("model");
+
+			// do nothing
+		}
+
+		public void ApplyViewToModel<TModel>(TModel model)
+		{
+			if ((object)model == null)
+				throw new ArgumentNullException("model");
+
+			// do nothing
+		}
+
+		[DispatchActionUri(Uri = URI_CONTROLLER_ATTACH_CHILD_EVENT)]
+		public void AttachChild(IPartialView partialView, ISlaveController slaveController)
+		{
+			if ((object)partialView == null)
+				throw new ArgumentNullException("partialView");
+
+			if ((object)slaveController == null)
+				throw new ArgumentNullException("slaveController");
+
+			this.ChildMap.Add(partialView, slaveController);
+		}
 
 		protected IEnumerable<IEnumerable<object>> BroadcastPresentationEvent(Uri controllerActionUri, object controllerActionContext)
 		{
@@ -31,7 +77,7 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 			controllerActionResults = new List<IEnumerable<object>>();
 
-			foreach (IPartialView partialView in this.View.PartialViews)
+			foreach (IPartialView partialView in this.ChildMap.Keys)
 			{
 				if (this.DispatchPresentationEvent(partialView, controllerActionUri, controllerActionContext, out controllerActionResult))
 					controllerActionResults.Add(controllerActionResult);
@@ -50,10 +96,7 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		public override void TerminateView()
 		{
-			/*foreach (IPartialView partialView in this.View.PartialViews)
-				partialView;*/
-
-			this.View.PartialViews.Clear();
+			this.ChildMap.Clear();
 
 			base.TerminateView();
 		}

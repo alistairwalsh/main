@@ -25,17 +25,31 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		#region Fields/Constants
 
+		public const string URI_CONTROLLER_ATTACH_CHILD_EVENT = "event://controller/attach-child";
+		private static readonly Uri controllerAttachChildEventUri = new Uri(URI_CONTROLLER_ATTACH_CHILD_EVENT);
 		private IBaseView view;
 
 		#endregion
 
 		#region Properties/Indexers/Events
 
+		public static Uri ControllerAttachChildEventUri
+		{
+			get
+			{
+				return controllerAttachChildEventUri;
+			}
+		}
+
 		public IBaseView View
 		{
 			get
 			{
 				return this.view;
+			}
+			private set
+			{
+				this.view = value;
 			}
 		}
 
@@ -97,12 +111,12 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 			if ((object)view == null)
 				throw new ArgumentNullException("view");
 
-			this.view = view;
+			this.View = view;
 		}
 
 		public virtual void TerminateView()
 		{
-			this.view = null;
+			this.View = null;
 		}
 
 		protected virtual IEnumerable<IEnumerable<object>> UnhandledEventDispatch(Uri controllerActionUri, object controllerActionContext)

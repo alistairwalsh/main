@@ -12,8 +12,8 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Forms
 {
-	public class BaseMultiDocumentForm<TMultiDocumentView, TMasterController> : BaseFullViewForm<TMultiDocumentView, TMasterController>, IMultiDocumentView
-		where TMultiDocumentView : class, IMultiDocumentView
+	public class BaseMultiDocumentForm<TMultiDocumentView, TMasterController> : BaseFullViewForm<TMultiDocumentView, TMasterController>, IMultiDocumentFullView
+		where TMultiDocumentView : class, IMultiDocumentFullView
 		where TMasterController : MasterController<TMultiDocumentView>, new()
 	{
 		#region Constructors/Destructors
@@ -40,11 +40,11 @@ namespace _2ndAsset.Common.WinForms.Forms
 			}
 		}
 
-		IList<IDocumentView> IMultiDocumentView.DocumentViews
+		IList<IDocumentFullView> IMultiDocumentFullView.DocumentViews
 		{
 			get
 			{
-				return this.DocumentForms.Cast<IDocumentView>().ToList();
+				return this.DocumentForms.Cast<IDocumentFullView>().ToList();
 			}
 		}
 
@@ -84,10 +84,10 @@ namespace _2ndAsset.Common.WinForms.Forms
 			// do nothing
 		}
 
-		IDocumentView IMultiDocumentView.CreateDocumentView(Uri viewUri, string documentFilePath)
+		IDocumentFullView IMultiDocumentFullView.CreateDocumentView(Uri viewUri, string documentFilePath)
 		{
 			BaseFullViewForm form;
-			IDocumentView documentView;
+			IDocumentFullView documentView;
 			Type controlType;
 
 			if ((object)viewUri == null)
@@ -102,7 +102,7 @@ namespace _2ndAsset.Common.WinForms.Forms
 			form.TextChanged += this.documentForm_TextChanged;
 			form.Closed += this.documentForm_Closed;
 
-			documentView = (IDocumentView)form;
+			documentView = (IDocumentFullView)form;
 			documentView.FilePath = documentFilePath;
 
 			form.Show();

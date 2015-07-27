@@ -12,7 +12,6 @@ using Solder.Framework;
 using _2ndAsset.ObfuscationEngine.Core;
 using _2ndAsset.ObfuscationEngine.Core.Adapter;
 using _2ndAsset.ObfuscationEngine.Core.Config;
-using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.Core.Hosting.Tool;
 using _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText;
 using _2ndAsset.ObfuscationEngine.UI.Views;
@@ -40,61 +39,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters
 		#endregion
 
 		#region Methods/Operators
-
-		private static void _ApplyDocumentToViewDelimitedText(DelimitedTextAdapterConfiguration delimitedTextAdapterConfiguration, IDelimitedTextAdapterSettingsPartialView delimitedTextAdapterSettingsPartialView)
-		{
-			if ((object)delimitedTextAdapterConfiguration == null)
-				throw new ArgumentNullException("delimitedTextAdapterConfiguration");
-
-			if ((object)delimitedTextAdapterSettingsPartialView == null)
-				throw new ArgumentNullException("delimitedTextAdapterSettingsPartialView");
-
-			delimitedTextAdapterSettingsPartialView.TextFilePath = delimitedTextAdapterConfiguration.DelimitedTextFilePath;
-
-			if ((object)delimitedTextAdapterConfiguration.DelimitedTextSpec != null)
-			{
-				delimitedTextAdapterSettingsPartialView.IsFirstRowHeaders = delimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader;
-				delimitedTextAdapterSettingsPartialView.QuoteValue = EscapeValue(delimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue);
-				delimitedTextAdapterSettingsPartialView.RecordDelimiter = EscapeValue(delimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter);
-				delimitedTextAdapterSettingsPartialView.FieldDelimiter = EscapeValue(delimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter);
-
-				delimitedTextAdapterSettingsPartialView.ClearHeaderSpecViews();
-
-				if ((object)delimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs != null)
-				{
-					foreach (HeaderSpec headerSpec in delimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs)
-						delimitedTextAdapterSettingsPartialView.AddHeaderSpecView(headerSpec.HeaderName, headerSpec.FieldType);
-				}
-			}
-		}
-
-		private static void _ApplyViewToDocumentDelimitedText(IDelimitedTextAdapterSettingsPartialView delimitedTextAdapterSettingsPartialView, DelimitedTextAdapterConfiguration delimitedTextAdapterConfiguration)
-		{
-			if ((object)delimitedTextAdapterSettingsPartialView == null)
-				throw new ArgumentNullException("delimitedTextAdapterSettingsPartialView");
-
-			if ((object)delimitedTextAdapterConfiguration == null)
-				throw new ArgumentNullException("delimitedTextAdapterConfiguration");
-
-			delimitedTextAdapterConfiguration.DelimitedTextFilePath = delimitedTextAdapterSettingsPartialView.TextFilePath;
-			delimitedTextAdapterConfiguration.DelimitedTextSpec.FirstRecordIsHeader = delimitedTextAdapterSettingsPartialView.IsFirstRowHeaders;
-			delimitedTextAdapterConfiguration.DelimitedTextSpec.QuoteValue = UnescapeValue(delimitedTextAdapterSettingsPartialView.QuoteValue);
-			delimitedTextAdapterConfiguration.DelimitedTextSpec.RecordDelimiter = UnescapeValue(delimitedTextAdapterSettingsPartialView.RecordDelimiter);
-			delimitedTextAdapterConfiguration.DelimitedTextSpec.FieldDelimiter = UnescapeValue(delimitedTextAdapterSettingsPartialView.FieldDelimiter);
-
-			foreach (IHeaderSpecListView headerSpecView in delimitedTextAdapterSettingsPartialView.HeaderSpecViews)
-			{
-				HeaderSpec headerSpec;
-
-				headerSpec = new HeaderSpec()
-							{
-								FieldType = headerSpecView.FieldType.GetValueOrDefault(),
-								HeaderName = headerSpecView.HeaderName
-							};
-
-				delimitedTextAdapterConfiguration.DelimitedTextSpec.HeaderSpecs.Add(headerSpec);
-			}
-		}
 
 		private static string EscapeValue(string value)
 		{

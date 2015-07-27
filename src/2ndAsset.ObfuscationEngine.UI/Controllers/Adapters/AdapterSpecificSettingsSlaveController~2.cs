@@ -5,7 +5,6 @@
 
 using System;
 
-using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.Core.Config.Adapters;
 using _2ndAsset.ObfuscationEngine.UI.Views.Adapters;
 
@@ -18,18 +17,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers.Adapters
 		#region Constructors/Destructors
 
 		public AdapterSpecificSettingsSlaveController()
-		{
-		}
-
-		#endregion
-
-		#region Methods/Operators
-
-		public void ApplyDocumentToView(AdapterConfiguration<TAdapterSpecificConfiguration> adapterConfiguration)
-		{
-		}
-
-		public void ApplyViewToDocument(AdapterConfiguration<TAdapterSpecificConfiguration> adapterConfiguration)
 		{
 		}
 

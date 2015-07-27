@@ -5,9 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
-using System.Data.OleDb;
-using System.Data.SqlClient;
 using System.Diagnostics;
 
 using Solder.Framework.Utilities;
@@ -52,11 +49,6 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			this.View.AdapterSettingsPartialView.AdapterTypes = typeListItems;
 			this.View.AdapterSettingsPartialView.SelectedAdapterType = null;
 
-			typeListItems = new List<IListItem<Type>>();
-			typeListItems.Add(new ListItem<Type>(typeof(OleDbConnection), "OleDbConnection (dictionary)"));
-			typeListItems.Add(new ListItem<Type>(typeof(OdbcConnection), "OdbcConnection (dictionary)"));
-			typeListItems.Add(new ListItem<Type>(typeof(SqlConnection), "SqlConnection (dictionary)"));
-
 			this.View.StatusText = "Ready";
 		}
 
@@ -66,7 +58,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 		}
 
 		[DispatchActionUri(Uri = Constants.URI_ADAPTER_UPDATE_EVENT)]
-		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, object actionContext)
+		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, Type actionContext)
 		{
 			if ((object)sourceView == null)
 				throw new ArgumentNullException("sourceView");

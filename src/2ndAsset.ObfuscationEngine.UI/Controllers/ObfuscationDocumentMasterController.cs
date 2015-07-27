@@ -22,7 +22,7 @@ using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 {
-	public abstract class ObfuscationDocumentMasterController<TObfuscationDocumentView> : MasterController<TObfuscationDocumentView>
+	public abstract partial class ObfuscationDocumentMasterController<TObfuscationDocumentView> : MasterController<TObfuscationDocumentView>
 		where TObfuscationDocumentView : class, IObfuscationDocumentView
 	{
 		#region Constructors/Destructors
@@ -53,18 +53,20 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 		#region Methods/Operators
 
-		public void ApplyDocumentToView(ObfuscationConfiguration obfuscationConfiguration)
+		protected void ApplyDocumentToView(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
 
-			//this.View.ObfuscationPartialView.ApplyDocumentToView(obfuscationConfiguration);
+			this.ApplyDocumentToView_ObfuscationSettings(obfuscationConfiguration);
 		}
 
-		public void ApplyViewToDocument(ObfuscationConfiguration obfuscationConfiguration)
+		protected void ApplyViewToDocument(ObfuscationConfiguration obfuscationConfiguration)
 		{
 			if ((object)obfuscationConfiguration == null)
 				throw new ArgumentNullException("obfuscationConfiguration");
+
+			this.ApplyViewToDocument_ObfuscationSettings(obfuscationConfiguration);
 		}
 
 		public void CloseDocument()
@@ -126,7 +128,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			if ((object)sourceView != (object)this.View.ObfuscationPartialView.MetadataSettingsPartialView)
 				throw new ArgumentOutOfRangeException("sourceView");
 
-			obfuscationConfiguration = new ObfuscationConfiguration();
+			obfuscationConfiguration = new ObfuscationConfiguration()
+										{
+											ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion,
+											EngineVersion = ObfuscationConfiguration.CurrentEngineVersion
+										};
 			this.ApplyViewToDocument(obfuscationConfiguration);
 
 			messages = obfuscationConfiguration.Validate();
@@ -163,7 +169,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 
 			this.View.StatusText = "Document validation started...";
 
-			obfuscationConfiguration = new ObfuscationConfiguration();
+			obfuscationConfiguration = new ObfuscationConfiguration()
+										{
+											ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion,
+											EngineVersion = ObfuscationConfiguration.CurrentEngineVersion
+										};
 			this.ApplyViewToDocument(obfuscationConfiguration);
 
 			messages = obfuscationConfiguration.Validate();
@@ -248,7 +258,11 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 			else
 			{
 				// just create new
-				obfuscationConfiguration = new ObfuscationConfiguration();
+				obfuscationConfiguration = new ObfuscationConfiguration()
+											{
+												ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion,
+												EngineVersion = ObfuscationConfiguration.CurrentEngineVersion
+											};
 			}
 
 			return obfuscationConfiguration;
@@ -276,7 +290,7 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controllers
 		}
 
 		[DispatchActionUri(Uri = Constants.URI_ADAPTER_UPDATE_EVENT)]
-		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, object actionContext)
+		public void UpdateAdapter(IAdapterSettingsPartialView sourceView, Type actionContext)
 		{
 			if ((object)sourceView == null)
 				throw new ArgumentNullException("sourceView");

@@ -65,6 +65,7 @@
     <Compile Include="Controllers\Adapters\AdapterSpecificSettingsSlaveController~1.cs" />
     <Compile Include="Controllers\DictionarySettingsSlaveController.cs" />
     <Compile Include="Controllers\AdapterSettingsSlaveController.cs" />
+    <Compile Include="Controllers\ObfuscationDocumentMasterController.p.cs" />
     <Compile Include="Controllers\ObfuscationSlaveController.cs" />
     <Compile Include="Controllers\MetadataSettingsSlaveController.cs" />
     <Compile Include="Controllers\AvalancheSettingsSlaveController.cs" />

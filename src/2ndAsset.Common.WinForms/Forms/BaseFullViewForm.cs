@@ -30,7 +30,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 
 		#region Fields/Constants
 
-		private readonly IList<IPartialView> partialViews = new List<IPartialView>();
 		private readonly IDictionary<Uri, Type> uriToControlTypes = new Dictionary<Uri, Type>();
 
 		#endregion
@@ -64,16 +63,6 @@ namespace _2ndAsset.Common.WinForms.Forms
 			get
 			{
 				return null;
-			}
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		IList<IPartialView> IFullView.PartialViews
-		{
-			get
-			{
-				return this.partialViews;
 			}
 		}
 

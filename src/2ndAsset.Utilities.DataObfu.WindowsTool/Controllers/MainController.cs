@@ -77,7 +77,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 
 			var documentViews = this.View.DocumentViews.Where(v => !v.IsViewDirty || result == true);
 
-			foreach (IDocumentView documentView in documentViews)
+			foreach (IDocumentFullView documentView in documentViews)
 			{
 				//if (documentView.IsViewDirty)
 				//documentView.SaveDocument(false);
@@ -135,7 +135,7 @@ namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Controllers
 
 		private void ShowDocument(string documentFilePath)
 		{
-			IDocumentView documentView;
+			IDocumentFullView documentView;
 
 			documentView = this.View.CreateDocumentView(DocumentViewUri, documentFilePath);
 		}

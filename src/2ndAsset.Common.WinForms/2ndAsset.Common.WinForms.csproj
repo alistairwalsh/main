@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Presentation\Controllers\BaseController.cs" />
     <Compile Include="Presentation\Controllers\BaseController~1.cs" />
+    <Compile Include="Presentation\Controllers\ISlaveController.cs" />
     <Compile Include="Presentation\Controllers\IMasterController.cs" />
     <Compile Include="Presentation\Controllers\IBaseController.cs" />
     <Compile Include="Presentation\Controllers\IBaseController~1.cs" />
@@ -142,9 +143,9 @@
     <Compile Include="ListItem~1.cs" />
     <Compile Include="Presentation\DispatchActionUriAttribute.cs" />
     <Compile Include="IDispatchTargetProvider.cs" />
-    <Compile Include="Presentation\Views\IDocumentView.cs" />
+    <Compile Include="Presentation\Views\IDocumentFullView.cs" />
     <Compile Include="Presentation\Views\IFullView.cs" />
-    <Compile Include="Presentation\Views\IMultiDocumentView.cs" />
+    <Compile Include="Presentation\Views\IMultiDocumentFullView.cs" />
     <Compile Include="Presentation\Views\IPartialView.cs" />
     <Compile Include="Presentation\Views\IListView.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />

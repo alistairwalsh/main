@@ -10,7 +10,7 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 {
-	public abstract class SlaveController<TView> : BaseController<TView>
+	public abstract class SlaveController<TView> : BaseController<TView>, ISlaveController
 		where TView : class, IPartialView
 	{
 		#region Constructors/Destructors
@@ -50,9 +50,11 @@ namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 
 		public override void InitializeView(TView view)
 		{
+			IEnumerable<object> controllerActionResult;
+
 			base.InitializeView(view);
 
-			this.View.FullView.PartialViews.Add(view);
+			this.DispatchPresentationEvent(this.View.FullView, ControllerAttachChildEventUri, this, out controllerActionResult);
 		}
 
 		#endregion

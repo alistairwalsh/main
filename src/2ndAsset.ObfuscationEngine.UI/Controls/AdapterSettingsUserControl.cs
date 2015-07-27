@@ -184,10 +184,10 @@ namespace _2ndAsset.ObfuscationEngine.UI.Controls
 			if ((object)adapterSpecificConfigurationUcType == null)
 				return;
 
-			if (!this.DependencyManager.HasTypeResolution(adapterSpecificConfigurationUcType, string.Empty))
-				this.DependencyManager.AddResolution(adapterSpecificConfigurationUcType, string.Empty, new SingletonDependencyResolution(new ActivatorDependencyResolution(adapterSpecificConfigurationUcType)));
+			if (!this.DependencyManager.HasTypeResolution(adapterSpecificConfigurationUcType, this.AdapterDirection.ToString()))
+				this.DependencyManager.AddResolution(adapterSpecificConfigurationUcType, this.AdapterDirection.ToString(), new SingletonDependencyResolution(new ActivatorDependencyResolution(adapterSpecificConfigurationUcType)));
 
-			this.CurrentAdapterSpecificConfigurationUc = (BasePartialViewUserControl)this.DependencyManager.ResolveDependency(adapterSpecificConfigurationUcType, string.Empty);
+			this.CurrentAdapterSpecificConfigurationUc = (BasePartialViewUserControl)this.DependencyManager.ResolveDependency(adapterSpecificConfigurationUcType, this.AdapterDirection.ToString());
 
 			//this.CurrentAdapterSpecificConfigurationUc = (XBaseUserControl)Activator.CreateInstance(adapterSpecificConfigurationUcType);
 			this.CurrentAdapterSpecificConfigurationUc.Parent = this.pnlAdapterConfigHost;

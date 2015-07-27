@@ -9,7 +9,7 @@ using _2ndAsset.Common.WinForms.Presentation.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Views
 {
-	public interface IObfuscationDocumentView : IDocumentView
+	public interface IObfuscationDocumentView : IDocumentFullView
 	{
 		#region Properties/Indexers/Events
 

@@ -6,8 +6,12 @@
 using System;
 using System.Diagnostics;
 
+using Solder.Framework.Utilities;
+
 using _2ndAsset.Common.WinForms.Presentation;
 using _2ndAsset.Common.WinForms.Presentation.Controllers;
+using _2ndAsset.Common.WinForms.Presentation.Views;
+using _2ndAsset.ObfuscationEngine.Core.Config;
 using _2ndAsset.ObfuscationEngine.UI.Views;
 
 namespace _2ndAsset.ObfuscationEngine.UI.Controllers

@@ -5,11 +5,9 @@
 
 using System;
 
-using _2ndAsset.Common.WinForms.Presentation.Views;
-
-namespace _2ndAsset.Utilities.DataObfu.WindowsTool.Views
+namespace _2ndAsset.Common.WinForms.Presentation.Controllers
 {
-	public interface IMainView : IMultiDocumentFullView
+	public interface ISlaveController : IBaseController
 	{
 	}
 }

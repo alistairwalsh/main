@@ -114,7 +114,11 @@ namespace _2ndAsset.Ssis.Components
 			ObfuscationConfiguration obfuscationConfiguration;
 
 			if (DataTypeFascade.Instance.IsNullOrWhiteSpace(this.ObfuscationConfigurationJsonText))
-				obfuscationConfiguration = new ObfuscationConfiguration();
+				obfuscationConfiguration = new ObfuscationConfiguration()
+											{
+												ConfigurationVersion = ObfuscationConfiguration.CurrentConfigurationVersion,
+												EngineVersion = ObfuscationConfiguration.CurrentEngineVersion
+											};
 			else
 				obfuscationConfiguration = new JsonSerializationStrategy().GetObjectFromString<ObfuscationConfiguration>(this.ObfuscationConfigurationJsonText);
 
