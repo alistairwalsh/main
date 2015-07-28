@@ -1,0 +1,13 @@
+h1. 2ndAsset
+
+2ndAsset is a powerful data obfuscation framework written in C#.
+
+Support headless console execution and SSIS hosts; source, dictionary, and destination adapter model with built-in support for ADO.NET and delimited text input/output.
+
+h2. Donations
+
+This project has evolved to a open source/donation model. http://www.gofundme.com/3bb3erru4
+
+h2. License
+
+See doc/LICENSE.txt.
