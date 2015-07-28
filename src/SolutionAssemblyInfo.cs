@@ -1,6 +1,6 @@
 ﻿/*
-	Copyright ©2014-2015 2ndAsset.com (info@2ndasset.com) - D. P. Bullington
-	CLOSED SOURCE, COMMERCIAL PRODUCT - THIS IS NOT OPEN SOURCE
+	Copyright ©2002-2015 Daniel Bullington (info@2ndasset.com)
+	Distributed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 */
 
 using System.Reflection;
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("2ndAsset.com")]
 [assembly: AssemblyProduct("2ndAsset Suite")]
 [assembly: AssemblyCopyright("©2014-2015 2ndAsset.com (info@2ndasset.com) - D. P. Bullington")]
-[assembly: AssemblyDescription("CLOSED SOURCE, COMMERCIAL PRODUCT\r\nTHIS IS NOT OPEN SOURCE")]
+[assembly: AssemblyDescription("Distributed under the MIT license: http://www.opensource.org/licenses/mit-license.php")]
 [assembly: AssemblyTrademark("π")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.0.0.0")]
