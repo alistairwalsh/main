@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6BD158BA-429B-422B-AAEB-24A36511C19A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_2ndAsset.Common.WinForms</RootNamespace>
+    <AssemblyName>2ndAsset.Common.WinForms</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\2ndAssetSuite.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\2ndAsset.Common.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\2ndAsset.Common.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Solder.Framework">
+      <HintPath>..\..\lib\Solder\Solder.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>SolutionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\BaseCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseGdiPaintSurface.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BasePartialViewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <None Include="DesignTime\Shapes\SketchEllipse.cs" />
+    <None Include="DesignTime\Shapes\SketchImage.cs" />
+    <None Include="DesignTime\Shapes\SketchLine.cs" />
+    <None Include="DesignTime\Shapes\SketchPoint.cs" />
+    <None Include="DesignTime\Shapes\SketchPointSet.cs" />
+    <None Include="DesignTime\Shapes\SketchRectangle.cs" />
+    <None Include="DesignTime\Shapes\SketchText.cs" />
+    <None Include="DesignTime\Shapes\SketchUnknown.cs" />
+    <None Include="DesignTime\Sketch.cs" />
+    <None Include="DesignTime\SketchDesigner.cs">
+      <SubType>UserControl</SubType>
+    </None>
+    <None Include="DesignTime\SketchDesigner.designer.cs">
+      <DependentUpon>SketchDesigner.cs</DependentUpon>
+    </None>
+    <None Include="DesignTime\SketchFactory.cs" />
+    <None Include="DesignTime\SketchShape.cs" />
+    <None Include="DesignTime\SketchUtilities.cs" />
+    <Compile Include="Controls\BasePartialViewUserControl~2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseFullViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseMultiDocumentForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseDocumentViewForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Controllers\BaseController.cs" />
+    <Compile Include="Presentation\Controllers\BaseController~1.cs" />
+    <Compile Include="Presentation\Controllers\ISlaveController.cs" />
+    <Compile Include="Presentation\Controllers\IMasterController.cs" />
+    <Compile Include="Presentation\Controllers\IBaseController.cs" />
+    <Compile Include="Presentation\Controllers\IBaseController~1.cs" />
+    <Compile Include="Presentation\Controllers\SlaveController~1.cs" />
+    <Compile Include="Presentation\Controllers\MasterController~1.cs" />
+    <Compile Include="Controls\ExtensionMethods.cs" />
+    <Compile Include="Forms\BackgroundTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BackgroundTaskForm.Designer.cs">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.designer.cs">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaseFullViewForm~2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IListItem.cs" />
+    <Compile Include="IListItem~1.cs" />
+    <Compile Include="ListItem.cs" />
+    <Compile Include="ListItem~1.cs" />
+    <Compile Include="Presentation\DispatchActionUriAttribute.cs" />
+    <Compile Include="IDispatchTargetProvider.cs" />
+    <Compile Include="Presentation\Views\IDocumentFullView.cs" />
+    <Compile Include="Presentation\Views\IFullView.cs" />
+    <Compile Include="Presentation\Views\IMultiDocumentFullView.cs" />
+    <Compile Include="Presentation\Views\IPartialView.cs" />
+    <Compile Include="Presentation\Views\IListView.cs" />
+    <Compile Include="ProjectAssemblyInfo.cs" />
+    <Compile Include="Presentation\Views\IBaseView.cs" />
+    <Compile Include="WindowsApplicationFascade~1.cs" />
+    <Compile Include="WindowsApplicationFascade~2.cs" />
+    <Compile Include="SplashApplicationContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\2ndAssetSuite.snk">
+      <Link>2ndAssetSuite.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DesignTime\SketchDesigner.resx">
+      <DependentUpon>SketchDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BackgroundTaskForm.resx">
+      <DependentUpon>BackgroundTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PropertyForm.resx">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2ndAsset.ObfuscationEngine.Core\2ndAsset.ObfuscationEngine.Core.csproj">
+      <Project>{098A37C5-39C2-4F73-B1AE-D1956B9FBE4A}</Project>
+      <Name>2ndAsset.ObfuscationEngine.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DesignTime\Shapes\Resources\Clean.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\Clear.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\DefaultImage.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchArrow.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchEllipse.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchImage.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchLine.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchPoint.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchPointSet.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchRectangle.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchText.bmp" />
+    <Content Include="DesignTime\Shapes\Resources\SketchUnknown.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

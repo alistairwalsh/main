@@ -65,9 +65,11 @@
     <Compile Include="DtsSourceAdapter.cs" />
     <Compile Include="DtsAdoNetAdapterConfiguration.cs" />
     <Compile Include="__ComponentMetadataWrapper.cs" />
+    <Compile Include="NopConstants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="CustomPropertyWrapper.cs" />
     <Compile Include="MappingDisposition.cs" />
+    <Compile Include="NopTransform.cs" />
     <Compile Include="ObfuscationStrategyTransform.cs" />
     <Compile Include="ProjectAssemblyInfo.cs" />
   </ItemGroup>

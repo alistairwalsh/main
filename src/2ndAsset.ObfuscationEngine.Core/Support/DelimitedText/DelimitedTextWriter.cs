@@ -53,14 +53,6 @@ namespace _2ndAsset.ObfuscationEngine.Core.Support.DelimitedText
 			}
 		}
 
-		public TextWriter InnerTextWriter
-		{
-			get
-			{
-				return this.innerTextWriter;
-			}
-		}
-
 		#endregion
 
 		#region Methods/Operators

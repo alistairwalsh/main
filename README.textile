@@ -1,12 +1,20 @@
 h1. 2ndAsset
 
-2ndAsset is a powerful data obfuscation framework written in C#.
+2ndAsset is a powerful data obfuscation framework written in C#. It support headless console execution and SSIS hosts; source, dictionary, and destination adapter model with built-in support for ADO.NET and delimited text input/output.
 
-Support headless console execution and SSIS hosts; source, dictionary, and destination adapter model with built-in support for ADO.NET and delimited text input/output.
+h2. About
+
+Every day it seems like the news outlets report on a data breach at companies large and small. Healthcare, financial, consumer, etc. are all targets for criminals looking to make a profit or worse. Even though Personally Identifiable Information (PII), or Sensitive Personal Information (SPI) is protected under a variety of law and regulations such as HIPAA, PCI/DSS, GLBA, CPNI, et al. poor information security practices and human error continue to provide ripe attack surfaces. One of the easiest but often overlooked weak spots is lack of corporate governance controlling access to data assets in non-production environments and inter-user data sharing scenarios.
+
+Many organizations attempt to solve for this in several ways: pay millions of dollars for a information lifecycle management (ILM) platform (IBM, Informatca, etc.); purchase a mid-range solution in the tens of thousands of dollars that is rigid and frequently abandoned; build a home-grown, often poorly designed solution; do nothing at all and absorb the risk.
+
+Given my professional background managing the architecture and delivery of large scale database platforms, I set out to solve this problem in a simple, elegant, and cost effective manner. I spent about the equivalent of one man-year of my own time, outside my 9-5, designing, building and testing this solution: 2ndAsset data obfuscation framework. My initial goal was to wrap a business model around the project; I soon realized that the latent need exists for this solution yet companies small and large may not be willing to purchase a product for this purpose given the other higher business priorities. After soul searching, I pivoted to the belief that I could open source the project instead and instead fund my effort via a donation model. No organization with any meaningful set of data assets, has an excuse NOT to protect their data in non-production environments (dev, testing, etc.) or during user-initiated data sharing scenarios (for example, a physician sharing a spreadsheet of HIPAA protected data).
+
+The 2ndAsset data obfuscation framework is fully functional, open source for any commercial and non-commercial use without restriction. I am looking to raise $50,000 to compensate for all the late nights and weekends it took to bring this needed solution to life and to continue refining the product. Your help is greatly appreciated!
 
 h2. Donations
 
-This project has evolved to a open source/donation model. http://www.gofundme.com/3bb3erru4
+This project has evolved to an open source/donation model; all considerations greatly appreicated: http://www.gofundme.com/3bb3erru4
 
 h2. License
 
