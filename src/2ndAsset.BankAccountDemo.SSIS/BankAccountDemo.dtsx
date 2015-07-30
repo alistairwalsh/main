@@ -1078,7 +1078,7 @@
             <component
               refId="Package\DFT-Ox_AccountReporting\Obfuscation Strategy Transform"
               componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="info@2ndasset.com"
+              contactInfo="dpbullington@gmail.com"
               description="2ndAsset Obfuscation Strategy Transform"
               name="Obfuscation Strategy Transform"
               usesDispositions="true"

@@ -1,6 +1,6 @@
 ﻿2ndAsset
 
-Copyright ©2002-2015 Daniel Bullington (info@2ndasset.com)
+Copyright ©2002-2015 Daniel Bullington (dpbullington@gmail.com)
 
 2ndAsset is released under the MIT License
 

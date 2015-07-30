@@ -1,6 +1,6 @@
 ﻿/*
-	Copyright ©2002-2015 Daniel Bullington
-	CLOSED SOURCE, COMMERCIAL PRODUCT - THIS IS NOT OPEN SOURCE
+	Copyright ©2002-2015 Daniel Bullington (dpbullington@gmail.com)
+	Distributed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 */
 
 namespace _2ndAsset.Ssis.Components
@@ -12,7 +12,7 @@ namespace _2ndAsset.Ssis.Components
 
 		public const int COMPONENT_CURRENT_VERSION = 1;
 		public const string COMPONENT_DESCRIPTION = "2ndAsset No-op Transform";
-		public const string COMPONENT_EMAIL = "info@2ndasset.com";
+		public const string COMPONENT_EMAIL = "dpbullington@gmail.com";
 		public const string COMPONENT_ICON_RESOURCE_NAME = "_2ndAsset.Ssis.Components.Icons.2ndAssetSuite.ico";
 		public const string COMPONENT_INPUT_DEFAULT_NAME = "No-op Input";
 		public const string COMPONENT_NAME = "No-op Transform";
